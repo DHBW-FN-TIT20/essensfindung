@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "essensfindung"
+version = "0.1.0"
+description = "Student project for DHBW-Friedrichshafen to search for restaurant or recipe suggestions."
+authors = ["Your Name <you@example.com>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^21.10b0"
+flake8 = "^4.0.1"
+pylint = "^2.11.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
