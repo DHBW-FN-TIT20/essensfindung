@@ -7,6 +7,10 @@ license = "MIT License"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+fastapi = "^0.70.1"
+uvicorn = "^0.16.0"
+Jinja2 = "^3.0.3"
+aiofiles = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.10b0"
