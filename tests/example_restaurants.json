@@ -1,0 +1,322 @@
+[
+    {
+        "place_id": "ChIJKw2_Iv5QqEcRE9uVHTTPRzs",
+        "name": "Avci D\u00f6ner",
+        "geometry": {
+            "location": {
+                "lat": "52.5065432",
+                "lng": "13.3323068",
+                "adr": "Hardenbergpl. 11, 10623 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=4271610594325814035",
+        "rating": 4.2,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": "https://avcidonerkebap.business.site/"
+    },
+    {
+        "place_id": "ChIJJyRIGsNRqEcRQcH-YZCrZbA",
+        "name": "Pergamon D\u00f6ner",
+        "geometry": {
+            "location": {
+                "lat": "52.5202922",
+                "lng": "13.388084",
+                "adr": "Friedrichstra\u00dfe 142, 10117 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=12710754159930818881",
+        "rating": 3.9,
+        "own_rating": null,
+        "phone_number": "+49 30 20644030",
+        "homepage": "http://www.pergamongrill.de/"
+    },
+    {
+        "place_id": "ChIJraGBEAlRqEcRFdc7bwLYLFQ",
+        "name": "FUNNY D\u00f6ner \u263a\ufe0f",
+        "geometry": {
+            "location": {
+                "lat": "52.4839117",
+                "lng": "13.3526086",
+                "adr": "Hauptstra\u00dfe 128, 10827 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=6065460303128942357",
+        "rating": 3.9,
+        "own_rating": null,
+        "phone_number": "+49 30 98459382",
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJ_UftzEFQqEcRaR1V3JDyRrQ",
+        "name": "R\u00fcyam Gem\u00fcse Kebab",
+        "geometry": {
+            "location": {
+                "lat": "52.4846282",
+                "lng": "13.353968",
+                "adr": "Hauptstra\u00dfe 133, 10827 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=12990336879182552425",
+        "rating": 4.8,
+        "own_rating": null,
+        "phone_number": "+49 30 69564413",
+        "homepage": "http://rueyam.de/"
+    },
+    {
+        "place_id": "ChIJVfsjupNRqEcRaYXJqszaMUs",
+        "name": "Kadakals D\u00f6ner Kebap",
+        "geometry": {
+            "location": {
+                "lat": "52.5164734",
+                "lng": "13.3812586",
+                "adr": "Unter den Linden 67, 10117 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=5418352399276934505",
+        "rating": 3.5,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": "https://kadakals-berlin.doener-curator.com/"
+    },
+    {
+        "place_id": "ChIJ6d4kf-NRqEcR8tP3PgV6VMk",
+        "name": "Rosenthaler Grill und Schlemmerbuffet",
+        "geometry": {
+            "location": {
+                "lat": "52.5298738",
+                "lng": "13.400867",
+                "adr": "Torstra\u00dfe 125, 10119 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=14507354462617064434",
+        "rating": 4.0,
+        "own_rating": null,
+        "phone_number": "+49 30 13005176",
+        "homepage": "http://www.rosenthaler-grill.de/"
+    },
+    {
+        "place_id": "ChIJby_OmM9RqEcRAkdmpR-FbBY",
+        "name": "TERAS D\u00f6ner Kebab",
+        "geometry": {
+            "location": {
+                "lat": "52.5117229",
+                "lng": "13.3835554",
+                "adr": "Wilhelmstra\u00dfe 45, 10117 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=1615812737284589314",
+        "rating": 4.2,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": "http://terasrestaurant.de/"
+    },
+    {
+        "place_id": "ChIJLTpE17lPqEcR4NQiAE_2V4Q",
+        "name": "Hazar Kebab - D\u00f6ner",
+        "geometry": {
+            "location": {
+                "lat": "52.4861309",
+                "lng": "13.4252457",
+                "adr": "Karl-Marx-Stra\u00dfe 5, 12043 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=9536361555145446624",
+        "rating": 4.5,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJDdqwpV5OqEcRan3k1DLCzpw",
+        "name": "D\u00f6ner Dach",
+        "geometry": {
+            "location": {
+                "lat": "52.5106906",
+                "lng": "13.456262",
+                "adr": "Simon-Dach-Stra\u00dfe 11, 10245 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=11299182038695050602",
+        "rating": 4.5,
+        "own_rating": null,
+        "phone_number": "+49 30 82717771",
+        "homepage": "https://imbiss-doener-dach-berlin.snack-online.com/"
+    },
+    {
+        "place_id": "ChIJjwC4k9hPqEcRBqt0O1eY_a8",
+        "name": "S\u00d6NER - Sucuk D\u00f6ner - Kreuzberg",
+        "geometry": {
+            "location": {
+                "lat": "52.4997045",
+                "lng": "13.4170335",
+                "adr": "Reichenberger Str. 176, 10999 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=12681459626172263174",
+        "rating": 4.4,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": "https://www.soener.de/"
+    },
+    {
+        "place_id": "ChIJ-fKr8VxOqEcRZKDFsWBqC7Q",
+        "name": "Best Grill - Kebab, Doner and more",
+        "geometry": {
+            "location": {
+                "lat": "52.5123178",
+                "lng": "13.4520939",
+                "adr": "Warschauer Str. 16, 10243 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=12973580115102769252",
+        "rating": 3.7,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJa9WPG2dPqEcR9lRuv_CKfDA",
+        "name": "Imbiss International",
+        "geometry": {
+            "location": {
+                "lat": "52.5111393",
+                "lng": "13.4354043",
+                "adr": "Erich-Steinfurth-Stra\u00dfe 7-8, 10243 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=3493820177541125366",
+        "rating": 2.1,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJz8eWcwROqEcRVzPbtxcnswo",
+        "name": "Seven D\u00f6ner",
+        "geometry": {
+            "location": {
+                "lat": "52.5341843",
+                "lng": "13.421677",
+                "adr": "Prenzlauer Allee 33, 10405 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=771002944032813911",
+        "rating": 4.1,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJE0psoh9OqEcRe3p8_ZhJ9vU",
+        "name": "Pergamon D\u00f6ner&Pizza",
+        "geometry": {
+            "location": {
+                "lat": "52.5210164",
+                "lng": "13.4116334",
+                "adr": "Dircksenstr. 2, 10178 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=17723434304999815803",
+        "rating": 3.6,
+        "own_rating": null,
+        "phone_number": "+49 30 27572690",
+        "homepage": "http://www.pergamongrill.de/"
+    },
+    {
+        "place_id": "ChIJn3-ni05QqEcReKCyZ2h9AEw",
+        "name": "Ceylan Kebap Haus",
+        "geometry": {
+            "location": {
+                "lat": "52.49888319999999",
+                "lng": "13.3536897",
+                "adr": "Nollendorfpl. 7, 10777 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=5476515034252353656",
+        "rating": 3.5,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJoTNwoiRSqEcRcvfb99AoxbI",
+        "name": "Sofra Grill",
+        "geometry": {
+            "location": {
+                "lat": "52.5549958",
+                "lng": "13.3842093",
+                "adr": "Bellermannstra\u00dfe 99, 13357 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=12881747187139868530",
+        "rating": 4.3,
+        "own_rating": null,
+        "phone_number": "+49 30 4947036",
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJA2NGesNNqEcRoRPCNLTBjGA",
+        "name": "D\u00f6ner Familien Bistro II",
+        "geometry": {
+            "location": {
+                "lat": "52.5499392",
+                "lng": "13.4591972",
+                "adr": "Berliner Allee 104, 13088 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=6957148504103981985",
+        "rating": 4.2,
+        "own_rating": null,
+        "phone_number": "+49 163 6773972",
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJVTXohB1OqEcRzvdXsar4PSw",
+        "name": "G\u00dcM\u00dcS",
+        "geometry": {
+            "location": {
+                "lat": "52.5282431",
+                "lng": "13.4112932",
+                "adr": "Torstra\u00dfe 40, 10119 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=3187977523251640270",
+        "rating": 4.5,
+        "own_rating": null,
+        "phone_number": "+49 30 28873169",
+        "homepage": "https://guemues.metro.bar/"
+    },
+    {
+        "place_id": "ChIJgRLORVBOqEcReO0jn2YJYnE",
+        "name": "Bistro ISTANBUL D\u00f6ner, Kebab",
+        "geometry": {
+            "location": {
+                "lat": "52.50383739999999",
+                "lng": "13.4473713",
+                "adr": "Warschauer Str. 45, 10243 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=8170103010364747128",
+        "rating": 4.1,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": null
+    },
+    {
+        "place_id": "ChIJD30badVNqEcRhbEsOkh6jNg",
+        "name": "Mac's Bistro",
+        "geometry": {
+            "location": {
+                "lat": "52.5358776",
+                "lng": "13.4743026",
+                "adr": "Wei\u00dfenseer Weg 36, 13055 Berlin, Germany"
+            }
+        },
+        "maps_url": "https://maps.google.com/?cid=15603981259564167557",
+        "rating": 3.9,
+        "own_rating": null,
+        "phone_number": null,
+        "homepage": "https://www.macs-bistro-berlin.de/"
+    }
+]
