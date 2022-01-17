@@ -16,7 +16,7 @@ class Restaurant(BaseModel):
     name: str
     geometry: Geometry
     maps_url: str = None
-    rating: float = 0
-    own_rating: float = 0
+    rating: float = None
+    own_rating: float = None
     phone_number: str = None
     homepage: str = None
