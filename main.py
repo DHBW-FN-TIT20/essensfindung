@@ -1,3 +1,4 @@
+"""Main entry Point for the Application"""
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
@@ -39,15 +40,17 @@ def configure_logger():
     # add handler
     logger.addHandler(stream_h)
     logger.addHandler(file_h)
+    logger.addHandler(backup_h)
 
 
 def configure_routing():
+    """Add / Configure all router for FastAPI"""
     app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(home.router)
 
 
 def configure_database():
-    pass
+    """Configure connection to the Database"""
 
 
 if __name__ == "__main__":
