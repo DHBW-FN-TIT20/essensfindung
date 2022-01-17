@@ -1,6 +1,7 @@
 import json
 from typing import List
 
+import httpx
 import pytest
 from infrastructure import Cuisine, gapi
 from models.restaurant import Restaurant
@@ -32,11 +33,13 @@ def fake_restaurants() -> List[Restaurant]:
         return [Restaurant(**value) for value in fake_restaurants]
 
 
+@pytest.mark.parametrize("status_code", [100, 200, 300, 400])
 def test_nearby_search(
+    mocker: MockerFixture,
     httpx_mock: HTTPXMock,
+    status_code: int,
     fake_nearby_search: dict,
     fake_nearby_search_restaurants: List[Restaurant],
-    mocker: MockerFixture,
 ):
     # Fake Datas
     params: dict = {
@@ -48,13 +51,17 @@ def test_nearby_search(
         "language": "de",
     }
     # Mock httpx responses
-    httpx_mock.add_response(status_code=200, json=fake_nearby_search)
+    httpx_mock.add_response(status_code=status_code, json=fake_nearby_search)
 
     # Mock other functions
     mocker.patch("infrastructure.get_api_key", return_value="42")
 
-    restaurants = gapi.nearby_search(params)
-    assert fake_nearby_search_restaurants == restaurants
+    if status_code != 200:
+        with pytest.raises(httpx.HTTPStatusError):
+            gapi.nearby_search(params)
+    else:
+        restaurants = gapi.nearby_search(params)
+        assert fake_nearby_search_restaurants == restaurants
 
 
 def test_place_details(
