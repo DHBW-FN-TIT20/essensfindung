@@ -20,3 +20,7 @@ class Restaurant(BaseModel):
     own_rating: float = None
     phone_number: str = None
     homepage: str = None
+
+
+class GoogleApiException(Exception):
+    """Exception if some Error from the Google API request are made"""
