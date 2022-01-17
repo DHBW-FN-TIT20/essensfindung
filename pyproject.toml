@@ -12,13 +12,15 @@ uvicorn = "^0.16.0"
 Jinja2 = "^3.0.3"
 aiofiles = "^0.8.0"
 pydantic = "^1.9.0"
-requests = "^2.27.1"
+httpx = "^0.21.3"
 
 [tool.poetry.dev-dependencies]
 black = "^21.10b0"
 flake8 = "^4.0.1"
 pylint = "^2.11.1"
 pytest = "^6.2.5"
+pytest-httpx = "^0.17.3"
+pytest-mock = "^3.6.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
