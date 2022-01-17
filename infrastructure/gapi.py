@@ -10,6 +10,8 @@ import infrastructure
 # TODO: Asynchrone Funktionen
 # TODO: Asynchrone API Anfragen
 
+logger = logging.getLogger(__name__)
+
 
 def search_restaurant(cuisin: infrastructure.Cuisine, location: Location, radius: int = 5000) -> List[Restaurant]:
     params: dict = {
@@ -24,8 +26,8 @@ def search_restaurant(cuisin: infrastructure.Cuisine, location: Location, radius
     try:
         restaurants = nearby_search(params=params)
         restaurants = place_details(restaurants)
-    except httpx.HTTPError as error:
-        logging.error("Cant request Restaurant from Google API")
+    except Exception as error:
+        logger.exception(error)
         raise error
 
 
@@ -36,6 +38,8 @@ def nearby_search(params: dict, next_page_token=None) -> List[Restaurant]:
 
     try:
         response = httpx.get(url, params=params)
+        logger.debug(f"Response status: {response.status_code}")
+
         response.raise_for_status()
 
         resp_obj = response.json()
@@ -44,8 +48,7 @@ def nearby_search(params: dict, next_page_token=None) -> List[Restaurant]:
         if resp_obj.get("next_page_token"):
             restaurants.extend(nearby_search(params=params, next_page_token=resp_obj.get("next_page_token")))
 
-    except Exception as error:
-        logging.exception(error)
+    except httpx.HTTPError as error:
         raise error  # Vielleicht eigene exception machen
 
     return restaurants
@@ -58,6 +61,8 @@ def place_details(restaurants: list[Restaurant]) -> List[Restaurant]:
         for restaurant in restaurants:
             params = {"key": infrastructure.get_api_key(), "place_id": restaurant.place_id}
             response = httpx.get(url, params=params)
+            logger.debug(f"Response status: {response.status_code}")
+
             response.raise_for_status()
 
             resp_obj = response.json().get("result")
@@ -67,8 +72,7 @@ def place_details(restaurants: list[Restaurant]) -> List[Restaurant]:
             restaurant.geometry.location.adr = resp_obj.get("formatted_address")
 
             extended_restaurants.append(restaurant)
-    except Exception as error:
-        logging.exception(error)
+    except httpx.HTTPError as error:
         raise error
-        
+
     return extended_restaurants
