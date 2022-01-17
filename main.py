@@ -1,14 +1,20 @@
+import logging
+from pathlib import Path
+
 import fastapi
 import uvicorn
-
 from starlette.staticfiles import StaticFiles
+
 from views import home
 
 app = fastapi.FastAPI()
+LOGGING_PATH = Path("./logs/infos.log")
 
 
 def configure():
     """Init Setup for the application"""
+    logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", filename=LOGGING_PATH, level=logging.DEBUG)
+
     configure_routing()
     configure_database()
 
