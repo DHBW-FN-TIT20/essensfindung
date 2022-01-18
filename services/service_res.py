@@ -1,3 +1,4 @@
+"""Main Module for the Restaurant-Search"""
 import random
 from typing import List
 

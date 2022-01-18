@@ -1,3 +1,4 @@
+"""Contains all Models and Classes for the Application"""
 from enum import Enum
 
 
