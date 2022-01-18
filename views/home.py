@@ -1,3 +1,4 @@
+"""Router for the Home of the Website"""
 from datetime import datetime
 
 import fastapi

@@ -1,0 +1,975 @@
+{
+   "html_attributions" : [],
+   "results" : [
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5065432,
+               "lng" : 13.3323068
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.50784277989272,
+                  "lng" : 13.33376287989272
+               },
+               "southwest" : {
+                  "lat" : 52.50514312010728,
+                  "lng" : 13.33106322010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Avci Döner",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111460482410961310298\"\u003esahin denizcan\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEAoqMKjpHHE9xhw4ZEv9JdpUX_mC5MUG7Ewx2g6sQRlVyH_chYSNyPF3-gKPOVNEubh0N4-q6e0Obyy14-99g-nxBJzaFcn6GjwD1eYx2D799ghNaa9ivVi3SXY5Cd-P1BfyRNbIUvE995S9PsePxk34bIOQs9Tzi-J5SuIVl68sKop",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJKw2_Iv5QqEcRE9uVHTTPRzs",
+         "plus_code" : {
+            "compound_code" : "G84J+JW Berlin",
+            "global_code" : "9F4MG84J+JW"
+         },
+         "rating" : 4.2,
+         "reference" : "ChIJKw2_Iv5QqEcRE9uVHTTPRzs",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 293,
+         "vicinity" : "Hardenbergpl. 11, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5202922,
+               "lng" : 13.388084
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.52164577989272,
+                  "lng" : 13.38949472989272
+               },
+               "southwest" : {
+                  "lat" : 52.51894612010727,
+                  "lng" : 13.38679507010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Pergamon Döner",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108346943265798379034\"\u003eJan-Moritz Gabriel\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uED2oZ3XgujFDIEONrom9pWwJWjIt-3cWv6xupVX4q6IizQ1yZvF-QvRmaRg35JVgGbl-LbBXFzNnHI6DXgh5dJz9kQgzHNhxCiHfOdB9fvzy_0Quz4wygD-hztBrDQ012eL838dEeR8WzRFcOjyeTypv0koQFBDRwI1PL2kgM-C6jEA",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJJyRIGsNRqEcRQcH-YZCrZbA",
+         "plus_code" : {
+            "compound_code" : "G9CQ+46 Berlin",
+            "global_code" : "9F4MG9CQ+46"
+         },
+         "price_level" : 1,
+         "rating" : 3.9,
+         "reference" : "ChIJJyRIGsNRqEcRQcH-YZCrZbA",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 537,
+         "vicinity" : "Friedrichstraße 142, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.4839117,
+               "lng" : 13.3526086
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.48530327989273,
+                  "lng" : 13.35404082989272
+               },
+               "southwest" : {
+                  "lat" : 52.48260362010728,
+                  "lng" : 13.35134117010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "FUNNY Döner ☺️",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3840,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103673742185248802748\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEAxg2EubeXD5IPovf_2vrxoqWJ2f2KX-nCsaj4Byw3BVUA0DIODTvj1Cq8U5yjYDeF6eW4ZM9lz8sVX17ISdskJH3dX_kBgWBuQmqeqAkGLRhsyW3DHxHGwcYOGSbQEhHaJGUSjt84Q83e41kiUugl4KttqvrN6CuyJMU1tIh0y6pY",
+               "width" : 2160
+            }
+         ],
+         "place_id" : "ChIJraGBEAlRqEcRFdc7bwLYLFQ",
+         "plus_code" : {
+            "compound_code" : "F9M3+H2 Berlin",
+            "global_code" : "9F4MF9M3+H2"
+         },
+         "rating" : 3.9,
+         "reference" : "ChIJraGBEAlRqEcRFdc7bwLYLFQ",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 12,
+         "vicinity" : "Hauptstraße 128, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.4846282,
+               "lng" : 13.353968
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.48606027989272,
+                  "lng" : 13.35523477989272
+               },
+               "southwest" : {
+                  "lat" : 52.48336062010728,
+                  "lng" : 13.35253512010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Rüyam Gemüse Kebab",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2657,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/112223607327558269976\"\u003eFlorian Plack\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEBX2cssBeyAA-Dem2PKBeFhYRQ3650YYJQrOWNEILRriuAc5Ovxdv4eAW1w4zaa-IQTbI8TsRl7M8fxqGQQJtshP2wlM092s79fntlFfRnVCt_AJIIV8FVRXzAyWVajI6v8fvW7KnxIB8hnNJzo06hIVW169HjQKYeIt2pVl0zNtS70",
+               "width" : 3279
+            }
+         ],
+         "place_id" : "ChIJ_UftzEFQqEcRaR1V3JDyRrQ",
+         "plus_code" : {
+            "compound_code" : "F9M3+VH Berlin",
+            "global_code" : "9F4MF9M3+VH"
+         },
+         "price_level" : 1,
+         "rating" : 4.8,
+         "reference" : "ChIJ_UftzEFQqEcRaR1V3JDyRrQ",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 4236,
+         "vicinity" : "Hauptstraße 133, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5164734,
+               "lng" : 13.3812586
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.51782322989272,
+                  "lng" : 13.38260842989272
+               },
+               "southwest" : {
+                  "lat" : 52.51512357010728,
+                  "lng" : 13.37990877010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Kadakals Döner Kebap",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 4032,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/114579301710370912855\"\u003eFrederik Laboyrie\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEDV-gtk_w27YivSjAh4uVHjdFRUbdkli7_hoQMTllmYs2WLypWk09Kx2TUODkuW_NHaXlaJXoQu-_WEd5s9ZNTjcy4bUUOauWTCM-xdaAHq1hBOU2B8ZWPsPrcqRI43wTcofv3nF-Sdiw9689gg9IxT117WgaNfQ6tfdaQCVSdoILT6",
+               "width" : 3024
+            }
+         ],
+         "place_id" : "ChIJVfsjupNRqEcRaYXJqszaMUs",
+         "plus_code" : {
+            "compound_code" : "G98J+HG Berlin",
+            "global_code" : "9F4MG98J+HG"
+         },
+         "rating" : 3.5,
+         "reference" : "ChIJVfsjupNRqEcRaYXJqszaMUs",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 47,
+         "vicinity" : "Unter den Linden 67, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5298738,
+               "lng" : 13.400867
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.53122362989272,
+                  "lng" : 13.40221682989272
+               },
+               "southwest" : {
+                  "lat" : 52.52852397010727,
+                  "lng" : 13.39951717010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Rosenthaler Grill und Schlemmerbuffet",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3120,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109288395617344264242\"\u003eAdrian Guevara\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEBbaCh_m5pE2S-Zl4cwi_yhurPDLSBOC-KC4fcrIIBA6_y3JQ-JpgYTKkePUyNgpBpIIGQvQ3icI7nT4pbjDYTBaac097A5vMPTLa9T9q94E3sUYOai1f1CcRYS09yPlue4oZHs1D0mVINez-AhzRbx6FxLIV55xZBbAa4vLGcaAyo",
+               "width" : 4160
+            }
+         ],
+         "place_id" : "ChIJ6d4kf-NRqEcR8tP3PgV6VMk",
+         "plus_code" : {
+            "compound_code" : "GCH2+W8 Berlin",
+            "global_code" : "9F4MGCH2+W8"
+         },
+         "price_level" : 1,
+         "rating" : 4,
+         "reference" : "ChIJ6d4kf-NRqEcR8tP3PgV6VMk",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1262,
+         "vicinity" : "Torstraße 125, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5117229,
+               "lng" : 13.3835554
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.51300332989272,
+                  "lng" : 13.38509732989272
+               },
+               "southwest" : {
+                  "lat" : 52.51030367010728,
+                  "lng" : 13.38239767010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "TERAS Döner Kebab",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 4032,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/106170292288949346103\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEA7mQCSd91X__3NbM89nSuk29Z3OLuQvaXPLG0eRNnvM8CxvI4ZoN53qbk0uxF8_lC758OtiO1TXbcwRUNMkS6HoL2YZO1s3poMckjxzWsDlqBNR4DoumiGdJVhO_LNk-It7XOuALkGs9_spvsZgneFz3cMJIyJUZhoupZUMgKwjISS",
+               "width" : 3024
+            }
+         ],
+         "place_id" : "ChIJby_OmM9RqEcRAkdmpR-FbBY",
+         "plus_code" : {
+            "compound_code" : "G96M+MC Berlin",
+            "global_code" : "9F4MG96M+MC"
+         },
+         "price_level" : 1,
+         "rating" : 4.2,
+         "reference" : "ChIJby_OmM9RqEcRAkdmpR-FbBY",
+         "scope" : "GOOGLE",
+         "types" : [
+            "meal_takeaway",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 2188,
+         "vicinity" : "Wilhelmstraße 45, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.4861309,
+               "lng" : 13.4252457
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.48744282989272,
+                  "lng" : 13.42653557989272
+               },
+               "southwest" : {
+                  "lat" : 52.48474317010728,
+                  "lng" : 13.42383592010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Hazar Kebab - Döner",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109156943431128233405\"\u003eSandra Lenz\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEASWWRw77_vs23GDhvltpefdlKpEVewXu4z5AjcY6zRD3S7RYx5U-_QuF2Rc2DLgfkjZ0JZRoFrTjuCsFdTRT5OesTjw0yAkH0tUOKU8EecbkppAckKoP5jyUBdgnfuoIbNnXrmuXIgEmjd-H9v1cfwrswKu_tY8iZcGGPyyZV3KKQF",
+               "width" : 3456
+            }
+         ],
+         "place_id" : "ChIJLTpE17lPqEcR4NQiAE_2V4Q",
+         "plus_code" : {
+            "compound_code" : "FCPG+F3 Berlin",
+            "global_code" : "9F4MFCPG+F3"
+         },
+         "rating" : 4.5,
+         "reference" : "ChIJLTpE17lPqEcR4NQiAE_2V4Q",
+         "scope" : "GOOGLE",
+         "types" : [
+            "restaurant",
+            "meal_takeaway",
+            "food",
+            "school",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 58,
+         "vicinity" : "Karl-Marx-Straße 5, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5106906,
+               "lng" : 13.456262
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.51204897989272,
+                  "lng" : 13.45775312989272
+               },
+               "southwest" : {
+                  "lat" : 52.50934932010728,
+                  "lng" : 13.45505347010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Döner Dach",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2624,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111891092711958394538\"\u003eDöner Dach\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEDHNiC3Gc07CXGvuSAn4Ceyhc27GcYeQRpsQUCJDsAL-yCKkAmK0giIjYN0o7VWrx4wYdWJ5DOABNUuYyiWrySyrr9EgNEBq-rMLk7SD7bLVQkFe2AbudCGTQrvTcdrGZRnkZibIv7qKel_pDQDRsq2Lq4WbIVWhc61ZB-kiFZCwJmE",
+               "width" : 3936
+            }
+         ],
+         "place_id" : "ChIJDdqwpV5OqEcRan3k1DLCzpw",
+         "plus_code" : {
+            "compound_code" : "GF64+7G Berlin",
+            "global_code" : "9F4MGF64+7G"
+         },
+         "price_level" : 1,
+         "rating" : 4.5,
+         "reference" : "ChIJDdqwpV5OqEcRan3k1DLCzpw",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 713,
+         "vicinity" : "Simon-Dach-Straße 11, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.4997045,
+               "lng" : 13.4170335
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.50096012989272,
+                  "lng" : 13.41834757989272
+               },
+               "southwest" : {
+                  "lat" : 52.49826047010728,
+                  "lng" : 13.41564792010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "SÖNER - Sucuk Döner - Kreuzberg",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 4032,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/101863357581823397204\"\u003eSila Özcirpan\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEAh1EEpw4rTGJ06Qu27UVXpwaJnxDp6d444Jb4t0xP14zViKCKhGcQXjCpSjOLzFL_khkDjjknIOk4_4tOqaaZpPCZIPcgSh8fkcceYzSSdMAXmDCTpT3IW-IwKne1Up1cuj6V_vnfliHT-j6lg9n96mUAztu4FnGO88207PoRvkoS0",
+               "width" : 3024
+            }
+         ],
+         "place_id" : "ChIJjwC4k9hPqEcRBqt0O1eY_a8",
+         "plus_code" : {
+            "compound_code" : "FCX8+VR Berlin",
+            "global_code" : "9F4MFCX8+VR"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJjwC4k9hPqEcRBqt0O1eY_a8",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 343,
+         "vicinity" : "Reichenberger Str. 176, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5123178,
+               "lng" : 13.4520939
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.51362057989272,
+                  "lng" : 13.45352642989272
+               },
+               "southwest" : {
+                  "lat" : 52.51092092010728,
+                  "lng" : 13.45082677010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Best Grill - Kebab, Doner and more",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118340306463349959977\"\u003eEmil Varga\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEC508LcPDc98H4Q7Vc-5aNEOrQIHn3qBjEIeTUB1gOGaqPUslconh33Vos7olOchjmOfx86MIFndK8zlrNqSc-_PJBE_oMQ5uq697zG6OaQb9ZDjTVTrYrNuUWYYLS0i9QlNGRfr7bx5lZ9uctH-65mtC9W3-aEM1NbdCZ5Qt6IeuaF",
+               "width" : 4608
+            }
+         ],
+         "place_id" : "ChIJ-fKr8VxOqEcRZKDFsWBqC7Q",
+         "plus_code" : {
+            "compound_code" : "GF62+WR Berlin",
+            "global_code" : "9F4MGF62+WR"
+         },
+         "price_level" : 1,
+         "rating" : 3.7,
+         "reference" : "ChIJ-fKr8VxOqEcRZKDFsWBqC7Q",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 81,
+         "vicinity" : "Warschauer Str. 16, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5111393,
+               "lng" : 13.4354043
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.51244092989272,
+                  "lng" : 13.43669982989272
+               },
+               "southwest" : {
+                  "lat" : 52.50974127010728,
+                  "lng" : 13.43400017010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Imbiss International",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJa9WPG2dPqEcR9lRuv_CKfDA",
+         "plus_code" : {
+            "compound_code" : "GC6P+F5 Berlin",
+            "global_code" : "9F4MGC6P+F5"
+         },
+         "rating" : 2.1,
+         "reference" : "ChIJa9WPG2dPqEcR9lRuv_CKfDA",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 20,
+         "vicinity" : "Erich-Steinfurth-Straße 7-8, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5341843,
+               "lng" : 13.421677
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.53555922989273,
+                  "lng" : 13.42290917989272
+               },
+               "southwest" : {
+                  "lat" : 52.53285957010728,
+                  "lng" : 13.42020952010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Seven Döner",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/115590691554147281716\"\u003eAndreas Baur\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uED9iuCFYFo34L4HMJYGfs-mRKBM5hwPa-PDiZuKCx35QPkUi8qzIj083wesxt0Pk4m6a8pd9mr5ih_YZ77uS-H9n9_t8SqKKkdZk3ief3dNokeWQj9LT3vLCah6pAoc2XNLnguG4ipeZX-hHHEIkaQ46MsCveGcFglPkHEzYMJLSivR",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJz8eWcwROqEcRVzPbtxcnswo",
+         "plus_code" : {
+            "compound_code" : "GCMC+MM Berlin",
+            "global_code" : "9F4MGCMC+MM"
+         },
+         "price_level" : 1,
+         "rating" : 4.1,
+         "reference" : "ChIJz8eWcwROqEcRVzPbtxcnswo",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 134,
+         "vicinity" : "Prenzlauer Allee 33, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5210164,
+               "lng" : 13.4116334
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.52228617989272,
+                  "lng" : 13.41352637989272
+               },
+               "southwest" : {
+                  "lat" : 52.51958652010727,
+                  "lng" : 13.41082672010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Pergamon Döner&Pizza",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/113334422621403336865\"\u003eYuliya Shkolnikova\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uECh_SCJZ8mw1ZkRwFG-FMM578-YZXpTWngModIdoufhV_uYnr6qzHaBuyZniY0eaGmgrP7x9HLJsct9zXCf06lwQv_dSkajvOFD8vLpuFigs_Py86C1B58lrAPSQUmsjXyPuv7FGGFTVqkY0gubZrACewhP3yjxpnakF6tCAPPk5pvZ",
+               "width" : 4608
+            }
+         ],
+         "place_id" : "ChIJE0psoh9OqEcRe3p8_ZhJ9vU",
+         "plus_code" : {
+            "compound_code" : "GCC6+CM Berlin",
+            "global_code" : "9F4MGCC6+CM"
+         },
+         "price_level" : 1,
+         "rating" : 3.6,
+         "reference" : "ChIJE0psoh9OqEcRe3p8_ZhJ9vU",
+         "scope" : "GOOGLE",
+         "types" : [
+            "meal_takeaway",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 797,
+         "vicinity" : "Dircksenstr. 2, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.49888319999999,
+               "lng" : 13.3536897
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.50032807989272,
+                  "lng" : 13.35500307989272
+               },
+               "southwest" : {
+                  "lat" : 52.49762842010728,
+                  "lng" : 13.35230342010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Ceylan Kebap Haus",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/100369400314030591061\"\u003eSascha Huth\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uECYX7537g612V9cWK45XeBmaMwt0YTjesXV-MsvESu2BBlehUgwGaVHJeoYoFiId5Y279TOpd_o0bvem8zVf5qxh3inFdygfAorMyukHZdDZCdeezoOfj0lrwEa6vyBkTYkwtQXhDcLitF87OKYm2ym5lGGmwkM_oR74_rsGeAplOwM",
+               "width" : 4608
+            }
+         ],
+         "place_id" : "ChIJn3-ni05QqEcReKCyZ2h9AEw",
+         "plus_code" : {
+            "compound_code" : "F9X3+HF Berlin",
+            "global_code" : "9F4MF9X3+HF"
+         },
+         "price_level" : 1,
+         "rating" : 3.5,
+         "reference" : "ChIJn3-ni05QqEcReKCyZ2h9AEw",
+         "scope" : "GOOGLE",
+         "types" : [
+            "meal_takeaway",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 153,
+         "vicinity" : "Nollendorfpl. 7, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5549958,
+               "lng" : 13.3842093
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.55626582989272,
+                  "lng" : 13.38550847989272
+               },
+               "southwest" : {
+                  "lat" : 52.55356617010727,
+                  "lng" : 13.38280882010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Sofra Grill",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 4032,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/115916739616983025237\"\u003eRiki Ross\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEB6Ep6NfTXICGXJXvPH1qShf4EOfhkkA5HhgU3b1W4WRQpy5Plg63rn5SnmseOKpWI5Fkt0kH9eh01TKlod-gSlq19jtUK2DfsTCrM8UeIC8AcT_orbdGAXyXRtrq4I6sFl9asqx1H-tPx5ncUjjYzGYZboVjAHnfhyur27cpmtM1Rd",
+               "width" : 3024
+            }
+         ],
+         "place_id" : "ChIJoTNwoiRSqEcRcvfb99AoxbI",
+         "plus_code" : {
+            "compound_code" : "H93M+XM Berlin",
+            "global_code" : "9F4MH93M+XM"
+         },
+         "price_level" : 1,
+         "rating" : 4.3,
+         "reference" : "ChIJoTNwoiRSqEcRcvfb99AoxbI",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 337,
+         "vicinity" : "Bellermannstraße 99, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5499392,
+               "lng" : 13.4591972
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.55128902989272,
+                  "lng" : 13.46054702989272
+               },
+               "southwest" : {
+                  "lat" : 52.54858937010727,
+                  "lng" : 13.45784737010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Döner Familien Bistro II",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2214,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/117358876418136099939\"\u003eWade Misel\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEBUZsKzL_Gm1vt7g5Phq6LXe-yRMVJ2TAvOx0-O2Knt3t-dr7qQwjyWAWoe8CzCNTKJeYwfy6rRFfLGcME1tybBZZDAlAAeevrGQ4_7uGtBcmT0LLNonR7flpfUBxu0QnBq_EpeioQ3MctawBEIfqjffnd--CLa71n-DNgXzNlqnGpN",
+               "width" : 1080
+            }
+         ],
+         "place_id" : "ChIJA2NGesNNqEcRoRPCNLTBjGA",
+         "plus_code" : {
+            "compound_code" : "GFX5+XM Berlin",
+            "global_code" : "9F4MGFX5+XM"
+         },
+         "price_level" : 1,
+         "rating" : 4.2,
+         "reference" : "ChIJA2NGesNNqEcRoRPCNLTBjGA",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 118,
+         "vicinity" : "Berliner Allee 104, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5282431,
+               "lng" : 13.4112932
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.52963682989271,
+                  "lng" : 13.41275927989272
+               },
+               "southwest" : {
+                  "lat" : 52.52693717010727,
+                  "lng" : 13.41005962010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "GÜMÜS",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111053220229136008484\"\u003eMarkus Rauscher\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEC9Zr9sfmVus9_AdqGwCnC4WDPOHr8V87vIrbc-eypcRztIATTDxVMnV1x6qpqalQ-849VhThEvhMorUVrAlDItgANwGOQCqJI6Cmg-licQCXZEnWMMwOWVedrbf0iCgfR7Xd_6svNBPT8hW3NJcEkhQopC3fSKSA1_hCTK21MWHSy5",
+               "width" : 4608
+            }
+         ],
+         "place_id" : "ChIJVTXohB1OqEcRzvdXsar4PSw",
+         "plus_code" : {
+            "compound_code" : "GCH6+7G Berlin",
+            "global_code" : "9F4MGCH6+7G"
+         },
+         "price_level" : 1,
+         "rating" : 4.5,
+         "reference" : "ChIJVTXohB1OqEcRzvdXsar4PSw",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 198,
+         "vicinity" : "Torstraße 40, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.50383739999999,
+               "lng" : 13.4473713
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.50515612989273,
+                  "lng" : 13.44885562989272
+               },
+               "southwest" : {
+                  "lat" : 52.50245647010728,
+                  "lng" : 13.44615597010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Bistro ISTANBUL Döner, Kebab",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3120,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108145848428906472462\"\u003ePijavko\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uECvbHl6k3_LwuwdOxYGFck1Jrzqx9Q42AJrCs30EqEiALujgcdJQ0LFqT29N2wmJM2JnwPszMjyuIMwgESwvkKltYkmljwERdzvB9mqmuBBcOZ4wbuNtOon0-ZaCBdEDICIVVsB78NT00nrpAAkdZJPZj4hwpv38DDmY8BZa4_TGUfn",
+               "width" : 4160
+            }
+         ],
+         "place_id" : "ChIJgRLORVBOqEcReO0jn2YJYnE",
+         "plus_code" : {
+            "compound_code" : "GC3W+GW Berlin",
+            "global_code" : "9F4MGC3W+GW"
+         },
+         "price_level" : 1,
+         "rating" : 4.1,
+         "reference" : "ChIJgRLORVBOqEcReO0jn2YJYnE",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 500,
+         "vicinity" : "Warschauer Str. 45, Berlin"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 52.5358776,
+               "lng" : 13.4743026
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 52.53740587989272,
+                  "lng" : 13.47554132989272
+               },
+               "southwest" : {
+                  "lat" : 52.53470622010728,
+                  "lng" : 13.47284167010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "Mac's Bistro",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3145,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105832651752877856219\"\u003eMichael Stellmacher\u003c/a\u003e"
+               ],
+               "photo_reference" : "Aap_uEBIuTn905_c_KdbXP2mbKLRAfBFRyY7jhM1UDNqcXuH_imceNSIYEG7f6sExhnYKhh0d8jONDz6LK_bjwtD5j8_Cv1oC-HUnijhPeHJKffGA3ZBAE3k_H547yxKQCEI7_XEBuravueKq45gQi5lCUTF9rY84jKM-F_tjve5ZfnU4As8",
+               "width" : 3114
+            }
+         ],
+         "place_id" : "ChIJD30badVNqEcRhbEsOkh6jNg",
+         "plus_code" : {
+            "compound_code" : "GFPF+9P Berlin",
+            "global_code" : "9F4MGFPF+9P"
+         },
+         "price_level" : 1,
+         "rating" : 3.9,
+         "reference" : "ChIJD30badVNqEcRhbEsOkh6jNg",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 272,
+         "vicinity" : "Weißenseer Weg 36, Berlin"
+      }
+   ],
+   "status" : "OK"
+}
