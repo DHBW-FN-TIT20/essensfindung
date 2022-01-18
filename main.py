@@ -21,7 +21,12 @@ def configure():
 
 def configure_logger():
     """Configure root logger"""
+    # create directory and file if not exist
     logging_path = Path("./logs/infos.log")
+    logging_path.parent.mkdir(exist_ok=True)
+    logging_path.touch(exist_ok=True)
+
+    # start Configuration
     logger = logging.getLogger()
 
     # create handler
