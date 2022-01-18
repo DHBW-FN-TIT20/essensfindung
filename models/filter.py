@@ -1,3 +1,4 @@
+"""Contains all Filter for the searches"""
 from pydantic import BaseModel, validator
 from models.restaurant import BaseLocation
 from models import Cuisine, Allergies
