@@ -1,17 +1,6 @@
 """Basic tools and definitions for the infrastracture"""
 from configparser import ConfigParser
 from pathlib import Path
-from enum import Enum
-
-
-class Cuisine(Enum):
-    """Only this Cuisine can be searched"""
-
-    ITALIAN = "Italienisch"
-    GERMAN = "Deutsch"
-    ASIAN = "Asiatisch"
-    DOENER = "Doener"
-    TURKEY = "Tuerkisch"
 
 
 def get_api_key() -> str:
