@@ -5,7 +5,6 @@ from typing import List
 import httpx
 from models.restaurant import Restaurant, GoogleApiException
 from models.filter import RestFilter
-from models import Cuisine
 
 import infrastructure
 
