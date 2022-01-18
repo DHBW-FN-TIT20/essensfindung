@@ -3,7 +3,8 @@ import logging
 from typing import List
 
 import httpx
-from models.restaurant import Location, Restaurant, GoogleApiException
+from models.restaurant import ResLocation, Restaurant, GoogleApiException
+from models import Cuisine
 
 import infrastructure
 
@@ -14,12 +15,12 @@ import infrastructure
 logger = logging.getLogger(__name__)
 
 
-def search_restaurant(cuisin: infrastructure.Cuisine, location: Location, radius: int = 5000) -> List[Restaurant]:
+def search_restaurant(cuisin: Cuisine, location: ResLocation, radius: int = 5000) -> List[Restaurant]:
     """Search all restaurants for a specific cuisin in a specific location
 
     Args:
-        cuisin (infrastructure.Cuisine): Like a Keyword for the google search
-        location (Location): Coordinates to specific the search
+        cuisin (Cuisine): Like a Keyword for the google search
+        location (ResLocation): Coordinates to specific the search
         radius (int, optional): Radius in meter to search. Defaults to 5000.
 
     Raises:
