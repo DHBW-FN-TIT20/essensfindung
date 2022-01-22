@@ -3,7 +3,8 @@ import logging
 from typing import List
 
 import httpx
-from models.restaurant import Location, Restaurant, GoogleApiException
+from models.restaurant import Restaurant, GoogleApiException
+from models.filter import RestFilter
 
 import infrastructure
 
@@ -14,14 +15,11 @@ import infrastructure
 logger = logging.getLogger(__name__)
 
 
-def search_restaurant(cuisin: infrastructure.Cuisine, location: Location, radius: int = 5000) -> List[Restaurant]:
+def search_restaurant(res_filter: RestFilter) -> List[Restaurant]:
     """Search all restaurants for a specific cuisin in a specific location
 
     Args:
-        cuisin (infrastructure.Cuisine): Like a Keyword for the google search
-        location (Location): Coordinates to specific the search
-        radius (int, optional): Radius in meter to search. Defaults to 5000.
-
+        res_filter (RestFilter): Filter for the API
     Raises:
         GoogleApiException: If something with the httpx went wrong
 
@@ -29,10 +27,11 @@ def search_restaurant(cuisin: infrastructure.Cuisine, location: Location, radius
         List[Restaurant]: List of all Restaurants from the google api
     """
     params: dict = {
-        "keyword": cuisin.value,
-        "location": f"{location.lat},{location.lng}",
+        "keyword": res_filter.cuisin.value,
+        "location": f"{res_filter.location.lat},{res_filter.location.lng}",
         "opennow": True,
-        "radius": radius,
+        "radius": res_filter.radius,
+        "maxprice": res_filter.costs,
         "type": "restaurant",
         "language": "de",
     }

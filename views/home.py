@@ -17,4 +17,14 @@ def index(request: Request):
         request (Request): Requerd for Template
     """
     some_data_day = datetime.today().day
-    return templates.TemplateResponse("home/index.html", {"request": request, "day": some_data_day})
+    return templates.TemplateResponse("examples/example.html", {"request": request, "day": some_data_day})
+
+@router.get("/search")
+def search(request: Request):
+    """Return the renderd template for the /index.html
+
+    Args:
+        request (Request): Requerd for Template
+    """
+    some_data_day = datetime.today().day
+    return templates.TemplateResponse("home/search.html", {"request": request, "day": some_data_day})

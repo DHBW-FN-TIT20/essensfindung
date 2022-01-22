@@ -2,18 +2,23 @@
 from pydantic import BaseModel
 
 
-class Location(BaseModel):
-    """store further information about the location of the restaurant"""
+class BaseLocation(BaseModel):
+    """contain only coordinates"""
 
     lat: str
     lng: str
+
+
+class ResLocation(BaseLocation):
+    """store further information about the location of the restaurant"""
+
     adr: str = None
 
 
 class Geometry(BaseModel):
     """Needed for better automation converting from the google api"""
 
-    location: Location
+    location: ResLocation
 
 
 class Restaurant(BaseModel):

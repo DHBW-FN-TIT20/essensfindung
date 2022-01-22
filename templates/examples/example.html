@@ -1,0 +1,119 @@
+{% extends "shared/layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <p>
+            Schlampnschleppa, Kittlschliaffa, Hundsbua, Vieh mit Haxn, Schlawina, Zigarettnbiaschal, Herrgoddsacklzementfixlujja, Schusterbua, schiache Goaß, Griasgram, Kasberl, Krampfhenna, du ogsoachte, Gscheidhaferl, Spinotfressa, Wuidsau, Badhur, eigschnabbda, Hungaleida, oida Daddara, Bierdimpfl, Dreegschleida, Randstoamare, Griggalheudda, Krampfhenna, Grachal, damischa Depp, krummhaxata Goaßbog, Knedlfressa, Schlawina, Bierdimpfl, Brunzkachl, du ogsoachte, Flegel, Pfundhamme, Daamaluudscha, bsuffas Wagscheidl, Bauernfünfa, Flaschn, Badwaschl, Dreeghamml, eigschnabbda, dreckata Drek, Fegeisen, Krippnmandl!
+        </p>
+    </div>   
+</div>
+<div class="row mb-3">
+    <div class="col-4 border">
+        <h1 class="d-flex justify-content-end">Geiler</h1>
+    </div>
+    <div class="col-4 border">
+        <h1 class="d-flex justify-content-center">Scheiß</h1>
+    </div>
+    <div class="col-4 border">
+        <h1 class="d-flex justify-content-start">!</h1>
+    </div>
+</div>
+<div class="row">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group my-3">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn-sm btn-dark">Submit</button>
+    </form>
+</div>
+<div class="row">
+    <form>
+        <label for="customRange2" class="form-label">Example range</label>
+        <input type="range" class="form-range" min="1" max="5" id="customRange2">
+    </form>
+</div>
+<div class="row mb-3">
+    <div class="col-4">
+        <button class="btn-lg btn-dark py-6" type="button" data-bs-toggle="modal" data-bs-target="#modalExample">Open modal</button>
+    </div>
+    <div class="col-8">
+        <div class="d-grid gap-2 d-md-block">
+            <input type="checkbox" class="btn-check col-4" id="btn-check1" autocomplete="off">
+            <label class="btn btn-secondary" for="btn-check1">First</label>
+
+            <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off">
+            <label class="btn btn-secondary" for="btn-check2">Second</label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <select class="selectpicker" multiple>
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Barbecue</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <img src="static/img/glaser.jpg" class="rounded" alt="...">
+          </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <h1 class="btn btn-light" onclick="change_text()" data-bs-toggle="collapse" href="#collapseExample" id="filterbtn" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Filter ▸
+        </h1>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalExample" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="/findrestaurant/?test1=0" type="button" class="btn btn-dark">Understood</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+
+    function change_text(){
+
+        if(document.getElementById("filterbtn").innerText == "Filter ▸"){
+            document.getElementById("filterbtn").innerText = "Filter ▾";
+        } else {
+            document.getElementById("filterbtn").innerText = "Filter ▸";
+        }
+    }
+</script>
+{% endblock %}
