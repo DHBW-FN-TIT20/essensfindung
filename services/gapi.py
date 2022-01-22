@@ -3,8 +3,8 @@ import logging
 from typing import List
 
 import httpx
-from models.restaurant import Restaurant, GoogleApiException
-from models.filter import RestFilter
+from schemes.restaurant import Restaurant, GoogleApiException
+from schemes.filter import RestFilter
 
 import infrastructure
 

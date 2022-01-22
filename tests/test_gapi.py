@@ -3,9 +3,9 @@ from typing import List
 
 import httpx
 import pytest
-from infrastructure import gapi
-from models import Cuisine
-from models.restaurant import Restaurant
+from services import gapi
+from schemes import Cuisine
+from schemes.restaurant import Restaurant
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
 

@@ -1,10 +1,10 @@
 import json
 from typing import List
 import pytest
-from models import Allergies, Cuisine
+from schemes import Allergies, Cuisine
 from services import service_res
-from models.restaurant import BaseLocation, Restaurant
-from models.filter import RestFilter
+from schemes.restaurant import BaseLocation, Restaurant
+from schemes.filter import RestFilter
 from pytest_mock import MockerFixture
 
 
@@ -34,14 +34,14 @@ def test_search_for_restaurant(
     mocker.patch("services.service_res.fill_user_rating", return_value=rated_restaurants)
 
     # ...googleapi
-    mocker.patch("infrastructure.gapi.search_restaurant", return_value=google_api_restaurants)
+    mocker.patch("services.gapi.search_restaurant", return_value=google_api_restaurants)
 
     filter = RestFilter(
         cuisine=Cuisine.DOENER,
         allergies=Allergies.LACTOSE,
         rating=3,
         costs=3,
-        location=BaseLocation(lat=42, lng=42),
+        zipcode="88069",
         radius=5000,
     )
     return_res = service_res.search_for_restaurant(filter)
