@@ -21,10 +21,18 @@ class Geometry(BaseModel):
     location: ResLocation
 
 
-class Restaurant(BaseModel):
-    """Basse class that got return to the website"""
+class BaseRestaurant(BaseModel):
+    """Scheme that is only needed for the DB"""
 
     place_id: str
+
+    class Config:
+        orm_mode = True
+
+
+class Restaurant(BaseRestaurant):
+    """Class that got return to the website"""
+
     name: str
     geometry: Geometry
     maps_url: str = None
