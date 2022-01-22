@@ -1,7 +1,6 @@
 """Contains all Filter for the searches"""
 from pydantic import BaseModel, validator
-from models.restaurant import BaseLocation
-from models import Cuisine, Allergies
+from schemes import Cuisine, Allergies
 
 
 class BaseFilter(BaseModel):
@@ -30,9 +29,24 @@ class BaseFilter(BaseModel):
 class RestFilter(BaseFilter):
     """Extended Model for Restaurant-Filter"""
 
-    location: BaseLocation
+    zipcode: str
     costs: int
     radius: int
+
+    @validator("zipcode")
+    @classmethod
+    def plz_length(cls, value: str):
+        """Check if the zipcode got the length 5
+
+        Args:
+            value (int): Value of zipcode
+
+        Raises:
+            ValueError: If wrong value
+        """
+        if len(value) == 5:
+            return value
+        raise ValueError("costs is not between 0 (included) and 4 (included)")
 
     @validator("costs")
     @classmethod
