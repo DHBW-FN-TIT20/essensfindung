@@ -3,7 +3,7 @@ from typing import List
 import pytest
 from schemes import Allergies, Cuisine
 from services import service_res
-from schemes.restaurant import BaseLocation, Restaurant
+from schemes.scheme_rest import BaseLocation, Restaurant
 from schemes.filter import RestFilter
 from pytest_mock import MockerFixture
 

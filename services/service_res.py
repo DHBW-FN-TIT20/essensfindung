@@ -4,7 +4,7 @@ from typing import List
 
 from services import gapi
 from schemes.filter import RestFilter
-from schemes.restaurant import Restaurant
+from schemes.scheme_rest import Restaurant
 
 
 def search_for_restaurant(user_f: RestFilter) -> Restaurant:

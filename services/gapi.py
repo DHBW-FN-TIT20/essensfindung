@@ -3,7 +3,7 @@ import logging
 from typing import List
 
 import httpx
-from schemes.restaurant import Restaurant, GoogleApiException
+from schemes.scheme_rest import Restaurant, GoogleApiException
 from schemes.filter import RestFilter
 
 from configuration import config
