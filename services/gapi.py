@@ -6,8 +6,7 @@ import httpx
 from schemes.restaurant import Restaurant, GoogleApiException
 from schemes.filter import RestFilter
 
-import infrastructure
-
+from configuration import config
 
 # TODO: Asynchrone Funktionen
 # TODO: Asynchrone API Anfragen
@@ -56,7 +55,7 @@ def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]
     """
     url: str = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params["pagetoken"] = next_page_token
-    params["key"] = infrastructure.get_api_key()
+    params["key"] = config.get_google_api_key()
 
     response = httpx.get(url, params=params)
     logger.debug("Response status: %s", response.status_code)
@@ -85,7 +84,7 @@ def place_details(restaurants: list[Restaurant]) -> List[Restaurant]:
     url: str = "https://maps.googleapis.com/maps/api/place/details/json"
     extended_restaurants: List[Restaurant] = []
     for restaurant in restaurants:
-        params = {"key": infrastructure.get_api_key(), "place_id": restaurant.place_id}
+        params = {"key": config.get_google_api_key(), "place_id": restaurant.place_id}
         response = httpx.get(url, params=params)
         logger.debug("Response status: %s", response.status_code)
         logger.debug("Request url: %s", response.url)

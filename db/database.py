@@ -1,10 +1,13 @@
+"""Create the connection to the Database"""
 from typing import Generator
 
+from configuration import config
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:5DuvSYmxecJM5Z4J3H5i@192.168.10.200/essensfinder"
+conf = config.get_db_conf()
+SQLALCHEMY_DATABASE_URL = f"postgresql://{conf['username']}:{conf['password']}@{conf['host']}/{conf['database']}"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
