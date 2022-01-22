@@ -7,7 +7,8 @@ import fastapi
 import uvicorn
 from starlette.staticfiles import StaticFiles
 
-from views import home
+from views import home, restaurant
+
 
 app = fastapi.FastAPI()
 
@@ -47,6 +48,7 @@ def configure_routing():
     """Add / Configure all router for FastAPI"""
     app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(home.router)
+    app.include_router(restaurant.router)
 
 
 def configure_database():
@@ -55,6 +57,6 @@ def configure_database():
 
 if __name__ == "__main__":
     configure()
-    uvicorn.run(app, port=8000, host="127.0.0.1")
+    uvicorn.run(app, port=8000, host="192.168.178.44")
 else:
     configure()
