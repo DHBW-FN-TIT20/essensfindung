@@ -42,5 +42,20 @@ class Restaurant(BaseRestaurant):
     homepage: str = None
 
 
+class BaseRestBewertung(BaseModel):
+    """Class to create Bewertungen for the DB"""
+
+    comment: str
+    rating: float
+
+
+class RestBewertung(BaseRestBewertung):
+    """Class to return a Bewertung"""
+    timestamp: str
+
+    class Config:
+        orm_mode = True
+
+
 class GoogleApiException(Exception):
     """Exception if some Error from the Google API request are made"""

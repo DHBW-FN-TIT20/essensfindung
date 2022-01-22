@@ -32,6 +32,7 @@ def get_all_restaurants(db: Session, skip: int = 0, limit: int = 100) -> List[db
     """
     return db.query(db_models.Restaurant).offset(skip).limit(limit).all()
 
+
 def create_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> db_models.Restaurant:
     """Create / Add a Restaurant to the DB
 
@@ -48,6 +49,23 @@ def create_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> db_model
     db.refresh(db_rest)
     return db_rest
 
+
 def delete_restaurant(db: Session, place_id: str) -> int:
     return db.query(db_models.Restaurant).delete(db_models.Restaurant.place_id == place_id)
 
+
+def create_bewertung(db: Session, assessment: scheme_rest.BaseRestBewertung) -> db_models.Bewertung:
+    """Create / Add a Bewertung to the DB. Timestamp and ID will set automatic
+
+    Args:
+        db (Session): Session to the DB
+        assessment (scheme_rest.BaseRestBewertung): Bewertung to add
+
+    Returns:
+        db_models.Bewertung: Return if success
+    """
+    db_assessment = db_models.Bewertung(**assessment.dict())
+    db.add(db_assessment)
+    db.commit()
+    db.refresh(db_assessment)
+    return db_assessment
