@@ -46,7 +46,7 @@ class Bewertung(Base):
     __tablename__ = "bewertung"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    zeitstempel = Column(DateTime(timezone=True), onupdate=func.now())
+    zeitstempel = Column(DateTime(timezone=True), server_onupdate=func.now(), server_default=func.now())
     kommentar = Column(String)
     rating = Column(Integer, autoincrement=False)
 

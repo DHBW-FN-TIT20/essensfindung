@@ -1,5 +1,9 @@
 """ Contains all classes for the restaurant search """
+import datetime
+
 from pydantic import BaseModel
+
+from . import scheme_user
 
 
 class BaseLocation(BaseModel):
@@ -43,14 +47,28 @@ class Restaurant(BaseRestaurant):
 
 
 class BaseRestBewertung(BaseModel):
-    """Class to create Bewertungen for the DB"""
+    """BaseClass for the Bewertung"""
 
     comment: str
     rating: float
 
 
+class RestBewertungCreate(BaseRestBewertung):
+    """Class to create a new Bewertung in the DB"""
+
+    person: scheme_user.UserBase
+    restaurant: BaseRestaurant
+
+
+class RestBewertungReturn(BaseRestBewertung):
+    """Class to return to the frontend"""
+
+    timestamp: datetime.datetime
+
+
 class RestBewertung(BaseRestBewertung):
     """Class to return a Bewertung"""
+
     timestamp: str
 
     class Config:

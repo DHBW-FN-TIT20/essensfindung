@@ -56,20 +56,30 @@ def delete_restaurant(db: Session, place_id: str) -> int:
     return db.query(db_models.Restaurant).filter(db_models.Restaurant.place_id == place_id).delete()
 
 
-def create_bewertung(db: Session, assessment: scheme_rest.BaseRestBewertung) -> db_models.Bewertung:
-    """Create / Add a Bewertung to the DB. Timestamp and ID will set automatic
+def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -> db_models.Bewertung:
+    """Create / Add a Bewertung to the DB. Timestamp and ID will set automatic.
 
     Args:
         db (Session): Session to the DB
-        assessment (scheme_rest.BaseRestBewertung): Bewertung to add
+        assessment (scheme_rest.RestBewertungCreate): Bewertung to add. This include the Person and Restaurant for the mapping of the Bewertung
 
     Returns:
         db_models.Bewertung: Return if success
     """
-    db_assessment = db_models.Bewertung(**assessment.dict())
+    db_assessment = db_models.Bewertung(kommentar=assessment.comment, rating=assessment.rating)
+    db_person = get_user_by_mail(db, assessment.person.email)
+    db_restaurant = get_restaurant_by_id(db, assessment.restaurant.place_id)
+
     db.add(db_assessment)
     db.commit()
     db.refresh(db_assessment)
+
+    db_assess_pers = db_models.BewPers(bewertung_id=db_assessment.id, email=db_person.email)
+    db_assess_rest = db_models.BewRest(bewertung_id=db_assessment.id, place_id=db_restaurant.place_id)
+
+    db.add(db_assess_pers)
+    db.add(db_assess_rest)
+    db.commit()
     return db_assessment
 
 
