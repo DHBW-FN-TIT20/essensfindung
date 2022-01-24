@@ -1,6 +1,8 @@
 """CRUD comes from: Create, Read, Update, and Delete... for the Database"""
 from typing import List, Union
 
+import sqlalchemy
+
 from schemes import scheme_rest, scheme_user
 from sqlalchemy.orm import Session
 from tools.hashing import Hasher
@@ -53,7 +55,60 @@ def create_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> db_model
 
 
 def delete_restaurant(db: Session, place_id: str) -> int:
+    """Delete one restaurant from the DB with the specific place_id
+
+    Args:
+        db (Session): Session to the DB
+        place_id (str): The Place_ID for the restaurant to delete
+
+    Returns:
+        int: Number of effected rows
+    """
     return db.query(db_models.Restaurant).filter(db_models.Restaurant.place_id == place_id).delete()
+
+
+def get_bewertung_from_user_to_rest(
+    db: Session, user: scheme_user.UserBase, rest: scheme_rest.BaseRestaurant
+) -> db_models.Bewertung:
+    """Return a specific bewertung from a user to only one restaurant
+
+    Args:
+        db (Session): Session to the DB
+        user (scheme_user.UserBase): Specifie the User
+        rest (scheme_rest.BaseRestaurant): Specifie the restauranat
+
+    Returns:
+        db_models.Bewertung: Return one bewertung that match the restaurant - user
+    """
+    return (
+        db.query(db_models.Bewertung)
+        .join(db_models.BewPers, db_models.Bewertung.id == db_models.BewPers.bewertung_id)
+        .join(db_models.Person, db_models.Person.email == db_models.BewPers.email)
+        .join(db_models.BewRest, db_models.Bewertung.id == db_models.BewRest.bewertung_id)
+        .join(db_models.Restaurant, db_models.Restaurant.place_id == db_models.BewRest.place_id)
+        .filter(db_models.Person.email == user.email)
+        .filter(db_models.Restaurant.place_id == rest.place_id)
+        .first()
+    )
+
+
+def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> List[db_models.Bewertung]:
+    """Return all bewertugen from one User
+
+    Args:
+        db (Session): Session to the DB
+        user (scheme_user.UserBase): The user to select
+
+    Returns:
+        List[db_models.Bewertung]: List of all Bewertungen from the user
+    """
+    return (
+        db.query(db_models.Bewertung)
+        .join(db_models.BewPers, db_models.Bewertung.id == db_models.BewPers.bewertung_id)
+        .join(db_models.Person, db_models.Person.email == db_models.BewPers.email)
+        .filter(db_models.Person.email == user.email)
+        .all()
+    )
 
 
 def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -> db_models.Bewertung:
@@ -66,9 +121,15 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     Returns:
         db_models.Bewertung: Return if success
     """
+    if get_bewertung_from_user_to_rest(db, assessment.person, assessment.restaurant) is not None:
+        raise sqlalchemy.exc.InvalidRequestError("Duplicate Bewertung!")
+
     db_assessment = db_models.Bewertung(kommentar=assessment.comment, rating=assessment.rating)
     db_person = get_user_by_mail(db, assessment.person.email)
     db_restaurant = get_restaurant_by_id(db, assessment.restaurant.place_id)
+
+    if db_person is None or db_restaurant is None:
+        raise sqlalchemy.exc.SQLAlchemyError("Person or Restaurant do not exist!")
 
     db.add(db_assessment)
     db.commit()
@@ -83,7 +144,7 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     return db_assessment
 
 
-def create_person(db: Session, person: scheme_user.UserCreate) -> db_models.Person:
+def create_user(db: Session, person: scheme_user.UserCreate) -> db_models.Person:
     """Create / Add Person to the Database with hashed password
 
     Args:
@@ -125,7 +186,9 @@ def update_user(db: Session, current_user_mail: str, new_user: scheme_user.UserC
         db_models.Person: Return the new DB values
     """
     db_new_user = db_models.Person(email=new_user.email, hashed_password=Hasher.get_password_hash(new_user.password))
-    db.query(db_models.Person).filter(db_models.Person.email == current_user_mail).update(db_new_user)
+    db.query(db_models.Person).filter(db_models.Person.email == current_user_mail).update(
+        {db_models.Person.email: db_new_user.email, db_models.Person.hashed_password: db_new_user.hashed_password}
+    )
     return get_user_by_mail(db, new_user.email)
 
 
