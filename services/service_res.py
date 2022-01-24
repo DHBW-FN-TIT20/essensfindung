@@ -2,9 +2,9 @@
 import random
 from typing import List
 
-from infrastructure import gapi
-from models.filter import RestFilter
-from models.restaurant import Restaurant
+from services import gapi
+from schemes.filter import RestFilter
+from schemes.scheme_rest import Restaurant
 
 
 def search_for_restaurant(user_f: RestFilter) -> Restaurant:
