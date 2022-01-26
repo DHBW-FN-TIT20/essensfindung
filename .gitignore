@@ -134,3 +134,6 @@ dmypy.json
 # Ignore all Configuration Files
 *.conf
 tests/test_db.db
+
+# Ignore Logs
+*log*
