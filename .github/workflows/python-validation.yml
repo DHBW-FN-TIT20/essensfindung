@@ -6,10 +6,10 @@ name: Our first GitHub Action
 on:
   push:
     branches: 
-      - master
+      - main
   pull_request:
     branches: 
-      - master
+      - main
 
 jobs:
   build:
