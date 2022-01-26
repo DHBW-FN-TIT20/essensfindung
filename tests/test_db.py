@@ -180,6 +180,13 @@ def test_bewertung(db_session: SessionTesting):
             ),
         )
 
+    # Delete Assessments
+    assert 1 == crud.delete_bewertung(db_session, user_add_1, rest_add_1)
+    assert crud.get_bewertung_from_user_to_rest(db_session, user_add_1, rest_add_1) is None
+    assert 0 == crud.delete_bewertung(db_session, user_add_1, rest_add_1)
+    assert 0 == crud.delete_bewertung(db_session, fake_user, rest_add_2)
+    assert 0 == crud.delete_bewertung(db_session, user_add_1, fake_rest)
+
     # Test if only one comment for the same restaurant an user are possible
     with pytest.raises(exc.IntegrityError):
-        crud.create_bewertung(db_session, assessment_add_1_1)
+        crud.create_bewertung(db_session, assessment_add_2_2)

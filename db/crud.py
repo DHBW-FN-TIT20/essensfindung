@@ -64,7 +64,9 @@ def delete_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> int:
     Returns:
         int: Number of effected rows
     """
-    return db.query(db_models.Restaurant).filter(db_models.Restaurant.place_id == rest.place_id).delete()
+    rows = db.query(db_models.Restaurant).filter(db_models.Restaurant.place_id == rest.place_id).delete()
+    db.commit()
+    return rows
 
 
 def get_bewertung_from_user_to_rest(
@@ -134,6 +136,26 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     return db_assessment
 
 
+def delete_bewertung(db: Session, user: scheme_user.User, rest: scheme_rest.BaseRestaurant) -> int:
+    """Delete one Bewertung
+
+    Args:
+        db (Session): Session to the db
+        user (scheme_user.User): The owner of the Bewertung
+        rest (scheme_rest.BaseRestaurant): The corrosponding Restaurant
+
+    Returns:
+        int: Number of effected rows
+    """
+    rows = (
+        db.query(db_models.Bewertung)
+        .filter(db_models.Bewertung.person_email == user.email, db_models.Bewertung.place_id == rest.place_id)
+        .delete()
+    )
+    db.commit()
+    return rows
+
+
 def create_user(db: Session, person: scheme_user.UserCreate) -> db_models.Person:
     """Create / Add Person to the Database with hashed password
 
@@ -179,7 +201,8 @@ def update_user(db: Session, current_user: scheme_user.UserBase, new_user: schem
     db.query(db_models.Person).filter(db_models.Person.email == current_user.email).update(
         {db_models.Person.email: db_new_user.email, db_models.Person.hashed_password: db_new_user.hashed_password}
     )
-    return get_user_by_mail(db, new_user.email)
+    db.commit()
+    return db_new_user
 
 
 def delete_user(db: Session, user: scheme_user.UserBase) -> int:
@@ -192,4 +215,6 @@ def delete_user(db: Session, user: scheme_user.UserBase) -> int:
     Returns:
         int: Number of effekted rows
     """
-    return db.query(db_models.Person).filter(db_models.Person.email == user.email).delete()
+    rows = db.query(db_models.Person).filter(db_models.Person.email == user.email).delete()
+    db.commit()
+    return rows
