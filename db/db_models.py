@@ -1,8 +1,16 @@
 """SQLAlchemy uses the term "model" to refer to these classes and instances that interact with the database"""
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 
 from db.database import Base
+
+association_table_filter_allergie = Table(
+    "association",
+    Base.metadata,
+    Column("filter_email", ForeignKey("filter.email")),
+    Column("allergie_name", ForeignKey("allergie.name")),
+)
 
 
 class Person(Base):
@@ -11,16 +19,11 @@ class Person(Base):
     __tablename__ = "person"
 
     email = Column(String, primary_key=True)
-    hashed_password = Column(String)
-    last_login = Column(DateTime(timezone=True), server_default=func.now())
+    hashed_password = Column(String, nullable=False)
+    last_login = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
-
-class BewPers(Base):
-    """Model for SQLAlchemy for the bewPers Table in the DB"""
-
-    __tablename__ = "bewPers"
-    bewertung_id = Column(Integer, ForeignKey("bewertung.id"), primary_key=True)
-    email = Column(String, ForeignKey("person.email"), primary_key=True)
+    bewertungen = relationship("Bewertung", back_populates="person", passive_deletes=True)
+    filter = relationship("Filter", back_populates="person", passive_deletes=True)
 
 
 class Restaurant(Base):
@@ -30,14 +33,7 @@ class Restaurant(Base):
 
     place_id = Column(String, primary_key=True)
 
-
-class BewRest(Base):
-    """Model for SQLAlchemy for the bewRest Table in the DB"""
-
-    __tablename__ = "bewRest"
-
-    bewertung_id = Column(Integer, ForeignKey("bewertung.id"), primary_key=True)
-    place_id = Column(String, ForeignKey("restaurant.place_id"), primary_key=True)
+    bewertungen = relationship("Bewertung", back_populates="restaurant", passive_deletes=True)
 
 
 class Bewertung(Base):
@@ -45,10 +41,14 @@ class Bewertung(Base):
 
     __tablename__ = "bewertung"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    person_email = Column(String, ForeignKey("person.email", ondelete="CASCADE"), primary_key=True)
+    place_id = Column(String, ForeignKey("restaurant.place_id", ondelete="CASCADE"), primary_key=True)
     zeitstempel = Column(DateTime(timezone=True), server_onupdate=func.now(), server_default=func.now())
-    kommentar = Column(String)
-    rating = Column(Integer, autoincrement=False)
+    kommentar = Column(String, nullable=True)
+    rating = Column(Integer, nullable=False)
+
+    person = relationship("Person", back_populates="bewertungen")
+    restaurant = relationship("Restaurant", back_populates="bewertungen")
 
 
 class Filter(Base):
@@ -57,11 +57,13 @@ class Filter(Base):
     __tablename__ = "filter"
 
     email = Column(String, ForeignKey("person.email"), primary_key=True)
-    plz = Column(String(5))
-    radius = Column(Integer)
-    g_rating = Column(Integer)
-    cuisine = Column(String)
-    allergie = Column(Integer, unique=True)
+    plz = Column(String(5), nullable=False)
+    radius = Column(Integer, nullable=False)
+    g_rating = Column(Integer, nullable=False)
+    cuisine = Column(String, nullable=False)
+
+    person = relationship("Person", back_populates="filter")
+    allergien = relationship("Allergie", secondary=association_table_filter_allergie)
 
 
 class Allergie(Base):
@@ -71,12 +73,3 @@ class Allergie(Base):
 
     name = Column(String, primary_key=True)
     beschreibung = Column(String)
-
-
-class FilterAllergien(Base):
-    """Model for SQLAlchemy for the filterAllergien Table in the DB"""
-
-    __tablename__ = "filterAllergien"
-
-    allergie = Column(Integer, ForeignKey("filter.allergie"), primary_key=True)
-    name = Column(String, ForeignKey("allergie.name"), primary_key=True)

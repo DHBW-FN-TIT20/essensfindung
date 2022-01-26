@@ -54,17 +54,17 @@ def create_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> db_model
     return db_rest
 
 
-def delete_restaurant(db: Session, place_id: str) -> int:
+def delete_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> int:
     """Delete one restaurant from the DB with the specific place_id
 
     Args:
         db (Session): Session to the DB
-        place_id (str): The Place_ID for the restaurant to delete
+        rest (BaseRestaurant): Restaurant with the place_id
 
     Returns:
         int: Number of effected rows
     """
-    return db.query(db_models.Restaurant).filter(db_models.Restaurant.place_id == place_id).delete()
+    return db.query(db_models.Restaurant).filter(db_models.Restaurant.place_id == rest.place_id).delete()
 
 
 def get_bewertung_from_user_to_rest(
@@ -82,17 +82,15 @@ def get_bewertung_from_user_to_rest(
     """
     return (
         db.query(db_models.Bewertung)
-        .join(db_models.BewPers, db_models.Bewertung.id == db_models.BewPers.bewertung_id)
-        .join(db_models.Person, db_models.Person.email == db_models.BewPers.email)
-        .join(db_models.BewRest, db_models.Bewertung.id == db_models.BewRest.bewertung_id)
-        .join(db_models.Restaurant, db_models.Restaurant.place_id == db_models.BewRest.place_id)
+        .join(db_models.Person, db_models.Person.email == db_models.Bewertung.person_email)
+        .join(db_models.Restaurant, db_models.Restaurant.place_id == db_models.Bewertung.place_id)
         .filter(db_models.Person.email == user.email)
         .filter(db_models.Restaurant.place_id == rest.place_id)
         .first()
     )
 
 
-def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> List[db_models.Bewertung]:
+def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> Union[List[db_models.Bewertung], None]:
     """Return all bewertugen from one User
 
     Args:
@@ -100,15 +98,13 @@ def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> List[db
         user (scheme_user.UserBase): The user to select
 
     Returns:
-        List[db_models.Bewertung]: List of all Bewertungen from the user
+        List[db_models.Bewertung] OR None
     """
-    return (
-        db.query(db_models.Bewertung)
-        .join(db_models.BewPers, db_models.Bewertung.id == db_models.BewPers.bewertung_id)
-        .join(db_models.Person, db_models.Person.email == db_models.BewPers.email)
-        .filter(db_models.Person.email == user.email)
-        .all()
-    )
+    user: db_models.Person = get_user_by_mail(db, user.email)
+    if user is None:
+        return None
+    else:
+        return user.bewertungen
 
 
 def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -> db_models.Bewertung:
@@ -121,26 +117,20 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     Returns:
         db_models.Bewertung: Return if success
     """
-    if get_bewertung_from_user_to_rest(db, assessment.person, assessment.restaurant) is not None:
-        raise sqlalchemy.exc.InvalidRequestError("Duplicate Bewertung!")
+    if get_user_by_mail(db, assessment.person.email) is None:
+        raise sqlalchemy.exc.InvalidRequestError("User does not exist")
+    if get_restaurant_by_id(db, assessment.restaurant.place_id) is None:
+        raise sqlalchemy.exc.InvalidRequestError("Restaurant does not exist")
 
-    db_assessment = db_models.Bewertung(kommentar=assessment.comment, rating=assessment.rating)
-    db_person = get_user_by_mail(db, assessment.person.email)
-    db_restaurant = get_restaurant_by_id(db, assessment.restaurant.place_id)
-
-    if db_person is None or db_restaurant is None:
-        raise sqlalchemy.exc.SQLAlchemyError("Person or Restaurant do not exist!")
-
+    db_assessment = db_models.Bewertung(
+        person_email=assessment.person.email,
+        place_id=assessment.restaurant.place_id,
+        kommentar=assessment.comment,
+        rating=assessment.rating,
+    )
     db.add(db_assessment)
     db.commit()
     db.refresh(db_assessment)
-
-    db_assess_pers = db_models.BewPers(bewertung_id=db_assessment.id, email=db_person.email)
-    db_assess_rest = db_models.BewRest(bewertung_id=db_assessment.id, place_id=db_restaurant.place_id)
-
-    db.add(db_assess_pers)
-    db.add(db_assess_rest)
-    db.commit()
     return db_assessment
 
 
@@ -174,25 +164,25 @@ def get_user_by_mail(db: Session, email: str) -> Union[db_models.Person, None]:
     return db.query(db_models.Person).filter(db_models.Person.email == email).first()
 
 
-def update_user(db: Session, current_user_mail: str, new_user: scheme_user.UserCreate) -> db_models.Person:
+def update_user(db: Session, current_user: scheme_user.UserBase, new_user: scheme_user.UserCreate) -> db_models.Person:
     """Update the User in the Database. You can change the Mail or Password
 
     Args:
         db (Session): Session to the DB
-        current_user_mail (str): Current mail to search for the user
+        current_user (scheme_user.UserBase): User to Update
         new_user (scheme_user.UserCreate): Contains the updated values for the User
 
     Returns:
         db_models.Person: Return the new DB values
     """
     db_new_user = db_models.Person(email=new_user.email, hashed_password=Hasher.get_password_hash(new_user.password))
-    db.query(db_models.Person).filter(db_models.Person.email == current_user_mail).update(
+    db.query(db_models.Person).filter(db_models.Person.email == current_user.email).update(
         {db_models.Person.email: db_new_user.email, db_models.Person.hashed_password: db_new_user.hashed_password}
     )
     return get_user_by_mail(db, new_user.email)
 
 
-def delete_user_by_mail(db: Session, email: str) -> int:
+def delete_user(db: Session, user: scheme_user.UserBase) -> int:
     """Remove the Person with the given email
 
     Args:
@@ -202,4 +192,4 @@ def delete_user_by_mail(db: Session, email: str) -> int:
     Returns:
         int: Number of effekted rows
     """
-    return db.query(db_models.Person).filter(db_models.Person.email == email).delete()
+    return db.query(db_models.Person).filter(db_models.Person.email == user.email).delete()

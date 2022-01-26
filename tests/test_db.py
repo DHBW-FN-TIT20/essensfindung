@@ -47,7 +47,7 @@ def test_restaurant(db_session: SessionTesting):
     assert rests_return_schemes == [rest_add, rest_add_2]
 
     # Delete that Restaurant
-    affected_rows = crud.delete_restaurant(db_session, rest_add.place_id)
+    affected_rows = crud.delete_restaurant(db_session, rest_add)
     assert affected_rows == 1
     assert crud.get_restaurant_by_id(db_session, rest_add.place_id) is None
 
@@ -72,14 +72,14 @@ def test_user(db_session: SessionTesting):
 
     # Update User password
     user_add.password = "new_password"
-    user_ret = crud.update_user(db_session, user_add.email, user_add)
+    user_ret = crud.update_user(db_session, user_add, user_add)
     assert user_add.email == user_ret.email
     assert Hasher.verify_password(user_add.password, user_ret.hashed_password)
 
     # Update User email
     tmp_user = user_add.copy()
     user_add.email = "new@mail.test"
-    user_ret = crud.update_user(db_session, tmp_user.email, user_add)
+    user_ret = crud.update_user(db_session, tmp_user, user_add)
     assert user_add.email == user_ret.email
     assert Hasher.verify_password(user_add.password, user_ret.hashed_password)
 
@@ -89,7 +89,7 @@ def test_user(db_session: SessionTesting):
     assert Hasher.verify_password(user_add.password, user_ret.hashed_password)
 
     # Delete one User
-    assert 1 == crud.delete_user_by_mail(db_session, user_add_2.email)
+    assert 1 == crud.delete_user(db_session, user_add_2)
 
     # Chek if only one user with the same email can be added
     with pytest.raises(exc.SQLAlchemyError):
@@ -97,21 +97,24 @@ def test_user(db_session: SessionTesting):
 
 
 def test_bewertung(db_session: SessionTesting):
-    # Add user
-    user_add = scheme_user.UserCreate(email="test1@demo.lol", password="password1")
+    fake_user = scheme_user.UserBase(email="fake@nope.ok")
+    fake_rest = scheme_rest.BaseRestaurant(place_id="000000")
+    user_add_1 = scheme_user.UserCreate(email="test1@demo.lol", password="password1")
     user_add_2 = scheme_user.UserCreate(email="test2@demo.lol", password="password2")
-    crud.create_user(db_session, user_add)
+    rest_add_1 = scheme_rest.BaseRestaurant(place_id="1234")
+    rest_add_2 = scheme_rest.BaseRestaurant(place_id="5678")
+
+    # Add user
+    crud.create_user(db_session, user_add_1)
     crud.create_user(db_session, user_add_2)
 
     # Add restaurant
-    rest_add = scheme_rest.BaseRestaurant(place_id="1234")
-    rest_add_2 = scheme_rest.BaseRestaurant(place_id="5678")
-    crud.create_restaurant(db_session, rest_add)
+    crud.create_restaurant(db_session, rest_add_1)
     crud.create_restaurant(db_session, rest_add_2)
 
     # Add assessment to user1 and rest1
     assessment_add_1_1 = scheme_rest.RestBewertungCreate(
-        comment="This is a comment", rating=1.5, person=user_add, restaurant=rest_add
+        comment="This is a comment", rating=1.5, person=user_add_1, restaurant=rest_add_1
     )
     assessment_ret = crud.create_bewertung(db_session, assessment_add_1_1)
     assert assessment_ret.kommentar == assessment_add_1_1.comment
@@ -120,7 +123,7 @@ def test_bewertung(db_session: SessionTesting):
 
     # Add assessment to user1 and rest2
     assessment_add_1_2 = scheme_rest.RestBewertungCreate(
-        comment="This is a comment for rest 2", rating=2.5, person=user_add, restaurant=rest_add_2
+        comment="This is a comment for rest 2", rating=2.5, person=user_add_1, restaurant=rest_add_2
     )
     assessment_ret = crud.create_bewertung(db_session, assessment_add_1_2)
     assert assessment_ret.kommentar == assessment_add_1_2.comment
@@ -137,40 +140,33 @@ def test_bewertung(db_session: SessionTesting):
     assert assessment_ret.zeitstempel is not None
 
     # Get all assessments
-    assessments_ret = crud.get_all_user_bewertungen(db_session, user_add)
+    assessments_ret = crud.get_all_user_bewertungen(db_session, user_add_1)
     assert len(assessments_ret) == 2
 
     assessments_ret = crud.get_all_user_bewertungen(db_session, user_add_2)
     assert len(assessments_ret) == 1
 
     # Get one assessment from one user to one rest
-    assessment_ret = crud.get_bewertung_from_user_to_rest(db_session, user_add, rest_add)
+    assessment_ret = crud.get_bewertung_from_user_to_rest(db_session, user_add_1, rest_add_1)
     assert assessment_ret.kommentar == assessment_add_1_1.comment
     assert assessment_ret.rating == assessment_add_1_1.rating
     assert assessment_ret.zeitstempel is not None
 
     # Try to get assessments that does not exist
-    assessment_ret = crud.get_all_user_bewertungen(db_session, scheme_user.UserBase(email="nope@nice.de"))
-    assert len(assessment_ret) == 0
-
-    assessment_ret = crud.get_bewertung_from_user_to_rest(
-        db_session, scheme_user.UserBase(email="nope@nice.de"), rest_add
-    )
+    assessment_ret = crud.get_all_user_bewertungen(db_session, fake_user)
     assert assessment_ret is None
 
-    assessment_ret = crud.get_bewertung_from_user_to_rest(
-        db_session, user_add, scheme_rest.BaseRestaurant(place_id="0000000")
-    )
+    assessment_ret = crud.get_bewertung_from_user_to_rest(db_session, fake_user, rest_add_1)
+    assert assessment_ret is None
+
+    assessment_ret = crud.get_bewertung_from_user_to_rest(db_session, user_add_1, fake_rest)
     assert assessment_ret is None
 
     # Try to add assessments with invalid user and restaurant
-    fake_user = scheme_user.UserBase(email="fake@nope.ok")
-    fake_rest = scheme_rest.BaseRestaurant(place_id="000000")
-
     with pytest.raises(exc.SQLAlchemyError):
         assessment_ret = crud.create_bewertung(
             db_session,
-            scheme_rest.RestBewertungCreate(comment="none", rating=0, person=fake_user, restaurant=rest_add),
+            scheme_rest.RestBewertungCreate(comment="none", rating=0, person=fake_user, restaurant=rest_add_1),
         )
 
     with pytest.raises(exc.SQLAlchemyError):
@@ -179,12 +175,11 @@ def test_bewertung(db_session: SessionTesting):
             scheme_rest.RestBewertungCreate(
                 comment="none",
                 rating=0,
-                person=scheme_user.UserBase(email=user_add.email),
+                person=scheme_user.UserBase(email=user_add_1.email),
                 restaurant=fake_rest,
             ),
         )
 
     # Test if only one comment for the same restaurant an user are possible
-    with pytest.raises(exc.SQLAlchemyError):
+    with pytest.raises(exc.IntegrityError):
         crud.create_bewertung(db_session, assessment_add_1_1)
-        pass
