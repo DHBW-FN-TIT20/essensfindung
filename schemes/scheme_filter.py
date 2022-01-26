@@ -1,6 +1,7 @@
 """Contains all Filter for the searches"""
 from pydantic import BaseModel, validator
 from schemes import Cuisine, Allergies
+from .scheme_rest import BaseLocation
 
 
 class BaseFilter(BaseModel):
@@ -27,26 +28,11 @@ class BaseFilter(BaseModel):
 
 
 class RestFilter(BaseFilter):
-    """Extended Model for Restaurant-Filter"""
+    """Use this scheme to Search for a Restaurant in the Backend"""
 
-    zipcode: str
     costs: int
     radius: int
-
-    @validator("zipcode")
-    @classmethod
-    def plz_length(cls, value: str):
-        """Check if the zipcode got the length 5
-
-        Args:
-            value (int): Value of zipcode
-
-        Raises:
-            ValueError: If wrong value
-        """
-        if len(value) == 5:
-            return value
-        raise ValueError("costs is not between 0 (included) and 4 (included)")
+    location: BaseLocation
 
     @validator("costs")
     @classmethod
@@ -60,6 +46,44 @@ class RestFilter(BaseFilter):
             ValueError: If wrong values
         """
         if 0 <= value <= 4:
+            return value
+        raise ValueError("costs is not between 0 (included) and 4 (included)")
+
+
+class DBFilter(BaseFilter):
+    """Use this scheme if you internact with the Filter that are saved in the DB"""
+
+    costs: int
+    radius: int
+    zipcode: str
+
+    @validator("costs")
+    @classmethod
+    def costs_range(cls, value: int):
+        """Check if costs >= 0 and <= 4
+
+        Args:
+            value (int): Value of costs
+
+        Raises:
+            ValueError: If wrong values
+        """
+        if 0 <= value <= 4:
+            return value
+        raise ValueError("costs is not between 0 (included) and 4 (included)")
+
+    @validator("zipcode")
+    @classmethod
+    def plz_length(cls, value: str):
+        """Check if the zipcode got the length 5
+
+        Args:
+            value (int): Value of zipcode
+
+        Raises:
+            ValueError: If wrong value
+        """
+        if len(value) == 5:
             return value
         raise ValueError("costs is not between 0 (included) and 4 (included)")
 

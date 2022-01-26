@@ -3,7 +3,7 @@ import random
 from typing import List
 
 from services import gapi
-from schemes.filter import RestFilter
+from schemes.scheme_filter import RestFilter
 from schemes.scheme_rest import Restaurant
 
 

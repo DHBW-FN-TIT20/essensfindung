@@ -4,7 +4,7 @@ import pytest
 from schemes import Allergies, Cuisine
 from services import service_res
 from schemes.scheme_rest import BaseLocation, Restaurant
-from schemes.filter import RestFilter
+from schemes.scheme_filter import RestFilter
 from pytest_mock import MockerFixture
 
 
@@ -43,6 +43,7 @@ def test_search_for_restaurant(
         costs=3,
         zipcode="88069",
         radius=5000,
+        location=BaseLocation(lat="1111", lng="345")
     )
     return_res = service_res.search_for_restaurant(filter)
     assert return_res == random_res
