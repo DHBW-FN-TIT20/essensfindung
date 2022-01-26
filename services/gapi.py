@@ -4,7 +4,7 @@ from typing import List
 
 import httpx
 from schemes.scheme_rest import Restaurant, GoogleApiException
-from schemes.filter import RestFilter
+from schemes.scheme_filter import RestFilter
 
 from configuration import config
 
