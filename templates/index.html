@@ -1,0 +1,21 @@
+{% extends "shared/layout.html" %}
+
+{% block content %}
+<br>
+<br>
+
+<div class="row justify-content-start">
+    <div class="d-grid gap-2 col-6">
+        <a class="btn-lg btn-dark py-5">Rezept finden!</a>
+        <a class="btn-lg btn-dark py-5" href="" id="search_restaurant" onclick="change_url()">Restaurant finden!</a>
+    </div>
+    <div class="d-grid gap-2 col-2">
+        <button class="btn-lg btn-dark py-6" type="button">Rezeptfilter</button>
+        <button class="btn-lg btn-dark py-6" type="button" data-bs-toggle="modal" data-bs-target="#restaurantFilter" >Restaurantfilter</button>
+    </div>
+</div>
+
+<script src="/static/js/restaurant.js"></script>
+{% include "restaurant/restaurant_filter_modal.html" %}
+
+{% endblock %}

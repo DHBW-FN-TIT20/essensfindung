@@ -9,7 +9,7 @@ from starlette.staticfiles import StaticFiles
 
 from db import db_models
 from db.database import engine
-from views import home, restaurant
+from views import index, restaurant
 
 app = fastapi.FastAPI()
 
@@ -53,7 +53,7 @@ def configure_logger():
 def configure_routing():
     """Add / Configure all router for FastAPI"""
     app.mount("/static", StaticFiles(directory="static"), name="static")
-    app.include_router(home.router)
+    app.include_router(index.router)
     app.include_router(restaurant.router)
 
 
