@@ -1,0 +1,194 @@
+Started server process [9932]
+Waiting for application startup.
+Application startup complete.
+Uvicorn running on http://192.168.178.44:8000 (Press CTRL+C to quit)
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [9932]
+Started server process [13744]
+Waiting for application startup.
+Application startup complete.
+Uvicorn running on http://192.168.178.44:8000 (Press CTRL+C to quit)
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [13744]
+Started server process [2932]
+Waiting for application startup.
+Application startup complete.
+Uvicorn running on http://192.168.178.44:8000 (Press CTRL+C to quit)
+Shutting down
+Waiting for connections to close. (CTRL+C to force quit)
+Finished server process [2932]
+2022-01-22 17:03:22,145 - uvicorn.error - ERROR: Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\starlette\routing.py", line 624, in lifespan
+    await receive()
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\lifespan\on.py", line 135, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\queues.py", line 166, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\starlette\routing.py", line 624, in lifespan
+    await receive()
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\lifespan\on.py", line 135, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\queues.py", line 166, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+2022-01-22 17:03:22,148 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+2022-01-22 17:03:22,150 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+2022-01-22 17:03:22,152 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+2022-01-22 17:03:22,153 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+2022-01-22 17:03:22,166 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
+2022-01-22 17:03:22,175 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
+handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
+    await handle_http(
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
+    await connection_lost
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
+    exc = task.exception()
+asyncio.exceptions.CancelledError
