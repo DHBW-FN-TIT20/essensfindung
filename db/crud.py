@@ -134,6 +134,26 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     return db_assessment
 
 
+def delete_bewertung(db: Session, user: scheme_user.User, rest: scheme_rest.BaseRestaurant) -> int:
+    """Delete one Bewertung
+
+    Args:
+        db (Session): Session to the db
+        user (scheme_user.User): The owner of the Bewertung
+        rest (scheme_rest.BaseRestaurant): The corrosponding Restaurant
+
+    Returns:
+        int: Number of effected rows
+    """
+    rows = (
+        db.query(db_models.Bewertung)
+        .filter(db_models.Bewertung.person_email == user.email, db_models.Bewertung.place_id == rest.place_id)
+        .delete()
+    )
+    db.commit()
+    return rows
+
+
 def create_user(db: Session, person: scheme_user.UserCreate) -> db_models.Person:
     """Create / Add Person to the Database with hashed password
 
