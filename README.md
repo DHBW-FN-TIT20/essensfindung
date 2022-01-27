@@ -24,7 +24,11 @@ pyenv global 3.9.7
 Please formatt your Code with [black](https://github.com/psf/black) and validate it with [flake8](https://pypi.org/project/flake8/) and [pylint](https://pypi.org/project/pylint/).
 
 ## Pre-Commit
-If you use git on console the pre-commit will take affect automatically. This will format the code to reduce merge conflicts and ensure some type of standards.<br>
+If you use git on console the [pre-commit](https://pre-commit.com) will take affect automatically. This will format the code to reduce merge conflicts and ensure some type of standards.<br>
+To activate the automaticall validation type:
+```console
+pre-commit install
+```
 If you want to manuall start the pre-commit check run:
 ```console
 pre-commit run --all-files
