@@ -26,7 +26,7 @@ def search_restaurant(res_filter: RestFilter) -> List[Restaurant]:
         List[Restaurant]: List of all Restaurants from the google api
     """
     params: dict = {
-        "keyword": res_filter.cuisin.value,
+        "keyword": res_filter.cuisine.value,
         "location": f"{res_filter.location.lat},{res_filter.location.lng}",
         "opennow": True,
         "radius": res_filter.radius,
@@ -38,6 +38,7 @@ def search_restaurant(res_filter: RestFilter) -> List[Restaurant]:
     try:
         restaurants = nearby_search(params=params)
         restaurants = place_details(restaurants)
+        return restaurants
     except httpx.HTTPError as error:
         logger.exception(error)
         raise GoogleApiException("Can't communicate with the Google API") from error
