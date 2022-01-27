@@ -161,7 +161,7 @@ def update_bewertung(
     return get_bewertung_from_user_to_rest(db, new_bewertung.person, new_bewertung.restaurant)
 
 
-def delete_bewertung(db: Session, user: scheme_user.User, rest: scheme_rest.BaseRestaurant) -> int:
+def delete_bewertung(db: Session, user: scheme_user.UserBase, rest: scheme_rest.BaseRestaurant) -> int:
     """Delete one Bewertung
 
     Args:
