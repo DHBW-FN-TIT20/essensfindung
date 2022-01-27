@@ -136,6 +136,31 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     return db_assessment
 
 
+def update_bewertung(
+    db: Session, old_bewertung: scheme_rest.RestBewertungCreate, new_bewertung: scheme_rest.RestBewertungCreate
+) -> db_models.Bewertung:
+    """Update the comment and rating of a bewertung
+
+    Args:
+        db (Session): Session to the DB
+        old_bewertung (scheme_rest.RestBewertungCreate): The old Bewertung
+        new_bewertung (scheme_rest.RestBewertungCreate): The updated Bewertung
+
+    Returns:
+        db_models.Bewertung: New Bewertung from `get_bewertung_from_user_to_rest`
+    """
+    (
+        db.query(db_models.Bewertung)
+        .filter(db_models.Bewertung.person_email == old_bewertung.person.email)
+        .filter(db_models.Bewertung.place_id == old_bewertung.restaurant.place_id)
+        .update(
+            {db_models.Bewertung.kommentar: new_bewertung.comment, db_models.Bewertung.rating: new_bewertung.rating}
+        )
+    )
+    db.commit()
+    return get_bewertung_from_user_to_rest(db, new_bewertung.person, new_bewertung.restaurant)
+
+
 def delete_bewertung(db: Session, user: scheme_user.User, rest: scheme_rest.BaseRestaurant) -> int:
     """Delete one Bewertung
 
