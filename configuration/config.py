@@ -1,5 +1,7 @@
 from configparser import ConfigParser
-from . import PATH_GOOGLE, PATH_DB
+
+from . import PATH_DB
+from . import PATH_GOOGLE
 
 
 def get_google_api_key() -> str:

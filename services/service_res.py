@@ -1,16 +1,20 @@
 """Main Module for the Restaurant-Search"""
 import random
-from typing import List, Union
+from typing import List
+from typing import Union
 
 import sqlalchemy
-from schemes.scheme_user import UserBase
-from schemes.scheme_rest import BaseRestaurant, RestBewertungCreate, RestBewertungReturn
-
-from services import gapi
-from db import crud, db_models
 from sqlalchemy.orm import Session
-from schemes.scheme_filter import RestFilter
+
+from db import crud
+from db import db_models
+from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
+from schemes.scheme_rest import RestaurantBase
+from schemes.scheme_rest import RestBewertungCreate
+from schemes.scheme_rest import RestBewertungReturn
+from schemes.scheme_user import UserBase
+from tools import gapi
 
 
 def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List[RestBewertungReturn], None]:
@@ -69,19 +73,17 @@ def update_assessment(
     """
     updated_assessment = crud.update_bewertung(db_session, old_assessment, new_assessment)
     return RestBewertungReturn(
-        comment=updated_assessment.kommentar,
-        rating=updated_assessment.rating,
-        timestamp=updated_assessment.zeitstempel,
+        comment=updated_assessment.kommentar, rating=updated_assessment.rating, timestamp=updated_assessment.zeitstempel
     )
 
 
-def delete_assessment(db_session: Session, user: UserBase, rest: BaseRestaurant) -> int:
+def delete_assessment(db_session: Session, user: UserBase, rest: RestaurantBase) -> int:
     """Delete one assessment that are mapped between the user and rest
 
     Args:
         db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
         user (UserBase): The owner of the assessment
-        rest (BaseRestaurant): The mapped Restaurant
+        rest (RestaurantBase): The mapped Restaurant
 
     Returns:
         int: The number of affected Rows of the delete
@@ -89,13 +91,13 @@ def delete_assessment(db_session: Session, user: UserBase, rest: BaseRestaurant)
     return crud.delete_bewertung(db_session, user, rest)
 
 
-def search_for_restaurant(db_session: Session, user: UserBase, user_f: RestFilter) -> Restaurant:
+def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRest) -> Restaurant:
     """Do a full search for a Restaurant. This does the google search, weights the result with the user rating
     and choose one of the restaurants according to the weights
 
     Args:
         db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
-        user_f (RestFilter): Filter that are needed for the search
+        user_f (FilterRest): Filter that are needed for the search
 
     Returns:
         Restaurant: The one choosen Restaurant where the user have to go now!
@@ -125,12 +127,12 @@ def fill_user_rating(db_session: Session, rests: List[Restaurant], user: UserBas
     return rests
 
 
-def apply_filter(rests: List[Restaurant], user_f: RestFilter) -> List[Restaurant]:
+def apply_filter(rests: List[Restaurant], user_f: FilterRest) -> List[Restaurant]:
     """Apply all filter (current only Rating)
 
     Args:
         rests (List[Restaurant]): List of all Restarants to apply the filter
-        filter (RestFilter): The Filter with all informations
+        filter (FilterRest): The Filter with all informations
 
     Returns:
         List[Restaurant]: The filtered List of the restaurants

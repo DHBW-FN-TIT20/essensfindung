@@ -1,10 +1,13 @@
 """Contains all Filter for the searches"""
-from pydantic import BaseModel, validator
-from schemes import Cuisine, Allergies
-from .scheme_rest import BaseLocation
+from pydantic import BaseModel
+from pydantic import validator
+
+from .scheme_rest import LocationBase
+from schemes import Allergies
+from schemes import Cuisine
 
 
-class BaseFilter(BaseModel):
+class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
     cuisine: Cuisine
@@ -27,12 +30,12 @@ class BaseFilter(BaseModel):
         raise ValueError("rating is not between 1 (included) and 5 (included)")
 
 
-class RestFilter(BaseFilter):
+class FilterRest(FilterBase):
     """Use this scheme to Search for a Restaurant in the Backend"""
 
     costs: int
     radius: int
-    location: BaseLocation
+    location: LocationBase
 
     @validator("costs")
     @classmethod
@@ -50,7 +53,7 @@ class RestFilter(BaseFilter):
         raise ValueError("costs is not between 0 (included) and 4 (included)")
 
 
-class DBFilter(BaseFilter):
+class FilterDatabase(FilterBase):
     """Use this scheme if you internact with the Filter that are saved in the DB"""
 
     costs: int
@@ -88,7 +91,7 @@ class DBFilter(BaseFilter):
         raise ValueError("costs is not between 0 (included) and 4 (included)")
 
 
-class RecipeFilter(BaseFilter):
+class FilterRecipe(FilterBase):
     """Extended Model for Recipe-Filter"""
 
     difficulty: int

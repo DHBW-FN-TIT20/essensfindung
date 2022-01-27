@@ -6,14 +6,14 @@ from pydantic import BaseModel
 from . import scheme_user
 
 
-class BaseLocation(BaseModel):
+class LocationBase(BaseModel):
     """contain only coordinates"""
 
     lat: str
     lng: str
 
 
-class ResLocation(BaseLocation):
+class LocationRest(LocationBase):
     """store further information about the location of the restaurant"""
 
     adr: str = None
@@ -22,10 +22,10 @@ class ResLocation(BaseLocation):
 class Geometry(BaseModel):
     """Needed for better automation converting from the google api"""
 
-    location: ResLocation
+    location: LocationRest
 
 
-class BaseRestaurant(BaseModel):
+class RestaurantBase(BaseModel):
     """Scheme that is only needed for the DB"""
 
     place_id: str
@@ -34,7 +34,7 @@ class BaseRestaurant(BaseModel):
         orm_mode = True
 
 
-class Restaurant(BaseRestaurant):
+class Restaurant(RestaurantBase):
     """Class that got return to the website"""
 
     name: str
@@ -46,28 +46,24 @@ class Restaurant(BaseRestaurant):
     homepage: str = None
 
 
-class BaseRestBewertung(BaseModel):
+class RestBewertungBase(BaseModel):
     """BaseClass for the Bewertung"""
 
     comment: str
     rating: float
 
 
-class RestBewertungCreate(BaseRestBewertung):
+class RestBewertungCreate(RestBewertungBase):
     """Class to create a new Bewertung in the DB"""
 
     person: scheme_user.UserBase
-    restaurant: BaseRestaurant
+    restaurant: RestaurantBase
 
 
-class RestBewertungReturn(BaseRestBewertung):
+class RestBewertungReturn(RestBewertungBase):
     """Class to return to the frontend"""
 
     timestamp: datetime.datetime
 
     class Config:
         orm_mode = True
-
-
-class GoogleApiException(Exception):
-    """Exception if some Error from the Google API request are made"""
