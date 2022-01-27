@@ -3,11 +3,12 @@ from typing import List
 
 import httpx
 import pytest
-from services import gapi
-from schemes import Cuisine
-from schemes.scheme_rest import Restaurant
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
+
+from schemes import Cuisine
+from schemes.scheme_rest import Restaurant
+from tools import gapi
 
 
 @pytest.fixture

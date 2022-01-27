@@ -1,13 +1,14 @@
 """CRUD comes from: Create, Read, Update, and Delete... for the Database"""
-from typing import List, Union
+from typing import List
+from typing import Union
 
 import sqlalchemy
-
-from schemes import scheme_rest, scheme_user
 from sqlalchemy.orm import Session
-from tools.hashing import Hasher
 
 from . import db_models
+from schemes import scheme_rest
+from schemes import scheme_user
+from tools.hashing import Hasher
 
 
 def get_restaurant_by_id(db: Session, place_id: str) -> db_models.Restaurant:
@@ -37,12 +38,12 @@ def get_all_restaurants(db: Session, skip: int = 0, limit: int = 100) -> List[db
     return db.query(db_models.Restaurant).offset(skip).limit(limit).all()
 
 
-def create_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> db_models.Restaurant:
+def create_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> db_models.Restaurant:
     """Create / Add a Restaurant to the DB
 
     Args:
         db (Session): Session to the DB
-        rest (scheme_rest.BaseRestaurant): The Restaurant with the place_id required
+        rest (scheme_rest.RestaurantBase): The Restaurant with the place_id required
 
     Returns:
         db_models.Restaurant: Return if success
@@ -54,12 +55,12 @@ def create_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> db_model
     return db_rest
 
 
-def delete_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> int:
+def delete_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> int:
     """Delete one restaurant from the DB with the specific place_id
 
     Args:
         db (Session): Session to the DB
-        rest (BaseRestaurant): Restaurant with the place_id
+        rest (RestaurantBase): Restaurant with the place_id
 
     Returns:
         int: Number of effected rows
@@ -70,14 +71,14 @@ def delete_restaurant(db: Session, rest: scheme_rest.BaseRestaurant) -> int:
 
 
 def get_bewertung_from_user_to_rest(
-    db: Session, user: scheme_user.UserBase, rest: scheme_rest.BaseRestaurant
+    db: Session, user: scheme_user.UserBase, rest: scheme_rest.RestaurantBase
 ) -> db_models.Bewertung:
     """Return a specific bewertung from a user to only one restaurant
 
     Args:
         db (Session): Session to the DB
         user (scheme_user.UserBase): Specifie the User
-        rest (scheme_rest.BaseRestaurant): Specifie the restauranat
+        rest (scheme_rest.RestaurantBase): Specifie the restauranat
 
     Returns:
         db_models.Bewertung: Return one bewertung that match the restaurant - user
@@ -161,13 +162,13 @@ def update_bewertung(
     return get_bewertung_from_user_to_rest(db, new_bewertung.person, new_bewertung.restaurant)
 
 
-def delete_bewertung(db: Session, user: scheme_user.UserBase, rest: scheme_rest.BaseRestaurant) -> int:
+def delete_bewertung(db: Session, user: scheme_user.UserBase, rest: scheme_rest.RestaurantBase) -> int:
     """Delete one Bewertung
 
     Args:
         db (Session): Session to the db
         user (scheme_user.User): The owner of the Bewertung
-        rest (scheme_rest.BaseRestaurant): The corrosponding Restaurant
+        rest (scheme_rest.RestaurantBase): The corrosponding Restaurant
 
     Returns:
         int: Number of effected rows

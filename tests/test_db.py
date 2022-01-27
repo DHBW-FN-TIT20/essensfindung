@@ -1,8 +1,12 @@
 import pytest
-from db import crud, db_models
-from schemes import scheme_rest, scheme_user
-from sqlalchemy import create_engine, exc
+from sqlalchemy import create_engine
+from sqlalchemy import exc
 from sqlalchemy.orm import sessionmaker
+
+from db import crud
+from db import db_models
+from schemes import scheme_rest
+from schemes import scheme_user
 from tools.hashing import Hasher
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
@@ -28,22 +32,22 @@ def test_restaurant(db_session: SessionTesting):
 
     # Add two Restaurants
     # add the first restaurant
-    rest_add = scheme_rest.BaseRestaurant(place_id="1234")
+    rest_add = scheme_rest.RestaurantBase(place_id="1234")
     rest_return = crud.create_restaurant(db_session, rest_add)
-    assert rest_add == scheme_rest.BaseRestaurant(**rest_return.__dict__)
+    assert rest_add == scheme_rest.RestaurantBase(**rest_return.__dict__)
 
     # add the second restaurant
-    rest_add_2 = scheme_rest.BaseRestaurant(place_id="567")
+    rest_add_2 = scheme_rest.RestaurantBase(place_id="567")
     rest_return = crud.create_restaurant(db_session, rest_add_2)
-    assert rest_add_2 == scheme_rest.BaseRestaurant(**rest_return.__dict__)
+    assert rest_add_2 == scheme_rest.RestaurantBase(**rest_return.__dict__)
 
     # Get one Restaurant
     rest_return = crud.get_restaurant_by_id(db_session, rest_add.place_id)
-    assert rest_add == scheme_rest.BaseRestaurant(**rest_return.__dict__)
+    assert rest_add == scheme_rest.RestaurantBase(**rest_return.__dict__)
 
     # Get all Restaurants
     rests_return = crud.get_all_restaurants(db_session)
-    rests_return_schemes = [scheme_rest.BaseRestaurant(**rest.__dict__) for rest in rests_return]
+    rests_return_schemes = [scheme_rest.RestaurantBase(**rest.__dict__) for rest in rests_return]
     assert rests_return_schemes == [rest_add, rest_add_2]
 
     # Delete that Restaurant
@@ -98,11 +102,11 @@ def test_user(db_session: SessionTesting):
 
 def test_bewertung(db_session: SessionTesting):
     fake_user = scheme_user.UserBase(email="fake@nope.ok")
-    fake_rest = scheme_rest.BaseRestaurant(place_id="000000")
+    fake_rest = scheme_rest.RestaurantBase(place_id="000000")
     user_add_1 = scheme_user.UserCreate(email="test1@demo.lol", password="password1")
     user_add_2 = scheme_user.UserCreate(email="test2@demo.lol", password="password2")
-    rest_add_1 = scheme_rest.BaseRestaurant(place_id="1234")
-    rest_add_2 = scheme_rest.BaseRestaurant(place_id="5678")
+    rest_add_1 = scheme_rest.RestaurantBase(place_id="1234")
+    rest_add_2 = scheme_rest.RestaurantBase(place_id="5678")
 
     # Add user
     crud.create_user(db_session, user_add_1)
@@ -183,10 +187,7 @@ def test_bewertung(db_session: SessionTesting):
         assessment_ret = crud.create_bewertung(
             db_session,
             scheme_rest.RestBewertungCreate(
-                comment="none",
-                rating=0,
-                person=scheme_user.UserBase(email=user_add_1.email),
-                restaurant=fake_rest,
+                comment="none", rating=0, person=scheme_user.UserBase(email=user_add_1.email), restaurant=fake_rest
             ),
         )
 
