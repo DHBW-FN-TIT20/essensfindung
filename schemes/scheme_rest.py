@@ -65,12 +65,6 @@ class RestBewertungReturn(BaseRestBewertung):
 
     timestamp: datetime.datetime
 
-
-class RestBewertung(BaseRestBewertung):
-    """Class to return a Bewertung"""
-
-    timestamp: str
-
     class Config:
         orm_mode = True
 

@@ -152,6 +152,16 @@ def test_bewertung(db_session: SessionTesting):
     assert assessment_ret.rating == assessment_add_1_1.rating
     assert assessment_ret.zeitstempel is not None
 
+    # Update assessment
+    updated_1_1 = assessment_add_1_1.copy()
+    updated_1_1.comment = "UPDATED"
+    updated_1_1.rating = 0
+    assessment_ret = crud.update_bewertung(db_session, assessment_add_1_1, updated_1_1)
+    assert assessment_ret.kommentar == updated_1_1.comment
+    assert assessment_ret.rating == updated_1_1.rating
+    assert assessment_ret.person_email == updated_1_1.person.email
+    assert assessment_ret.place_id == updated_1_1.restaurant.place_id
+
     # Try to get assessments that does not exist
     assessment_ret = crud.get_all_user_bewertungen(db_session, fake_user)
     assert assessment_ret is None
