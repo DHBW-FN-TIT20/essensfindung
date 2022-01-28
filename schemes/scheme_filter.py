@@ -1,10 +1,13 @@
 """Contains all Filter for the searches"""
-from pydantic import BaseModel, validator
-from models.restaurant import BaseLocation
-from models import Cuisine, Allergies
+from pydantic import BaseModel
+from pydantic import validator
+
+from .scheme_rest import LocationBase
+from schemes import Allergies
+from schemes import Cuisine
 
 
-class BaseFilter(BaseModel):
+class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
     cuisine: Cuisine
@@ -27,12 +30,12 @@ class BaseFilter(BaseModel):
         raise ValueError("rating is not between 1 (included) and 5 (included)")
 
 
-class RestFilter(BaseFilter):
-    """Extended Model for Restaurant-Filter"""
+class FilterRest(FilterBase):
+    """Use this scheme to Search for a Restaurant in the Backend"""
 
-    location: BaseLocation
     costs: int
     radius: int
+    location: LocationBase
 
     @validator("costs")
     @classmethod
@@ -50,7 +53,45 @@ class RestFilter(BaseFilter):
         raise ValueError("costs is not between 0 (included) and 4 (included)")
 
 
-class RecipeFilter(BaseFilter):
+class FilterDatabase(FilterBase):
+    """Use this scheme if you internact with the Filter that are saved in the DB"""
+
+    costs: int
+    radius: int
+    zipcode: str
+
+    @validator("costs")
+    @classmethod
+    def costs_range(cls, value: int):
+        """Check if costs >= 0 and <= 4
+
+        Args:
+            value (int): Value of costs
+
+        Raises:
+            ValueError: If wrong values
+        """
+        if 0 <= value <= 4:
+            return value
+        raise ValueError("costs is not between 0 (included) and 4 (included)")
+
+    @validator("zipcode")
+    @classmethod
+    def plz_length(cls, value: str):
+        """Check if the zipcode got the length 5
+
+        Args:
+            value (int): Value of zipcode
+
+        Raises:
+            ValueError: If wrong value
+        """
+        if len(value) == 5:
+            return value
+        raise ValueError("costs is not between 0 (included) and 4 (included)")
+
+
+class FilterRecipe(FilterBase):
     """Extended Model for Recipe-Filter"""
 
     difficulty: int

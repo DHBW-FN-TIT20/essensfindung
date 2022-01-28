@@ -3,11 +3,11 @@ import logging
 from typing import List
 
 import httpx
-from models.restaurant import Restaurant, GoogleApiException
-from models.filter import RestFilter
 
-import infrastructure
-
+from configuration import config
+from schemes.exceptions import GoogleApiException
+from schemes.scheme_filter import FilterRest
+from schemes.scheme_rest import Restaurant
 
 # TODO: Asynchrone Funktionen
 # TODO: Asynchrone API Anfragen
@@ -15,11 +15,11 @@ import infrastructure
 logger = logging.getLogger(__name__)
 
 
-def search_restaurant(res_filter: RestFilter) -> List[Restaurant]:
+def search_restaurant(res_filter: FilterRest) -> List[Restaurant]:
     """Search all restaurants for a specific cuisin in a specific location
 
     Args:
-        res_filter (RestFilter): Filter for the API
+        res_filter (FilterRest): Filter for the API
     Raises:
         GoogleApiException: If something with the httpx went wrong
 
@@ -27,7 +27,7 @@ def search_restaurant(res_filter: RestFilter) -> List[Restaurant]:
         List[Restaurant]: List of all Restaurants from the google api
     """
     params: dict = {
-        "keyword": res_filter.cuisin.value,
+        "keyword": res_filter.cuisine.value,
         "location": f"{res_filter.location.lat},{res_filter.location.lng}",
         "opennow": True,
         "radius": res_filter.radius,
@@ -39,6 +39,7 @@ def search_restaurant(res_filter: RestFilter) -> List[Restaurant]:
     try:
         restaurants = nearby_search(params=params)
         restaurants = place_details(restaurants)
+        return restaurants
     except httpx.HTTPError as error:
         logger.exception(error)
         raise GoogleApiException("Can't communicate with the Google API") from error
@@ -56,7 +57,7 @@ def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]
     """
     url: str = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params["pagetoken"] = next_page_token
-    params["key"] = infrastructure.get_api_key()
+    params["key"] = config.get_google_api_key()
 
     response = httpx.get(url, params=params)
     logger.debug("Response status: %s", response.status_code)
@@ -85,7 +86,7 @@ def place_details(restaurants: list[Restaurant]) -> List[Restaurant]:
     url: str = "https://maps.googleapis.com/maps/api/place/details/json"
     extended_restaurants: List[Restaurant] = []
     for restaurant in restaurants:
-        params = {"key": infrastructure.get_api_key(), "place_id": restaurant.place_id}
+        params = {"key": config.get_google_api_key(), "place_id": restaurant.place_id}
         response = httpx.get(url, params=params)
         logger.debug("Response status: %s", response.status_code)
         logger.debug("Request url: %s", response.url)

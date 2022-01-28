@@ -3,11 +3,12 @@ from typing import List
 
 import httpx
 import pytest
-from infrastructure import gapi
-from models import Cuisine
-from models.restaurant import Restaurant
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
+
+from schemes import Cuisine
+from schemes.scheme_rest import Restaurant
+from tools import gapi
 
 
 @pytest.fixture
@@ -55,7 +56,7 @@ def test_nearby_search(
     httpx_mock.add_response(status_code=status_code, json=fake_nearby_search)
 
     # Mock other functions
-    mocker.patch("infrastructure.get_api_key", return_value="42")
+    mocker.patch("configuration.config.get_google_api_key", return_value="42")
 
     if status_code != 200:
         with pytest.raises(httpx.HTTPStatusError):
@@ -79,7 +80,7 @@ def test_place_details(
         httpx_mock.add_response(status_code=200, json=fake_place_detail, url=url)
 
     # Mock other functions
-    mocker.patch("infrastructure.get_api_key", return_value="42")
+    mocker.patch("configuration.config.get_google_api_key", return_value="42")
 
     restaurants = gapi.place_details(fake_nearby_search_restaurants)
     assert fake_restaurants == restaurants
