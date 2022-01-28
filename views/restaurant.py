@@ -8,6 +8,7 @@ from schemes import scheme_rest
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
 
+
 @router.get("/findrestaurant")
 async def findrestaurant(request: Request, rest_name: str, costs: float, cuisine: str):
     """[summary]
