@@ -9,8 +9,8 @@ from starlette.staticfiles import StaticFiles
 
 from db import db_models
 from db.database import engine
+from views import index
 from views import restaurant
-from views import index, restaurant
 
 app = fastapi.FastAPI()
 
