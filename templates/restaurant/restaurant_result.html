@@ -1,7 +1,7 @@
 {% extends "shared/layout.html" %}
 
 {% block content %}
-<p>{{restaurant.name}}</p>
+<p>Name (beim Testen Zipcode): {{restaurant.name}}, Kostenstufe: {{restaurant.own_rating}}</p>
 <!--Google map-->
 <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
     <iframe src="{{restaurant.maps_url}}&output=embed" frameborder="0"
