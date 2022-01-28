@@ -1,7 +1,12 @@
 """SQLAlchemy uses the term "model" to refer to these classes and instances that interact with the database"""
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table
-from sqlalchemy.sql import func
+from sqlalchemy import Column
+from sqlalchemy import DateTime
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Table
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 from db.database import Base
 
