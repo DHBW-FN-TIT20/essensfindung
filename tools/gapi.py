@@ -4,7 +4,7 @@ from typing import List
 
 import httpx
 
-from configuration import config
+from configuration.config import settings
 from schemes.exceptions import GoogleApiException
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
@@ -57,7 +57,7 @@ def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]
     """
     url: str = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params["pagetoken"] = next_page_token
-    params["key"] = config.get_google_api_key()
+    params["key"] = settings.GOOGLE_API_KEY
 
     response = httpx.get(url, params=params)
     logger.debug("Response status: %s", response.status_code)
@@ -86,7 +86,7 @@ def place_details(restaurants: list[Restaurant]) -> List[Restaurant]:
     url: str = "https://maps.googleapis.com/maps/api/place/details/json"
     extended_restaurants: List[Restaurant] = []
     for restaurant in restaurants:
-        params = {"key": config.get_google_api_key(), "place_id": restaurant.place_id}
+        params = {"key": settings.GOOGLE_API_KEY, "place_id": restaurant.place_id}
         response = httpx.get(url, params=params)
         logger.debug("Response status: %s", response.status_code)
         logger.debug("Request url: %s", response.url)
