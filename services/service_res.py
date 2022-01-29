@@ -6,7 +6,11 @@ from typing import Union
 import sqlalchemy
 from sqlalchemy.orm import Session
 
-from db import crud
+from db.crud.bewertung import create_bewertung
+from db.crud.bewertung import delete_bewertung
+from db.crud.bewertung import get_all_user_bewertungen
+from db.crud.bewertung import get_bewertung_from_user_to_rest
+from db.crud.bewertung import update_bewertung
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
 from schemes.scheme_rest import RestaurantBase
@@ -26,7 +30,7 @@ def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List
     Returns:
         Union[List[RestBewertungReturn], None]: Return a List of all User or None
     """
-    db_rests = crud.get_all_user_bewertungen(db_session, user)
+    db_rests = get_all_user_bewertungen(db_session, user)
     scheme_rests = [
         RestBewertungReturn(comment=db_rest.kommentar, rating=db_rest.rating, timestamp=db_rest.zeitstempel)
         for db_rest in db_rests
@@ -47,7 +51,7 @@ def add_assessment(db_session: Session, assessment: RestBewertungCreate) -> Rest
         [RestBewertungReturn]: The created Restaurant
     """
     try:
-        created_assessment = crud.create_bewertung(db_session, assessment)
+        created_assessment = create_bewertung(db_session, assessment)
         return RestBewertungReturn(
             comment=created_assessment.kommentar,
             rating=created_assessment.rating,
@@ -70,7 +74,7 @@ def update_assessment(
     Returns:
         RestBewertungReturn: Restaurant the the new values
     """
-    updated_assessment = crud.update_bewertung(db_session, old_assessment, new_assessment)
+    updated_assessment = update_bewertung(db_session, old_assessment, new_assessment)
     return RestBewertungReturn(
         comment=updated_assessment.kommentar, rating=updated_assessment.rating, timestamp=updated_assessment.zeitstempel
     )
@@ -87,7 +91,7 @@ def delete_assessment(db_session: Session, user: UserBase, rest: RestaurantBase)
     Returns:
         int: The number of affected Rows of the delete
     """
-    return crud.delete_bewertung(db_session, user, rest)
+    return delete_bewertung(db_session, user, rest)
 
 
 def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRest) -> Restaurant:
@@ -119,7 +123,7 @@ def fill_user_rating(db_session: Session, rests: List[Restaurant], user: UserBas
         List[Restaurant]: Return of the input List with the user rating if one got found
     """
     for rest in rests:
-        assessment = crud.get_bewertung_from_user_to_rest(db_session, user, rest)
+        assessment = get_bewertung_from_user_to_rest(db_session, user, rest)
         if assessment is not None:
             rest.own_rating = assessment.rating
 
