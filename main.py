@@ -7,10 +7,10 @@ import fastapi
 import uvicorn
 from starlette.staticfiles import StaticFiles
 
-from db import db_models
+from db.base import Base
 from db.database import engine
+from views import index
 from views import restaurant
-from views import index, restaurant
 
 app = fastapi.FastAPI()
 
@@ -60,7 +60,7 @@ def configure_routing():
 
 def configure_database():
     """Configure connection to the Database"""
-    db_models.Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
 
 
 if __name__ == "__main__":
