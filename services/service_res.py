@@ -7,7 +7,6 @@ import sqlalchemy
 from sqlalchemy.orm import Session
 
 from db import crud
-from db import db_models
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
 from schemes.scheme_rest import RestaurantBase
@@ -27,7 +26,7 @@ def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List
     Returns:
         Union[List[RestBewertungReturn], None]: Return a List of all User or None
     """
-    db_rests: List[db_models.Bewertung] = crud.get_all_user_bewertungen(db_session, user)
+    db_rests = crud.get_all_user_bewertungen(db_session, user)
     scheme_rests = [
         RestBewertungReturn(comment=db_rest.kommentar, rating=db_rest.rating, timestamp=db_rest.zeitstempel)
         for db_rest in db_rests

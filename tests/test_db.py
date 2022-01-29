@@ -4,7 +4,7 @@ from sqlalchemy import exc
 from sqlalchemy.orm import sessionmaker
 
 from db import crud
-from db import db_models
+from db.base import Base
 from schemes import scheme_rest
 from schemes import scheme_user
 from tools.hashing import Hasher
@@ -13,7 +13,7 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 # Use connect_args parameter only with sqlite
 SessionTesting = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-db_models.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 
 @pytest.mark.filterwarnings("ignore")
