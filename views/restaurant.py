@@ -1,28 +1,25 @@
 """Router for the Home of the Website"""
+import enum
+from datetime import datetime
+
 import fastapi
+from fastapi import Depends
+from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
+from db.database import get_db
 from schemes import scheme_rest
+from services import service_res
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
 
 
 @router.get("/findrestaurant")
-async def findrestaurant(request: Request, rest_name: str, costs: float, cuisine: str):
-    """[summary]
-
-    Args:
-        request (Request): [description]
-        rest_name (str): [description]
-        costs (float): [description]
-        cuisine (str): [description]
-
-    Returns:
-        [type]: [description]
-    """
+async def findrestaurant(request: Request, rest_name: str, costs: float, cuisine: str, db: Session = Depends(get_db)):
     # api.Search_restaurant(...)
+    # service_res.get_assessments_from_user(db, user=Us)
     restaurant = scheme_rest.Restaurant(
         place_id="PlaceID",
         name=rest_name,
