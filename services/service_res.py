@@ -11,6 +11,8 @@ from db.crud.bewertung import delete_bewertung
 from db.crud.bewertung import get_all_user_bewertungen
 from db.crud.bewertung import get_bewertung_from_user_to_rest
 from db.crud.bewertung import update_bewertung
+from db.crud.restaurant import create_restaurant
+from db.crud.restaurant import get_restaurant_by_id
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
 from schemes.scheme_rest import RestaurantBase
@@ -108,7 +110,11 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
     google_rests: List[Restaurant] = gapi.search_restaurant(user_f)
     filterd_rests: List[Restaurant] = apply_filter(google_rests, user_f)
     user_rests: List[Restaurant] = fill_user_rating(db_session, filterd_rests, user)
-    return select_restaurant(user_rests)
+    restaurant = select_restaurant(user_rests)
+    if get_restaurant_by_id(db_session, restaurant.place_id):
+        create_restaurant(db_session, restaurant)
+        add_assessment(db_session, RestBewertungCreate(person=user, restaurant=restaurant))
+    return restaurant
 
 
 def fill_user_rating(db_session: Session, rests: List[Restaurant], user: UserBase) -> List[Restaurant]:
