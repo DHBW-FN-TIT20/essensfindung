@@ -1,18 +1,58 @@
+/************ Initialize Multiselects ***************** */
+$(document).ready(function() {
+    $('.restaurant_filter_multiselects').select2({
+        dropdownParent: $('#restaurantFilter'),
+        width: "250"
+    });
+});
+
+/******** inititialize star-rating-svg *****************/
+$("#restaurant_filter_rating").rating({min:1, max:10, step:2, size:'lg'});
+
 function change_url(){
-    var zipcode = document.getElementById("restaurant_filter_zipcode").value;
+    var latitude = get_latitude();
+    var longitude = get_longitude();
+    var zipcode = get_zipcode();
     var costs = get_costs();
     var cuisine = get_cuisine();
-    document.getElementById("search_restaurant").href = "/findrestaurant?rest_name="+zipcode+"&costs="+costs+"&cuisine="+cuisine;
+    var allergies = get_allergies();
+    var rating = get_rating();
+    var radius = get_radius();   
+    document.getElementById("search_restaurant").href = "/findrestaurant?cuisine="+cuisine+"&allergies="+allergies+"&rating="+rating+"&costs="+costs+"&radius="+radius+"&lat="+latitude+"&lng="+longitude;
+}
+
+function get_latitude(){
+    return document.getElementById("restaurant_filter_latitude").innerHTML;
+}
+
+function get_longitude(){
+    return document.getElementById("restaurant_filter_longitude").innerHTML;
+}
+
+function get_zipcode(){
+    return document.getElementById("restaurant_filter_zipcode").value;
 }
 
 function get_costs(){
     return document.getElementById('restaurant_filter_costs').value;
 }
 
+function get_rating(){
+    return 3;
+}
+
+function get_radius(){
+    return document.getElementById('restaurant_filter_radius').value;
+}
+
 function get_cuisine(){
-    // var thisiscuisine = document.getElementById('restaurant_filter_cuisine').value;
-    // return thisiscuisine;
-    return 0;
+    var selections = $('#restaurant_filter_cuisine').select2('data');
+    return "Doener";
+}
+
+function get_allergies(){
+    var selections = $('#restaurant_filter_allergies').select2('data');
+    return "lactose";
 }
 
 function update_modal_on_show() {

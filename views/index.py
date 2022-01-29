@@ -1,8 +1,13 @@
 """Router for the Home of the Website"""
+from re import U
+
 import fastapi
+from fastapi import Depends
+from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
+from db.database import get_db
 from schemes import Allergies
 from schemes import Cuisine
 from schemes import scheme_filter
@@ -13,13 +18,14 @@ router = fastapi.APIRouter()
 
 
 @router.get("/")
-def index(request: Request):
+def index(request: Request, db: Session = Depends(get_db)):
     """Return the renderd template for the /index.html
 
     Args:
         request (Request): Requerd for Template
     """
     # request filter of user
+    # service_res.get_assessments_from_user(db, user=get_logged_in_user.email)
     rest_filter = scheme_filter.FilterRest(
         cuisine=Cuisine.ASIAN,
         allergies=Allergies.LACTOSE,
