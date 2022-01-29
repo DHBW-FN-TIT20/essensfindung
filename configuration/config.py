@@ -3,31 +3,16 @@ from configparser import ConfigParser
 from . import PATH_DB
 from . import PATH_GOOGLE
 
-
-def get_google_api_key() -> str:
-    """Get the API-Key for google requests
-
-    Returns:
-        str: API-Key
-    """
-    config = ConfigParser()
-    config.read(PATH_GOOGLE)
-    key: str = config["API"]["KEY"]
-    return key
+config = ConfigParser()
+config.read((PATH_GOOGLE, PATH_DB))
 
 
-def get_db_conf() -> dict:
-    """Return the importet configuration of the db
+class Setting:
+    GOOGLE_API_KEY: str = config["API"]["KEY"]
+    POSTGRES_USER: str = config["USER"]["USERNAME"]
+    POSTGRES_PASSWORD: str = config["USER"]["PASSWORD"]
+    POSTGRES_SERVER: str = config["CONNECTION"]["HOST"]
+    POSTGRES_DATABASE: str = config["CONNECTION"]["DATABASE"]
 
-    Returns:
-        dict: return the values for "username", "password", "host", "database"
-    """
-    config = ConfigParser()
-    config.read(PATH_DB)
-    values = {
-        "username": config["USER"]["USERNAME"],
-        "password": config["USER"]["PASSWORD"],
-        "host": config["CONNECTION"]["HOST"],
-        "database": config["CONNECTION"]["DATABASE"],
-    }
-    return values
+
+settings = Setting()
