@@ -1,194 +1,114 @@
-Started server process [9932]
+Started server process [50716]
 Waiting for application startup.
 Application startup complete.
-Uvicorn running on http://192.168.178.44:8000 (Press CTRL+C to quit)
+Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2022-01-31 18:30:17,856 - uvicorn.error - ERROR: Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 373, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 75, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\routing.py", line 656, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\routing.py", line 259, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\routing.py", line 61, in app
+    response = await func(request)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\anyio\to_thread.py", line 28, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(func, *args, cancellable=cancellable,
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\anyio\_backends\_asyncio.py", line 818, in run_sync_in_worker_thread
+    return await future
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\anyio\_backends\_asyncio.py", line 754, in run
+    result = context.run(func, *args)
+  File "d:\Documents D\Projects\School\DHBW\SWEng\personal\essensfindung\views\signin.py", line 16, in signin
+    return templates.TemplateResponse("login/login.html", {"request": request})
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\templating.py", line 86, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\templating.py", line 73, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\environment.py", line 997, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\environment.py", line 958, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\loaders.py", line 125, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\loaders.py", line 214, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: login/login.html
 Shutting down
 Waiting for application shutdown.
 Application shutdown complete.
-Finished server process [9932]
-Started server process [13744]
+Finished server process [50716]
+Started server process [66356]
 Waiting for application startup.
 Application startup complete.
-Uvicorn running on http://192.168.178.44:8000 (Press CTRL+C to quit)
-Shutting down
-Waiting for application shutdown.
-Application shutdown complete.
-Finished server process [13744]
-Started server process [2932]
-Waiting for application startup.
-Application startup complete.
-Uvicorn running on http://192.168.178.44:8000 (Press CTRL+C to quit)
-Shutting down
-Waiting for connections to close. (CTRL+C to force quit)
-Finished server process [2932]
-2022-01-22 17:03:22,145 - uvicorn.error - ERROR: Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\starlette\routing.py", line 624, in lifespan
-    await receive()
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\lifespan\on.py", line 135, in receive
-    return await self.receive_queue.get()
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\queues.py", line 166, in get
-    await getter
-asyncio.exceptions.CancelledError
-
+Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2022-01-31 18:31:38,709 - uvicorn.error - ERROR: Exception in ASGI application
 Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\starlette\routing.py", line 624, in lifespan
-    await receive()
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\lifespan\on.py", line 135, in receive
-    return await self.receive_queue.get()
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\queues.py", line 166, in get
-    await getter
-asyncio.exceptions.CancelledError
-
-2022-01-22 17:03:22,148 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-2022-01-22 17:03:22,150 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-2022-01-22 17:03:22,152 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-2022-01-22 17:03:22,153 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-2022-01-22 17:03:22,166 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
-2022-01-22 17:03:22,175 - asyncio - ERROR: Exception in callback handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56
-handle: <Handle handle_http.<locals>.retrieve_exception(<Task cancell...erver.py:104>>) at C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py:56>
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\server.py", line 107, in handler
-    await handle_http(
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 87, in handle_http
-    await connection_lost
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\flori\AppData\Local\Programs\Python\Python39\lib\site-packages\uvicorn\_handlers\http.py", line 58, in retrieve_exception
-    exc = task.exception()
-asyncio.exceptions.CancelledError
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 373, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 75, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\routing.py", line 656, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\routing.py", line 259, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\routing.py", line 61, in app
+    response = await func(request)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\anyio\to_thread.py", line 28, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(func, *args, cancellable=cancellable,
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\anyio\_backends\_asyncio.py", line 818, in run_sync_in_worker_thread
+    return await future
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\anyio\_backends\_asyncio.py", line 754, in run
+    result = context.run(func, *args)
+  File "d:\Documents D\Projects\School\DHBW\SWEng\personal\essensfindung\views\signin.py", line 16, in signin
+    return templates.TemplateResponse("login/login.html", {"request": request})
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\templating.py", line 86, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\starlette\templating.py", line 73, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\environment.py", line 997, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\environment.py", line 958, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\loaders.py", line 125, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\Baldur.Siegel\AppData\Local\pypoetry\Cache\virtualenvs\essensfindung-IV0NJ7GY-py3.9\lib\site-packages\jinja2\loaders.py", line 214, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: login/login.html
