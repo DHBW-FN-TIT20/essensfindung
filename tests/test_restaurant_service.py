@@ -3,13 +3,37 @@ from typing import List
 
 import pytest
 from pytest_mock import MockerFixture
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker
 
+from db.base_class import Base
+from db.crud.user import create_user
 from schemes import Allergies
 from schemes import Cuisine
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import LocationBase
 from schemes.scheme_rest import Restaurant
+from schemes.scheme_user import UserCreate
 from services import service_res
+
+SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+# Use connect_args parameter only with sqlite
+SessionTesting = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base.metadata.create_all(bind=engine)
+
+
+@pytest.mark.filterwarnings("ignore")
+@pytest.fixture(scope="function")
+def db_session():
+    connection = engine.connect()
+    transaction = connection.begin()
+    session = SessionTesting(bind=connection)
+    yield session  # use the session in tests.
+    session.close()
+    transaction.rollback()
+    connection.close()
 
 
 @pytest.fixture
@@ -27,7 +51,10 @@ def google_api_restaurants() -> List[Restaurant]:
 
 
 def test_search_for_restaurant(
-    rated_restaurants: List[Restaurant], google_api_restaurants: List[Restaurant], mocker: MockerFixture
+    db_session: Session,
+    rated_restaurants: List[Restaurant],
+    google_api_restaurants: List[Restaurant],
+    mocker: MockerFixture,
 ):
     # mocking...
     # ...random
@@ -49,7 +76,10 @@ def test_search_for_restaurant(
         radius=5000,
         location=LocationBase(lat="1111", lng="345"),
     )
-    return_res = service_res.search_for_restaurant(filter)
+
+    user = create_user(db_session, UserCreate(email="test@ok.de", password="geheim"))
+
+    return_res = service_res.search_for_restaurant(db_session, user, filter)
     assert return_res == random_res
 
 

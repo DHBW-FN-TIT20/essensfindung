@@ -2,18 +2,14 @@
 from typing import Generator
 
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from configuration import config
+from configuration.config import settings
 
-conf = config.get_db_conf()
-SQLALCHEMY_DATABASE_URL = f"postgresql://{conf['username']}:{conf['password']}@{conf['host']}/{conf['database']}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}/{settings.POSTGRES_DATABASE}"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
 
 
 def get_db() -> Generator:

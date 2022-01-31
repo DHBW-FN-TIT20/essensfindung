@@ -1,5 +1,6 @@
 """ Contains all classes for the restaurant search """
 import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -50,7 +51,7 @@ class RestBewertungBase(BaseModel):
     """BaseClass for the Bewertung"""
 
     comment: str
-    rating: float
+    rating: Optional[float] = 0
 
 
 class RestBewertungCreate(RestBewertungBase):
