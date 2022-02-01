@@ -12,7 +12,7 @@ on:
       - main
 
 jobs:
-  build:
+  validate:
 
     runs-on: ubuntu-latest
 
