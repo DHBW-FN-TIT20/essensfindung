@@ -22,12 +22,12 @@
                 <input type="password" name="passwordInputConfirm" id="passwordInputConfirm" class="form-control" required>
             </div>
             <div class="mb-4 form-check">
-                <input type="checkbox" name="tosConfirm" id="tosConfirm" class="form-check-input" style="width: 1.2em; height: 1.2em;" required>
+                <input type="checkbox" name="tosConfirm" id="tosConfirm" class="form-check-input" style="width: 1.1em; height: 1.1em;" required>
                 <label for="tosConfirm" class="form-check-label">
                     Ich stimme den
-                    <a href="#">AGB</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">AGB</a>
                     und der
-                    <a href="#">Datenschutzerkl&auml;rung</a>
+                    <a href="#" id="privacypolLink" data-bs-toggle="modal" data-bs-target="#privacypolModal">Datenschutzerkl&auml;rung</a>
                     zu
                 </label>
             </div>
@@ -37,5 +37,44 @@
         </form>
     </div>
 </div>
+
+<div class="modal fade" id="privacypolModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Datenschutzerkl&auml;rung</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <pre style="white-space: pre-wrap;">
+                {{ legal.privacy }}
+            </pre>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="termsModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Allgemeine Gesch&auml;ftsbedingungen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <pre style="white-space: pre-wrap;">
+                {{ legal.tos }}
+            </pre>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("privacypolLink").createEventHandler("click", e => {
+        e.preventDefault();
+
+    })
+</script>
 
 {% endblock %}
