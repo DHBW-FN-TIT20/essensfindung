@@ -11,6 +11,7 @@ from db.base import Base
 from db.database import engine
 from views import index
 from views import restaurant
+from views import signin
 
 app = fastapi.FastAPI()
 
@@ -56,6 +57,7 @@ def configure_routing():
     app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(index.router)
     app.include_router(restaurant.router)
+    app.include_router(signin.router)
 
 
 def configure_database():
@@ -65,6 +67,7 @@ def configure_database():
 
 if __name__ == "__main__":
     configure()
-    uvicorn.run(app, port=8000, host="127.0.0.1")
+    uvicorn.run(app, port=8000, host="192.168.178.44")
+    #uvicorn.run(app, port=8000, host="127.0.0.1")
 else:
     configure()

@@ -1,5 +1,4 @@
 """Router for the Home of the Website"""
-from datetime import datetime
 import enum
 from schemes import scheme_rest
 import fastapi
