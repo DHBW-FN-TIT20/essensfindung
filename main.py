@@ -67,7 +67,6 @@ def configure_database():
 
 if __name__ == "__main__":
     configure()
-    uvicorn.run(app, port=8000, host="192.168.178.44")
-    #uvicorn.run(app, port=8000, host="127.0.0.1")
+    uvicorn.run(app, port=8000, host="127.0.0.1")
 else:
     configure()
