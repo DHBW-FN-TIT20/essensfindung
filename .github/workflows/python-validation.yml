@@ -36,6 +36,6 @@ jobs:
     - uses: psf/black@stable
       with:
         options: "--line-length 120"
-    #- name: Test with pytest
-    #  run: |
-     #   pytest ./tests
+    - name: Test with pytest
+      run: |
+        pytest ./tests
