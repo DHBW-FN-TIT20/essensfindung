@@ -111,6 +111,7 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
     filterd_rests: List[Restaurant] = apply_filter(google_rests, user_f)
     user_rests: List[Restaurant] = fill_user_rating(db_session, filterd_rests, user)
     restaurant = select_restaurant(user_rests)
+    restaurant = gapi.place_details(restaurant)
     if get_restaurant_by_id(db_session, restaurant.place_id):
         create_restaurant(db_session, restaurant)
         add_assessment(db_session, RestBewertungCreate(person=user, restaurant=restaurant))
