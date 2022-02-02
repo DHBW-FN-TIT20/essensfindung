@@ -38,7 +38,6 @@ def search_restaurant(res_filter: FilterRest) -> List[Restaurant]:
 
     try:
         restaurants = nearby_search(params=params)
-        restaurants = place_details(restaurants)
         return restaurants
     except httpx.HTTPError as error:
         logger.exception(error)
@@ -74,31 +73,31 @@ def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]
     return restaurants
 
 
-def place_details(restaurants: list[Restaurant]) -> List[Restaurant]:
-    """To get additionals informations of a specifict place (restaurants) you have to do a specific api request
+def place_details(restaurant: Restaurant) -> Restaurant:
+    """To get additionals informations of a specifict place (restaurant) you have to do a specific api request
 
     Args:
-        restaurants (list[Restaurant]): List of all Restaurants with the place_id in it
+        restaurant (Restaurant): The Restaurant with the palce_id
 
     Returns:
-        List[Restaurant]: List of the restaurants with all informations filled out if google got some
+        Restaurant: The restaurant with all informations filled out if google got some
     """
     url: str = "https://maps.googleapis.com/maps/api/place/details/json"
-    extended_restaurants: List[Restaurant] = []
-    for restaurant in restaurants:
-        params = {"key": settings.GOOGLE_API_KEY, "place_id": restaurant.place_id}
-        response = httpx.get(url, params=params)
-        logger.debug("Response status: %s", response.status_code)
-        logger.debug("Request url: %s", response.url)
+    extended_restaurant: Restaurant = None
 
-        response.raise_for_status()
+    params = {"key": settings.GOOGLE_API_KEY, "place_id": restaurant.place_id}
+    response = httpx.get(url, params=params)
+    logger.debug("Response status: %s", response.status_code)
+    logger.debug("Request url: %s", response.url)
 
-        resp_obj = response.json().get("result")
-        restaurant.homepage = resp_obj.get("website")
-        restaurant.maps_url = resp_obj.get("url")
-        restaurant.phone_number = resp_obj.get("international_phone_number")
-        restaurant.geometry.location.adr = resp_obj.get("formatted_address")
+    response.raise_for_status()
 
-        extended_restaurants.append(restaurant)
+    resp_obj = response.json().get("result")
+    restaurant.homepage = resp_obj.get("website")
+    restaurant.maps_url = resp_obj.get("url")
+    restaurant.phone_number = resp_obj.get("international_phone_number")
+    restaurant.geometry.location.adr = resp_obj.get("formatted_address")
 
-    return extended_restaurants
+    extended_restaurant = restaurant
+
+    return extended_restaurant

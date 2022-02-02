@@ -2,6 +2,7 @@ import json
 from typing import List
 
 import pytest
+from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -51,6 +52,7 @@ def google_api_restaurants() -> List[Restaurant]:
 
 
 def test_search_for_restaurant(
+    httpx_mock: HTTPXMock,
     db_session: Session,
     rated_restaurants: List[Restaurant],
     google_api_restaurants: List[Restaurant],
@@ -66,6 +68,10 @@ def test_search_for_restaurant(
 
     # ...googleapi
     mocker.patch("tools.gapi.search_restaurant", return_value=google_api_restaurants)
+    mocker.patch("configuration.config.Setting.GOOGLE_API_KEY", "42")
+
+    url = f"https://maps.googleapis.com/maps/api/place/details/json?key=42&place_id={random_res.place_id}"
+    httpx_mock.add_response(status_code=200, json={"result": random_res.dict()}, url=url)
 
     filter = FilterRest(
         cuisine=Cuisine.DOENER,

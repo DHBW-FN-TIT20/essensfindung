@@ -11,6 +11,7 @@ from db.base import Base
 from db.database import engine
 from views import index
 from views import restaurant
+from views import signin
 
 app = fastapi.FastAPI()
 
@@ -56,6 +57,7 @@ def configure_routing():
     app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(index.router)
     app.include_router(restaurant.router)
+    app.include_router(signin.router)
 
 
 def configure_database():
