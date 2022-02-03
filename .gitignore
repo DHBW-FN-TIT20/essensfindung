@@ -134,7 +134,7 @@ dmypy.json
 # Ignore all Configuration Files
 *.conf
 !example*.conf
-tests/test_db.db
+app/tests/test_db.db
 
 # Ignore Logs
 *log*
