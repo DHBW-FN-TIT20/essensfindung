@@ -1,13 +1,19 @@
 """Create the connection to the Database"""
 from typing import Generator
 
-from configuration.config import settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from tools.config import settings
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DATABASE}"
+if settings.SQL_LITE:
+    SQLALCHEMY_DATABASE_URL = "sqlite:///./essensfindung.db"
+    # Use connect_args parameter only with sqlite
+    engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+else:
+    SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DATABASE}"
+    engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
