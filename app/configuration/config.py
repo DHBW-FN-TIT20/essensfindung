@@ -1,18 +1,21 @@
-from configparser import ConfigParser
+import os
+from pathlib import Path
 
-from . import PATH_DB
-from . import PATH_GOOGLE
+from dotenv import load_dotenv
 
-config = ConfigParser()
-config.read((PATH_GOOGLE, PATH_DB))
+ENV_PATH = Path("./configuration/.env")
+load_dotenv(dotenv_path=ENV_PATH)
 
 
 class Setting:
-    GOOGLE_API_KEY: str = config["API"]["KEY"]
-    POSTGRES_USER: str = config["USER"]["USERNAME"]
-    POSTGRES_PASSWORD: str = config["USER"]["PASSWORD"]
-    POSTGRES_SERVER: str = config["CONNECTION"]["HOST"]
-    POSTGRES_DATABASE: str = config["CONNECTION"]["DATABASE"]
+    """Contains all Settings - Loads from the os env"""
+
+    GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY")
+    POSTGRES_USER: str = os.getenv("POSTGRES_USER")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER")
+    POSTGRES_DATABASE: str = os.getenv("POSTGRES_DATABASE")
+    POSTGRES_PORT: str = os.getenv("POSTGRES_PORT")
 
 
 settings = Setting()
