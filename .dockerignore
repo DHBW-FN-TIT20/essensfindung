@@ -1,0 +1,12 @@
+*.md
+app/tests
+__pycache__
+.env
+*example*
+.git
+.vscode
+.venv
+*cache*
+.github
+app/logs
+app/essensfindung.db

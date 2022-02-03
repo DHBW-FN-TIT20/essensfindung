@@ -1,0 +1,32 @@
+version: '3.5'
+services:
+
+  essensfindung:
+    image: essensfindung
+    container_name: essensfindung
+    hostname: essensfindung
+    depends_on:
+      - db
+    ports:
+      - "8888:80"
+    environment:
+      - TZ=Europe/Berlin
+      - GOOGLE_API_KEY=CHANGE_TO_KEY
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=SAVE_PASSWORD
+      - POSTGRES_SERVER=db
+      - POSTGRES_DATABASE=essensfinder
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./app/data:/essensfindung/app/data:rw
+
+  db:
+    image: postgres
+    container_name: postgresDB_essensfindung
+    hostname: db
+    environment:
+      - TZ=Europe/Berlin
+      - PUID=1000
+      - PGID=1000
+      - POSTGRES_PASSWORD=SAVE_PASSWORD
+      - POSTGRES_DB=essensfindung
