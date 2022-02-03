@@ -74,13 +74,11 @@ def test_place_details(
     mocker: MockerFixture,
 ):
 
-    # Mock httpx responses
-    for fake_place_detail in fake_place_details:
-        url = f"https://maps.googleapis.com/maps/api/place/details/json?key=42&place_id={fake_place_detail['result']['place_id']}"
-        httpx_mock.add_response(status_code=200, json=fake_place_detail, url=url)
+    url = f"https://maps.googleapis.com/maps/api/place/details/json?key=42&place_id={fake_place_details[0]['result']['place_id']}"
+    httpx_mock.add_response(status_code=200, json=fake_place_details[0], url=url)
 
     # Mock other functions
     mocker.patch("configuration.config.Setting.GOOGLE_API_KEY", "42")
 
-    restaurants = gapi.place_details(fake_nearby_search_restaurants)
-    assert fake_restaurants == restaurants
+    restaurant = gapi.place_details(fake_nearby_search_restaurants[0])
+    assert fake_restaurants[0] == restaurant
