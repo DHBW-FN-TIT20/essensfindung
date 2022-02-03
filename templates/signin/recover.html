@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div style="height: 25vh;"></div>
     <div class="text-center mb-3">
-        <h2>Anmelden</h2>
+        <h2>Email Eingeben</h2>
     </div>
     <div class="col-10" style="max-width: 480px;">
         <form action="">
@@ -13,20 +13,17 @@
                 <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
                 <input type="email" name="emailInput" id="emailInput" class="form-control" required>
             </div>
-            <div class="mb-3">
-                <label for="passwordInput" class="form-label mb-1 ms-1">Passwort:</label>
-                <input type="password" name="passwordInput" id="passwordInput" class="form-control" required>
-                <a href="/recover">Passwort Vergessen?</a>
-            </div>
             <div class="form-actions text-center">
-                <button type="submit" class="btn btn-dark">Anmelden</button>
+                <button type="submit" class="btn btn-dark">Passwort Zur&uuml;cksetzen</button>
             </div>
         </form>
     </div>
 </div>
 
-<div class="row my-5 text-center">
-    <p>Noch kein Konto? <a href="/register">Hier Registrieren!</a></p>
+<div class="row my-5 justify-content-center">
+    <div class="col-10 text-center" style="max-width: 480px;">
+        <p>Es wird eine E-mail an die angegebene Adresse geschickt, die einen Wiederherstellungslink f&uuml;r dein Passwort beinhaltet.</p>
+    </div>
 </div>
 
 {% endblock %}

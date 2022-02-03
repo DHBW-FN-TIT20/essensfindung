@@ -42,3 +42,23 @@ def register(request: Request):
     legal = {"tos": tosstring, "privacy": privstring}
 
     return templates.TemplateResponse("signin/register.html", {"request": request, "legal": legal})
+
+
+@router.get("/recover/", response_class=HTMLResponse)
+def signin(request: Request):
+    """Return the rendered template for the login page
+
+    Args:
+        request (Request): Requerd for Template
+    """
+    return templates.TemplateResponse("signin/recover.html", {"request": request})
+
+
+@router.get("/pwreset/", response_class=HTMLResponse)
+def signin(request: Request):
+    """Return the rendered template for the login page
+
+    Args:
+        request (Request): Requerd for Template
+    """
+    return templates.TemplateResponse("signin/pwreset.html", {"request": request})
