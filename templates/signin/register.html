@@ -8,7 +8,7 @@
         <h2>Registrieren</h2>
     </div>
     <div class="col-10" style="max-width: 480px;">
-        <form action="" id="registrationForm" class="needs-validation" novalidate>
+        <form action="" id="registrationForm" class="needs-validation">
             <div class="mb-4">
                 <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
                 <input type="email" name="emailInput" id="emailInput" class="form-control" required>
@@ -41,7 +41,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="privacypolModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="row my-5 text-center">
+    <p>Konto bereits erstellt? <a href="/signin">Hier Anmelden!</a></p>
+</div>
+
+<div class="modal" id="privacypolModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -57,7 +61,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="termsModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal" id="termsModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -95,15 +99,15 @@
     'use strict'
 
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const form = document.querySelector('.needs-validation')
+    const form = document.querySelector('.needs-validation');
 
     // Loop over them and prevent submission
     form.addEventListener('submit', function (event) {
         if (form[1].classList.contains("is-invalid") || form[2].classList.contains("is-invalid")) {
-            event.preventDefault()
-            event.stopPropagation()
+            event.preventDefault();
+            event.stopPropagation();
         }
-    }, false)
+    }, false);
     })()
 </script>
 
