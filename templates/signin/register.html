@@ -8,7 +8,7 @@
         <h2>Registrieren</h2>
     </div>
     <div class="col-10" style="max-width: 480px;">
-        <form action="">
+        <form action="" id="registrationForm" class="needs-validation" novalidate>
             <div class="mb-4">
                 <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
                 <input type="email" name="emailInput" id="emailInput" class="form-control" required>
@@ -19,7 +19,10 @@
             </div>
             <div class="mb-4">
                 <label for="passwordInputConfirm" class="form-label mb-1 ms-1">Passwort Best&auml;tigen:</label>
-                <input type="password" name="passwordInputConfirm" id="passwordInputConfirm" class="form-control" required>
+                <input type="password" name="passwordInputConfirm" id="passwordInputConfirm" class="form-control" onchange="validatePassword()" required>
+                <div class="invalid-feedback">
+                    Passw&ouml;rter sind nicht gleich!
+                </div>
             </div>
             <div class="mb-4 form-check">
                 <input type="checkbox" name="tosConfirm" id="tosConfirm" class="form-check-input" style="width: 1.1em; height: 1.1em;" required>
@@ -70,11 +73,38 @@
     </div>
 </div>
 
-<script>
-    document.getElementById("privacypolLink").createEventHandler("click", e => {
-        e.preventDefault();
+{% endblock %}
 
-    })
+{% block scripts %}
+
+<script>
+    function validatePassword() {
+        let form = document.querySelector(".needs-validation")
+        let passA = form[1].value;
+        let passB = form[2].value;
+        if (passA === passB) {
+            form[1].classList.remove("is-invalid");
+            form[2].classList.remove("is-invalid");
+        } else {
+            form[1].classList.add("is-invalid");
+            form[2].classList.add("is-invalid");
+        }
+    }
+
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const form = document.querySelector('.needs-validation')
+
+    // Loop over them and prevent submission
+    form.addEventListener('submit', function (event) {
+        if (form[1].classList.contains("is-invalid") || form[2].classList.contains("is-invalid")) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+    }, false)
+    })()
 </script>
 
 {% endblock %}
