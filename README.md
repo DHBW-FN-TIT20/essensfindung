@@ -63,7 +63,7 @@ essensfindung
 ```
 
 ## Docker-Compose
-Coming soon...
+See the `docker-compose.yml` File
 # Developing
 Python-Verison 3.9 or higher<br>
 You can use [pyenv](https://github.com/pyenv/pyenv) to manage you virtual envioremnts.
