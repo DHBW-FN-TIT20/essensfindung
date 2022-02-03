@@ -1,4 +1,5 @@
 """Create the connection to the Database"""
+from pathlib import Path
 from typing import Generator
 
 from sqlalchemy import create_engine
@@ -6,7 +7,8 @@ from sqlalchemy.orm import sessionmaker
 from tools.config import settings
 
 if settings.SQL_LITE:
-    SQLALCHEMY_DATABASE_URL = "sqlite:///./essensfindung.db"
+    Path("./data").mkdir(exist_ok=True)
+    SQLALCHEMY_DATABASE_URL = "sqlite:///./data/essensfindung.db"
     # Use connect_args parameter only with sqlite
     engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 else:

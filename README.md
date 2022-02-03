@@ -34,7 +34,7 @@ nano .env
 ```
 
 ## Docker
-You also can build the a docker container
+You also can build a docker container
 ```console
 git clone https://github.com/DHBW-FN-TIT20/essensfindung.git
 cd essensfindung
@@ -42,7 +42,11 @@ docker build essensfindung .
 ```
 If you **dont** have a PostgreSQL Database start the container:
 ```console
-docker run -p 8080:80 -e GOOGLE_API_KEY=KEY essensfindung
+docker run -p 8080:80 \
+-v /essensfindung/app/data \
+-e GOOGLE_API_KEY=KEY \
+--name essensfindung \
+essensfindung
 ```
 
 If you have a PostgreSQL Database:
@@ -54,6 +58,7 @@ docker run -p 8080:80 \
 -e POSTGRES_SERVER=localhost \
 -e POSTGRES_DATABASE=essensfindung \
 -e POSTGRES_PORT=5432 \
+--name essensfindung \
 essensfindung
 ```
 
