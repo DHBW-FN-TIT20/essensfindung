@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="restaurantFilter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade modal-sm modal-lg center" id="restaurantFilter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,7 +18,10 @@
 
                 <!-- rating input -->
                 <div class="p-2">
-                    <input id="restaurant_filter_rating" type="text" class="rating">
+                    <label for="restaurant_filter_rating" class="form-label">Rating (minimal)</label>
+                    <div id="restaurant_filter_rating"></div>
+                    <span id="restaurant_filter_rating_target" style="display:none"></span>
+                    <span id="restaurant_filter_rating_selected" style="display:none">{{ rest_filter.rating }}</span>
                 </div>
 
                 <!-- radius range -->

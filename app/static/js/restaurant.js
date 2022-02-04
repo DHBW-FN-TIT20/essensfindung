@@ -7,7 +7,16 @@ $(document).ready(function() {
 });
 
 /******** inititialize star-rating-svg *****************/
-$("#restaurant_filter_rating").rating({ min: 1, max: 10, step: 2, size: 'lg' });
+$("#restaurant_filter_rating").raty({
+    starOff: 'https://cdn.jsdelivr.net/npm/raty-js@3.1.1/lib/images/star-off.png',
+    starOn: 'https://cdn.jsdelivr.net/npm/raty-js@3.1.1/lib/images/star-on.png',
+    click: function(score, evt) {
+        document.getElementById('restaurant_filter_rating_target').innerHTML = score;
+    },
+    score: function() {
+        return document.getElementById('restaurant_filter_rating_selected').innerHTML;
+    }
+});
 
 function change_url() {
     var latitude = get_latitude();
@@ -42,7 +51,7 @@ function get_costs() {
 }
 
 function get_rating() {
-    return 3;
+    return document.getElementById('restaurant_filter_rating_target').innerHTML;
 }
 
 function get_radius() {
