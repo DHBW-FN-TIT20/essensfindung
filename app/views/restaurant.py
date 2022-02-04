@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 from typing import Union
+from typing import List
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
@@ -21,7 +22,7 @@ router = fastapi.APIRouter()
 @router.get("/findrestaurant", response_class=HTMLResponse)
 async def findrestaurant(
     request: Request,
-    cuisine: Cuisine,
+    cuisine: str,
     rating: int,
     costs: float,
     radius: int,
@@ -30,7 +31,7 @@ async def findrestaurant(
     allergies: Union[Allergies, None]=None,
     db_session: Session = Depends(get_db)
 ):
-
+    #cuisine:str zum Cuisine-Array machen
     rest_filter = scheme_filter.FilterRest(
         cuisine=cuisine,
         allergies=allergies,
