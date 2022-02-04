@@ -7,16 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Florian Herkommer, Baldur Siegel, David Felder, Florian Glaser, Jonas Straub">
     <title>Essensfindung</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
-
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
     
+    <style>
+        .img-display {
+            height: calc(1.625rem + 2.5vw);
+            width: auto;
+        }
+        @media screen and (min-width: 768px) {
+            .img-display {
+                height: 2.5rem;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
 <div>
+
+    <div class="row fixed-top mx-auto" style="max-width: 480px;">
+        <a href="/landing/" class="text-decoration-none text-body">
+            <div class="d-flex">
+                <img src="/static/img/essensfinder-draft.png" alt="" class="img-display m-2">
+                <h3 class="align-self-center" style="font-weight: 200;">Essensfinder</h3>
+            </div>
+        </a>
+    </div>
+
     <div class="container-sm">
         {% block content %}
         <div class="row text-center">
@@ -30,5 +51,10 @@
 </div>
 <script src="/static/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <!-- Latest compiled and minified JavaScript -->
+
+{% block scripts %}
+
+{% endblock %}
+
 </body>
 </html>
