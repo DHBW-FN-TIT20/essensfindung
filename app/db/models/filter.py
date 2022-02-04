@@ -1,12 +1,11 @@
 """Filter structure for the DB"""
+from db.base import Base
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
-
-from db.base import Base
 
 
 association_table_filter_allergie = Table(

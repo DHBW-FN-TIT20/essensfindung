@@ -1,8 +1,7 @@
 """Allergie structure for the DB"""
+from db.base import Base
 from sqlalchemy import Column
 from sqlalchemy import String
-
-from db.base import Base
 
 
 class Allergie(Base):

@@ -1,10 +1,9 @@
 """All DB functions for the User table"""
 from typing import Union
 
-from sqlalchemy.orm import Session
-
 from db.base import Person
 from schemes import scheme_user
+from sqlalchemy.orm import Session
 from tools.hashing import Hasher
 
 

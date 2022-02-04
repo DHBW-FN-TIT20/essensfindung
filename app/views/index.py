@@ -2,16 +2,16 @@
 from re import U
 
 import fastapi
-from fastapi import Depends
-from sqlalchemy.orm import Session
-from starlette.requests import Request
-from starlette.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
 from db.database import get_db
+from fastapi import Depends
+from fastapi.responses import HTMLResponse
 from schemes import Allergies
 from schemes import Cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
+from sqlalchemy.orm import Session
+from starlette.requests import Request
+from starlette.templating import Jinja2Templates
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()

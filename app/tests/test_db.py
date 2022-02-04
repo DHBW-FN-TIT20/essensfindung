@@ -1,8 +1,4 @@
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy import exc
-from sqlalchemy.orm import sessionmaker
-
 from db.base import Base
 from db.crud.bewertung import create_bewertung
 from db.crud.bewertung import delete_bewertung
@@ -19,6 +15,9 @@ from db.crud.user import get_user_by_mail
 from db.crud.user import update_user
 from schemes import scheme_rest
 from schemes import scheme_user
+from sqlalchemy import create_engine
+from sqlalchemy import exc
+from sqlalchemy.orm import sessionmaker
 from tools.hashing import Hasher
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"

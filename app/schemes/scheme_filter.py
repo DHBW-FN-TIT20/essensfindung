@@ -1,10 +1,10 @@
 """Contains all Filter for the searches"""
 from pydantic import BaseModel
 from pydantic import validator
-
-from .scheme_rest import LocationBase
 from schemes import Allergies
 from schemes import Cuisine
+
+from .scheme_rest import LocationBase
 
 
 class FilterBase(BaseModel):

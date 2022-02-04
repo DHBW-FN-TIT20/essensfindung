@@ -4,8 +4,6 @@ from typing import List
 from typing import Union
 
 import sqlalchemy
-from sqlalchemy.orm import Session
-
 from db.crud.bewertung import create_bewertung
 from db.crud.bewertung import delete_bewertung
 from db.crud.bewertung import get_all_user_bewertungen
@@ -19,6 +17,7 @@ from schemes.scheme_rest import RestaurantBase
 from schemes.scheme_rest import RestBewertungCreate
 from schemes.scheme_rest import RestBewertungReturn
 from schemes.scheme_user import UserBase
+from sqlalchemy.orm import Session
 from tools import gapi
 
 
