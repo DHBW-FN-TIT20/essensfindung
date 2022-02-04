@@ -3,11 +3,10 @@ import logging
 from typing import List
 
 import httpx
-
-from configuration.config import settings
 from schemes.exceptions import GoogleApiException
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
+from tools.config import settings
 
 # TODO: Asynchrone Funktionen
 # TODO: Asynchrone API Anfragen

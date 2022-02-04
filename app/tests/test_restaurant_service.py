@@ -2,14 +2,10 @@ import json
 from typing import List
 
 import pytest
-from pytest_httpx import HTTPXMock
-from pytest_mock import MockerFixture
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from sqlalchemy.orm import sessionmaker
-
 from db.base_class import Base
 from db.crud.user import create_user
+from pytest_httpx import HTTPXMock
+from pytest_mock import MockerFixture
 from schemes import Allergies
 from schemes import Cuisine
 from schemes.scheme_filter import FilterRest
@@ -17,6 +13,9 @@ from schemes.scheme_rest import LocationBase
 from schemes.scheme_rest import Restaurant
 from schemes.scheme_user import UserCreate
 from services import service_res
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
@@ -68,7 +67,7 @@ def test_search_for_restaurant(
 
     # ...googleapi
     mocker.patch("tools.gapi.search_restaurant", return_value=google_api_restaurants)
-    mocker.patch("configuration.config.Setting.GOOGLE_API_KEY", "42")
+    mocker.patch("tools.config.Setting.GOOGLE_API_KEY", "42")
 
     url = f"https://maps.googleapis.com/maps/api/place/details/json?key=42&place_id={random_res.place_id}"
     httpx_mock.add_response(status_code=200, json={"result": random_res.dict()}, url=url)
