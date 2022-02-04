@@ -11,11 +11,33 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
     
+    <style>
+        .img-display {
+            height: calc(1.625rem + 2.5vw);
+            width: auto;
+        }
+        @media screen and (min-width: 768px) {
+            .img-display {
+                height: 2.5rem;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
 <div>
+
+    <div class="row fixed-top mx-auto" style="max-width: 480px;">
+        <a href="/landing/" class="text-decoration-none text-body">
+            <div class="d-flex">
+                <img src="/static/img/essensfinder-draft.png" alt="" class="img-display m-2">
+                <h3 class="align-self-center" style="font-weight: 200;">Essensfinder</h3>
+            </div>
+        </a>
+    </div>
+
     <div class="container-sm">
         {% block content %}
         <div class="row text-center">
