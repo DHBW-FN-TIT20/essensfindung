@@ -53,7 +53,7 @@
         }
         .img-display {
             height: calc(1.625rem + 4.5vw);
-            width: calc(1.625rem + 4.5vw);
+            width: auto;
         }
         @media screen and (min-width: 1200px) {
             .img-display {
@@ -66,8 +66,10 @@
 <body>
 
 <div>
+
     <div style="height: 40vh;"></div>
-    <div class="container-sm align-items-center justify-content-center vh-100">
+
+    <div class="container-sm align-items-center justify-content-center">
         <div class="row justify-content-center">
             <div class="col d-flex justify-content-center" style="max-width: 480px;">
                 <div class="text-center d-flex">
@@ -83,6 +85,10 @@
                     <h1 class="display-1 fs-2">Jetzt Finden. Jetzt Essen.</h1>
                 </div>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/register" class="btn btn-outline-dark m-2">Registrieren</a>
+            <a href="/signin" class="btn btn-outline-dark m-2">Anmelden</a>
         </div>
     </div>
 </div>
