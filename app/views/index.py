@@ -6,7 +6,7 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
-
+from fastapi.responses import HTMLResponse
 from db.database import get_db
 from schemes import Allergies
 from schemes import Cuisine
