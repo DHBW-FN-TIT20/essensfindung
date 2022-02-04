@@ -5,10 +5,10 @@ from pathlib import Path
 
 import fastapi
 import uvicorn
-from starlette.staticfiles import StaticFiles
-
 from db.base import Base
 from db.database import engine
+from sqlalchemy import exc
+from starlette.staticfiles import StaticFiles
 from views import index
 from views import restaurant
 from views import signin
@@ -62,7 +62,11 @@ def configure_routing():
 
 def configure_database():
     """Configure connection to the Database"""
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+    except exc.OperationalError:
+        # Ignore if Tables already exist
+        pass
 
 
 if __name__ == "__main__":

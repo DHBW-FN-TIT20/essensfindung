@@ -17,8 +17,8 @@ templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
 
 
-@router.get("/")
-def index(request: Request, db: Session = Depends(get_db)):
+@router.get("/", response_class=HTMLResponse)
+def index(request: Request):
     """Return the renderd template for the /index.html
 
     Args:

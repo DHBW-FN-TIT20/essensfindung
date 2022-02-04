@@ -1,12 +1,14 @@
 """ Logic for Login and Registration Pages """
 import fastapi
+from fastapi.responses import HTMLResponse
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
 
-@router.get("/signin/")
+
+@router.get("/signin/", response_class=HTMLResponse)
 def signin(request: Request):
     """Return the rendered template for the login page
 
@@ -16,7 +18,7 @@ def signin(request: Request):
     return templates.TemplateResponse("signin/signin.html", {"request": request})
 
 
-@router.get("/register/")
+@router.get("/register/", response_class=HTMLResponse)
 def register(request: Request):
     """Return the rendered template for the login page
 
@@ -24,7 +26,7 @@ def register(request: Request):
         request (Request): Requerd for Template
     """
 
-    #read terms of service and privacy policy from text files
+    # read terms of service and privacy policy from text files
     tosstring = "Terms of Service is Missing"
     privstring = "Privacy Policy is Missing"
 
@@ -37,7 +39,7 @@ def register(request: Request):
         print(tosstring)
     except Exception as e:
         print(e)
-    
+
     legal = {"tos": tosstring, "privacy": privstring}
-        
-    return templates.TemplateResponse("signin/register.html",{"request": request, "legal": legal})
+
+    return templates.TemplateResponse("signin/register.html", {"request": request, "legal": legal})

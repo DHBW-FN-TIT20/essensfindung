@@ -5,7 +5,6 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
-
 from schemes import Cuisine
 from schemes.scheme_rest import Restaurant
 from tools import gapi
@@ -56,7 +55,7 @@ def test_nearby_search(
     httpx_mock.add_response(status_code=status_code, json=fake_nearby_search)
 
     # Mock other functions
-    mocker.patch("configuration.config.Setting.GOOGLE_API_KEY", "42")
+    mocker.patch("tools.config.Setting.GOOGLE_API_KEY", "42")
 
     if status_code != 200:
         with pytest.raises(httpx.HTTPStatusError):
@@ -78,7 +77,7 @@ def test_place_details(
     httpx_mock.add_response(status_code=200, json=fake_place_details[0], url=url)
 
     # Mock other functions
-    mocker.patch("configuration.config.Setting.GOOGLE_API_KEY", "42")
+    mocker.patch("tools.config.Setting.GOOGLE_API_KEY", "42")
 
     restaurant = gapi.place_details(fake_nearby_search_restaurants[0])
     assert fake_restaurants[0] == restaurant
