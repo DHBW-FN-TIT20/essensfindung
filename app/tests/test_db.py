@@ -1,14 +1,12 @@
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy import exc
-from sqlalchemy.orm import sessionmaker
-
 from db.base import Base
+from db.crud.allergies import create_allergie
 from db.crud.bewertung import create_bewertung
 from db.crud.bewertung import delete_bewertung
 from db.crud.bewertung import get_all_user_bewertungen
 from db.crud.bewertung import get_bewertung_from_user_to_rest
 from db.crud.bewertung import update_bewertung
+from db.crud.filter import create_filter
 from db.crud.restaurant import create_restaurant
 from db.crud.restaurant import delete_restaurant
 from db.crud.restaurant import get_all_restaurants
@@ -17,8 +15,15 @@ from db.crud.user import create_user
 from db.crud.user import delete_user
 from db.crud.user import get_user_by_mail
 from db.crud.user import update_user
+from schemes import Allergies
+from schemes import Cuisine
+from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes import scheme_user
+from schemes.scheme_user import UserCreate
+from sqlalchemy import create_engine
+from sqlalchemy import exc
+from sqlalchemy.orm import sessionmaker
 from tools.hashing import Hasher
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
@@ -213,3 +218,21 @@ def test_bewertung(db_session: SessionTesting):
     # Test if only one comment for the same restaurant an user are possible
     with pytest.raises(exc.IntegrityError):
         create_bewertung(db_session, assessment_add_2_2)
+
+
+# Currently fails
+@pytest.mark.xfail
+def test_filter_add(db_session: SessionTesting):
+    person = UserCreate(email="bla@ka.de", password="password")
+    filter_new = scheme_filter.FilterRestDatabase(
+        cuisine=Cuisine.DOENER, allergies=[Allergies.LACTOSE], rating=3, costs=3, radius=5000, zipcode=88069
+    )
+    create_user(db_session, person)
+    filter_return = create_filter(db_session, filter_new, person)
+    assert filter_return == filter_new
+
+
+def test_allergie_add(db_session: SessionTesting):
+    for allergie in Allergies:
+        added_allergie = create_allergie(db_session, allergie)
+        assert allergie.value == added_allergie.name

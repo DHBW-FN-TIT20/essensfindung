@@ -6,8 +6,11 @@ from pathlib import Path
 import fastapi
 import uvicorn
 from db.base import Base
+from db.crud.allergies import create_allergie
 from db.database import engine
+from schemes import Allergies
 from sqlalchemy import exc
+from sqlalchemy.orm import Session
 from starlette.staticfiles import StaticFiles
 from views import index
 from views import restaurant
@@ -63,10 +66,23 @@ def configure_routing():
 def configure_database():
     """Configure connection to the Database"""
     try:
-        Base.metadata.create_all(bind=engine)
-    except exc.OperationalError:
-        # Ignore if Tables already exist
+        create_database_table()
+        add_all_allergies()
+    except (exc.OperationalError, exc.IntegrityError):
+        # Ignore if Tables already configured
         pass
+
+
+def create_database_table():
+    """Create the Table of the DB"""
+    Base.metadata.create_all(bind=engine)
+
+
+def add_all_allergies():
+    """Add all Allergies from the Enum to the DB"""
+    with Session(engine) as session:
+        for allergie in Allergies:
+            create_allergie(session, allergie)
 
 
 if __name__ == "__main__":
