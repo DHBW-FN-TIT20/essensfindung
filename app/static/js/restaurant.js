@@ -82,7 +82,7 @@ function update_cuisine_selected() {
 }
 
 function update_radius_text(val) {
-    document.getElementById('restaurant_filter_radius_text').value = val + " km";
+    document.getElementById('restaurant_filter_radius_text').value = (val | 0) + " km";
 }
 
 function update_costs_text(val) {
