@@ -36,7 +36,8 @@ def index(request: Request):
         location=scheme_rest.LocationBase(lat="47.7007", lng="9.562")
     )
     #rest_filter-cuisine umwandeln in comma getrennte cuisine_selected:str
-    cuisine_selected:str = ','.join(rest_filter.cuisine)
+    #cuisine_selected:str = ','.join(rest_filter.cuisine)
+    cuisine_selected = "Doener,Deutsch"
     
     return templates.TemplateResponse("main.html", {"request": request, "rest_filter": rest_filter, "cuisine_selected": cuisine_selected})
 

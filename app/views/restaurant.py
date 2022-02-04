@@ -33,7 +33,7 @@ async def findrestaurant(
 ):
     #cuisine:str zum Cuisine-Array machen
     rest_filter = scheme_filter.FilterRest(
-        cuisine=cuisine,
+        cuisine=str_to_array(cuisine)[0],
         allergies=allergies,
         rating=rating,
         costs=costs,
@@ -56,3 +56,6 @@ async def findrestaurant(
     return templates.TemplateResponse(
         "restaurant/restaurant_result.html", {"request": request, "restaurant": restaurant}
     )
+
+def str_to_array(cuisines:str):
+    return cuisines.split(',')

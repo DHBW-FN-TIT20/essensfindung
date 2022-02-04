@@ -7,119 +7,68 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>{{rest_filter.radius}}, {{rest_filter.costs}}</p>
+                <div class="p-2">
+                    <p>Die Filter werden automatisch gespeichert.</p>
+                </div>
 
                 <!-- PLZ input -->
-                <input type="text" class="form-control" id="restaurant_filter_zipcode" aria-describedby="zipcode" placeholder="Bitte Postleitzahl eingeben"></input>
+                <div class="p-2">
+                    <input type="text" class="form-control" id="restaurant_filter_zipcode" aria-describedby="zipcode" placeholder="Bitte Postleitzahl eingeben"></input>
+                </div>
 
-                <input id="restaurant_filter_rating" type="text" class="rating">
-
-
-                <br>
+                <!-- rating input -->
+                <div class="p-2">
+                    <input id="restaurant_filter_rating" type="text" class="rating">
+                </div>
 
                 <!-- radius range -->
-                <label for="restaurant_filter_radius" class="form-label">Radius (maximal)</label>
-                <input type="range" class="form-range" id="restaurant_filter_radius" name="restaurant_filter_radius" min="0" max="50" value="{{rest_filter.radius / 1000}}" oninput="update_radius_text(this.value)"></input>
-                <input class="form-label text-center" id="restaurant_filter_radius_text" value=""></input>
+                <div class="p-2">
+                    <label for="restaurant_filter_radius" class="form-label">Radius (maximal)</label>
+                    <input type="range" class="form-range" id="restaurant_filter_radius" name="restaurant_filter_radius" min="0" max="50" value="{{rest_filter.radius // 1000}}" oninput="update_radius_text(this.value)"></input>
+                    <input class="form-label text-center" id="restaurant_filter_radius_text" value="" readonly></input>
+                </div>
 
-                <br><br>
 
                 <!-- costs range -->
-                <label for="restaurant_filter_costs" class="form-label">Preisstufe (maximal)</label>
-                <input type="range" class="form-range" id="restaurant_filter_costs" name="restaurant_filter_costs" min="0" max="4" value="{{rest_filter.costs}}" oninput="update_costs_text(this.value)"></input>
-                <input class="form-label text-center" id="restaurant_filter_costs_text" value=""></input>
+                <div class="p-2">
+                    <label for="restaurant_filter_costs" class="form-label">Preisstufe (maximal)</label>
+                    <input type="range" class="form-range" id="restaurant_filter_costs" name="restaurant_filter_costs" min="0" max="4" value="{{rest_filter.costs}}" oninput="update_costs_text(this.value)"></input>
+                    <input class="form-label text-center" id="restaurant_filter_costs_text" value="" readonly></input>
+                </div>
 
-                <br><br>
 
                 <!-- cuisine select -->
-                <label for="restaurant_filter_cuisine" class="form label">Cuisine</label><br>
-                <select class="restaurant_filter_multiselects" id="restaurant_filter_cuisine" name="restaurant_filter_cuisine" multiple="multiple">
-                  <option value="Italienisch">Italienisch</option>
-                  <option value="Deutsch">Deutsch</option>
-                  <option value="Asiatisch">Asiatisch</option>
-                  <option value="Doener">Döner</option>
-                  <option value="Tuerkisch">Türkisch</option>
-                </select>
-                <!--saved data from backend-->
-                <span id="cuisine_selected" style="display:none">{{cuisine_selected}}</span>
-                <span id="cuisine_options" style="display:none">Italienisch,Deutsch,Asiatisch,Doener,Tuerkisch</span>
-                <br><br>
+                <div class="p-2">
+                    <label for="restaurant_filter_cuisine" class="form label">Cuisine</label><br>
+                    <select class="restaurant_filter_multiselects" id="restaurant_filter_cuisine" name="restaurant_filter_cuisine" multiple="multiple">
+                      <option value="Italienisch">Italienisch</option>
+                      <option value="Deutsch">Deutsch</option>
+                      <option value="Asiatisch">Asiatisch</option>
+                      <option value="Doener">Döner</option>
+                      <option value="Tuerkisch">Türkisch</option>
+                   </select>
+                    <!--saved data from backend-->
+                    <span id="cuisine_selected" style="display:none">{{cuisine_selected}}</span>
+                    <span id="cuisine_options" style="display:none">Italienisch,Deutsch,Asiatisch,Doener,Tuerkisch</span>
+                </div>
+
 
                 <!-- allergies select -->
-                <label for="restaurant_filter_allergies" class="form label">Allergien</label><br>
-                <select class="restaurant_filter_multiselects" id="restaurant_filter_allergies" name="restaurant_filter_allergies" multiple="multiple">
-                  <option value="lactose">Laktoseintoleranz</option>
-                  <option value="wheat">Glutenunverträglichkeit</option>
-                </select>
+                <div class="p-2">
+                    <label for="restaurant_filter_allergies" class="form-label">Allergien</label><br>
+                    <select class="restaurant_filter_multiselects" id="restaurant_filter_allergies" name="restaurant_filter_allergies" multiple="multiple">
+                      <option value="lactose">Laktoseintoleranz</option>
+                      <option value="wheat">Glutenunverträglichkeit</option>
+                    </select>
+                </div>
 
+                <!--savings for geometry-->
                 <span id="restaurant_filter_latitude" style="display:none"></span>
                 <span id="restaurant_filter_longitude" style="display:none"></span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Speichern</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Schließen</button>
             </div>
         </div>
-        <div class="modal-body">
-          <div class="p-2">
-            <p>Die Filter werden automatisch gespeichert. Radius: {{rest_filter.radius}}, Kosten: {{rest_filter.costs}}</p>
-          </div>
-
-          <!-- PLZ input -->
-          <div class="p-2">
-            <input type="text" class="form-control" id="restaurant_filter_zipcode" aria-describedby="zipcode" placeholder="Bitte Postleitzahl eingeben"></input>
-          </div>
-
-          <!-- rating input -->
-          <div class="p-2">
-            <input id="restaurant_filter_rating" type="text" class="rating">
-          </div>
-
-          <!-- radius range -->
-          <div class="p-2">
-            <label for="restaurant_filter_radius" class="form-label">Radius (maximal)</label>
-            <input type="range" class="form-range" id="restaurant_filter_radius" name="restaurant_filter_radius" min="0" max="50" value="{{rest_filter.radius / 1000}}" oninput="update_radius_text(this.value)"></input>
-            <input class="form-label text-center" id="restaurant_filter_radius_text" value="" readonly></input>
-          </div>
-
-
-          <!-- costs range -->
-          <div class="p-2">
-            <label for="restaurant_filter_costs" class="form-label">Preisstufe (maximal)</label>
-            <input type="range" class="form-range" id="restaurant_filter_costs" name="restaurant_filter_costs" min="0" max="4" value="{{rest_filter.costs}}" oninput="update_costs_text(this.value)"></input>
-            <input class="form-label text-center" id="restaurant_filter_costs_text" value="" readonly></input>
-          </div>
-
-          
-          <!-- cuisine select -->
-          <div class="p-2">
-            <label for="restaurant_filter_cuisine" class="form label">Cuisine</label><br>
-            <select class="restaurant_filter_multiselects" id="restaurant_filter_cuisine" name="restaurant_filter_cuisine" multiple="multiple">
-              <option value="Italienisch">Italienisch</option>
-              <option value="Deutsch">Deutsch</option>
-              <option value="Asiatisch">Asiatisch</option>
-              <option value="Doener">Döner</option>
-              <option value="Tuerkisch">Türkisch</option>
-            </select>
-            <span id=cuisine style="display:none">{{rest_filter.cuisine.value}}</span>
-          </div>
-
-
-          <!-- allergies select -->
-          <div class="p-2">
-            <label for="restaurant_filter_allergies" class="form-label">Allergien</label><br>
-            <select class="restaurant_filter_multiselects" id="restaurant_filter_allergies" name="restaurant_filter_allergies" multiple="multiple">
-              <option value="lactose">Laktoseintoleranz</option>
-              <option value="wheat">Glutenunverträglichkeit</option>
-            </select>
-          </div>
-
-
-          <span id="restaurant_filter_latitude" style="display:none"></span>
-          <span id="restaurant_filter_longitude" style="display:none"></span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Schließen</button>
-        </div>
-      </div>
     </div>
 </div>

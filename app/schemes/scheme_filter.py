@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from pydantic import validator
 from schemes import Allergies
 from schemes import Cuisine
-
 from .scheme_rest import LocationBase
 
 

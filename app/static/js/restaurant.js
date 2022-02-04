@@ -76,14 +76,13 @@ function update_modal_on_show() {
 }
 
 function update_cuisine_selected() {
-    var cuisine = document.getElementById('cuisine').innerHTML;
-    //loop comma trennung
-    $('#restaurant_filter_cuisine').val(cuisine);
+    var cuisineStr = document.getElementById('cuisine_selected').innerHTML;
+    $('#restaurant_filter_cuisine').val(strToArray(cuisineStr));
     $('#restaurant_filter_cuisine').trigger('change');
 }
 
 function update_radius_text(val) {
-    document.getElementById('restaurant_filter_radius_text').value = (val | 0) + " km";
+    document.getElementById('restaurant_filter_radius_text').value = val + " km";
 }
 
 function update_costs_text(val) {
@@ -98,4 +97,8 @@ function update_costs_text(val) {
     } else {
         document.getElementById('restaurant_filter_costs_text').value = "Sehr Teuer";
     }
+}
+
+function strToArray(commaSeperatedString) {
+    return commaSeperatedString.split(',');
 }
