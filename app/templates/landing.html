@@ -51,14 +51,24 @@
             left: 0;
             background-color: #0000004f;
         }
+        .limit-width {
+            max-width: 480px;
+        }
         .img-display {
-            height: calc(1.625rem + 4.5vw);
+            height: calc(1.625rem + 4.5vh);
             width: auto;
         }
         @media screen and (min-width: 1200px) {
             .img-display {
                 height: 5rem;
             }
+        }
+
+        .trans-03 {
+            transition: color 0.3s;
+        }
+        .transparent {
+            color: #fff0 !important;
         }
     </style>
 </head>
@@ -71,7 +81,7 @@
 
     <div class="container-sm align-items-center justify-content-center">
         <div class="row justify-content-center">
-            <div class="col d-flex justify-content-center" style="max-width: 480px;">
+            <div class="col d-flex justify-content-center limit-width">
                 <div class="text-center d-flex">
                     <img src="/static/img/essensfinder-draft.png" alt="" class="img-display me-3 mt-2">
                     <h1 class="display-1">Essensfinder</h1>
@@ -79,7 +89,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col d-flex justify-content-center" style="max-width: 480px;">
+            <div class="col d-flex justify-content-center limit-width" style="max-width: 480px;">
                 <div class="text-end d-flex">
                     <div class="img-display me-3 mt-2"></div>
                     <h1 class="display-1 fs-2">Jetzt Finden. Jetzt Essen.</h1>
@@ -90,10 +100,59 @@
             <a href="/register" class="btn btn-outline-dark m-2">Registrieren</a>
             <a href="/signin" class="btn btn-outline-dark m-2">Anmelden</a>
         </div>
+
+        <div style="height: 40vh"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                <h1 class="display-6">Nullam nec bibendum velit.</h1>
+                <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at leo convallis, convallis neque vitae, semper urna. Nunc sit amet sodales arcu. Morbi tristique tortor a diam finibus, vitae sagittis urna feugiat. In placerat mollis nisi, sit amet hendrerit dui lacinia sit amet. Duis at nisl quis diam tincidunt malesuada et in justo. Duis tortor nisl, feugiat at egestas in, consequat vestibulum odio. Nullam faucibus nulla quis lacus facilisis bibendum. Sed varius vestibulum enim quis tempus. Duis eu lobortis elit. Etiam quis elit ut risus porttitor tincidunt. Fusce justo tellus, dignissim sit amet semper at, ultricies non diam. Proin tempor, mauris a mollis rutrum, mauris erat lobortis nulla, in gravida justo odio tempor eros. Nullam placerat nunc nec neque gravida varius. Duis tincidunt rutrum urna eget posuere.
+                </p>
+                <br>
+                <figure>
+                    <blockquote class="blockquote">
+                        Sed varius eros ut metus accumsan, et varius ipsum mollis. Fusce efficitur nibh sem, dapibus eleifend ex aliquet sed.
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Quisque volutpat, arcu ac hendrerit 
+                    </figcaption>
+                </figure>
+                <br>
+                <h1>Aenean at leo convallis</h1>
+                <p>
+                Nullam mattis ligula quis ipsum ultrices convallis. Praesent id ultricies massa. Sed convallis eros eget massa aliquam luctus eu non turpis. Mauris vel ipsum sed quam interdum varius vitae sed nibh. Maecenas laoreet maximus erat, quis fringilla lorem tristique quis. Nulla facilisi. Etiam porta tristique diam eget condimentum. Morbi non orci vitae purus vestibulum finibus. Etiam maximus enim eu ante dictum egestas. Phasellus sed egestas leo, et dapibus enim. Suspendisse potenti. Nam posuere dignissim quam, eget fermentum velit dapibus eget. Sed efficitur quam a lectus volutpat, eu mollis justo viverra.
+                </p>
+                <h2>Nunc sit amet soldales</h2>
+                <p>
+                Nam nunc erat, fringilla ut ante at, pretium fringilla nibh. Etiam quis rhoncus sapien. Sed purus massa, tincidunt vel fringilla ac, laoreet a ipsum. Fusce luctus ante odio. Etiam bibendum sollicitudin odio non semper. In hac habitasse platea dictumst. Duis ut porta elit. Nam sit amet pharetra ligula. Aenean enim nisl, facilisis a varius vel, pharetra sed metus. Proin mollis vitae orci id accumsan. Vestibulum quis bibendum tellus. Suspendisse condimentum nisl in interdum gravida. Curabitur scelerisque elementum maximus. 
+                </p>
+            </div>
+        </div>
     </div>
+
+    <div class="fixed-bottom">
+        <div class="text-center">
+            <h1 class="display-6 text-secondary trans-03" id="scrollArrow">&or;</h1>
+        </div>
+    </div>
+
 </div>
 
 <script src="/static/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+<script>
+    let prev = window.pageYOffset;
+    let hidden = false;
+    window.onscroll = function() {
+        let current = window.pageYOffset;
+        if (!hidden && prev < current) {
+            console.log("hiding!")
+            hidden = true;
+            document.getElementById("scrollArrow").classList.add("transparent");
+        }
+    }
+</script>
 
 </body>
 </html>
