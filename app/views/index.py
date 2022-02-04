@@ -32,3 +32,10 @@ def index(request: Request):
         location=scheme_rest.LocationBase(lat="47.7007", lng="9.562"),
     )
     return templates.TemplateResponse("index.html", {"request": request, "rest_filter": rest_filter})
+
+
+@router.get("/landing/", response_class=HTMLResponse)
+def index(request: Request):
+    """Return landing page for new users"""
+
+    return templates.TemplateResponse("landing.html", {"request": request})
