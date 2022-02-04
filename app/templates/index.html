@@ -1,14 +1,12 @@
-{% extends "shared/layout.html" %}
-
-{% block content %}
+{% extends "shared/layout.html" %} {% block content %}
 <br>
 <br>
-<div class="row">
-    <div class="col-12">
+<div class="row justify-content-center">
+    <div class="col-10" style="max-width: 480px;">
         <div class="btn-group btn-group-lg d-flex w-100">
             <div class="btn-group-vertical m-1 d-flex w-100" role="group" aria-label="Suche">
                 <a class="btn btn-lg btn-dark mb-1 w-100 p-5">Rezept finden!</a>
-                <a class="btn btn-lg btn-dark mb-1 w-100 p-5" href="" id="search_restaurant" onclick="change_url()">Restaurant finden!</a>                   
+                <a class="btn btn-lg btn-dark mb-1 w-100 p-5" href="" id="search_restaurant" onclick="change_url()">Restaurant finden!</a>
             </div>
             <div class="btn-group-vertical m-1 d-flex w-50" role="group" aria-label="Filter">
                 <a class="btn btn-lg btn-dark mb-1 w-100 p-5">🝖<br>Filter</a>
@@ -20,6 +18,4 @@
 
 <script src="/static/js/index.js"></script>
 <script src="/static/js/restaurant.js"></script>
-{% include "restaurant/restaurant_filter_modal.html" %}
-
-{% endblock %}
+{% include "restaurant/restaurant_filter_modal.html" %} {% endblock %}

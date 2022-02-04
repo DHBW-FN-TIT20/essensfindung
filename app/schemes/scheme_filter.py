@@ -11,7 +11,7 @@ class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
     cuisine: Cuisine
-    allergies: Allergies
+    allergies: Allergies = None
     rating: int
 
     @validator("rating")
