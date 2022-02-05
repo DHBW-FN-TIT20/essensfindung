@@ -22,10 +22,11 @@ class FilterRest(Base):
     __tablename__ = "filterRest"
 
     email = Column(String, ForeignKey("person.email"), primary_key=True)
-    plz = Column(String(5), nullable=False)
+    zipcode = Column(String(5), nullable=False)
     radius = Column(Integer, nullable=False)
-    g_rating = Column(Integer, nullable=False)
+    rating = Column(Integer, nullable=False)
     cuisine = Column(String, nullable=False)
+    costs = Column(Integer, nullable=False)
 
     person = relationship("Person", back_populates="filterRest", passive_deletes=True)
     allergies = relationship("Allergie", secondary=association_table_filter_allergie, passive_deletes=True)

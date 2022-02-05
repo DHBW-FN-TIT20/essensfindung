@@ -32,13 +32,13 @@ def create_filterRest(
 
     db_filter = FilterRest(
         email=db_user.email,
-        plz=filter_new.zipcode,
+        zipcode=filter_new.zipcode,
         radius=filter_new.radius,
-        g_rating=filter_new.rating,
+        rating=filter_new.rating,
         cuisine=filter_new.cuisine.value,
+        costs=filter_new.costs,
+        allergies=__allergies_scheme_to_model__(db, filter_new.allergies),
     )
-
-    db_filter.allergies = __allergies_scheme_to_model__(db, filter_new.allergies)
 
     db.add(db_filter)
     db.commit()
@@ -50,34 +50,42 @@ def create_filterRest(
 def update_filterRest(
     db: Session, updated_filter: scheme_filter.FilterRestDatabase, user: scheme_user.UserBase
 ) -> FilterRest:
+    """Update the Values of a FilterRest
+
+    Args:
+        db (Session): Session to the Database
+        updated_filter (scheme_filter.FilterRestDatabase): Filter with the new Values. Need also the old Values
+        user (scheme_user.UserBase): The User to the Filter
+
+    Returns:
+        FilterRest: Return the added filter
+    """
 
     db_person: Person = db.query(Person).filter(Person.email == user.email).first()
 
-    # db_current_filter: FilterRest = db_person.filterRest
-    db_person.filterRest.plz = updated_filter.zipcode
+    db_person.filterRest.zipcode = updated_filter.zipcode
     db_person.filterRest.radius = str(updated_filter.radius)
-    db_person.filterRest.g_rating = str(updated_filter.rating)
+    db_person.filterRest.rating = str(updated_filter.rating)
     db_person.filterRest.cuisine = updated_filter.cuisine.value
+    db_person.filterRest.costs = updated_filter.costs
     db_person.filterRest.allergies = __allergies_scheme_to_model__(db, updated_filter.allergies)
 
     db.commit()
     db.refresh(db_person)
     return db_person.filterRest
 
-    # db_updated_filter = FilterRest(
-    #     email=user.email,
-    #     plz=updated_filter.zipcode,
-    #     radius=updated_filter.radius,
-    #     g_rating=updated_filter.rating,
-    #     cuisine=updated_filter.cuisine.value,
-    # )
-    # db_updated_filter.allergies = __allergies_scheme_to_model__(db, updated_filter.allergies)
 
-    # db_person.filterRest = db_updated_filter
-    # db.commit()
-    # db.refresh(db_updated_filter)
+def get_filter_from_user(db: Session, user: scheme_user.UserBase) -> Union[FilterRest, None]:
+    """Get the Filter for one User if exists
 
-    # return db_updated_filter
+    Args:
+        db (Session): Session to the DB
+        user (scheme_user.UserBase): Owner of the Filter
+
+    Returns:
+        Union[FilterRest, None]: Return the filter or None
+    """
+    return db.query(FilterRest).filter(FilterRest.email == user.email).first()
 
 
 def __allergies_scheme_to_model__(

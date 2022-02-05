@@ -1,5 +1,6 @@
 """Contains all Filter for the searches"""
 from typing import List
+from typing import Optional
 
 from pydantic import BaseModel
 from pydantic import validator
@@ -13,7 +14,7 @@ class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
     cuisine: Cuisine
-    allergies: List[Allergies] = None
+    allergies: Optional[List[Allergies]] = None
     rating: int
 
     @validator("rating")
@@ -61,6 +62,9 @@ class FilterRestDatabase(FilterBase):
     costs: int
     radius: int
     zipcode: str
+
+    class Config:
+        orm_mode = True
 
     @validator("costs")
     @classmethod

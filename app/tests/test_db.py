@@ -242,9 +242,9 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
     filterRest_return = create_filterRest(db_session, filterRest_person1, person1)
     assert person1.email == filterRest_return.person.email
     assert person1.email == filterRest_return.email
-    assert filterRest_person1.zipcode == filterRest_return.plz
+    assert filterRest_person1.zipcode == filterRest_return.zipcode
     assert filterRest_person1.radius == filterRest_return.radius
-    assert filterRest_person1.rating == filterRest_return.g_rating
+    assert filterRest_person1.rating == filterRest_return.rating
     assert filterRest_person1.cuisine.value == filterRest_return.cuisine
 
     # Try without Allergies
@@ -270,9 +270,9 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
     filterRest_return = update_filterRest(db_session, updated_filter=filterRest_update, user=person1)
     assert person1.email == filterRest_return.person.email
     assert person1.email == filterRest_return.email
-    assert filterRest_update.zipcode == filterRest_return.plz
+    assert filterRest_update.zipcode == filterRest_return.zipcode
     assert filterRest_update.radius == filterRest_return.radius
-    assert filterRest_update.rating == filterRest_return.g_rating
+    assert filterRest_update.rating == filterRest_return.rating
     assert filterRest_update.cuisine.value == filterRest_return.cuisine
 
     # Only one filterRest for one Person
