@@ -4,12 +4,13 @@ from typing import List
 from typing import Union
 
 import sqlalchemy
+from sqlalchemy.orm import Session
+
 from db.base import Allergie
 from db.base import FilterRest
 from db.base import Person
 from schemes import scheme_filter
 from schemes import scheme_user
-from sqlalchemy.orm import Session
 
 
 def create_filterRest(
@@ -21,6 +22,9 @@ def create_filterRest(
         db (Session): Session to the DB
         filter (scheme_filter.FilterRestDatabase): Filter to add / create
         user (scheme_user.UserCreate): Person to add the filter
+
+    Raises:
+        sqlalchemy.exc.NoForeignKeysError: Raises if User is missing
 
     Returns:
         FilterRest: Created Filter
@@ -92,7 +96,7 @@ def __allergies_scheme_to_model__(
     db: Session, allergies: List[scheme_filter.FilterRestDatabase]
 ) -> Union[List[FilterRest], FilterRest, None]:
     if isinstance(allergies, Iterable):
-        return [db.query(Allergie).filter(Allergie.name == allergie.value).first() for allergie in allergies]
+        return [db.query(Allergie).filter(Allergie.name == allergie.name).first() for allergie in allergies]
     elif allergies is not None:
         return [allergies]
     else:

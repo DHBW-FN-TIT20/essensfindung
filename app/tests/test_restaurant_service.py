@@ -17,6 +17,7 @@ from schemes.scheme_filter import FilterRest
 from schemes.scheme_filter import FilterRestDatabase
 from schemes.scheme_rest import LocationBase
 from schemes.scheme_rest import Restaurant
+from schemes.scheme_user import User
 from schemes.scheme_user import UserBase
 from schemes.scheme_user import UserCreate
 from services import service_res
@@ -72,9 +73,22 @@ def test_get_rest_filter_from_user(db_session: SessionTesting, add_allergies, mo
 
     mocker.patch("db.crud.filter.get_filter_from_user", return_value=db_filter)
 
-    db_filter_copy.allergies = [allergie.name for allergie in db_filter_copy.allergies]
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter_copy)
     assert scheme_filter_rest == service_res.get_rest_filter_from_user(db_session, UserBase(email="test@nice.de"))
+
+
+def test_create_rest_filter(db_session: SessionTesting, add_allergies, mocker: MockerFixture):
+    allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
+    db_user = create_user(db_session, UserCreate(email="nice@ok.test", password="geheim"))
+    user = User.from_orm(db_user)
+
+    db_filter = db.base.FilterRest(
+        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisine="Deutsch", costs=3, allergies=allergies
+    )
+
+    scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
+
+    assert scheme_filter_rest == service_res.create_rest_filter(db_session, scheme_filter_rest, user)
 
 
 def test_search_for_restaurant(

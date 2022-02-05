@@ -105,10 +105,31 @@ def get_rest_filter_from_user(db_session: Session, user: UserBase) -> Union[Filt
     """
     db_filter_rest = crud_filter.get_filter_from_user(db_session, user)
     if db_filter_rest:
-        db_filter_rest.allergies = [allergie.name for allergie in db_filter_rest.allergies]
         filter_rest = FilterRestDatabase.from_orm(db_filter_rest)
         return filter_rest
     return None
+
+
+def create_rest_filter(db_session: Session, filter_rest: FilterRestDatabase, user: UserBase) -> FilterRestDatabase:
+    """Add a Filter to an existing person
+
+    Args:
+        db_session (Session): Session to the Database
+        filter_rest (FilterRestDatabase): Filter to add
+        user (UserBase): Owner of the Filter
+
+    Raises:
+        sqlalchemy.exc.NoForeignKeysError: If the User does not exist
+
+    Returns:
+        FilterRestDatabase: Added Filter
+    """
+    try:
+        db_filter_rest = crud_filter.create_filterRest(db_session, filter_rest, user)
+        filter_rest = FilterRestDatabase.from_orm(db_filter_rest)
+        return filter_rest
+    except sqlalchemy.exc.NoForeignKeysError as error:
+        raise sqlalchemy.exc.NoForeignKeysError from error
 
 
 def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRest) -> Restaurant:

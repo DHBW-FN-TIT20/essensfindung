@@ -1,4 +1,8 @@
 import pytest
+from sqlalchemy import create_engine
+from sqlalchemy import exc
+from sqlalchemy.orm import sessionmaker
+
 from db.base import Base
 from db.crud.allergies import create_allergie
 from db.crud.bewertung import create_bewertung
@@ -18,14 +22,12 @@ from db.crud.user import get_user_by_mail
 from db.crud.user import update_user
 from schemes import Allergies
 from schemes import Cuisine
+from schemes import scheme_allergie
 from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes import scheme_user
 from schemes.scheme_user import UserBase
 from schemes.scheme_user import UserCreate
-from sqlalchemy import create_engine
-from sqlalchemy import exc
-from sqlalchemy.orm import sessionmaker
 from tools.hashing import Hasher
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
@@ -233,7 +235,7 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
     person1 = UserCreate(email="bla@ka.de", password="password")
     create_user(db_session, person1)
 
-    allergies = [Allergies.LACTOSE]
+    allergies = [scheme_allergie.PydanticAllergies(name=Allergies.LACTOSE.value)]
     filterRest_person1 = scheme_filter.FilterRestDatabase(
         cuisine=Cuisine.DOENER, allergies=allergies, rating=3, costs=3, radius=5000, zipcode=88069
     )
