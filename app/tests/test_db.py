@@ -4,11 +4,15 @@ from sqlalchemy import exc
 from sqlalchemy.orm import sessionmaker
 
 from db.base import Base
+from db.crud.allergies import create_allergie
 from db.crud.bewertung import create_bewertung
 from db.crud.bewertung import delete_bewertung
 from db.crud.bewertung import get_all_user_bewertungen
 from db.crud.bewertung import get_bewertung_from_user_to_rest
 from db.crud.bewertung import update_bewertung
+from db.crud.cuisine import create_cuisine
+from db.crud.filter import create_filterRest
+from db.crud.filter import update_filterRest
 from db.crud.restaurant import create_restaurant
 from db.crud.restaurant import delete_restaurant
 from db.crud.restaurant import get_all_restaurants
@@ -17,8 +21,15 @@ from db.crud.user import create_user
 from db.crud.user import delete_user
 from db.crud.user import get_user_by_mail
 from db.crud.user import update_user
+from schemes import Allergies
+from schemes import Cuisine
+from schemes import scheme_allergie
+from schemes import scheme_cuisine
+from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes import scheme_user
+from schemes.scheme_user import UserBase
+from schemes.scheme_user import UserCreate
 from tools.hashing import Hasher
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./tests/test_db.db"
@@ -38,6 +49,18 @@ def db_session():
     session.close()
     transaction.rollback()
     connection.close()
+
+
+@pytest.fixture(scope="function")
+def add_allergies(db_session: SessionTesting) -> None:
+    for allergie in Allergies:
+        create_allergie(db_session, allergie)
+
+
+@pytest.fixture(scope="function")
+def add_cuisines(db_session: SessionTesting) -> None:
+    for cuisine in Cuisine:
+        create_cuisine(db_session, cuisine)
 
 
 def test_restaurant(db_session: SessionTesting):
@@ -213,3 +236,80 @@ def test_bewertung(db_session: SessionTesting):
     # Test if only one comment for the same restaurant an user are possible
     with pytest.raises(exc.IntegrityError):
         create_bewertung(db_session, assessment_add_2_2)
+
+
+def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):
+    # set data
+    person1 = UserCreate(email="bla@ka.de", password="password")
+    create_user(db_session, person1)
+
+    allergies = [scheme_allergie.PydanticAllergies(name=Allergies.LACTOSE.value)]
+    cuisines = [
+        scheme_cuisine.PydanticCuisine(name=Cuisine.GERMAN.value),
+        scheme_cuisine.PydanticCuisine(name=Cuisine.DOENER.value),
+    ]
+    filterRest_person1 = scheme_filter.FilterRestDatabase(
+        cuisines=cuisines, allergies=allergies, rating=3, costs=3, radius=5000, zipcode=88069
+    )
+
+    # Try with Allergies
+    filterRest_return = create_filterRest(db_session, filterRest_person1, person1)
+    assert person1.email == filterRest_return.person.email
+    assert person1.email == filterRest_return.email
+    assert filterRest_person1.zipcode == filterRest_return.zipcode
+    assert filterRest_person1.radius == filterRest_return.radius
+    assert filterRest_person1.rating == filterRest_return.rating
+    # assert filterRest_person1.cuisines.value == filterRest_return.cuisine
+
+    # Try without Allergies
+    person2 = UserCreate(email="blab2@ka.de", password="geheim")
+    filterRest_person2 = filterRest_person1.copy()
+    create_user(db_session, person2)
+    try:
+        filterRest_person2.allergies = None
+        create_filterRest(db_session, filterRest_person2, person2)
+    except Exception as error:
+        assert False, f"'create_filter raised exception {error}"
+
+    # Try with none existing user
+    person_fail = UserBase(email="nope@ok.de")
+    filterRest_fail = filterRest_person1.copy()
+    with pytest.raises(exc.NoForeignKeysError):
+        create_filterRest(db_session, filterRest_fail, person_fail)
+
+    # Update Filter from person1
+    filterRest_update = scheme_filter.FilterRestDatabase(
+        cuisines=[scheme_cuisine.PydanticCuisine(name=Cuisine.GERMAN.value)],
+        allergies=allergies,
+        rating=1,
+        costs=1,
+        radius=1444,
+        zipcode=88069,
+    )
+    filterRest_return = update_filterRest(db_session, updated_filter=filterRest_update, user=person1)
+    assert person1.email == filterRest_return.person.email
+    assert person1.email == filterRest_return.email
+    assert filterRest_update.zipcode == filterRest_return.zipcode
+    assert filterRest_update.radius == filterRest_return.radius
+    assert filterRest_update.rating == filterRest_return.rating
+    # assert filterRest_update.cuisines.value == filterRest_return.cuisine
+
+    # Try updated with non existing User
+    with pytest.raises(exc.NoForeignKeysError):
+        update_filterRest(db_session, updated_filter=filterRest_person1, user=person_fail)
+
+    # Only one filterRest for one Person
+    with pytest.raises(exc.IntegrityError):
+        create_filterRest(db_session, filterRest_person1, person1)
+
+
+def test_allergie_add(db_session: SessionTesting):
+    for allergie in Allergies:
+        added_allergie = create_allergie(db_session, allergie)
+        assert allergie.value == added_allergie.name
+
+
+def test_cuisine_add(db_session: SessionTesting):
+    for cuisine in Cuisine:
+        added_allergie = create_cuisine(db_session, cuisine)
+        assert cuisine.value == added_allergie.name

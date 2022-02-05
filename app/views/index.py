@@ -1,6 +1,4 @@
 """Router for the Home of the Website"""
-from datetime import datetime
-
 import fastapi
 from fastapi.responses import HTMLResponse
 from starlette.requests import Request
@@ -24,8 +22,8 @@ def index(request: Request):
     """
     # request filter of user
     rest_filter = scheme_filter.FilterRest(
-        cuisine=Cuisine.ASIAN,
-        allergies=Allergies.LACTOSE,
+        cuisines=[Cuisine.ASIAN],
+        allergies=[Allergies.LACTOSE],
         rating=4,
         costs=2,
         radius=15000,
