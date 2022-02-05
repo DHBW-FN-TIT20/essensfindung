@@ -61,11 +61,16 @@ def update_filterRest(
         updated_filter (scheme_filter.FilterRestDatabase): Filter with the new Values. Need also the old Values
         user (scheme_user.UserBase): The User to the Filter
 
+    Raises:
+        sqlalchemy.exc.NoForeignKeysError: Raises if User is missing
+
     Returns:
         FilterRest: Return the added filter
     """
 
     db_person: Person = db.query(Person).filter(Person.email == user.email).first()
+    if not db_person:
+        raise sqlalchemy.exc.NoForeignKeysError("Missing User")
 
     db_person.filterRest.zipcode = updated_filter.zipcode
     db_person.filterRest.radius = str(updated_filter.radius)

@@ -277,6 +277,10 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
     assert filterRest_update.rating == filterRest_return.rating
     assert filterRest_update.cuisine.value == filterRest_return.cuisine
 
+    # Try updated with non existing User
+    with pytest.raises(exc.NoForeignKeysError):
+        update_filterRest(db_session, updated_filter=filterRest_person1, user=person_fail)
+
     # Only one filterRest for one Person
     with pytest.raises(exc.IntegrityError):
         create_filterRest(db_session, filterRest_person1, person1)
