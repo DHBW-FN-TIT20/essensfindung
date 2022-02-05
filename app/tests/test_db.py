@@ -10,6 +10,7 @@ from db.crud.bewertung import delete_bewertung
 from db.crud.bewertung import get_all_user_bewertungen
 from db.crud.bewertung import get_bewertung_from_user_to_rest
 from db.crud.bewertung import update_bewertung
+from db.crud.cuisine import create_cuisine
 from db.crud.filter import create_filterRest
 from db.crud.filter import update_filterRest
 from db.crud.restaurant import create_restaurant
@@ -23,6 +24,7 @@ from db.crud.user import update_user
 from schemes import Allergies
 from schemes import Cuisine
 from schemes import scheme_allergie
+from schemes import scheme_cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes import scheme_user
@@ -53,6 +55,12 @@ def db_session():
 def add_allergies(db_session: SessionTesting) -> None:
     for allergie in Allergies:
         create_allergie(db_session, allergie)
+
+
+@pytest.fixture(scope="function")
+def add_cuisines(db_session: SessionTesting) -> None:
+    for cuisine in Cuisine:
+        create_cuisine(db_session, cuisine)
 
 
 def test_restaurant(db_session: SessionTesting):
@@ -230,14 +238,18 @@ def test_bewertung(db_session: SessionTesting):
         create_bewertung(db_session, assessment_add_2_2)
 
 
-def test_filterRest(db_session: SessionTesting, add_allergies):
+def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):
     # set data
     person1 = UserCreate(email="bla@ka.de", password="password")
     create_user(db_session, person1)
 
     allergies = [scheme_allergie.PydanticAllergies(name=Allergies.LACTOSE.value)]
+    cuisines = [
+        scheme_cuisine.PydanticCuisine(name=Cuisine.GERMAN.value),
+        scheme_cuisine.PydanticCuisine(name=Cuisine.DOENER.value),
+    ]
     filterRest_person1 = scheme_filter.FilterRestDatabase(
-        cuisine=Cuisine.DOENER, allergies=allergies, rating=3, costs=3, radius=5000, zipcode=88069
+        cuisines=cuisines, allergies=allergies, rating=3, costs=3, radius=5000, zipcode=88069
     )
 
     # Try with Allergies
@@ -247,7 +259,7 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
     assert filterRest_person1.zipcode == filterRest_return.zipcode
     assert filterRest_person1.radius == filterRest_return.radius
     assert filterRest_person1.rating == filterRest_return.rating
-    assert filterRest_person1.cuisine.value == filterRest_return.cuisine
+    # assert filterRest_person1.cuisines.value == filterRest_return.cuisine
 
     # Try without Allergies
     person2 = UserCreate(email="blab2@ka.de", password="geheim")
@@ -267,7 +279,12 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
 
     # Update Filter from person1
     filterRest_update = scheme_filter.FilterRestDatabase(
-        cuisine=Cuisine.GERMAN, allergies=allergies, rating=1, costs=1, radius=1444, zipcode=88069
+        cuisines=[scheme_cuisine.PydanticCuisine(name=Cuisine.GERMAN.value)],
+        allergies=allergies,
+        rating=1,
+        costs=1,
+        radius=1444,
+        zipcode=88069,
     )
     filterRest_return = update_filterRest(db_session, updated_filter=filterRest_update, user=person1)
     assert person1.email == filterRest_return.person.email
@@ -275,7 +292,7 @@ def test_filterRest(db_session: SessionTesting, add_allergies):
     assert filterRest_update.zipcode == filterRest_return.zipcode
     assert filterRest_update.radius == filterRest_return.radius
     assert filterRest_update.rating == filterRest_return.rating
-    assert filterRest_update.cuisine.value == filterRest_return.cuisine
+    # assert filterRest_update.cuisines.value == filterRest_return.cuisine
 
     # Try updated with non existing User
     with pytest.raises(exc.NoForeignKeysError):
@@ -290,3 +307,9 @@ def test_allergie_add(db_session: SessionTesting):
     for allergie in Allergies:
         added_allergie = create_allergie(db_session, allergie)
         assert allergie.value == added_allergie.name
+
+
+def test_cuisine_add(db_session: SessionTesting):
+    for cuisine in Cuisine:
+        added_allergie = create_cuisine(db_session, cuisine)
+        assert cuisine.value == added_allergie.name

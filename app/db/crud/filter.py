@@ -7,8 +7,11 @@ import sqlalchemy
 from sqlalchemy.orm import Session
 
 from db.base import Allergie
+from db.base import Cuisine
 from db.base import FilterRest
 from db.base import Person
+from schemes import scheme_allergie
+from schemes import scheme_cuisine
 from schemes import scheme_filter
 from schemes import scheme_user
 
@@ -39,8 +42,8 @@ def create_filterRest(
         zipcode=filter_new.zipcode,
         radius=filter_new.radius,
         rating=filter_new.rating,
-        cuisine=filter_new.cuisine.value,
         costs=filter_new.costs,
+        cuisines=__cuisine_scheme_to_model__(db, filter_new.cuisines),
         allergies=__allergies_scheme_to_model__(db, filter_new.allergies),
     )
 
@@ -75,8 +78,8 @@ def update_filterRest(
     db_person.filterRest.zipcode = updated_filter.zipcode
     db_person.filterRest.radius = str(updated_filter.radius)
     db_person.filterRest.rating = str(updated_filter.rating)
-    db_person.filterRest.cuisine = updated_filter.cuisine.value
     db_person.filterRest.costs = updated_filter.costs
+    db_person.filterRest.cuisines = __cuisine_scheme_to_model__(db, updated_filter.cuisines)
     db_person.filterRest.allergies = __allergies_scheme_to_model__(db, updated_filter.allergies)
 
     db.commit()
@@ -98,11 +101,22 @@ def get_filter_from_user(db: Session, user: scheme_user.UserBase) -> Union[Filte
 
 
 def __allergies_scheme_to_model__(
-    db: Session, allergies: List[scheme_filter.FilterRestDatabase]
-) -> Union[List[FilterRest], FilterRest, None]:
+    db: Session, allergies: List[scheme_allergie.PydanticAllergies]
+) -> Union[List[scheme_allergie.PydanticAllergies], scheme_allergie.PydanticAllergies, None]:
     if isinstance(allergies, Iterable):
         return [db.query(Allergie).filter(Allergie.name == allergie.name).first() for allergie in allergies]
     elif allergies is not None:
         return [allergies]
+    else:
+        return []
+
+
+def __cuisine_scheme_to_model__(
+    db: Session, cuisines: List[scheme_cuisine.PydanticCuisine]
+) -> Union[List[scheme_cuisine.PydanticCuisine], scheme_cuisine.PydanticCuisine, None]:
+    if isinstance(cuisines, Iterable):
+        return [db.query(Cuisine).filter(Cuisine.name == cuisine.name).first() for cuisine in cuisines]
+    elif cuisines is not None:
+        return [cuisines]
     else:
         return []

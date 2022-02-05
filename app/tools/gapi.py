@@ -3,6 +3,7 @@ import logging
 from typing import List
 
 import httpx
+
 from schemes.exceptions import GoogleApiException
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
@@ -25,22 +26,24 @@ def search_restaurant(res_filter: FilterRest) -> List[Restaurant]:
     Returns:
         List[Restaurant]: List of all Restaurants from the google api
     """
-    params: dict = {
-        "keyword": res_filter.cuisine.value,
-        "location": f"{res_filter.location.lat},{res_filter.location.lng}",
-        "opennow": True,
-        "radius": res_filter.radius,
-        "maxprice": res_filter.costs,
-        "type": "restaurant",
-        "language": "de",
-    }
+    restaurants = []
+    for cuisine in res_filter.cuisines:
+        params: dict = {
+            "keyword": cuisine.name,
+            "location": f"{res_filter.location.lat},{res_filter.location.lng}",
+            "opennow": True,
+            "radius": res_filter.radius,
+            "maxprice": res_filter.costs,
+            "type": "restaurant",
+            "language": "de",
+        }
 
-    try:
-        restaurants = nearby_search(params=params)
-        return restaurants
-    except httpx.HTTPError as error:
-        logger.exception(error)
-        raise GoogleApiException("Can't communicate with the Google API") from error
+        try:
+            restaurants.extend(nearby_search(params=params))
+        except httpx.HTTPError as error:
+            logger.exception(error)
+            raise GoogleApiException("Can't communicate with the Google API") from error
+    return restaurants
 
 
 def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]:

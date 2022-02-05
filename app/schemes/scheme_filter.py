@@ -6,14 +6,14 @@ from pydantic import BaseModel
 from pydantic import validator
 
 from .scheme_rest import LocationBase
-from schemes import Cuisine
 from schemes import scheme_allergie
+from schemes import scheme_cuisine
 
 
 class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
-    cuisine: Cuisine
+    cuisines: List[scheme_cuisine.PydanticCuisine]
     allergies: Optional[List[scheme_allergie.PydanticAllergies]] = None
     rating: int
 

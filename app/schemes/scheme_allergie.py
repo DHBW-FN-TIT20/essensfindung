@@ -11,7 +11,7 @@ class PydanticAllergies(BaseModel):
     name: constr(to_lower=True)
 
     @classmethod
-    @validator("allergies")
+    @validator("name")
     def allergie_values(cls, value: str):
         """Check if the Allergie is in schemes.Allergies Enum"""
         for allergie in Allergies:

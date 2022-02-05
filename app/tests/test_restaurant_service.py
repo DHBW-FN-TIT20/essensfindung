@@ -1,6 +1,5 @@
 import json
 from typing import List
-from unicodedata import name
 
 import pytest
 from pytest_httpx import HTTPXMock
@@ -11,10 +10,12 @@ from sqlalchemy.orm import sessionmaker
 import db
 from db.base_class import Base
 from db.crud.allergies import create_allergie
+from db.crud.cuisine import create_cuisine
 from db.crud.user import create_user
 from schemes import Allergies
 from schemes import Cuisine
 from schemes.scheme_allergie import PydanticAllergies
+from schemes.scheme_cuisine import PydanticCuisine
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_filter import FilterRestDatabase
 from schemes.scheme_rest import LocationBase
@@ -63,14 +64,21 @@ def google_api_restaurants() -> List[Restaurant]:
         return [Restaurant(**value) for value in fake_restaurants]
 
 
+@pytest.fixture(scope="function")
+def add_cuisines(db_session: SessionTesting) -> None:
+    for cuisine in Cuisine:
+        create_cuisine(db_session, cuisine)
+
+
 def test_get_rest_filter_from_user(db_session: SessionTesting, add_allergies, mocker: MockerFixture):
     allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
+    cuisines = [PydanticCuisine(name=Cuisine.GERMAN.value), PydanticCuisine(name=Cuisine.DOENER.value)]
     db_filter = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisine="Deutsch", costs=3, allergies=allergies
+        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
     )
 
     db_filter_copy = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisine="Deutsch", costs=3, allergies=allergies
+        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
     )
 
     mocker.patch("db.crud.filter.get_filter_from_user", return_value=db_filter)
@@ -79,13 +87,14 @@ def test_get_rest_filter_from_user(db_session: SessionTesting, add_allergies, mo
     assert scheme_filter_rest == service_res.get_rest_filter_from_user(db_session, UserBase(email="test@nice.de"))
 
 
-def test_create_rest_filter(db_session: SessionTesting, add_allergies, mocker: MockerFixture):
+def test_create_rest_filter(db_session: SessionTesting, add_allergies, add_cuisines):
     allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
+    cuisines = [PydanticCuisine(name=Cuisine.GERMAN.value), PydanticCuisine(name=Cuisine.DOENER.value)]
     db_user = create_user(db_session, UserCreate(email="nice@ok.test", password="geheim"))
     user = User.from_orm(db_user)
 
     db_filter = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisine="Deutsch", costs=3, allergies=allergies
+        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
     )
 
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
@@ -93,13 +102,14 @@ def test_create_rest_filter(db_session: SessionTesting, add_allergies, mocker: M
     assert scheme_filter_rest == service_res.create_rest_filter(db_session, scheme_filter_rest, user)
 
 
-def test_update_rest_filter(db_session: SessionTesting, add_allergies, mocker: MockerFixture):
+def test_update_rest_filter(db_session: SessionTesting, add_allergies, add_cuisines):
     allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
+    cuisines = [PydanticCuisine(name=Cuisine.GERMAN.value), PydanticCuisine(name=Cuisine.DOENER.value)]
     db_user = create_user(db_session, UserCreate(email="nice@ok.test", password="geheim"))
     user = User.from_orm(db_user)
 
     db_filter = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisine="Deutsch", costs=3, allergies=allergies
+        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
     )
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
     service_res.create_rest_filter(db_session, scheme_filter_rest, user)
@@ -134,7 +144,7 @@ def test_search_for_restaurant(
     httpx_mock.add_response(status_code=200, json={"result": random_res.dict()}, url=url)
 
     filter = FilterRest(
-        cuisine=Cuisine.DOENER,
+        cuisines=[Cuisine.DOENER],
         allergies=[Allergies.LACTOSE],
         rating=3,
         costs=3,
