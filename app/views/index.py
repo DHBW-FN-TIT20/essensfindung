@@ -1,6 +1,4 @@
 """Router for the Home of the Website"""
-from datetime import datetime
-
 import fastapi
 from fastapi.responses import HTMLResponse
 from starlette.requests import Request
