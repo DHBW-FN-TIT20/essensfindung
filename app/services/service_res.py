@@ -132,6 +132,28 @@ def create_rest_filter(db_session: Session, filter_rest: FilterRestDatabase, use
         raise sqlalchemy.exc.NoForeignKeysError from error
 
 
+def update_rest_filter(db_session: Session, filter_updated: FilterRestDatabase, user: UserBase) -> FilterRestDatabase:
+    """Update a Filter from a User. Need the full information of the filter (not only the new one)
+
+    Args:
+        db_session (Session): Session to the Database
+        filter_updated (FilterRestDatabase): The new Filter for the user
+        user (UserBase): Owner of the Filter
+
+    Raises:
+        sqlalchemy.exc.NoForeignKeysError: If the USer is not in the db
+
+    Returns:
+        FilterRestDatabase: The updated Filter
+    """
+    try:
+        db_filter_rest = crud_filter.update_filterRest(db_session, filter_updated, user)
+        filter_rest = FilterRestDatabase.from_orm(db_filter_rest)
+        return filter_rest
+    except sqlalchemy.exc.NoForeignKeysError as error:
+        raise sqlalchemy.exc.NoForeignKeysError from error
+
+
 def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRest) -> Restaurant:
     """Do a full search for a Restaurant. This does the google search, weights the result with the user rating
     and choose one of the restaurants according to the weights

@@ -1,5 +1,6 @@
 import json
 from typing import List
+from unicodedata import name
 
 import pytest
 from pytest_httpx import HTTPXMock
@@ -13,6 +14,7 @@ from db.crud.allergies import create_allergie
 from db.crud.user import create_user
 from schemes import Allergies
 from schemes import Cuisine
+from schemes.scheme_allergie import PydanticAllergies
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_filter import FilterRestDatabase
 from schemes.scheme_rest import LocationBase
@@ -89,6 +91,24 @@ def test_create_rest_filter(db_session: SessionTesting, add_allergies, mocker: M
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
 
     assert scheme_filter_rest == service_res.create_rest_filter(db_session, scheme_filter_rest, user)
+
+
+def test_update_rest_filter(db_session: SessionTesting, add_allergies, mocker: MockerFixture):
+    allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
+    db_user = create_user(db_session, UserCreate(email="nice@ok.test", password="geheim"))
+    user = User.from_orm(db_user)
+
+    db_filter = db.base.FilterRest(
+        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisine="Deutsch", costs=3, allergies=allergies
+    )
+    scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
+    service_res.create_rest_filter(db_session, scheme_filter_rest, user)
+
+    updated_scheme_filter_rest = scheme_filter_rest.copy()
+    updated_scheme_filter_rest.costs = 1
+    updated_scheme_filter_rest.allergies = [PydanticAllergies(name=Allergies.LACTOSE.value)]
+
+    assert updated_scheme_filter_rest == service_res.update_rest_filter(db_session, updated_scheme_filter_rest, user)
 
 
 def test_search_for_restaurant(
