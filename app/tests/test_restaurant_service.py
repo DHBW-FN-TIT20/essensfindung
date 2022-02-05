@@ -74,7 +74,7 @@ def test_search_for_restaurant(
 
     filter = FilterRest(
         cuisine=Cuisine.DOENER,
-        allergies=Allergies.LACTOSE,
+        allergies=[Allergies.LACTOSE],
         rating=3,
         costs=3,
         zipcode="88069",

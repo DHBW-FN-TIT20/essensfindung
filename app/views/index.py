@@ -3,13 +3,12 @@ from datetime import datetime
 
 import fastapi
 from fastapi.responses import HTMLResponse
-from starlette.requests import Request
-from starlette.templating import Jinja2Templates
-
 from schemes import Allergies
 from schemes import Cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
+from starlette.requests import Request
+from starlette.templating import Jinja2Templates
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
@@ -25,7 +24,7 @@ def index(request: Request):
     # request filter of user
     rest_filter = scheme_filter.FilterRest(
         cuisine=Cuisine.ASIAN,
-        allergies=Allergies.LACTOSE,
+        allergies=[Allergies.LACTOSE],
         rating=4,
         costs=2,
         radius=15000,

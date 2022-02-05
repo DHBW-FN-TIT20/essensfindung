@@ -6,7 +6,8 @@ from db.crud.bewertung import delete_bewertung
 from db.crud.bewertung import get_all_user_bewertungen
 from db.crud.bewertung import get_bewertung_from_user_to_rest
 from db.crud.bewertung import update_bewertung
-from db.crud.filter import create_filter
+from db.crud.filter import create_filterRest
+from db.crud.filter import update_filterRest
 from db.crud.restaurant import create_restaurant
 from db.crud.restaurant import delete_restaurant
 from db.crud.restaurant import get_all_restaurants
@@ -20,6 +21,7 @@ from schemes import Cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes import scheme_user
+from schemes.scheme_user import UserBase
 from schemes.scheme_user import UserCreate
 from sqlalchemy import create_engine
 from sqlalchemy import exc
@@ -43,6 +45,12 @@ def db_session():
     session.close()
     transaction.rollback()
     connection.close()
+
+
+@pytest.fixture(scope="function")
+def add_allergies(db_session: SessionTesting) -> None:
+    for allergie in Allergies:
+        create_allergie(db_session, allergie)
 
 
 def test_restaurant(db_session: SessionTesting):
@@ -220,16 +228,56 @@ def test_bewertung(db_session: SessionTesting):
         create_bewertung(db_session, assessment_add_2_2)
 
 
-# Currently fails
-@pytest.mark.xfail
-def test_filter_add(db_session: SessionTesting):
-    person = UserCreate(email="bla@ka.de", password="password")
-    filter_new = scheme_filter.FilterRestDatabase(
-        cuisine=Cuisine.DOENER, allergies=[Allergies.LACTOSE], rating=3, costs=3, radius=5000, zipcode=88069
+def test_filterRest(db_session: SessionTesting, add_allergies):
+    # set data
+    person1 = UserCreate(email="bla@ka.de", password="password")
+    create_user(db_session, person1)
+
+    allergies = [Allergies.LACTOSE]
+    filterRest_person1 = scheme_filter.FilterRestDatabase(
+        cuisine=Cuisine.DOENER, allergies=allergies, rating=3, costs=3, radius=5000, zipcode=88069
     )
-    create_user(db_session, person)
-    filter_return = create_filter(db_session, filter_new, person)
-    assert filter_return == filter_new
+
+    # Try with Allergies
+    filterRest_return = create_filterRest(db_session, filterRest_person1, person1)
+    assert person1.email == filterRest_return.person.email
+    assert person1.email == filterRest_return.email
+    assert filterRest_person1.zipcode == filterRest_return.plz
+    assert filterRest_person1.radius == filterRest_return.radius
+    assert filterRest_person1.rating == filterRest_return.g_rating
+    assert filterRest_person1.cuisine.value == filterRest_return.cuisine
+
+    # Try without Allergies
+    person2 = UserCreate(email="blab2@ka.de", password="geheim")
+    filterRest_person2 = filterRest_person1.copy()
+    create_user(db_session, person2)
+    try:
+        filterRest_person2.allergies = None
+        create_filterRest(db_session, filterRest_person2, person2)
+    except Exception as error:
+        assert False, f"'create_filter raised exception {error}"
+
+    # Try with none existing user
+    person_fail = UserBase(email="nope@ok.de")
+    filterRest_fail = filterRest_person1.copy()
+    with pytest.raises(exc.NoForeignKeysError):
+        create_filterRest(db_session, filterRest_fail, person_fail)
+
+    # Update Filter from person1
+    filterRest_update = scheme_filter.FilterRestDatabase(
+        cuisine=Cuisine.GERMAN, allergies=allergies, rating=1, costs=1, radius=1444, zipcode=88069
+    )
+    filterRest_return = update_filterRest(db_session, updated_filter=filterRest_update, user=person1)
+    assert person1.email == filterRest_return.person.email
+    assert person1.email == filterRest_return.email
+    assert filterRest_update.zipcode == filterRest_return.plz
+    assert filterRest_update.radius == filterRest_return.radius
+    assert filterRest_update.rating == filterRest_return.g_rating
+    assert filterRest_update.cuisine.value == filterRest_return.cuisine
+
+    # Only one filterRest for one Person
+    with pytest.raises(exc.IntegrityError):
+        create_filterRest(db_session, filterRest_person1, person1)
 
 
 def test_allergie_add(db_session: SessionTesting):
