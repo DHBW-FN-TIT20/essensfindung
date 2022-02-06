@@ -19,7 +19,7 @@ router = fastapi.APIRouter()
 
 
 @router.get("/main", response_class=HTMLResponse)
-def index(request: Request):
+def main(request: Request):
     """Return the renderd template for the /main.html
 
     Args:
