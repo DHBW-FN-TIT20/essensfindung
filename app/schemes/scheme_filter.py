@@ -1,16 +1,20 @@
 """Contains all Filter for the searches"""
+from typing import List
+from typing import Optional
+
 from pydantic import BaseModel
 from pydantic import validator
-from schemes import Allergies
-from schemes import Cuisine
+
 from .scheme_rest import LocationBase
+from schemes import scheme_allergie
+from schemes import scheme_cuisine
 
 
 class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
-    cuisine: Cuisine
-    allergies: Allergies = None
+    cuisines: List[scheme_cuisine.PydanticCuisine]
+    allergies: Optional[List[scheme_allergie.PydanticAllergies]] = None
     rating: int
 
     @validator("rating")
@@ -52,12 +56,15 @@ class FilterRest(FilterBase):
         raise ValueError("costs is not between 0 (included) and 4 (included)")
 
 
-class FilterDatabase(FilterBase):
+class FilterRestDatabase(FilterBase):
     """Use this scheme if you internact with the Filter that are saved in the DB"""
 
     costs: int
     radius: int
     zipcode: str
+
+    class Config:
+        orm_mode = True
 
     @validator("costs")
     @classmethod

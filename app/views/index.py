@@ -1,6 +1,4 @@
 """Router for the Home of the Website"""
-from re import U
-
 import fastapi
 from db.database import get_db
 from fastapi import Depends

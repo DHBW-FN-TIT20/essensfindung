@@ -9,23 +9,31 @@ from sqlalchemy.orm import relationship
 
 
 association_table_filter_allergie = Table(
-    "association",
+    "association_filter_allergie",
     Base.metadata,
-    Column("filter_email", ForeignKey("filter.email")),
-    Column("allergie_name", ForeignKey("allergie.name")),
+    Column("filterRest_email", ForeignKey("filterRest.email"), primary_key=True),
+    Column("allergie_name", ForeignKey("allergie.name"), primary_key=True),
+)
+
+association_table_filter_cuisine = Table(
+    "association_filter_cuisine",
+    Base.metadata,
+    Column("filterRest_email", ForeignKey("filterRest.email"), primary_key=True),
+    Column("cuisine_name", ForeignKey("cuisine.name"), primary_key=True),
 )
 
 
-class Filter(Base):
+class FilterRest(Base):
     """Model for SQLAlchemy for the filter Table in the DB"""
 
-    __tablename__ = "filter"
+    __tablename__ = "filterRest"
 
     email = Column(String, ForeignKey("person.email"), primary_key=True)
-    plz = Column(String(5), nullable=False)
+    zipcode = Column(String(5), nullable=False)
     radius = Column(Integer, nullable=False)
-    g_rating = Column(Integer, nullable=False)
-    cuisine = Column(String, nullable=False)
+    rating = Column(Integer, nullable=False)
+    costs = Column(Integer, nullable=False)
 
-    person = relationship("Person", back_populates="filter")
-    allergien = relationship("Allergie", secondary=association_table_filter_allergie)
+    person = relationship("Person", back_populates="filterRest", passive_deletes=True)
+    allergies = relationship("Allergie", secondary=association_table_filter_allergie, passive_deletes=True)
+    cuisines = relationship("Cuisine", secondary=association_table_filter_cuisine, passive_deletes=True)
