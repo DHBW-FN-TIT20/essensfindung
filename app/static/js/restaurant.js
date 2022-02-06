@@ -51,7 +51,12 @@ function get_costs() {
 }
 
 function get_rating() {
-    return document.getElementById('restaurant_filter_rating_target').innerHTML;
+    var rating = document.getElementById('restaurant_filter_rating_target').innerHTML;
+    if (typeof rating == "number") {
+        return rating;
+    } else {
+        return document.getElementById('restaurant_filter_rating_selected').innerHTML;
+    }
 }
 
 function get_radius() {
