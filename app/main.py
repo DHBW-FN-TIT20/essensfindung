@@ -2,7 +2,6 @@
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-
 import fastapi
 import uvicorn
 from sqlalchemy import exc
@@ -12,9 +11,11 @@ from starlette.staticfiles import StaticFiles
 from db.base import Base
 from db.crud.allergies import create_allergie
 from db.crud.cuisine import create_cuisine
+
 from db.database import engine
 from schemes import Allergies
 from schemes import Cuisine
+from schemes import scheme_user
 from views import index
 from views import restaurant
 from views import signin
@@ -26,7 +27,7 @@ def configure():
     """Init Setup for the application"""
     configure_logger()
     configure_routing()
-    configure_database()
+    configure_database()   
 
 
 def configure_logger():
@@ -71,6 +72,7 @@ def configure_database():
     try:
         create_database_table()
         add_all_allergies()
+        add_all_cuisine()
     except (exc.OperationalError, exc.IntegrityError):
         # Ignore if Tables already configured
         pass
@@ -89,7 +91,7 @@ def add_all_allergies():
 
 
 def add_all_cuisine():
-    """Add all Allergies from the Enum to the DB"""
+    """Add all cuisnes from the Enum to the DB"""
     with Session(engine) as session:
         for cuisine in Cuisine:
             create_cuisine(session, cuisine)

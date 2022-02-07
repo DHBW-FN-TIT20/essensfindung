@@ -18,6 +18,12 @@ $("#restaurant_filter_rating").raty({
     }
 });
 
+/*********** On modal close ****************************/
+$('#restaurantFilter').on('hide.bs.modal', function(e) {
+    document.getElementById("cuisine_selected").innerHTML = get_cuisine();
+    document.getElementById("allergies_selected").innerHTML = get_allergies();
+})
+
 function change_url() {
     var latitude = get_latitude();
     var longitude = get_longitude();
@@ -32,6 +38,10 @@ function change_url() {
     } else {
         document.getElementById("search_restaurant").href = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
     }
+}
+
+function reload_page() {
+    window.location.reload();
 }
 
 function get_latitude() {
@@ -67,32 +77,83 @@ function get_cuisine() {
     var selections = $('#restaurant_filter_cuisine').select2('data');
     var cuisines = [];
     for (const element of selections) {
-        console.log(element.id);
         cuisines.push(element.id);
     }
-    return cuisines;
+    if (cuisines.length > 0) {
+        return cuisines;
+    } else {
+        update_cuisine_selected();
+        selections = $('#restaurant_filter_cuisine').select2('data');
+        for (const element of selections) {
+            cuisines.push(element.id);
+        }
+        return cuisines;
+    }
+
 }
 
 function get_allergies() {
     var selections = $('#restaurant_filter_allergies').select2('data');
     var allergies = [];
     for (const element of selections) {
-        console.log(element.id);
         allergies.push(element.id);
     }
+    // if (allergies > 0) {
     return allergies;
+    // } else {
+    //     update_allergies_selected();
+    //     selections = $('#restaurant_filter_allergies').select2('data');
+    //     for (const element of selections) {
+    //         allergies.push(element.id);
+    //     }
+    //     return allergies;
+    // }
+}
+
+function update_allergies_selected() {
+    var allergies_str = document.getElementById('allergies_selected').innerHTML;
+    $('#restaurant_filter_allergies').val(strToArray(allergies_str));
+    $('#restaurant_filter_allergies').trigger('change');
+    // $('#restaurant_filter_allergies').on('change', function);
+}
+
+function update_allergies_options() {
+    var allergie_options = strToArray(document.getElementById('allergies_options').innerHTML);
+    for (const allergie of allergie_options) {
+        if ($('#restaurant_filter_allergies').find("option[value='" + allergie + "']").length) {
+            $('#restaurant_filter_allergies').val(allergie).trigger('change');
+        } else {
+            var new_option = new Option(allergie, allergie, false, false);
+            $('#restaurant_filter_allergies').append(new_option).trigger('change');
+        }
+    }
 }
 
 function update_modal_on_show() {
     update_radius_text(document.getElementById('restaurant_filter_radius').value);
     update_costs_text(document.getElementById('restaurant_filter_costs').value);
+    update_cuisine_options();
+    update_allergies_options();
     update_cuisine_selected();
+    update_allergies_selected();
 }
 
 function update_cuisine_selected() {
-    var cuisineStr = document.getElementById('cuisine_selected').innerHTML;
-    $('#restaurant_filter_cuisine').val(strToArray(cuisineStr));
+    var cuisine_str = document.getElementById('cuisine_selected').innerHTML;
+    $('#restaurant_filter_cuisine').val(strToArray(cuisine_str));
     $('#restaurant_filter_cuisine').trigger('change');
+}
+
+function update_cuisine_options() {
+    var cuisines_options = strToArray(document.getElementById('cuisine_options').innerHTML);
+    for (const cuisine of cuisines_options) {
+        if ($('#restaurant_filter_cuisine').find("option[value='" + cuisine + "']").length) {
+            $('#restaurant_filter_cuisine').val(cuisine).trigger('change');
+        } else {
+            var new_option = new Option(cuisine, cuisine, false, false);
+            $('#restaurant_filter_cuisine').append(new_option).trigger('change');
+        }
+    }
 }
 
 function update_radius_text(val) {

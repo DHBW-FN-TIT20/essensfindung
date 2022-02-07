@@ -5,6 +5,7 @@ from typing import Union
 
 import sqlalchemy
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session
 
 from db.crud import bewertung as crud_bewertung
 from db.crud import filter as crud_filter
@@ -16,7 +17,7 @@ from schemes.scheme_rest import RestaurantBase
 from schemes.scheme_rest import RestBewertungCreate
 from schemes.scheme_rest import RestBewertungReturn
 from schemes.scheme_user import UserBase
-from sqlalchemy.orm import Session
+
 from tools import gapi
 
 
