@@ -15,6 +15,8 @@ from db.crud.cuisine import create_cuisine
 from db.database import engine
 from schemes import Allergies
 from schemes import Cuisine
+from schemes import scheme_user
+from views import error
 from views import index
 from views import restaurant
 from views import signin
@@ -64,6 +66,7 @@ def configure_routing():
     app.include_router(index.router)
     app.include_router(restaurant.router)
     app.include_router(signin.router)
+    app.include_router(error.router)
 
 
 def configure_database():
@@ -96,6 +99,22 @@ def add_all_cuisine():
                 create_cuisine(session, cuisine)
             except exc.IntegrityError:
                 pass
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request, exc: Exception):
+    """Exception Handler for all Exceptions made and unhandeld
+
+    Args:
+        request: Request for the api
+        exc (ServiceError): Raised Exception
+
+    Returns:
+        fastapi.responses.JSONResponse: Return Exception as JSON-Formattet to the client
+    """
+    # TODO: Logging the Errors
+    print(str(exc))
+    return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
 
 
 if __name__ == "__main__":

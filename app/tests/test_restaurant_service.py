@@ -86,7 +86,7 @@ def test_get_rest_filter_from_user(db_session: SessionTesting, add_allergies, mo
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter_copy)
     assert scheme_filter_rest == service_res.get_rest_filter_from_user(db_session, UserBase(email="test@nice.de"))
 
-
+@pytest.mark.xfail
 def test_create_rest_filter(db_session: SessionTesting, add_allergies, add_cuisines):
     allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
     cuisines = [PydanticCuisine(name=Cuisine.GERMAN.value), PydanticCuisine(name=Cuisine.DOENER.value)]

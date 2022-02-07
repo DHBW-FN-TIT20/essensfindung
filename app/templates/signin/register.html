@@ -1,6 +1,4 @@
-{% extends "shared/layout_singleform.html" %}
-
-{% block content %}
+{% extends "shared/layout_singleform.html" %} {% block content %}
 
 <div class="row justify-content-center">
     <div style="height: 25vh;"></div>
@@ -47,33 +45,33 @@
 
 <div class="modal" id="privacypolModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Datenschutzerkl&auml;rung</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <pre style="white-space: pre-wrap;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Datenschutzerkl&auml;rung</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <pre style="white-space: pre-wrap;">
                 {{ legal.privacy }}
             </pre>
+            </div>
         </div>
-      </div>
     </div>
 </div>
 
 <div class="modal" id="termsModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Allgemeine Gesch&auml;ftsbedingungen</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <pre style="white-space: pre-wrap;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Allgemeine Gesch&auml;ftsbedingungen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <pre style="white-space: pre-wrap;">
                 {{ legal.tos }}
             </pre>
+            </div>
         </div>
-      </div>
     </div>
 </div>
 

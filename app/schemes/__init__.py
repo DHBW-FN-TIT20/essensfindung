@@ -10,11 +10,23 @@ class Cuisine(Enum):
     ASIAN = "Asiatisch"
     DOENER = "Doener"
     TURKEY = "Tuerkisch"
+    GREEK = "Griechisch"
+    KOREAN = "Koreanisch"
+    THAILAND = "Thailaendisch"
+    INDIAN = "Indisch"
+    COFFE = "Kaffee"
+    BAKERY = "Baecker"
+    BUTCHER = "Metzgerei"
+    VEGAN = "Vegan"
+    VEGETARIAN = "Vegetarisch"
+    FASTFOOD = "Fastfood"
+    AMERICAN = "Amerikanisch"
+    FOOD = "Essen"  # used when no cuisine is selected
 
 
 class Allergies(Enum):
     """Filter for Allergies"""
 
     # TODO: More...
-    LACTOSE = "lactose"
-    WHEAT = "wheat"
+    LACTOSE = "Laktoseintoleranz"
+    WHEAT = "Glutenunvertraeglichkeit"

@@ -8,7 +8,7 @@ from schemes import Allergies
 class PydanticAllergies(BaseModel):
     """Needed class for revonvert orm models"""
 
-    name: constr(to_lower=True)
+    name: str
 
     @classmethod
     @validator("name")

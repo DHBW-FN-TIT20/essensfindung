@@ -1,10 +1,34 @@
-{% extends "shared/layout.html" %}
-
-{% block content %}
-<p>Name (beim Testen Zipcode): {{restaurant.name}}, Kostenstufe: {{restaurant.own_rating}}</p>
-<!--Google map-->
-<div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-    <iframe src="{{restaurant.maps_url}}&output=embed" frameborder="0"
-      style="border:0" allowfullscreen></iframe>
+{% extends "shared/layout.html" %} {% block content %} {% include "restaurant/restaurant_navbar.html" %}
+<div class="row justify-content-center">
+    <div class="col-10  mb-2" style="max-width: 480px;">
+        <h1>{{restaurant.name}}</h1>
+    </div>
 </div>
+<div class="row justify-content-center">
+    <div class="col-10" style="max-width: 480px;">
+        <p>Google-Bewertung: {{restaurant.rating}}/5</p>
+        <p>Eigene Bewertung: {{restaurant.own_rating}}</p>
+    </div>
+</div>
+{% if restaurant.homepage%}
+<div class="row justify-content-center">
+    <div class="col-10 m-3 text-center" style="max-width: 480px;">
+        <a href="{{restaurant.homepage}}" class="btn btn-lg btn-dark">Homepage</a>
+    </div>
+</div>
+{% endif %}
+<div class="row justify-content-center">
+    <div class="col-10" style="max-width: 480px;">
+        <!--Google map-->
+        <div id="map-container-google-1" class="z-depth-1-half map-container border border-dark" style="height: 100%">
+            <iframe id="map-google-1" index="map-google" src="{{restaurant.maps_url}}&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-10 text-center m-3" style="max-width: 480px;">
+        <a onclick="reload_page()" class="btn btn-dark btn-lg">Erneut suchen!</a>
+    </div>
+</div>
+<script src="/static/js/restaurant.js"></script>
 {% endblock %}
