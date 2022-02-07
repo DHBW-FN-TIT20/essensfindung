@@ -46,7 +46,7 @@ def configure_logger():
 
     # level and formatter
     stream_h.setLevel(logging.WARNING)
-    file_h.setLevel(logging.ERROR)
+    file_h.setLevel(logging.INFO)
 
     formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
     stream_h.setFormatter(formatter)

@@ -3,6 +3,7 @@ from typing import Union
 
 from sqlalchemy.orm import Session
 
+from . import logger
 from db.base import Person
 from schemes import scheme_user
 from tools.hashing import Hasher
@@ -22,6 +23,9 @@ def create_user(db: Session, person: scheme_user.UserCreate) -> Person:
     db.add(db_person)
     db.commit()
     db.refresh(db_person)
+
+    logger.info("Added User to db... user:%s", db_person.email)
+
     return db_person
 
 
@@ -54,6 +58,9 @@ def update_user(db: Session, current_user: scheme_user.UserBase, new_user: schem
         {Person.email: db_new_user.email, Person.hashed_password: db_new_user.hashed_password}
     )
     db.commit()
+
+    logger.info("Updated User... (old)email:%s", current_user.email)
+
     return db_new_user
 
 
@@ -69,4 +76,7 @@ def delete_user(db: Session, user: scheme_user.UserBase) -> int:
     """
     rows = db.query(Person).filter(Person.email == user.email).delete()
     db.commit()
+
+    logger.info("Delete User from db... email:%s", user.email)
+
     return rows
