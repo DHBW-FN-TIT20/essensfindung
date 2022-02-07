@@ -3,12 +3,18 @@ import random
 from typing import List
 from typing import Union
 
+import httpx
 import sqlalchemy
 from sqlalchemy.orm import Session
 
 from db.crud import bewertung as crud_bewertung
 from db.crud import filter as crud_filter
 from db.crud import restaurant as crud_restaurant
+from schemes.exceptions import DatabaseException
+from schemes.exceptions import DuplicateEntry
+from schemes.exceptions import GoogleApiException
+from schemes.exceptions import NoResultsException
+from schemes.exceptions import UserNotFound
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_filter import FilterRestDatabase
 from schemes.scheme_rest import Restaurant
@@ -44,7 +50,8 @@ def add_assessment(db_session: Session, assessment: RestBewertungCreate) -> Rest
         db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
         assessment (RestBewertungCreate): The assessment need to be unique
 
-    Raises: `sqlalchemy.exc.InvalidRequestError` if the User or Restaurant does not exist or the assessment is duplicated
+    Raises:
+        `DatabaseException`: if the User or Restaurant does not exist or the assessment is duplicated
 
     Returns:
         [RestBewertungReturn]: The created Restaurant
@@ -56,7 +63,7 @@ def add_assessment(db_session: Session, assessment: RestBewertungCreate) -> Rest
             rating=created_assessment.rating,
             timestamp=created_assessment.zeitstempel,
         )
-    except sqlalchemy.exc.SQLAlchemyError as error:
+    except DatabaseException as error:
         raise error
 
 
@@ -70,10 +77,16 @@ def update_assessment(
         old_assessment (RestBewertungCreate): The current assessment
         new_assessment (RestBewertungCreate): The new assessment with the updated values
 
+    Raises:
+        `DatabaseException`: if the User or Restaurant does not exist or the assessment is duplicated
+
     Returns:
         RestBewertungReturn: Restaurant the the new values
     """
-    updated_assessment = crud_bewertung.update_bewertung(db_session, old_assessment, new_assessment)
+    try:
+        updated_assessment = crud_bewertung.update_bewertung(db_session, old_assessment, new_assessment)
+    except DatabaseException as error:
+        raise error
     return RestBewertungReturn(
         comment=updated_assessment.kommentar, rating=updated_assessment.rating, timestamp=updated_assessment.zeitstempel
     )
@@ -87,10 +100,16 @@ def delete_assessment(db_session: Session, user: UserBase, rest: RestaurantBase)
         user (UserBase): The owner of the assessment
         rest (RestaurantBase): The mapped Restaurant
 
+    Raises:
+        `DatabaseException`: if the User or Restaurant does not exist or the assessment is duplicated
+
     Returns:
         int: The number of affected Rows of the delete
     """
-    return crud_bewertung.delete_bewertung(db_session, user, rest)
+    rows = crud_bewertung.delete_bewertung(db_session, user, rest)
+    if rows == 0:
+        raise DatabaseException("Can not delete assessment. Does the user and restaurant excist?")
+    return rows
 
 
 def get_rest_filter_from_user(db_session: Session, user: UserBase) -> Union[FilterRestDatabase, None]:
@@ -119,7 +138,7 @@ def create_rest_filter(db_session: Session, filter_rest: FilterRestDatabase, use
         user (UserBase): Owner of the Filter
 
     Raises:
-        sqlalchemy.exc.NoForeignKeysError: If the User does not exist
+        UserNotFound: If the User does not exist
 
     Returns:
         FilterRestDatabase: Added Filter
@@ -128,8 +147,8 @@ def create_rest_filter(db_session: Session, filter_rest: FilterRestDatabase, use
         db_filter_rest = crud_filter.create_filterRest(db_session, filter_rest, user)
         filter_rest = FilterRestDatabase.from_orm(db_filter_rest)
         return filter_rest
-    except sqlalchemy.exc.NoForeignKeysError as error:
-        raise sqlalchemy.exc.NoForeignKeysError from error
+    except (UserNotFound, DuplicateEntry) as error:
+        raise error
 
 
 def update_rest_filter(db_session: Session, filter_updated: FilterRestDatabase, user: UserBase) -> FilterRestDatabase:
@@ -141,7 +160,7 @@ def update_rest_filter(db_session: Session, filter_updated: FilterRestDatabase, 
         user (UserBase): Owner of the Filter
 
     Raises:
-        sqlalchemy.exc.NoForeignKeysError: If the USer is not in the db
+        UserNotFound: If the User is not in the db
 
     Returns:
         FilterRestDatabase: The updated Filter
@@ -150,8 +169,8 @@ def update_rest_filter(db_session: Session, filter_updated: FilterRestDatabase, 
         db_filter_rest = crud_filter.update_filterRest(db_session, filter_updated, user)
         filter_rest = FilterRestDatabase.from_orm(db_filter_rest)
         return filter_rest
-    except sqlalchemy.exc.NoForeignKeysError as error:
-        raise sqlalchemy.exc.NoForeignKeysError from error
+    except UserNotFound as error:
+        raise error
 
 
 def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRest) -> Restaurant:
@@ -162,14 +181,27 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
         db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
         user_f (FilterRest): Filter that are needed for the search
 
+    Raises:
+        NoResultsException: If no Results are found
+        GoogleApiException: If no communication with the Google API are possible
+
     Returns:
         Restaurant: The one choosen Restaurant where the user have to go now!
     """
     google_rests: List[Restaurant] = gapi.search_restaurant(user_f)
     filterd_rests: List[Restaurant] = apply_filter(google_rests, user_f)
+
+    if len(filterd_rests) == 0:
+        raise NoResultsException("There are no Restaurants found with these parameters")
+
     user_rests: List[Restaurant] = fill_user_rating(db_session, filterd_rests, user)
     restaurant = select_restaurant(user_rests)
-    restaurant = gapi.place_details(restaurant)
+
+    try:
+        restaurant = gapi.place_details(restaurant)
+    except httpx.HTTPError as error:
+        raise GoogleApiException("Can't communicate with the Google API") from error
+
     if crud_restaurant.get_restaurant_by_id(db_session, restaurant.place_id):
         crud_restaurant.create_restaurant(db_session, restaurant)
         add_assessment(db_session, RestBewertungCreate(person=user, restaurant=restaurant))

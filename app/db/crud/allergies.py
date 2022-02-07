@@ -1,10 +1,12 @@
 from typing import List
 
+import sqlalchemy
 from sqlalchemy.orm import Session
 
 import schemes
 from . import logger
 from db.base import Allergie
+from schemes.exceptions import DuplicateEntry
 
 
 def create_allergie(db: Session, allergie: schemes.Allergies) -> Allergie:
@@ -14,17 +16,23 @@ def create_allergie(db: Session, allergie: schemes.Allergies) -> Allergie:
         db (Session): Session to the db
         allergie (scheme_allergie.Allergie): Allergie to be added
 
+    Raises:
+        DuplicateEntry: Duplicate Primary Key
+
     Returns:
         Allergie: return the db Allergie if success
     """
-    db_allergie = Allergie(name=allergie.value)
-    db.add(db_allergie)
-    db.commit()
-    db.refresh(db_allergie)
+    try:
+        db_allergie = Allergie(name=allergie.value)
+        db.add(db_allergie)
+        db.commit()
+        db.refresh(db_allergie)
 
-    logger.info("Added allergie to db... name:%s", db_allergie.name)
+        logger.info("Added allergie to db... name:%s", db_allergie.name)
 
-    return db_allergie
+        return db_allergie
+    except sqlalchemy.exc.IntegrityError as error:
+        raise DuplicateEntry(f"Allergie {allergie.value} already exist in the Database") from error
 
 
 def get_all_allergies(db: Session) -> List[Allergie]:

@@ -1,11 +1,14 @@
 """All DB functions for the User table"""
 from typing import Union
 
+import sqlalchemy
 from sqlalchemy.orm import Session
 
 from . import logger
 from db.base import Person
 from schemes import scheme_user
+from schemes.exceptions import DuplicateEntry
+from schemes.exceptions import UserNotFound
 from tools.hashing import Hasher
 
 
@@ -16,17 +19,23 @@ def create_user(db: Session, person: scheme_user.UserCreate) -> Person:
         db (Session): Session to the DB
         person (scheme_user.UserCreate): The person to create
 
+    Raises:
+        DuplicateEntry: Duplicate Primary Key
+
     Returns:
         Person: Return the created person
     """
-    db_person = Person(email=person.email, hashed_password=Hasher.get_password_hash(person.password))
-    db.add(db_person)
-    db.commit()
-    db.refresh(db_person)
+    try:
+        db_person = Person(email=person.email, hashed_password=Hasher.get_password_hash(person.password))
+        db.add(db_person)
+        db.commit()
+        db.refresh(db_person)
 
-    logger.info("Added User to db... user:%s", db_person.email)
+        logger.info("Added User to db... user:%s", db_person.email)
 
-    return db_person
+        return db_person
+    except sqlalchemy.exc.IntegrityError as error:
+        raise DuplicateEntry(f"User {person.email} already exist") from error
 
 
 def get_user_by_mail(db: Session, email: str) -> Union[Person, None]:
@@ -76,6 +85,9 @@ def delete_user(db: Session, user: scheme_user.UserBase) -> int:
     """
     rows = db.query(Person).filter(Person.email == user.email).delete()
     db.commit()
+
+    if rows == 0:
+        raise UserNotFound(f"Can not delete User {user.email} - NotFound", user.email)
 
     logger.info("Delete User from db... email:%s", user.email)
 
