@@ -45,7 +45,7 @@ def register(request: Request):
 
 
 @router.get("/recover/", response_class=HTMLResponse)
-def signin(request: Request):
+def recover(request: Request):
     """Return the rendered template for the login page
 
     Args:
@@ -55,10 +55,19 @@ def signin(request: Request):
 
 
 @router.get("/pwreset/", response_class=HTMLResponse)
-def signin(request: Request):
+def pwreset(request: Request):
     """Return the rendered template for the login page
 
     Args:
         request (Request): Requerd for Template
     """
     return templates.TemplateResponse("signin/pwreset.html", {"request": request})
+
+@router.get("/pwchange/", response_class=HTMLResponse)
+def pwchange(request: Request):
+    """Return the rendered template for the login page
+
+    Args:
+        request (Request): Requerd for Template
+    """
+    return templates.TemplateResponse("signin/pwchange.html", {"request": request})
