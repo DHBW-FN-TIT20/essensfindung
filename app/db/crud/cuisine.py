@@ -3,6 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 
 import schemes
+from . import logger
 from db.base import Cuisine
 
 
@@ -20,6 +21,7 @@ def create_cuisine(db: Session, cuisine: schemes.Cuisine) -> Cuisine:
     db.add(db_cuisine)
     db.commit()
     db.refresh(db_cuisine)
+    logger.info("Added cuisine to db... name:%s", db_cuisine.name)
     return db_cuisine
 
 
