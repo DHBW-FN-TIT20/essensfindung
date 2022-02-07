@@ -2,6 +2,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy import exc
 from sqlalchemy.orm import sessionmaker
+
 from db.base import Base
 from db.crud.allergies import create_allergie
 from db.crud.bewertung import create_bewertung
@@ -27,6 +28,9 @@ from schemes import scheme_cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes import scheme_user
+from schemes.exceptions import DuplicateEntry
+from schemes.exceptions import RestaurantNotFound
+from schemes.exceptions import UserNotFound
 from schemes.scheme_user import UserBase
 from schemes.scheme_user import UserCreate
 from tools.hashing import Hasher
@@ -90,7 +94,7 @@ def test_restaurant(db_session: SessionTesting):
     assert get_restaurant_by_id(db_session, rest_add.place_id) is None
 
     # Check if you cant add the same restaurant twice
-    with pytest.raises(exc.SQLAlchemyError):
+    with pytest.raises(DuplicateEntry):
         create_restaurant(db_session, rest_add_2)
 
 
@@ -130,7 +134,7 @@ def test_user(db_session: SessionTesting):
     assert 1 == delete_user(db_session, user_add_2)
 
     # Chek if only one user with the same email can be added
-    with pytest.raises(exc.SQLAlchemyError):
+    with pytest.raises(DuplicateEntry):
         create_user(db_session, user_add)
 
 
@@ -211,13 +215,13 @@ def test_bewertung(db_session: SessionTesting):
     assert assessment_ret is None
 
     # Try to add assessments with invalid user and restaurant
-    with pytest.raises(exc.SQLAlchemyError):
+    with pytest.raises(UserNotFound):
         assessment_ret = create_bewertung(
             db_session,
             scheme_rest.RestBewertungCreate(comment="none", rating=0, person=fake_user, restaurant=rest_add_1),
         )
 
-    with pytest.raises(exc.SQLAlchemyError):
+    with pytest.raises(RestaurantNotFound):
         assessment_ret = create_bewertung(
             db_session,
             scheme_rest.RestBewertungCreate(
@@ -233,7 +237,7 @@ def test_bewertung(db_session: SessionTesting):
     assert 0 == delete_bewertung(db_session, user_add_1, fake_rest)
 
     # Test if only one comment for the same restaurant an user are possible
-    with pytest.raises(exc.IntegrityError):
+    with pytest.raises(DuplicateEntry):
         create_bewertung(db_session, assessment_add_2_2)
 
 
@@ -273,7 +277,7 @@ def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):
     # Try with none existing user
     person_fail = UserBase(email="nope@ok.de")
     filterRest_fail = filterRest_person1.copy()
-    with pytest.raises(exc.NoForeignKeysError):
+    with pytest.raises(UserNotFound):
         create_filterRest(db_session, filterRest_fail, person_fail)
 
     # Update Filter from person1
@@ -294,11 +298,11 @@ def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):
     # assert filterRest_update.cuisines.value == filterRest_return.cuisine
 
     # Try updated with non existing User
-    with pytest.raises(exc.NoForeignKeysError):
+    with pytest.raises(UserNotFound):
         update_filterRest(db_session, updated_filter=filterRest_person1, user=person_fail)
 
     # Only one filterRest for one Person
-    with pytest.raises(exc.IntegrityError):
+    with pytest.raises(DuplicateEntry):
         create_filterRest(db_session, filterRest_person1, person1)
 
 

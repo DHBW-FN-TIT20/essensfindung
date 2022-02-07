@@ -15,7 +15,7 @@ from db.crud.cuisine import create_cuisine
 from db.database import engine
 from schemes import Allergies
 from schemes import Cuisine
-from schemes import scheme_user
+from schemes.exceptions import DuplicateEntry
 from views import error
 from views import index
 from views import restaurant
@@ -87,7 +87,7 @@ def add_all_allergies():
         with Session(engine) as session:
             try:
                 create_allergie(session, allergie)
-            except exc.IntegrityError:
+            except DuplicateEntry:
                 pass
 
 
@@ -97,7 +97,7 @@ def add_all_cuisine():
         with Session(engine) as session:
             try:
                 create_cuisine(session, cuisine)
-            except exc.IntegrityError:
+            except DuplicateEntry:
                 pass
 
 

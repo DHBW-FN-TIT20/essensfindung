@@ -1,11 +1,13 @@
 """All DB functions for the Restaurant table"""
 from typing import List
 
+import sqlalchemy
 from sqlalchemy.orm import Session
 
 from . import logger
 from db.base import Restaurant
 from schemes import scheme_rest
+from schemes.exceptions import DuplicateEntry
 
 
 def get_restaurant_by_id(db: Session, place_id: str) -> Restaurant:
@@ -42,17 +44,23 @@ def create_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> Restaura
         db (Session): Session to the DB
         rest (scheme_rest.RestaurantBase): The Restaurant with the place_id required
 
+    Raises:
+        DuplicateEntry: Duplicate Primary Key
+
     Returns:
         Restaurant: Return if success
     """
-    db_rest = Restaurant(**rest.dict())
-    db.add(db_rest)
-    db.commit()
-    db.refresh(db_rest)
+    try:
+        db_rest = Restaurant(**rest.dict())
+        db.add(db_rest)
+        db.commit()
+        db.refresh(db_rest)
 
-    logger.info("Added Restaurant to db... place_id:%s", db_rest.place_id)
+        logger.info("Added Restaurant to db... place_id:%s", db_rest.place_id)
 
-    return db_rest
+        return db_rest
+    except sqlalchemy.exc.IntegrityError as error:
+        raise DuplicateEntry(f"Restaurant {rest.place_id} already in the Database") from error
 
 
 def delete_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> int:
