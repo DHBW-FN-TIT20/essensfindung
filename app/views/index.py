@@ -30,10 +30,10 @@ def main(request: Request, db_session: Session = Depends(get_db)):
     try:
         from db.crud.user import create_user
         from schemes.scheme_user import UserCreate
-        from sqlalchemy.exc import SQLAlchemyError
+        from schemes.exceptions import DuplicateEntry
 
         create_user(db_session, UserCreate(email="example@gmx.de", password="password"))
-    except SQLAlchemyError:
+    except DuplicateEntry:
         db_session.rollback()
 
     # request filter of user
