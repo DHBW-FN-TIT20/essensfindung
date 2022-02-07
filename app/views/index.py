@@ -59,7 +59,7 @@ def main(request: Request, db_session: Session = Depends(get_db)):
         allergies_selected: str = ','.join([allergie.name for allergie in rest_filter_db.allergies])
 
     allergies_options:str = ','.join([allergie.value for allergie in Allergies])
-    return templates.TemplateResponse("main.html", {"request": request, "rest_filter": rest_filter_db, "cuisines_selected": cuisines_selected, "cuisines_options": cuisines_options, "allergies_selected": allergies_selected, "allergies_options":allergies_options })
+    return templates.TemplateResponse("main.html", {"request": request, "rest_filter": rest_filter_db, "cuisines_selected": cuisines_selected, "cuisines_options": cuisines_options, "allergies_selected": allergies_selected, "allergies_options": allergies_options, "username": mock_user.email })
 
 
 @router.get("/", response_class=HTMLResponse)

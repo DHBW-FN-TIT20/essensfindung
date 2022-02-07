@@ -24,18 +24,21 @@ router = fastapi.APIRouter()
 @router.get("/findrestaurant", response_class=HTMLResponse)
 async def findrestaurant(
     request: Request,
-    cuisine: str,
     rating: int,
     costs: float,
     radius: int,
     lat: str,
     lng: str,
+    cuisine: Union[str, None] = None,
     allergies: Union[str, None] = None,
     db_session: Session = Depends(get_db)
 ):
 
     # cuisine:str zum Cuisine-Array machen
-    cuisine_list = [scheme_cuisine.PydanticCuisine(name=cuisine) for cuisine in cuisine.split(",")]
+    if cuisine is not None:
+        cuisine_list = [scheme_cuisine.PydanticCuisine(name=cuisine) for cuisine in cuisine.split(",")]
+    else:
+        cuisine_list = [scheme_cuisine.PydanticCuisine(name="Essen")]
     allergies_list = allergies
     if allergies is not None:
         allergies_list = [scheme_allergie.PydanticAllergies(name=allergie) for allergie in allergies.split(",")]

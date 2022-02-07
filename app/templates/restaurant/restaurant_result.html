@@ -6,8 +6,8 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-10" style="max-width: 480px;">
-        <p>Google-Bewertung:{{restaurant.rating}}/5</p>
-        <p>Eigene Bewertung:{{restaurant.own_rating}}</p>
+        <p>Google-Bewertung: {{restaurant.rating}}/5</p>
+        <p>Eigene Bewertung: {{restaurant.own_rating}}</p>
     </div>
 </div>
 {% if restaurant.homepage%}
@@ -21,7 +21,7 @@
     <div class="col-10" style="max-width: 480px;">
         <!--Google map-->
         <div id="map-container-google-1" class="z-depth-1-half map-container border border-dark" style="height: 100%">
-            <iframe src="{{restaurant.maps_url}}&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <iframe id="map-google-1" index="map-google" src="{{restaurant.maps_url}}&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
     </div>
 </div>

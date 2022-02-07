@@ -17,6 +17,7 @@ class Cuisine(Enum):
     COFFE = "Kaffee"
     BAKERY = "Baecker"
     BUTCHER = "Metzger"
+    FOOD = "Essen" # used when no cuisine is selected
 
 
 class Allergies(Enum):

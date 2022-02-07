@@ -33,15 +33,20 @@ function change_url() {
     var allergies = get_allergies();
     var rating = get_rating();
     var radius = get_radius();
-    if (allergies.length > 0) {
+    if (cuisine.length > 0 && allergies.length > 0) {
         document.getElementById("search_restaurant").href = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
-    } else {
+    } else if (cuisine.length > 0) {
         document.getElementById("search_restaurant").href = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+    } else if (allergies.length > 0) {
+        document.getElementById("search_restaurant").href = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+    } else {
+        document.getElementById("search_restaurant").href = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
     }
 }
 
 function reload_page() {
     window.location.reload();
+    document.getElementByIndex('map-google').contentWindow.location.reload();
 }
 
 function get_latitude() {
@@ -62,7 +67,7 @@ function get_costs() {
 
 function get_rating() {
     var rating = document.getElementById('restaurant_filter_rating_target').innerHTML;
-    if (typeof rating == "number") {
+    if (rating) {
         return rating;
     } else {
         return document.getElementById('restaurant_filter_rating_selected').innerHTML;
@@ -79,16 +84,16 @@ function get_cuisine() {
     for (const element of selections) {
         cuisines.push(element.id);
     }
-    if (cuisines.length > 0) {
-        return cuisines;
-    } else {
-        update_cuisine_selected();
-        selections = $('#restaurant_filter_cuisine').select2('data');
-        for (const element of selections) {
-            cuisines.push(element.id);
-        }
-        return cuisines;
-    }
+    // if (cuisines.length > 0) {
+    return cuisines;
+    // } else {
+    //     update_cuisine_selected();
+    //     selections = $('#restaurant_filter_cuisine').select2('data');
+    //     for (const element of selections) {
+    //         cuisines.push(element.id);
+    //     }
+    //     return cuisines;
+    // }
 
 }
 
@@ -147,11 +152,13 @@ function update_cuisine_selected() {
 function update_cuisine_options() {
     var cuisines_options = strToArray(document.getElementById('cuisine_options').innerHTML);
     for (const cuisine of cuisines_options) {
-        if ($('#restaurant_filter_cuisine').find("option[value='" + cuisine + "']").length) {
-            $('#restaurant_filter_cuisine').val(cuisine).trigger('change');
-        } else {
-            var new_option = new Option(cuisine, cuisine, false, false);
-            $('#restaurant_filter_cuisine').append(new_option).trigger('change');
+        if (cuisine != "Essen") {
+            if ($('#restaurant_filter_cuisine').find("option[value='" + cuisine + "']").length) {
+                $('#restaurant_filter_cuisine').val(cuisine).trigger('change');
+            } else {
+                var new_option = new Option(cuisine, cuisine, false, false);
+                $('#restaurant_filter_cuisine').append(new_option).trigger('change');
+            }
         }
     }
 }
