@@ -86,9 +86,9 @@ def test_get_rest_filter_from_user(db_session: SessionTesting, add_allergies, mo
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter_copy)
     assert scheme_filter_rest == service_res.get_rest_filter_from_user(db_session, UserBase(email="test@nice.de"))
 
-@pytest.mark.xfail
+
 def test_create_rest_filter(db_session: SessionTesting, add_allergies, add_cuisines):
-    allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
+    allergies = [db.base.Allergie(name=Allergies.WHEAT.value), db.base.Allergie(name=Allergies.LACTOSE.value)]
     cuisines = [PydanticCuisine(name=Cuisine.GERMAN.value), PydanticCuisine(name=Cuisine.DOENER.value)]
     db_user = create_user(db_session, UserCreate(email="nice@ok.test", password="geheim"))
     user = User.from_orm(db_user)
@@ -98,8 +98,9 @@ def test_create_rest_filter(db_session: SessionTesting, add_allergies, add_cuisi
     )
 
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
+    created_rest = service_res.create_rest_filter(db_session, scheme_filter_rest, user)
 
-    assert scheme_filter_rest == service_res.create_rest_filter(db_session, scheme_filter_rest, user)
+    assert scheme_filter_rest == created_rest
 
 
 def test_update_rest_filter(db_session: SessionTesting, add_allergies, add_cuisines):
