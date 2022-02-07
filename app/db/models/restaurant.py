@@ -1,8 +1,9 @@
 """Restaurant structure for the DB"""
-from db.base import Base
 from sqlalchemy import Column
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
+
+from db.base import Base
 
 
 class Restaurant(Base):

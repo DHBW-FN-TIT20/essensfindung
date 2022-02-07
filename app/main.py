@@ -2,6 +2,7 @@
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+
 import fastapi
 import uvicorn
 from sqlalchemy import exc
@@ -11,15 +12,14 @@ from starlette.staticfiles import StaticFiles
 from db.base import Base
 from db.crud.allergies import create_allergie
 from db.crud.cuisine import create_cuisine
-
 from db.database import engine
 from schemes import Allergies
 from schemes import Cuisine
 from schemes import scheme_user
+from views import error
 from views import index
 from views import restaurant
 from views import signin
-from views import error
 
 app = fastapi.FastAPI()
 
@@ -28,7 +28,7 @@ def configure():
     """Init Setup for the application"""
     configure_logger()
     configure_routing()
-    configure_database()   
+    configure_database()
 
 
 def configure_logger():

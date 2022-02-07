@@ -1,4 +1,5 @@
 import pytest
+
 from db.base import Base
 from db.crud.allergies import create_allergie
 from db.crud.bewertung import create_bewertung

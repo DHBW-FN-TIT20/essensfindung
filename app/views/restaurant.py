@@ -1,20 +1,20 @@
 """Router for the Home of the Website"""
+from typing import Union
+
 import fastapi
-from db.database import get_db
 from fastapi import Depends
 from fastapi.responses import HTMLResponse
-from schemes import Allergies
-from schemes import scheme_filter
-from schemes import scheme_cuisine
-from schemes import scheme_allergie
-from schemes import scheme_rest
-from schemes.scheme_user import UserBase
-from services import service_res
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
-from typing import Union
-from typing import List
+
+from db.database import get_db
+from schemes import scheme_allergie
+from schemes import scheme_cuisine
+from schemes import scheme_filter
+from schemes import scheme_rest
+from schemes.scheme_user import UserBase
+from services import service_res
 
 
 templates = Jinja2Templates("templates")
@@ -31,7 +31,7 @@ async def findrestaurant(
     lng: str,
     cuisine: Union[str, None] = None,
     allergies: Union[str, None] = None,
-    db_session: Session = Depends(get_db)
+    db_session: Session = Depends(get_db),
 ):
 
     # cuisine:str zum Cuisine-Array machen
@@ -51,8 +51,14 @@ async def findrestaurant(
         location=scheme_rest.LocationBase(lat=lat, lng=lng),
     )
     mock_user = UserBase(email="example@gmx.de")
-    rest_filter_db = scheme_filter.FilterRestDatabase(cuisines=rest_filter.cuisines, allergies=rest_filter.allergies,
-                                                      rating=rest_filter.rating, costs=rest_filter.costs, radius=rest_filter.radius, zipcode="88045")
+    rest_filter_db = scheme_filter.FilterRestDatabase(
+        cuisines=rest_filter.cuisines,
+        allergies=rest_filter.allergies,
+        rating=rest_filter.rating,
+        costs=rest_filter.costs,
+        radius=rest_filter.radius,
+        zipcode="88045",
+    )
     service_res.update_rest_filter(db_session=db_session, filter_updated=rest_filter_db, user=mock_user)
     restaurant = service_res.search_for_restaurant(db_session=db_session, user=mock_user, user_f=rest_filter)
     return templates.TemplateResponse(
@@ -61,4 +67,4 @@ async def findrestaurant(
 
 
 def str_to_array(cuisines: str):
-    return cuisines.split(',')
+    return cuisines.split(",")

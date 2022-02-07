@@ -13,7 +13,6 @@ from db.crud.restaurant import get_restaurant_by_id
 from db.crud.user import get_user_by_mail
 from schemes import scheme_rest
 from schemes import scheme_user
-from sqlalchemy.orm import Session
 
 
 def get_bewertung_from_user_to_rest(

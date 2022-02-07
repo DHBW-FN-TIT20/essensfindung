@@ -6,6 +6,7 @@ from starlette.templating import Jinja2Templates
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
 
+
 @router.get("/error", response_class=HTMLResponse)
 def error(request: Request, err_msg: str):
     """Return landing page for errors"""

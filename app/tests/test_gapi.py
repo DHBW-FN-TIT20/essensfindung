@@ -5,6 +5,7 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
+
 from schemes import Cuisine
 from schemes.scheme_rest import Restaurant
 from tools import gapi

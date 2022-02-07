@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 from . import logger
 from db.base import Person
 from schemes import scheme_user
-from sqlalchemy.orm import Session
 from tools.hashing import Hasher
 
 

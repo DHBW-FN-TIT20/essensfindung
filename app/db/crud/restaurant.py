@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 from . import logger
 from db.base import Restaurant
 from schemes import scheme_rest
-from sqlalchemy.orm import Session
 
 
 def get_restaurant_by_id(db: Session, place_id: str) -> Restaurant:
