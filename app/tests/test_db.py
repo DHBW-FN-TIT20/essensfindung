@@ -1,5 +1,7 @@
 import pytest
-
+from sqlalchemy import create_engine
+from sqlalchemy import exc
+from sqlalchemy.orm import sessionmaker
 from db.base import Base
 from db.crud.allergies import create_allergie
 from db.crud.bewertung import create_bewertung
