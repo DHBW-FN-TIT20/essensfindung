@@ -6,6 +6,7 @@ from typing import Union
 import sqlalchemy
 from sqlalchemy.orm import Session
 
+from . import logger
 from db.base import Allergie
 from db.base import Cuisine
 from db.base import FilterRest
@@ -51,6 +52,8 @@ def create_filterRest(
     db.commit()
     db.refresh(db_filter)
 
+    logger.info("Added FilterRest to db... user:%s", db_user.email)
+
     return db_filter
 
 
@@ -84,6 +87,9 @@ def update_filterRest(
 
     db.commit()
     db.refresh(db_person)
+
+    logger.info("Updated FilterRest from... user:%s", db_person.email)
+
     return db_person.filterRest
 
 

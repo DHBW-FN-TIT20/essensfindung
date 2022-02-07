@@ -1,6 +1,9 @@
 """All DB functions for the Restaurant table"""
 from typing import List
 
+from sqlalchemy.orm import Session
+
+from . import logger
 from db.base import Restaurant
 from schemes import scheme_rest
 from sqlalchemy.orm import Session
@@ -47,6 +50,9 @@ def create_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> Restaura
     db.add(db_rest)
     db.commit()
     db.refresh(db_rest)
+
+    logger.info("Added Restaurant to db... place_id:%s", db_rest.place_id)
+
     return db_rest
 
 
@@ -62,4 +68,7 @@ def delete_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> int:
     """
     rows = db.query(Restaurant).filter(Restaurant.place_id == rest.place_id).delete()
     db.commit()
+
+    logger.info("Removed Restaurant from db... place_id:%s", rest.place_id)
+
     return rows

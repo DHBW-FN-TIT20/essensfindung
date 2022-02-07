@@ -48,7 +48,7 @@ def configure_logger():
 
     # level and formatter
     stream_h.setLevel(logging.WARNING)
-    file_h.setLevel(logging.ERROR)
+    file_h.setLevel(logging.INFO)
 
     formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
     stream_h.setFormatter(formatter)
@@ -71,32 +71,34 @@ def configure_routing():
 
 def configure_database():
     """Configure connection to the Database"""
-    try:
-        create_database_table()
-        add_all_allergies()
-        add_all_cuisine()
-    except (exc.OperationalError, exc.IntegrityError):
-        # Ignore if Tables already configured
-        pass
+    create_database_table()
+    add_all_allergies()
+    add_all_cuisine()
 
 
 def create_database_table():
     """Create the Table of the DB"""
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine, checkfirst=True)
 
 
 def add_all_allergies():
     """Add all Allergies from the Enum to the DB"""
-    with Session(engine) as session:
-        for allergie in Allergies:
-            create_allergie(session, allergie)
+    for allergie in Allergies:
+        with Session(engine) as session:
+            try:
+                create_allergie(session, allergie)
+            except exc.IntegrityError:
+                pass
 
 
 def add_all_cuisine():
-    """Add all cuisnes from the Enum to the DB"""
-    with Session(engine) as session:
-        for cuisine in Cuisine:
-            create_cuisine(session, cuisine)
+    """Add all Allergies from the Enum to the DB"""
+    for cuisine in Cuisine:
+        with Session(engine) as session:
+            try:
+                create_cuisine(session, cuisine)
+            except exc.IntegrityError:
+                pass
 
 
 @app.exception_handler(Exception)

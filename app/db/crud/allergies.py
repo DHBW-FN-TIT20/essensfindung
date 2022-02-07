@@ -1,8 +1,10 @@
 from typing import List
 
-import schemes
-from db.base import Allergie
 from sqlalchemy.orm import Session
+
+import schemes
+from . import logger
+from db.base import Allergie
 
 
 def create_allergie(db: Session, allergie: schemes.Allergies) -> Allergie:
@@ -19,6 +21,9 @@ def create_allergie(db: Session, allergie: schemes.Allergies) -> Allergie:
     db.add(db_allergie)
     db.commit()
     db.refresh(db_allergie)
+
+    logger.info("Added allergie to db... name:%s", db_allergie.name)
+
     return db_allergie
 
 

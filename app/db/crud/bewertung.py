@@ -3,6 +3,9 @@ from typing import List
 from typing import Union
 
 import sqlalchemy
+from sqlalchemy.orm import Session
+
+from . import logger
 from db.base import Bewertung
 from db.base import Person
 from db.base import Restaurant
@@ -77,6 +80,13 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
     db.add(db_assessment)
     db.commit()
     db.refresh(db_assessment)
+    logger.info(
+        "Added assessment to db... place_id:%s\temail%s\trating:%s\comment:%s",
+        db_assessment.place_id,
+        db_assessment.person_email,
+        db_assessment.rating,
+        db_assessment.kommentar,
+    )
     return db_assessment
 
 
@@ -100,6 +110,7 @@ def update_bewertung(
         .update({Bewertung.kommentar: new_bewertung.comment, Bewertung.rating: new_bewertung.rating})
     )
     db.commit()
+    logger.info("Updated bewertung %s - %s", old_bewertung.person.email, old_bewertung.restaurant.place_id)
     return get_bewertung_from_user_to_rest(db, new_bewertung.person, new_bewertung.restaurant)
 
 
@@ -118,4 +129,5 @@ def delete_bewertung(db: Session, user: scheme_user.UserBase, rest: scheme_rest.
         db.query(Bewertung).filter(Bewertung.person_email == user.email, Bewertung.place_id == rest.place_id).delete()
     )
     db.commit()
+    logger.info("Deleted bewertung %s - %s", user.email, rest.place_id)
     return rows
