@@ -5,7 +5,6 @@ from pathlib import Path
 
 import fastapi
 import uvicorn
-from sqlalchemy import exc
 from sqlalchemy.orm import Session
 from starlette.staticfiles import StaticFiles
 
@@ -15,6 +14,7 @@ from db.crud.cuisine import create_cuisine
 from db.database import engine
 from schemes import Allergies
 from schemes import Cuisine
+from schemes import exceptions
 from schemes.exceptions import DuplicateEntry
 from views import error
 from views import index
@@ -101,8 +101,42 @@ def add_all_cuisine():
                 pass
 
 
+@app.exception_handler(exceptions.DatabaseException)
+async def database_exception_handler(request: fastapi.Request, exc: Exception):
+    """Exception Handler for all DatabaseExceptions made and unhandeld
+
+    Args:
+        request: Request for the api
+        exc (ServiceError): Raised Exception
+
+    Returns:
+        fastapi.responses.JSONResponse: Return Exception as JSON-Formattet to the client
+    """
+    # TODO: Logging the Errors
+    print(str(exc))
+    print(f"Request-URL: {request.url} ")
+    return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
+
+
+@app.exception_handler(exceptions.NoResultsException)
+async def search_exception_handler(request: fastapi.Request, exc: Exception):
+    """Exception Handler for all search Exceptions made and unhandeld
+
+    Args:
+        request: Request for the api
+        exc (ServiceError): Raised Exception
+
+    Returns:
+        fastapi.responses.JSONResponse: Return Exception as JSON-Formattet to the client
+    """
+    # TODO: Logging the Errors
+    print(str(exc))
+    print(f"Request-URL: {request.url} ")
+    return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
+
+
 @app.exception_handler(Exception)
-async def general_exception_handler(request, exc: Exception):
+async def general_exception_handler(request: fastapi.Request, exc: Exception):
     """Exception Handler for all Exceptions made and unhandeld
 
     Args:
@@ -114,6 +148,7 @@ async def general_exception_handler(request, exc: Exception):
     """
     # TODO: Logging the Errors
     print(str(exc))
+    print(f"Request-URL: {request.url} ")
     return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
 
 

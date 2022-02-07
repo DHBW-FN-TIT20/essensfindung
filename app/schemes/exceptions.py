@@ -1,12 +1,12 @@
 """Contains all own created Exceptions"""
 
 
-class GoogleApiException(Exception):
-    """Exception if some Error from the Google API request are made"""
-
-
 class NoResultsException(Exception):
     """Exception if the Search got no results"""
+
+
+class GoogleApiException(NoResultsException):
+    """Exception if some Error from the Google API request are made"""
 
 
 class DatabaseException(Exception):
