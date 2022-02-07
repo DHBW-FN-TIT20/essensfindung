@@ -10,9 +10,9 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     cargo \
     && rm -rf /var/lib/apt/lists/*
-RUN pip install poetry
+RUN /usr/local/bin/python -m pip install --upgrade pip && curl -sSL https://install.python-poetry.org | python3 -
 COPY ["./pyproject.toml", "./poetry.lock", "/tmp/"]
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+RUN $HOME/.local/bin/poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Start final stage
 FROM python:3.9
@@ -36,4 +36,4 @@ RUN ["mkdir", "data"]
 VOLUME [ "/essensfindung/app/data" ]
 
 # Start gunicorn server with 2 workers, uvicorn worker type and use the 0.0.0.0 host with port 80
-ENTRYPOINT ["gunicorn", "-w", "2",  "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:80", "main:app"]
+ENTRYPOINT ["gunicorn", "-w", "2",  "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:80", "--preload", "main:app", "main:app"]
