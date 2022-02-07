@@ -68,31 +68,34 @@ def configure_routing():
 
 def configure_database():
     """Configure connection to the Database"""
-    try:
-        create_database_table()
-        add_all_allergies()
-    except (exc.OperationalError, exc.IntegrityError):
-        # Ignore if Tables already configured
-        pass
+    create_database_table()
+    add_all_allergies()
+    add_all_cuisine()
 
 
 def create_database_table():
     """Create the Table of the DB"""
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine, checkfirst=True)
 
 
 def add_all_allergies():
     """Add all Allergies from the Enum to the DB"""
-    with Session(engine) as session:
-        for allergie in Allergies:
-            create_allergie(session, allergie)
+    for allergie in Allergies:
+        with Session(engine) as session:
+            try:
+                create_allergie(session, allergie)
+            except exc.IntegrityError:
+                pass
 
 
 def add_all_cuisine():
     """Add all Allergies from the Enum to the DB"""
-    with Session(engine) as session:
-        for cuisine in Cuisine:
-            create_cuisine(session, cuisine)
+    for cuisine in Cuisine:
+        with Session(engine) as session:
+            try:
+                create_cuisine(session, cuisine)
+            except exc.IntegrityError:
+                pass
 
 
 if __name__ == "__main__":
