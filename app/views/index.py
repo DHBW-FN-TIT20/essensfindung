@@ -25,6 +25,17 @@ def main(request: Request, db_session: Session = Depends(get_db)):
     Args:
         request (Request): Requerd for Template
     """
+
+    # TODO: Remove Mocked User
+    try:
+        from db.crud.user import create_user
+        from schemes.scheme_user import UserCreate
+        from sqlalchemy.exc import SQLAlchemyError
+
+        create_user(db_session, UserCreate(email="example@gmx.de", password="password"))
+    except SQLAlchemyError:
+        db_session.rollback()
+
     # request filter of user
     mock_user = UserBase(email="example@gmx.de")
     rest_filter_db = service_res.get_rest_filter_from_user(db_session=db_session, user=mock_user)
