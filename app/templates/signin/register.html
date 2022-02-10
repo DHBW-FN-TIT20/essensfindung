@@ -32,7 +32,7 @@
                 </label>
             </div>
             <div class="form-actions text-center">
-                <button type="submit" class="btn btn-dark">Konto Erstellen</button>
+                <button type="submit" class="btn btn-dark mt-3">Konto Erstellen</button>
             </div>
         </form>
     </div>
@@ -77,12 +77,6 @@
 {% endblock %}
 
 {% block scripts %}
-
-{% if success == "True" %}
-    <script> alert("User erfolgreich erstellt :) \n {{ msg }}"); </script>
-{% elif success == "False" %}
-    <script> alert("User konnte nicht erstellt werden! \n {{ msg }}"); </script>
-{% endif %}
 
 <script>
     function validatePassword() {
