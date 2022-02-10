@@ -13,8 +13,10 @@ from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
+from db.crud.user import create_user
 from db.database import get_db
 from schemes import exceptions
+from schemes.scheme_user import UserCreate
 from tools import security
 from tools.config import settings
 
@@ -45,7 +47,7 @@ def signin(request: Request, error: Optional[str] = ""):
     return templates.TemplateResponse("signin/signin.html", {"request": request, "error": error})
 
 
-@router.post("/signin/", response_class=HTMLResponse)
+@router.post("/signin/", response_class=RedirectResponse)
 async def login(request: Request, url: Optional[str] = None, db_session: Session = Depends(get_db)):
     if not url:
         url = "/main"
@@ -69,7 +71,7 @@ async def login(request: Request, url: Optional[str] = None, db_session: Session
 
 
 @router.get("/register/", response_class=HTMLResponse)
-def register(request: Request):
+def register(request: Request, msg: Optional[str] = "", success: Optional[str] = ""):
     """Return the rendered template for the login page
 
     Args:
@@ -91,7 +93,28 @@ def register(request: Request):
 
     legal = {"tos": tosstring, "privacy": privstring}
 
-    return templates.TemplateResponse("signin/register.html", {"request": request, "legal": legal})
+    data = {"request": request, "legal": legal, "msg": msg, "success": success}
+    return templates.TemplateResponse("signin/register.html", data)
+
+
+@router.post("/register/", response_class=RedirectResponse)
+async def register_post(request: Request, db_session: Session = Depends(get_db)):
+    form = await request.form()
+    email = form.get("emailInput")
+    password = form.get("passwordInput")
+
+    try:
+        user = UserCreate(email=email, password=password)
+        create_user(db=db_session, person=user)
+        return RedirectResponse("/register/?success=True", status_code=status.HTTP_302_FOUND)
+    except exceptions.DuplicateEntry:
+        return RedirectResponse(
+            "/register/?success=False&msg=User mit der email gibt es bereits", status_code=status.HTTP_302_FOUND
+        )
+    except exceptions.DatabaseException:
+        return RedirectResponse(
+            "/register/?success=False&msg=Probleme mit der Datenbank", status_code=status.HTTP_302_FOUND
+        )
 
 
 @router.get("/recover/", response_class=HTMLResponse)

@@ -5,7 +5,7 @@
         <h2>Registrieren</h2>
     </div>
     <div class="col-10 limit-width">
-        <form action="" id="registrationForm" class="needs-validation">
+        <form action="" method="post" id="registrationForm" class="needs-validation">
             <div class="mb-4">
                 <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
                 <input type="email" name="emailInput" id="emailInput" class="form-control" required>
@@ -77,6 +77,12 @@
 {% endblock %}
 
 {% block scripts %}
+
+{% if success == "True" %}
+    <script> alert("User erfolgreich erstellt :) \n {{ msg }}"); </script>
+{% elif success == "False" %}
+    <script> alert("User konnte nicht erstellt werden! \n {{ msg }}"); </script>
+{% endif %}
 
 <script>
     function validatePassword() {
