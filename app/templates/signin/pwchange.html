@@ -1,14 +1,16 @@
-{% extends "shared/layout_singleform.html" %}
-
-{% block content %}
+{% extends "shared/layout_singleform.html" %} {% block content %}
 
 <div class="row justify-content-center">
     <div class="text-center mb-3">
-        <h2>Passwort zur&uuml;cksetzen</h2>
+        <h2>Passwort &auml;ndern</h2>
     </div>
     <div class="col-10 limit-width">
-        <form action="" class="needs-validation">
+        <form action="" id="registrationForm" class="needs-validation">
             <div class="mb-4">
+                <label for="emailInput" class="form-label mb-1 ms-1">Altes Passwort:</label>
+                <input type="password" name="oldpasswordinput" id="oldpasswordinput" class="form-control" required>
+            </div>
+            <div class="mb-1">
                 <label for="passwordInput" class="form-label mb-1 ms-1">Passwort:</label>
                 <input type="password" name="passwordInput" id="passwordInput" class="form-control" required>
             </div>
@@ -33,14 +35,14 @@
 <script>
     function validatePassword() {
         let form = document.querySelector(".needs-validation")
-        let passA = form[0].value;
-        let passB = form[1].value;
+        let passA = form[1].value;
+        let passB = form[2].value;
         if (passA === passB) {
-            form[0].classList.remove("is-invalid");
             form[1].classList.remove("is-invalid");
+            form[2].classList.remove("is-invalid");
         } else {
-            form[0].classList.add("is-invalid");
             form[1].classList.add("is-invalid");
+            form[2].classList.add("is-invalid");
         }
     }
 
@@ -52,7 +54,7 @@
 
     // Loop over them and prevent submission
     form.addEventListener('submit', function (event) {
-        if (form[0].classList.contains("is-invalid") || form[1].classList.contains("is-invalid")) {
+        if (form[1].classList.contains("is-invalid") || form[2].classList.contains("is-invalid")) {
             event.preventDefault();
             event.stopPropagation();
         }

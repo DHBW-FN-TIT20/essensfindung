@@ -15,6 +15,8 @@ from schemes import scheme_allergie
 from schemes import scheme_cuisine
 from schemes import scheme_filter
 from schemes import scheme_user
+from schemes.exceptions import DuplicateEntry
+from schemes.exceptions import UserNotFound
 
 
 def create_filterRest(
@@ -28,7 +30,8 @@ def create_filterRest(
         user (scheme_user.UserCreate): Person to add the filter
 
     Raises:
-        sqlalchemy.exc.NoForeignKeysError: Raises if User is missing
+        UserNotFound: Raises if User is missing
+        DuplicateEntry: Duplicate Primary Key
 
     Returns:
         FilterRest: Created Filter
@@ -36,7 +39,7 @@ def create_filterRest(
 
     db_user = db.query(Person).filter(Person.email == user.email).first()
     if not db_user:
-        raise sqlalchemy.exc.NoForeignKeysError("Missing User")
+        raise UserNotFound(f"User {user.email} not found", user.email)
 
     db_filter = FilterRest(
         email=db_user.email,
@@ -48,13 +51,16 @@ def create_filterRest(
         allergies=__allergies_scheme_to_model__(db, filter_new.allergies),
     )
 
-    db.add(db_filter)
-    db.commit()
-    db.refresh(db_filter)
+    try:
+        db.add(db_filter)
+        db.commit()
+        db.refresh(db_filter)
 
-    logger.info("Added FilterRest to db... user:%s", db_user.email)
+        logger.info("Added FilterRest to db... user:%s", db_user.email)
 
-    return db_filter
+        return db_filter
+    except sqlalchemy.exc.IntegrityError as error:
+        raise DuplicateEntry("Filter already exist") from error
 
 
 def update_filterRest(
@@ -68,7 +74,7 @@ def update_filterRest(
         user (scheme_user.UserBase): The User to the Filter
 
     Raises:
-        sqlalchemy.exc.NoForeignKeysError: Raises if User is missing
+        UserNotFound: Raises if User is missing
 
     Returns:
         FilterRest: Return the added filter
@@ -76,7 +82,7 @@ def update_filterRest(
 
     db_person: Person = db.query(Person).filter(Person.email == user.email).first()
     if not db_person:
-        raise sqlalchemy.exc.NoForeignKeysError("Missing User")
+        raise UserNotFound(f"User {user.email} not found", user.email)
 
     db_person.filterRest.zipcode = updated_filter.zipcode
     db_person.filterRest.radius = str(updated_filter.radius)

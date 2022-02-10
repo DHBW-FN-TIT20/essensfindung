@@ -45,8 +45,7 @@ function change_url() {
 }
 
 function reload_page() {
-    window.location.reload();
-    document.getElementByIndex('map-google').contentWindow.location.reload();
+    window.location.reload(true);
 }
 
 function get_latitude() {
