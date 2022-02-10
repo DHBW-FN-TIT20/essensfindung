@@ -45,6 +45,7 @@ If you **dont** have a PostgreSQL Database start the container:
 docker run -p 8080:80 \
 -v /essensfindung/app/data \
 -e GOOGLE_API_KEY=KEY \
+-e SECRET_KEY=KEY \
 --name essensfindung \
 essensfindung
 ```
@@ -53,6 +54,7 @@ If you have a PostgreSQL Database:
 ```console
 docker run -p 8080:80 \
 -e GOOGLE_API_KEY=KEY \
+-e SECRET_KEY=KEY \
 -e POSTGRES_USER=postgres \
 -e POSTGRES_PASSWORD=PASSWORD \
 -e POSTGRES_SERVER=localhost \
