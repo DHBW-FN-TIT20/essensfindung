@@ -50,7 +50,7 @@ class Restaurant(RestaurantBase):
 class RestBewertungBase(BaseModel):
     """BaseClass for the Bewertung"""
 
-    comment: str
+    comment: Optional[str] = ""
     rating: Optional[float] = 0
 
 

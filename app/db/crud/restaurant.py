@@ -51,7 +51,7 @@ def create_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> Restaura
         Restaurant: Return if success
     """
     try:
-        db_rest = Restaurant(**rest.dict())
+        db_rest = Restaurant(place_id=rest.place_id)
         db.add(db_rest)
         db.commit()
         db.refresh(db_rest)
