@@ -71,7 +71,7 @@ async def login(request: Request, url: Optional[str] = None, db_session: Session
 
 
 @router.get("/register/", response_class=HTMLResponse)
-def register(request: Request, msg: Optional[str] = "", success: Optional[str] = ""):
+def register(request: Request):
     """Return the rendered template for the login page
 
     Args:
@@ -93,7 +93,7 @@ def register(request: Request, msg: Optional[str] = "", success: Optional[str] =
 
     legal = {"tos": tosstring, "privacy": privstring}
 
-    data = {"request": request, "legal": legal, "msg": msg, "success": success}
+    data = {"request": request, "legal": legal}
     return templates.TemplateResponse("signin/register.html", data)
 
 
@@ -106,15 +106,23 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
     try:
         user = UserCreate(email=email, password=password)
         create_user(db=db_session, person=user)
-        return RedirectResponse("/register/?success=True", status_code=status.HTTP_302_FOUND)
+        return RedirectResponse("/accresp/?success=True", status_code=status.HTTP_302_FOUND)
     except exceptions.DuplicateEntry:
         return RedirectResponse(
-            "/register/?success=False&msg=User mit der email gibt es bereits", status_code=status.HTTP_302_FOUND
+            "/accresp/?success=False&msg=User mit der email gibt es bereits", status_code=status.HTTP_302_FOUND
         )
     except exceptions.DatabaseException:
         return RedirectResponse(
-            "/register/?success=False&msg=Probleme mit der Datenbank", status_code=status.HTTP_302_FOUND
+            "/accresp/?success=False&msg=Probleme mit der Datenbank", status_code=status.HTTP_302_FOUND
         )
+
+
+@router.get("/accresp/", response_class=HTMLResponse)
+def account_response(request: Request, msg: Optional[str] = "", success: Optional[str] = ""):
+    """Return a response page for account creation, either positive or negative"""
+    data = {"request": request, "msg": msg, "success": success}
+    return templates.TemplateResponse("signin/accresponse.html", data)
+
 
 
 @router.get("/recover/", response_class=HTMLResponse)
