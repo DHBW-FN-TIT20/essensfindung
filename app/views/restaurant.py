@@ -13,8 +13,10 @@ from schemes import scheme_allergie
 from schemes import scheme_cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
+from schemes.scheme_user import User
 from schemes.scheme_user import UserBase
 from services import service_res
+from tools.security import get_current_user
 
 
 templates = Jinja2Templates("templates")
@@ -32,6 +34,7 @@ async def findrestaurant(
     cuisine: Union[str, None] = None,
     allergies: Union[str, None] = None,
     db_session: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
 
     # cuisine:str zum Cuisine-Array machen

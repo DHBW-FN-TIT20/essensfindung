@@ -135,6 +135,12 @@ async def search_exception_handler(request: fastapi.Request, exc: Exception):
     return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
 
 
+@app.exception_handler(exceptions.NotAuthorizedException)
+async def database_exception_handler(request: fastapi.Request, exc: Exception):
+
+    return fastapi.responses.RedirectResponse(url="/signin")
+
+
 @app.exception_handler(Exception)
 async def general_exception_handler(request: fastapi.Request, exc: Exception):
     """Exception Handler for all Exceptions made and unhandeld
