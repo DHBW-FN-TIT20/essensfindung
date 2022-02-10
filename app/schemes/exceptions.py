@@ -1,4 +1,5 @@
 """Contains all own created Exceptions"""
+from http.client import HTTPException
 
 
 class NoResultsException(Exception):
@@ -31,3 +32,7 @@ class RestaurantNotFound(DatabaseException):
 
 class DuplicateEntry(DatabaseException):
     """Exception if you add a duplicate entry"""
+
+
+class NotAuthorizedException(HTTPException):
+    """Exception if you are not authorized"""

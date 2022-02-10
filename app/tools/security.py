@@ -19,6 +19,7 @@ from sqlalchemy.orm import Session
 
 from db.crud.user import get_user_by_mail
 from db.database import get_db
+from schemes import exceptions
 from schemes.scheme_user import UserLogin
 from tools.config import settings
 from tools.hashing import Hasher
@@ -75,11 +76,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         scheme, param = get_authorization_scheme_param(authorization)
         if not authorization or scheme.lower() != "bearer":
             if self.auto_error:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Not authenticated",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
+                raise exceptions.NotAuthorizedException()
             else:
                 return None
         return param
@@ -110,11 +107,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 async def get_current_user(db_session: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+    credentials_exception = exceptions.NotAuthorizedException()
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         username: str = payload.get("sub")
