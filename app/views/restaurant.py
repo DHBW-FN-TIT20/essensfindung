@@ -14,7 +14,6 @@ from schemes import scheme_cuisine
 from schemes import scheme_filter
 from schemes import scheme_rest
 from schemes.scheme_user import User
-from schemes.scheme_user import UserBase
 from services import service_res
 from tools.security import get_current_user
 
@@ -53,7 +52,6 @@ async def findrestaurant(
         radius=radius * 1000,
         location=scheme_rest.LocationBase(lat=lat, lng=lng),
     )
-    mock_user = UserBase(email="example@gmx.de")
     rest_filter_db = scheme_filter.FilterRestDatabase(
         cuisines=rest_filter.cuisines,
         allergies=rest_filter.allergies,
@@ -62,12 +60,8 @@ async def findrestaurant(
         radius=rest_filter.radius,
         zipcode="88045",
     )
-    service_res.update_rest_filter(db_session=db_session, filter_updated=rest_filter_db, user=mock_user)
-    restaurant = service_res.search_for_restaurant(db_session=db_session, user=mock_user, user_f=rest_filter)
+    service_res.update_rest_filter(db_session=db_session, filter_updated=rest_filter_db, user=current_user)
+    restaurant = service_res.search_for_restaurant(db_session=db_session, user=current_user, user_f=rest_filter)
     return templates.TemplateResponse(
         "restaurant/restaurant_result.html", {"request": request, "restaurant": restaurant}
     )
-
-
-def str_to_array(cuisines: str):
-    return cuisines.split(",")

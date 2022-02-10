@@ -5,6 +5,7 @@ from pathlib import Path
 
 import fastapi
 import uvicorn
+from fastapi import status
 from sqlalchemy.orm import Session
 from starlette.staticfiles import StaticFiles
 
@@ -110,7 +111,7 @@ async def database_exception_handler(request: fastapi.Request, exc: Exception):
         exc (ServiceError): Raised Exception
 
     Returns:
-        fastapi.responses.JSONResponse: Return Exception as JSON-Formattet to the client
+        fastapi.responses.RedirectResponse: Redirect to the error page
     """
     # TODO: Logging the Errors
     print(str(exc))
@@ -127,7 +128,7 @@ async def search_exception_handler(request: fastapi.Request, exc: Exception):
         exc (ServiceError): Raised Exception
 
     Returns:
-        fastapi.responses.JSONResponse: Return Exception as JSON-Formattet to the client
+        fastapi.responses.RedirectResponse: Redirect to the error page
     """
     # TODO: Logging the Errors
     print(str(exc))
@@ -136,9 +137,20 @@ async def search_exception_handler(request: fastapi.Request, exc: Exception):
 
 
 @app.exception_handler(exceptions.NotAuthorizedException)
-async def database_exception_handler(request: fastapi.Request, exc: Exception):
+async def authentication_exception_handler(request: fastapi.Request, exc: exceptions.NotAuthorizedException):
+    """Exception Handler for accessing a page with wrong ore None credentials
 
-    return fastapi.responses.RedirectResponse(url="/signin")
+    Args:
+        request (fastapi.Request): Request for the url
+        exc (exceptions.NotAuthorizedException): Raised Exception
+
+    Returns:
+        fastapi.responses.RedirectResponse: Redirect to the siging page
+    """
+    print(str(exc))
+    print(f"Request-URL: {request.url} ")
+    url = str(request.url).replace("&", "%26")
+    return fastapi.responses.RedirectResponse(url=f"/signin/?url={url}", headers=exc.headers)
 
 
 @app.exception_handler(Exception)
@@ -150,12 +162,12 @@ async def general_exception_handler(request: fastapi.Request, exc: Exception):
         exc (ServiceError): Raised Exception
 
     Returns:
-        fastapi.responses.JSONResponse: Return Exception as JSON-Formattet to the client
+        fastapi.responses.RedirectResponse: Redirect to the error page
     """
     # TODO: Logging the Errors
     print(str(exc))
     print(f"Request-URL: {request.url} ")
-    return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
+    return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}", status_code=status.HTTP_302_FOUND)
 
 
 if __name__ == "__main__":
