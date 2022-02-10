@@ -11,6 +11,9 @@ class Setting:
     """Contains all Settings - Loads from the os env"""
 
     GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY")
+    SECRET_KEY: str = os.getenv("SECRET_KEY")
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     if os.getenv("POSTGRES_SERVER"):
         SQL_LITE: bool = False
