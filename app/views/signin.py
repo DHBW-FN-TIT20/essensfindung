@@ -1,18 +1,20 @@
 """ Logic for Login and Registration Pages """
 from datetime import timedelta
+from typing import Optional
 
 import fastapi
 from fastapi import Depends
-from fastapi import HTTPException
 from fastapi import Response
 from fastapi import status
 from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
 from db.database import get_db
+from schemes import exceptions
 from tools import security
 from tools.config import settings
 
@@ -26,11 +28,7 @@ async def login_for_access_token(
 ):
     user = security.authenticate_user(db_session, form_data.username, form_data.password)
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise exceptions.NotAuthorizedException(error_msg="Incorrect username or password")
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = security.create_access_token(data={"sub": user.email}, expires_delta=access_token_expires)
     response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
@@ -38,30 +36,36 @@ async def login_for_access_token(
 
 
 @router.get("/signin/", response_class=HTMLResponse)
-def signin(request: Request):
+def signin(request: Request, error: Optional[str] = ""):
     """Return the rendered template for the login page
 
     Args:
         request (Request): Requerd for Template
     """
-    return templates.TemplateResponse("signin/signin.html", {"request": request})
+    return templates.TemplateResponse("signin/signin.html", {"request": request, "error": error})
 
 
 @router.post("/signin/", response_class=HTMLResponse)
-async def login(request: Request, db_session: Session = Depends(get_db)):
+async def login(request: Request, url: Optional[str] = None, db_session: Session = Depends(get_db)):
+    if not url:
+        url = "/main"
     form = security.LoginForm(request)
     await form.load_data()
     if await form.is_valid():
         try:
             form.__dict__.update(msg="Login Successful :)")
-            response = templates.TemplateResponse("signin/signin.html", form.__dict__)
+            url = url.replace("%26", "&")
+            response = RedirectResponse(url=url, status_code=status.HTTP_302_FOUND)
             await login_for_access_token(response=response, form_data=form, db_session=db_session)
             return response
-        except HTTPException:
+        except exceptions.NotAuthorizedException:
+            url = url.replace("&", "%26")
             form.__dict__.update(msg="")
-            form.__dict__.get("errors").append("Incorrect Email or Password")
-            return templates.TemplateResponse("signin/signin.html", form.__dict__)
-    return templates.TemplateResponse("signin/signin.html", form.__dict__)
+            form.error = "Incorrect Email or Password"
+            return RedirectResponse(
+                url=f"/signin/?error=Wrong Email or Password&url={url}", status_code=status.HTTP_302_FOUND
+            )
+    return RedirectResponse(url="/signin/", status_code=status.HTTP_302_FOUND)
 
 
 @router.get("/register/", response_class=HTMLResponse)
@@ -78,9 +82,9 @@ def register(request: Request):
 
     try:
         with open("static/text/privacy.txt", "r", encoding="utf-8") as privfile:
-            privstring = "".join(privfile.readlines())
+            privstring = privfile.read()
         with open("static/text/tos.txt", "r", encoding="utf-8") as tosfile:
-            tosstring = "".join(tosfile.readlines())
+            tosstring = tosfile.read()
 
     except Exception as e:
         print(e)

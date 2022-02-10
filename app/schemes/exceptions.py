@@ -1,6 +1,8 @@
 """Contains all own created Exceptions"""
 from http.client import HTTPException
 
+from fastapi import status
+
 
 class NoResultsException(Exception):
     """Exception if the Search got no results"""
@@ -36,3 +38,10 @@ class DuplicateEntry(DatabaseException):
 
 class NotAuthorizedException(HTTPException):
     """Exception if you are not authorized"""
+
+    def __init__(
+        self, error_msg: str, status_code=status.HTTP_401_UNAUTHORIZED, headers: dict = {"WWW-Authenticate": "Bearer"}
+    ):
+        self.error_msg = error_msg
+        self.status_code = status_code
+        self.headers = headers

@@ -7,7 +7,7 @@
         <h2>Anmelden</h2>
     </div>
     <div class="col-10 limit-width">
-        <form action="/signin" method="post">
+        <form method="post">
             <div class="mb-3">
                 <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
                 <input type="email" name="emailInput" id="emailInput" class="form-control" required>
@@ -27,5 +27,9 @@
 <div class="row my-5 text-center">
     <p>Noch kein Konto? <a href="/register">Hier Registrieren!</a></p>
 </div>
+
+{% if error is defined and error|length > 0 %}
+    <script> alert("{{ error }}"); </script>
+{% endif %}
 
 {% endblock %}

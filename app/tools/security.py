@@ -1,16 +1,12 @@
 from datetime import datetime
 from datetime import timedelta
 from typing import Dict
-from typing import List
 from typing import Optional
 
 from fastapi import Depends
-from fastapi import HTTPException
 from fastapi import Request
-from fastapi import status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import OAuth2
-from fastapi.security import OAuth2PasswordBearer
 from fastapi.security.utils import get_authorization_scheme_param
 from jose import jwt
 from jose import JWTError
@@ -37,7 +33,7 @@ class TokenData(BaseModel):
 class LoginForm:
     def __init__(self, request: Request):
         self.request: Request = request
-        self.errors: List = []
+        self.error: Optional[str] = None
         self.username: Optional[str] = None
         self.password: Optional[str] = None
 
@@ -50,8 +46,8 @@ class LoginForm:
 
     async def is_valid(self):
         if not self.username or not (self.username.__contains__("@")):
-            self.errors.append("Email is required")
-        if not self.errors:
+            self.error = "Email is required"
+        if not self.error:
             return True
         return False
 
@@ -76,7 +72,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         scheme, param = get_authorization_scheme_param(authorization)
         if not authorization or scheme.lower() != "bearer":
             if self.auto_error:
-                raise exceptions.NotAuthorizedException()
+                raise exceptions.NotAuthorizedException(error_msg="No valid Token")
             else:
                 return None
         return param
@@ -87,12 +83,11 @@ oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/token")
 
 def authenticate_user(db_session, username: str, password: str):
     db_user = get_user_by_mail(db_session, username)
-    user = UserLogin.from_orm(db_user)
-    if not user:
+    if not db_user:
         return False
-    if not Hasher.verify_password(password, user.hashed_password):
+    if not Hasher.verify_password(password, db_user.hashed_password):
         return False
-    return user
+    return UserLogin.from_orm(db_user)
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -107,7 +102,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 async def get_current_user(db_session: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
-    credentials_exception = exceptions.NotAuthorizedException()
+    credentials_exception = exceptions.NotAuthorizedException(error_msg="Not authorized")
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         username: str = payload.get("sub")
