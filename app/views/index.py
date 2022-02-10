@@ -11,23 +11,24 @@ from schemes import Allergies
 from schemes import Cuisine
 from schemes import scheme_cuisine
 from schemes import scheme_filter
-from schemes.scheme_user import UserBase
+from schemes.scheme_user import UserLogin
 from services import service_res
+from tools.security import get_current_user
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
 
 
 @router.get("/main", response_class=HTMLResponse)
-def main(request: Request, db_session: Session = Depends(get_db)):
+def main(request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)):
     """Return the renderd template for the /main.html
 
     Args:
         request (Request): Requerd for Template
     """
+
     # request filter of user
-    mock_user = UserBase(email="example@gmx.de")
-    rest_filter_db = service_res.get_rest_filter_from_user(db_session=db_session, user=mock_user)
+    rest_filter_db = service_res.get_rest_filter_from_user(db_session=db_session, user=current_user)
 
     # default filter for first login
     if rest_filter_db is None:
@@ -35,7 +36,7 @@ def main(request: Request, db_session: Session = Depends(get_db)):
         rest_filter_db = scheme_filter.FilterRestDatabase(
             cuisines=cuisine_list, allergies=None, rating=4, costs=2, radius=5000, zipcode="88045"
         )
-        service_res.create_rest_filter(db_session=db_session, filter_rest=rest_filter_db, user=mock_user)
+        service_res.create_rest_filter(db_session=db_session, filter_rest=rest_filter_db, user=current_user)
 
     # rest_filter-cuisine to comma seperated str
     cuisines_selected: str = ",".join([cuisine.name for cuisine in rest_filter_db.cuisines])
@@ -56,13 +57,25 @@ def main(request: Request, db_session: Session = Depends(get_db)):
             "cuisines_options": cuisines_options,
             "allergies_selected": allergies_selected,
             "allergies_options": allergies_options,
-            "username": mock_user.email,
+            "username": current_user.email,
         },
     )
 
 
 @router.get("/", response_class=HTMLResponse)
-def index(request: Request):
+def index(request: Request, db_session: Session = Depends(get_db)):  # <- REMOVE DB WITH MOCKED USER
     """Return landing page for new users"""
+
+    # TODO: Remove Mocked User ##########
+    try:
+        from db.crud.user import create_user
+        from schemes.scheme_user import UserCreate
+        from schemes.exceptions import DuplicateEntry
+
+        create_user(db_session, UserCreate(email="example@gmx.de", password="password"))
+    except DuplicateEntry:
+        db_session.rollback()
+
+    ############ END REMOVE ###############
 
     return templates.TemplateResponse("index.html", {"request": request})

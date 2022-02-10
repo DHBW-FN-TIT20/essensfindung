@@ -13,6 +13,10 @@ from db.crud.restaurant import get_restaurant_by_id
 from db.crud.user import get_user_by_mail
 from schemes import scheme_rest
 from schemes import scheme_user
+from schemes.exceptions import DatabaseException
+from schemes.exceptions import DuplicateEntry
+from schemes.exceptions import RestaurantNotFound
+from schemes.exceptions import UserNotFound
 
 
 def get_bewertung_from_user_to_rest(
@@ -62,13 +66,18 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
         db (Session): Session to the DB
         assessment (scheme_rest.RestBewertungCreate): Bewertung to add. This include the Person and Restaurant for the mapping of the Bewertung
 
+    Raises:
+        UserNotFound: If the user does not exist
+        RestaurantNotFound: If the restaurant does not exist
+        DuplicateEntry: Duplicate Primary Key
+
     Returns:
         Bewertung: Return if success
     """
     if get_user_by_mail(db, assessment.person.email) is None:
-        raise sqlalchemy.exc.InvalidRequestError("User does not exist")
+        raise UserNotFound(f"User {assessment.person.email} does not exist", assessment.person.email)
     if get_restaurant_by_id(db, assessment.restaurant.place_id) is None:
-        raise sqlalchemy.exc.InvalidRequestError("Restaurant does not exist")
+        raise RestaurantNotFound("Restaurant does not exist", assessment.restaurant.place_id)
 
     db_assessment = Bewertung(
         person_email=assessment.person.email,
@@ -76,17 +85,20 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
         kommentar=assessment.comment,
         rating=assessment.rating,
     )
-    db.add(db_assessment)
-    db.commit()
-    db.refresh(db_assessment)
-    logger.info(
-        "Added assessment to db... place_id:%s\temail%s\trating:%s\comment:%s",
-        db_assessment.place_id,
-        db_assessment.person_email,
-        db_assessment.rating,
-        db_assessment.kommentar,
-    )
-    return db_assessment
+    try:
+        db.add(db_assessment)
+        db.commit()
+        db.refresh(db_assessment)
+        logger.info(
+            "Added assessment to db... place_id:%s\temail%s\trating:%s\tcomment:%s",
+            db_assessment.place_id,
+            db_assessment.person_email,
+            db_assessment.rating,
+            db_assessment.kommentar,
+        )
+        return db_assessment
+    except sqlalchemy.exc.IntegrityError as error:
+        raise DuplicateEntry("Assessment already exist") from error
 
 
 def update_bewertung(
@@ -102,12 +114,16 @@ def update_bewertung(
     Returns:
         Bewertung: New Bewertung from `get_bewertung_from_user_to_rest`
     """
-    (
+    rows = (
         db.query(Bewertung)
         .filter(Bewertung.person_email == old_bewertung.person.email)
         .filter(Bewertung.place_id == old_bewertung.restaurant.place_id)
         .update({Bewertung.kommentar: new_bewertung.comment, Bewertung.rating: new_bewertung.rating})
     )
+
+    if rows == 0:
+        raise DatabaseException("Can not update assessment. Does the User and the Restaurant exist?")
+
     db.commit()
     logger.info("Updated bewertung %s - %s", old_bewertung.person.email, old_bewertung.restaurant.place_id)
     return get_bewertung_from_user_to_rest(db, new_bewertung.person, new_bewertung.restaurant)
