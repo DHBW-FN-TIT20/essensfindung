@@ -20,6 +20,7 @@ from views import error
 from views import index
 from views import restaurant
 from views import signin
+from views import rating
 
 app = fastapi.FastAPI()
 
@@ -67,6 +68,7 @@ def configure_routing():
     app.include_router(restaurant.router)
     app.include_router(signin.router)
     app.include_router(error.router)
+    app.include_router(rating.router)
 
 
 def configure_database():
