@@ -67,7 +67,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
 
     async def __call__(self, request: Request) -> Optional[str]:
         authorization: str = request.cookies.get("access_token")  # changed to accept access token from httpOnly Cookie
-        print("access_token is", authorization)
+        # print("access_token is", authorization)
 
         scheme, param = get_authorization_scheme_param(authorization)
         if not authorization or scheme.lower() != "bearer":
@@ -101,7 +101,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return encoded_jwt
 
 
-async def get_current_user(db_session: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+async def get_current_user(db_session: Session = Depends(get_db), token: str = Depends(oauth2_scheme)) -> UserLogin:
     credentials_exception = exceptions.NotAuthorizedException(error_msg="Not authorized")
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
@@ -114,4 +114,4 @@ async def get_current_user(db_session: Session = Depends(get_db), token: str = D
     user = get_user_by_mail(db_session, token_data.username)
     if user is None:
         raise credentials_exception
-    return user
+    return UserLogin.from_orm(user)
