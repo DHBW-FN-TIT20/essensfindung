@@ -2,6 +2,7 @@ from datetime import datetime
 from datetime import timedelta
 from typing import Dict
 from typing import Optional
+from typing import Union
 
 from fastapi import Depends
 from fastapi import Request
@@ -81,7 +82,17 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/token")
 
 
-def authenticate_user(db_session, username: str, password: str):
+def authenticate_user(db_session: Session, username: str, password: str) -> Union[UserLogin, None]:
+    """Validate the given username and password with the Database
+
+    Args:
+        db_session (Session): Session to the Database
+        username (str): Email of the user
+        password (str): Password to verify
+
+    Returns:
+        Union[UserLogin, None]: Return the User OR False
+    """
     db_user = get_user_by_mail(db_session, username)
     if not db_user:
         return False
@@ -90,7 +101,16 @@ def authenticate_user(db_session, username: str, password: str):
     return UserLogin.from_orm(db_user)
 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+    """Create a JWT with the given data and an Expires Delta
+
+    Args:
+        data (dict): Data to store in the Token
+        expires_delta (Optional[timedelta], optional): Defaults to None.
+
+    Returns:
+        str: Created JWT
+    """
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
@@ -102,6 +122,18 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 async def get_current_user(db_session: Session = Depends(get_db), token: str = Depends(oauth2_scheme)) -> UserLogin:
+    """Get the current user from a JWT
+
+    Args:
+        db_session (Session, optional): Session to the Database. Defaults to Depends(get_db).
+        token (str, optional): JTW - Otherwise it takes it from /token. Defaults to Depends(oauth2_scheme).
+
+    Raises:
+        NotAuthorizedException: Exception if the the Token or the Data is invalid
+
+    Returns:
+        UserLogin: Logged in User from the Databse
+    """
     credentials_exception = exceptions.NotAuthorizedException(error_msg="Not authorized")
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
@@ -110,7 +142,7 @@ async def get_current_user(db_session: Session = Depends(get_db), token: str = D
             raise credentials_exception
         token_data = TokenData(username=username)
     except JWTError:
-        raise credentials_exception
+        raise credentials_exception from JWTError
     user = get_user_by_mail(db_session, token_data.username)
     if user is None:
         raise credentials_exception
