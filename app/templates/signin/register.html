@@ -1,0 +1,111 @@
+{% extends "shared/layout_singleform.html" %} {% block content %}
+
+<div class="row justify-content-center">
+    <div class="text-center mb-3">
+        <h2>Registrieren</h2>
+    </div>
+    <div class="col-10 limit-width">
+        <form action="" id="registrationForm" class="needs-validation">
+            <div class="mb-4">
+                <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
+                <input type="email" name="emailInput" id="emailInput" class="form-control" required>
+            </div>
+            <div class="mb-1">
+                <label for="passwordInput" class="form-label mb-1 ms-1">Passwort:</label>
+                <input type="password" name="passwordInput" id="passwordInput" class="form-control" required>
+            </div>
+            <div class="mb-4">
+                <label for="passwordInputConfirm" class="form-label mb-1 ms-1">Passwort Best&auml;tigen:</label>
+                <input type="password" name="passwordInputConfirm" id="passwordInputConfirm" class="form-control" onchange="validatePassword()" required>
+                <div class="invalid-feedback">
+                    Passw&ouml;rter sind nicht gleich!
+                </div>
+            </div>
+            <div class="mb-4 form-check">
+                <input type="checkbox" name="tosConfirm" id="tosConfirm" class="form-check-input" style="width: 1.1em; height: 1.1em;" required>
+                <label for="tosConfirm" class="form-check-label">
+                    Ich stimme den
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">AGB</a>
+                    und der
+                    <a href="#" id="privacypolLink" data-bs-toggle="modal" data-bs-target="#privacypolModal">Datenschutzerkl&auml;rung</a>
+                    zu
+                </label>
+            </div>
+            <div class="form-actions text-center">
+                <button type="submit" class="btn btn-dark">Konto Erstellen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row my-5 text-center">
+    <p>Konto bereits erstellt? <a href="/signin">Hier Anmelden!</a></p>
+</div>
+
+<div class="modal" id="privacypolModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Datenschutzerkl&auml;rung</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <pre style="white-space: pre-wrap;">
+                {{ legal.privacy }}
+            </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="termsModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Allgemeine Gesch&auml;ftsbedingungen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <pre style="white-space: pre-wrap;">
+                {{ legal.tos }}
+            </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    function validatePassword() {
+        let form = document.querySelector(".needs-validation")
+        let passA = form[1].value;
+        let passB = form[2].value;
+        if (passA === passB) {
+            form[1].classList.remove("is-invalid");
+            form[2].classList.remove("is-invalid");
+        } else {
+            form[1].classList.add("is-invalid");
+            form[2].classList.add("is-invalid");
+        }
+    }
+
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const form = document.querySelector('.needs-validation');
+
+    // Loop over them and prevent submission
+    form.addEventListener('submit', function (event) {
+        if (form[1].classList.contains("is-invalid") || form[2].classList.contains("is-invalid")) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }, false);
+    })()
+</script>
+
+{% endblock %}
