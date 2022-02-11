@@ -37,7 +37,7 @@ def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List
     db_rests = crud_bewertung.get_all_user_bewertungen(db_session, user)
     scheme_rests = [
         RestBewertungReturn(
-            name=db_rest.name,
+            name=db_rest.restaurant.name,
             email=db_rest.person_email,
             place_id=db_rest.place_id,
             comment=db_rest.kommentar,
