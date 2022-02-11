@@ -12,5 +12,6 @@ class Restaurant(Base):
     __tablename__ = "restaurant"
 
     place_id = Column(String, primary_key=True)
+    name = Column(String, nullable=False, autoincrement=False)
 
     bewertungen = relationship("Bewertung", back_populates="restaurant", passive_deletes=True)

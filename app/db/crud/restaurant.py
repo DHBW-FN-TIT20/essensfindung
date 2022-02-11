@@ -37,7 +37,7 @@ def get_all_restaurants(db: Session, skip: int = 0, limit: int = 100) -> List[Re
     return db.query(Restaurant).offset(skip).limit(limit).all()
 
 
-def create_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> Restaurant:
+def create_restaurant(db: Session, rest: scheme_rest.RestaurantCreate) -> Restaurant:
     """Create / Add a Restaurant to the DB
 
     Args:
@@ -51,7 +51,7 @@ def create_restaurant(db: Session, rest: scheme_rest.RestaurantBase) -> Restaura
         Restaurant: Return if success
     """
     try:
-        db_rest = Restaurant(place_id=rest.place_id)
+        db_rest = Restaurant(place_id=rest.place_id, name=rest.name)
         db.add(db_rest)
         db.commit()
         db.refresh(db_rest)

@@ -37,6 +37,7 @@ def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List
     db_rests = crud_bewertung.get_all_user_bewertungen(db_session, user)
     scheme_rests = [
         RestBewertungReturn(
+            name=db_rest.name,
             email=db_rest.person_email,
             place_id=db_rest.place_id,
             comment=db_rest.kommentar,
@@ -64,6 +65,7 @@ def add_assessment(db_session: Session, assessment: RestBewertungCreate) -> Rest
     try:
         created_assessment = crud_bewertung.create_bewertung(db_session, assessment)
         return RestBewertungReturn(
+            name=created_assessment.restaurant.name,
             email=created_assessment.person_email,
             place_id=created_assessment.place_id,
             comment=created_assessment.kommentar,
@@ -95,6 +97,7 @@ def update_assessment(
     except DatabaseException as error:
         raise error
     return RestBewertungReturn(
+        name=updated_assessment.restaurant.name,
         email=updated_assessment.person_email,
         place_id=updated_assessment.place_id,
         comment=updated_assessment.kommentar,
@@ -216,7 +219,7 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
     if not crud_restaurant.get_restaurant_by_id(db_session, restaurant.place_id):
         crud_restaurant.create_restaurant(db_session, restaurant)
     if not crud_bewertung.get_bewertung_from_user_to_rest(db_session, user, restaurant):
-        add_assessment(db_session, RestBewertungCreate(person=user, restaurant=restaurant))
+        add_assessment(db_session, RestBewertungCreate(name=restaurant.name, person=user, restaurant=restaurant))
     return restaurant
 
 

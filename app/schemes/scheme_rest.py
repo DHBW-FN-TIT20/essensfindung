@@ -30,6 +30,13 @@ class RestaurantBase(BaseModel):
     """Scheme that is only needed for the DB"""
 
     place_id: str
+    name: str
+
+
+class RestaurantCreate(RestaurantBase):
+    """Scheme that is only needed for the DB"""
+
+    name: str
 
     class Config:
         orm_mode = True
@@ -50,6 +57,7 @@ class Restaurant(RestaurantBase):
 class RestBewertungBase(BaseModel):
     """BaseClass for the Bewertung"""
 
+    name: str
     comment: Optional[str] = ""
     rating: Optional[float] = 0
 
