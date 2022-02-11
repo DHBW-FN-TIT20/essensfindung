@@ -6,31 +6,16 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-10  mb-2" style="max-width: 480px;">
-        {% for rating in rest_ratings %}
-        <button type="button" class="btn btn-dark btn-sm w-100 mb-2 d-flex justify-content-between">
-            <span>Restaurant xy</span>
+        {% for rest_rating in rest_ratings %}
+        <a type="button" class="btn btn-dark btn-sm w-100 mb-2 d-flex justify-content-between" href="/rating/edit?place_id={{rest_rating.place_id}}">
+            <span>{{rest_rating.name}}</span>
             <span class="d-flex justify-content-end">
-                <span>{{rating.rating}}/5 &nbsp;</span>
-                <span class="border-left border-white">| &gt;</span>
+                {% if rest_rating.rating != 0 %}
+                <span>{{rest_rating.rating|round|int}}/5 &nbsp;</span> {% else %}
+            <span>Keine Bewertung&nbsp;</span> {% endif %}
+            <span class="border-left border-white">| &gt;</span>
             </span>
-        </button>
-        <!-- Modal -->
-        <div class="modal fade modal-sm modal-lg center" id="{{rating.}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Bewertung ändern</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Speichern</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 </div>
