@@ -70,12 +70,12 @@ def test_restaurant(db_session: SessionTesting):
 
     # Add two Restaurants
     # add the first restaurant
-    rest_add = scheme_rest.RestaurantBase(place_id="1234")
+    rest_add = scheme_rest.RestaurantBase(place_id="1234", name="Rest 1 nice")
     rest_return = create_restaurant(db_session, rest_add)
     assert rest_add == scheme_rest.RestaurantBase(**rest_return.__dict__)
 
     # add the second restaurant
-    rest_add_2 = scheme_rest.RestaurantBase(place_id="567")
+    rest_add_2 = scheme_rest.RestaurantBase(place_id="567", name="Rest 2 nice")
     rest_return = create_restaurant(db_session, rest_add_2)
     assert rest_add_2 == scheme_rest.RestaurantBase(**rest_return.__dict__)
 
@@ -140,11 +140,11 @@ def test_user(db_session: SessionTesting):
 
 def test_bewertung(db_session: SessionTesting):
     fake_user = scheme_user.UserBase(email="fake@nope.ok")
-    fake_rest = scheme_rest.RestaurantBase(place_id="000000")
+    fake_rest = scheme_rest.RestaurantBase(place_id="000000", name="Fake Rest")
     user_add_1 = scheme_user.UserCreate(email="test1@demo.lol", password="password1")
     user_add_2 = scheme_user.UserCreate(email="test2@demo.lol", password="password2")
-    rest_add_1 = scheme_rest.RestaurantBase(place_id="1234")
-    rest_add_2 = scheme_rest.RestaurantBase(place_id="5678")
+    rest_add_1 = scheme_rest.RestaurantBase(place_id="1234", name="Rest 1")
+    rest_add_2 = scheme_rest.RestaurantBase(place_id="5678", name="Rest 2")
 
     # Add user
     create_user(db_session, user_add_1)
@@ -156,7 +156,7 @@ def test_bewertung(db_session: SessionTesting):
 
     # Add assessment to user1 and rest1
     assessment_add_1_1 = scheme_rest.RestBewertungCreate(
-        comment="This is a comment", rating=1.5, person=user_add_1, restaurant=rest_add_1
+        name="Rest 1 1", comment="This is a comment", rating=1.5, person=user_add_1, restaurant=rest_add_1
     )
     assessment_ret = create_bewertung(db_session, assessment_add_1_1)
     assert assessment_ret.kommentar == assessment_add_1_1.comment
@@ -165,7 +165,7 @@ def test_bewertung(db_session: SessionTesting):
 
     # Add assessment to user1 and rest2
     assessment_add_1_2 = scheme_rest.RestBewertungCreate(
-        comment="This is a comment for rest 2", rating=2.5, person=user_add_1, restaurant=rest_add_2
+        name="Rest 1 2", comment="This is a comment for rest 2", rating=2.5, person=user_add_1, restaurant=rest_add_2
     )
     assessment_ret = create_bewertung(db_session, assessment_add_1_2)
     assert assessment_ret.kommentar == assessment_add_1_2.comment
@@ -174,7 +174,7 @@ def test_bewertung(db_session: SessionTesting):
 
     # Add assessment to user2 and rest2
     assessment_add_2_2 = scheme_rest.RestBewertungCreate(
-        comment="This is a comment 2", rating=3.5, person=user_add_2, restaurant=rest_add_2
+        name="Rest 2 2", comment="This is a comment 2", rating=3.5, person=user_add_2, restaurant=rest_add_2
     )
     assessment_ret = create_bewertung(db_session, assessment_add_2_2)
     assert assessment_ret.kommentar == assessment_add_2_2.comment
@@ -218,14 +218,20 @@ def test_bewertung(db_session: SessionTesting):
     with pytest.raises(UserNotFound):
         assessment_ret = create_bewertung(
             db_session,
-            scheme_rest.RestBewertungCreate(comment="none", rating=0, person=fake_user, restaurant=rest_add_1),
+            scheme_rest.RestBewertungCreate(
+                name="Troll", comment="none", rating=0, person=fake_user, restaurant=rest_add_1
+            ),
         )
 
     with pytest.raises(RestaurantNotFound):
         assessment_ret = create_bewertung(
             db_session,
             scheme_rest.RestBewertungCreate(
-                comment="none", rating=0, person=scheme_user.UserBase(email=user_add_1.email), restaurant=fake_rest
+                name="Nice",
+                comment="none",
+                rating=0,
+                person=scheme_user.UserBase(email=user_add_1.email),
+                restaurant=fake_rest,
             ),
         )
 
