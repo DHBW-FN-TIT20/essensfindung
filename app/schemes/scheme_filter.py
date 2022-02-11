@@ -1,4 +1,5 @@
 """Contains all Filter for the searches"""
+from datetime import timedelta
 from typing import List
 from typing import Optional
 
@@ -100,19 +101,4 @@ class FilterRestDatabase(FilterBase):
 class FilterRecipe(FilterBase):
     """Extended Model for Recipe-Filter"""
 
-    difficulty: int
-
-    @validator("difficulty")
-    @classmethod
-    def difficulty_range(cls, value: int):
-        """Check if difficulty >= 1 and <= 5
-
-        Args:
-            value (int): Value of difficulty
-
-        Raises:
-            ValueError: If wrong values
-        """
-        if 1 <= value <= 5:
-            return value
-        raise ValueError("difficulty is not between 1 (included) and 5 (included)")
+    totalTime: timedelta
