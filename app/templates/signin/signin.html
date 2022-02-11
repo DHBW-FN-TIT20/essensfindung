@@ -9,16 +9,32 @@
     <div class="col-10 limit-width">
         <form method="post">
             <div class="mb-3">
-                <label for="emailInput" class="form-label mb-1 ms-1">Email: (example@gmx.de)</label>
-                <input type="email" name="emailInput" id="emailInput" class="form-control" required>
+                <label for="emailInput" class="form-label mb-1 ms-1">Email:</label>
+                {% if error is defined and error|length > 0 %}
+                    <input type="email" name="emailInput" id="emailInput" placeholder="example@gmx.de" class="form-control is-invalid" required>
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% else %}
+                    <input type="email" name="emailInput" id="emailInput" placeholder="example@gmx.de" class="form-control" required>
+                {% endif %}
             </div>
             <div class="mb-3">
-                <label for="passwordInput" class="form-label mb-1 ms-1">Passwort: (password)</label>
-                <input type="password" name="passwordInput" id="passwordInput" class="form-control" required>
-                <a href="/recover" class="ms-1 mt-2">Passwort Vergessen?</a>
+                <label for="passwordInput" class="form-label mb-1 ms-1">Passwort:</label>
+                
+                {% if error is defined and error|length > 0 %}
+                    <input type="password" name="passwordInput" id="passwordInput" placeholder="password" class="form-control is-invalid" required>
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% else %}
+                    <input type="password" name="passwordInput" id="passwordInput" placeholder="password" class="form-control" required>
+                {% endif %}
+
+                <a href="/recover" class="ms-1 pt-3">Passwort Vergessen?</a>
             </div>
             <div class="form-actions text-center">
-                <button type="submit" class="btn btn-dark">Anmelden</button>
+                <button type="submit" class="btn btn-dark mt-3">Anmelden</button>
             </div>
         </form>
     </div>
@@ -27,9 +43,5 @@
 <div class="row my-5 text-center">
     <p>Noch kein Konto? <a href="/register">Hier Registrieren!</a></p>
 </div>
-
-{% if error is defined and error|length > 0 %}
-    <script> alert("{{ error }}"); </script>
-{% endif %}
 
 {% endblock %}

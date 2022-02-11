@@ -1,5 +1,6 @@
 """Main entry Point for the Application"""
 import logging
+import traceback
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
@@ -166,6 +167,7 @@ async def general_exception_handler(request: fastapi.Request, exc: Exception):
     """
     # TODO: Logging the Errors
     print(str(exc))
+    traceback.print_exc()
     print(f"Request-URL: {request.url} ")
     return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}", status_code=status.HTTP_302_FOUND)
 

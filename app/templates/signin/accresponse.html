@@ -1,0 +1,37 @@
+{% extends "shared/layout_singleform.html" %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+    <div class="text-center mb-3">
+        {% if success == "True" %}
+            <h2>Konto Erfolgreich Erstellt</h2>
+        {% elif success == "False" %}
+            <h2>Konto Erstellen Fehlgeschlagen</h2>
+        {% endif %}
+    </div>
+    <div class="col-10 limit-width">
+        {% if success == "True" %}
+            <img src="/static/img/icons8-checkmark-yes-large.png" alt="" class="mx-auto d-block w-25">
+            <div class="text-center">
+                <p class="mt-4">
+                    Melden Sie sich and und finden Sie Essen!
+                </p>
+                <a href="/signin" class="btn btn-dark">Anmelden</a>
+            </div>
+        {% elif success == "False" %}
+            <img src="/static/img/icons8-macos-close-large.png" alt="" class="mx-auto d-block w-25">
+            <div class="text-center">
+                {% if msg is defined and msg|length > 0 %}
+                    <p class="mt-4">
+                        Fehler: {{ msg }}
+                    </p>
+                {% endif %}
+                <a href="/register" class="btn btn-dark mt-3">Erneut Registrieren</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

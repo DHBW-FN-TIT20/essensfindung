@@ -154,7 +154,8 @@ def test_search_for_restaurant(
         location=LocationBase(lat="1111", lng="345"),
     )
 
-    user = create_user(db_session, UserCreate(email="test@ok.de", password="geheim"))
+    user = UserCreate(email="test@ok.de", password="geheim")
+    create_user(db_session, user)
 
     return_res = service_res.search_for_restaurant(db_session, user, filter)
     assert return_res == random_res
