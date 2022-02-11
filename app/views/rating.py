@@ -20,6 +20,7 @@ async def rating(
     current_user: User = Depends(get_current_user)
 ):
     rest_ratings = service_res.get_assessments_from_user(db_session=db_session, user=current_user)
+
     return templates.TemplateResponse(
         "rating/rating.html", {"request": request, "rest_ratings":rest_ratings}
     )
