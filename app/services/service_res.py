@@ -202,8 +202,9 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
     except httpx.HTTPError as error:
         raise GoogleApiException("Can't communicate with the Google API") from error
 
-    if crud_restaurant.get_restaurant_by_id(db_session, restaurant.place_id):
+    if not crud_restaurant.get_restaurant_by_id(db_session, restaurant.place_id):
         crud_restaurant.create_restaurant(db_session, restaurant)
+    if not crud_bewertung.get_bewertung_from_user_to_rest(db_session, user, restaurant):
         add_assessment(db_session, RestBewertungCreate(person=user, restaurant=restaurant))
     return restaurant
 
