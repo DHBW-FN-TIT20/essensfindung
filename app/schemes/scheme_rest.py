@@ -64,6 +64,8 @@ class RestBewertungCreate(RestBewertungBase):
 class RestBewertungReturn(RestBewertungBase):
     """Class to return to the frontend"""
 
+    email: str
+    place_id: str
     timestamp: datetime.datetime
 
     class Config:
