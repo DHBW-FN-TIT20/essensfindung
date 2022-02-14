@@ -11,8 +11,7 @@ from db.database import get_db
 from sqlalchemy.orm import Session
 from tools.security import get_current_user
 from schemes.scheme_user import User
-from db.models.bewertung import Bewertung
-from db.crud.bewertung import get_bewertung_from_user_to_rest, update_bewertung
+from db.crud.bewertung import get_bewertung_from_user_to_rest
 from services import service_res
 from copy import copy
 
@@ -35,6 +34,17 @@ def rating(
 
 @router.get("/rating/edit", response_class=HTMLResponse)
 def edit_rating(request: Request, place_id: str, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Return the rendered template for displaying rating that matches place_id for editing
+
+    Args:
+        request (Request): Request for template
+        place_id (str): identifier for restaurant
+        db_session (Session, optional): current db_session. Defaults to Depends(get_db).
+        current_user (User, optional): current logged in user. Defaults to Depends(get_current_user).
+
+    Returns:
+        HTMLResponse: rendered template
+    """
     rest_ratings = service_res.get_assessments_from_user(db_session=db_session, user=current_user)
     rest_rating = [r for r in rest_ratings if r.place_id == place_id]
     return templates.TemplateResponse(
@@ -43,7 +53,7 @@ def edit_rating(request: Request, place_id: str, db_session: Session = Depends(g
 
 
 @router.post("/rating/edit", response_class=RedirectResponse)
-async def edit_rating(request: Request, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+async def edit_rating_post(request: Request, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     form = await request.form()
     rating = form.get("rating_edit_rating_target")
     notes = form.get("rating_notes")
@@ -60,7 +70,8 @@ async def edit_rating(request: Request, db_session: Session = Depends(get_db), c
     service_res.update_assessment(db_session=db_session, old_assessment=old_rating_scheme, new_assessment=new_rating)
     return RedirectResponse("/rating/", status_code=status.HTTP_302_FOUND)
 
+
 @router.get("/rating/delete", response_class=RedirectResponse)
-def delete_rating(request: Request, place_id:str, rest_name:str, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def delete_rating(request: Request, place_id: str, rest_name: str, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     service_res.delete_assessment(db_session=db_session, user=current_user, rest=RestaurantBase(place_id=place_id, name=rest_name))
     return RedirectResponse("/rating/", status_code=status.HTTP_302_FOUND)

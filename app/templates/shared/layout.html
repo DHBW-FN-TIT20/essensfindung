@@ -31,5 +31,15 @@
         {% block content %} {% endblock %}
     </div>
 </body>
+<script type="text/javascript">
+    let clickcount = 0;
+    $('#logo').click(function() {
+        clickcount += 1;
+        if (clickcount == 3) {
+            $("#logo").addClass("rotate");
+            clickcount = 0;
+        }
+    });
+</script>
 
 </html>
