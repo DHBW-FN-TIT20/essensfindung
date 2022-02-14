@@ -23,10 +23,15 @@
 .drop-shadow {
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
-
+.drop-shadow:hover {
+    box-shadow: 0 0 0 #fff;
+}
+.drop-shadow:active {
+    box-shadow: 0 0 0 #fff;
+}
 .box-shadow {
     transition: box-shadow 0.2s;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.35);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.30);
 }
 
 .box-shadow:hover {
@@ -57,9 +62,28 @@
     border-color: #6eb1df !important;
     color: #212529;
 }
+.prevent-dark-hover:hover {
+    background-color: #fff;
+    color: #212529;
+}
 
 .limit-width {
     max-width: 480px;
+}
+
+.filter-character-up {
+    display: inline-block;
+    transform: rotate(90deg);
+    font-size: 0.8rem;
+}
+.filter-character-down {
+    display: inline-block;
+    transform: rotate(180deg);
+    font-size: 0.8rem;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .img-display {
