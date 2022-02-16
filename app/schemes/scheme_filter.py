@@ -15,8 +15,8 @@ class FilterBase(BaseModel):
     """Base Filter for recepes and restaurant"""
 
     cuisines: List[scheme_cuisine.PydanticCuisine]
-    allergies: Optional[List[scheme_allergie.PydanticAllergies]] = None
     rating: int
+    allergies: Optional[List[scheme_allergie.PydanticAllergies]]
 
     @validator("rating")
     @classmethod
@@ -101,4 +101,5 @@ class FilterRestDatabase(FilterBase):
 class FilterRecipe(FilterBase):
     """Extended Model for Recipe-Filter"""
 
-    totalTime: timedelta
+    keyword: str
+    total_time: timedelta
