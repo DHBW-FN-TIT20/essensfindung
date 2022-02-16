@@ -139,5 +139,5 @@ app/tests/test_db.db
 # Ignore Logs
 *log*
 
-# Ignore local data
-app/data
+# Ignore local Database
+app/data/essensfindung.db
