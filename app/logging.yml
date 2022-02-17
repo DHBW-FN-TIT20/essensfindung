@@ -1,0 +1,49 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  default:
+    (): "uvicorn.logging.DefaultFormatter"
+    fmt: "%(levelprefix)-9s %(message)s"
+  access:
+    (): "uvicorn.logging.AccessFormatter"
+    fmt: '%(levelprefix)-9s %(client_addr)s - "%(request_line)s" %(status_code)s'
+  file_formatter:
+    format: "%(levelname)s:\t%(asctime)s - %(filename)s::%(lineno)d - %(message)s"
+handlers:
+  default:
+    class: logging.StreamHandler
+    formatter: default
+    stream: ext://sys.stderr
+  uvicorn_access:
+    class: logging.StreamHandler
+    formatter: access
+    stream: ext://sys.stdout
+  info_file_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: file_formatter
+    filename: logs/info.log
+    maxBytes: 10485760 # 10MB
+    backupCount: 10
+    encoding: utf8
+  error_file_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: WARNING
+    formatter: file_formatter
+    filename: logs/errors.log
+    maxBytes: 10485760 # 10MB
+    backupCount: 10
+    encoding: utf8
+loggers:
+  my_logger:
+    level: INFO
+    handlers: [default, info_file_handler, error_file_handler]
+  uvicorn:
+    level: INFO
+    handlers: [default, info_file_handler]
+  uvicorn.error:
+    level: INFO
+  uvicorn.access:
+    level: INFO
+    propagate: False
+    handlers: [uvicorn_access, info_file_handler]
