@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade modal-sm modal-lg center" id="recipeFilter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Rezeptfilter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-2">
+                    <p>Die Filter werden automatisch gespeichert.</p>
+                </div>
+
+                <!-- length range -->
+                <div class="p-2">
+                    <label for="recipe_filter_length" class="form-label">Länge</label>
+                    <!-- value="recp_filter.length" -->
+                    <input type="range" class="form-range" id="recipe_filter_length" name="recipe_filter_length" min="0" max="4" value="" oninput="update_length_text(this.value)"></input>
+                    <input class="form-label text-center" id="recipe_filter_length_text" value="" readonly></input>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,25 +3,25 @@
 <div class="row justify-content-center">
     <div class="col-10 limit-width">
         <div class="d-flex">
-            <div class="btn btn-outline-dark w-100 flex-grow-1 m-2 py-4 box-shadow prevent-dark-fill d-flex align-items-center justify-content-center flex-column">
+            <a id="search_recipe" onclick="change_recipe_url()" class="btn btn-outline-dark w-100 flex-grow-1 m-2 py-4 box-shadow prevent-dark-fill d-flex align-items-center justify-content-center flex-column">
                 <img src="/static/img/icons8-recipe-book-large.png" alt="" class="img-display">
                 <h1 class="fs-5">Rezept Finden</h1>
-            </div>
-            <div class="btn btn-outline-dark w-50 m-2 py-4 box-shadow prevent-dark-fill grid align-items-center justify-content-center flex-column">
+            </a>
+            <a data-bs-toggle="modal" data-bs-target="#recipeFilter" onclick="update_recipe_modal_on_show()" class="btn btn-outline-dark w-50 m-2 py-4 box-shadow prevent-dark-fill grid align-items-center justify-content-center flex-column">
                 <img src="/static/img/icons8-filter-large.png" alt="" class="img-display p-2">
                 <h1 class="fs-5">Filter</h1>
-            </div>
+            </a>
         </div>
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-10 limit-width">
         <div class="d-flex">
-            <a id="search_restaurant" onclick="change_url()" class="btn btn-outline-dark w-100 flex-grow-1 m-2 py-4 box-shadow prevent-dark-fill d-flex align-items-center justify-content-center flex-column">
+            <a id="search_restaurant" onclick="change_restaurant_url()" class="btn btn-outline-dark w-100 flex-grow-1 m-2 py-4 box-shadow prevent-dark-fill d-flex align-items-center justify-content-center flex-column">
                 <img src="/static/img/icons8-plate-and-utensils-large.png" alt="" class="img-display">
                 <h1 class="fs-5">Restaurant Finden</h1>
             </a>
-            <a data-bs-toggle="modal" data-bs-target="#restaurantFilter" onclick="update_modal_on_show()" class="btn btn-outline-dark w-50 m-2 py-4 box-shadow prevent-dark-fill grid align-items-center justify-content-center flex-column">
+            <a data-bs-toggle="modal" data-bs-target="#restaurantFilter" onclick="update_restaurant_modal_on_show()" class="btn btn-outline-dark w-50 m-2 py-4 box-shadow prevent-dark-fill grid align-items-center justify-content-center flex-column">
                 <img src="/static/img/icons8-filter-large.png" alt="" class="img-display p-2">
                 <h1 class="fs-5">Filter</h1>
             </a>
@@ -31,8 +31,8 @@
 
 {% include "signin/account_modal.html" %}
 {% include "restaurant/restaurant_filter_modal.html" %}
-
+{% include "recipe/recipe_filter_modal.html" %}
 <script src="/static/js/index.js"></script>
 <script src="/static/js/restaurant.js"></script>
-
+<script src="/static/js/recipe.js"></script>
 {% endblock %}

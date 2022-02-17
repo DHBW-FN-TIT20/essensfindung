@@ -21,7 +21,7 @@ class Cuisine(Enum):
     VEGETARIAN = "Vegetarisch"
     FASTFOOD = "Fastfood"
     AMERICAN = "Amerikanisch"
-    FOOD = "Essen"  # used when no cuisine is selected
+    RESTAURANT = "Restaurant"  # used when no cuisine is selected
 
 
 class Allergies(Enum):

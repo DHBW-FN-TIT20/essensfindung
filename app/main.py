@@ -21,6 +21,7 @@ from schemes.exceptions import DuplicateEntry
 from views import error
 from views import index
 from views import restaurant
+from views import recipe
 from views import signin
 from views import rating
 
@@ -68,6 +69,7 @@ def configure_routing():
     app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(index.router)
     app.include_router(restaurant.router)
+    app.include_router(recipe.router)
     app.include_router(signin.router)
     app.include_router(error.router)
     app.include_router(rating.router)
@@ -176,6 +178,6 @@ async def general_exception_handler(request: fastapi.Request, exc: Exception):
 
 if __name__ == "__main__":
     configure()
-    uvicorn.run(app, port=8000, host="192.168.0.112")
+    uvicorn.run(app, port=8000, host="172.0.0.1")
 else:
     configure()

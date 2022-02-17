@@ -114,6 +114,6 @@ poetry export -f requirements.txt -o requirements.txt
 ### pip 
 To install the requierd dependencies via pip:
 ```console
-pip install -r requirements_dev.txt
+pip install -r requirements-dev.txt
 ```
 Here you have to manuel manage the requirements.txt files. Use a fixed versions only.
