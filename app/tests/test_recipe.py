@@ -5,9 +5,7 @@ import pandas
 import pytest
 from pytest_mock import MockerFixture
 
-from schemes import Cuisine
 from schemes.exceptions import RecipeNotFound
-from schemes.scheme_cuisine import PydanticCuisine
 from schemes.scheme_filter import FilterRecipe
 from schemes.scheme_recipe import Recipe
 from services import service_rec
@@ -16,12 +14,7 @@ from tools.recipe_db import RecipeDB
 
 @pytest.fixture
 def recipe_filter() -> FilterRecipe:
-    return FilterRecipe(
-        keyword="Rice",
-        cuisines=[PydanticCuisine(name=Cuisine.GERMAN.value)],
-        rating=3,
-        total_time=timedelta(minutes=10),
-    )
+    return FilterRecipe(keyword="Rice", total_time=timedelta(minutes=10))
 
 
 @pytest.fixture
