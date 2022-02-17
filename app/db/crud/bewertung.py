@@ -5,7 +5,6 @@ from typing import Union
 import sqlalchemy
 from sqlalchemy.orm import Session
 
-from . import logger
 from db.base import Bewertung
 from db.base import Person
 from db.base import Restaurant
@@ -17,6 +16,7 @@ from schemes.exceptions import DatabaseException
 from schemes.exceptions import DuplicateEntry
 from schemes.exceptions import RestaurantNotFound
 from schemes.exceptions import UserNotFound
+from tools.my_logging import logger
 
 
 def get_bewertung_from_user_to_rest(
@@ -90,7 +90,7 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
         db.commit()
         db.refresh(db_assessment)
         logger.info(
-            "Added assessment to db... place_id:%s\temail%s\trating:%s\tcomment:%s",
+            "Added assessment to db... place_id:%s\temail:%s\trating:%s\tcomment:%s",
             db_assessment.place_id,
             db_assessment.person_email,
             db_assessment.rating,
