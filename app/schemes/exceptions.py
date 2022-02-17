@@ -36,7 +36,7 @@ class DuplicateEntry(DatabaseException):
     """Exception if you add a duplicate entry"""
 
 
-class RecipeNotFound(DatabaseException):
+class RecipeNotFound(NoResultsException):
     """Exception if no recipe found in the Database"""
 
 
