@@ -5,6 +5,7 @@ import pandas
 import pytest
 from pytest_mock import MockerFixture
 
+from schemes.exceptions import RecipeNotFound
 from schemes.scheme_filter import FilterRecipe
 from schemes.scheme_recipe import Recipe
 from services import service_rec
@@ -67,3 +68,21 @@ def test_search_recipe(mocker: MockerFixture, recipe_filter: FilterRecipe):
     mocker.patch("pandas.DataFrame.sample", return_value=random_recipe_df)
     recipe_return = service_rec.search_recipe(recipe_filter=recipe_filter)
     assert recipe_return == random_recipe
+
+
+def test_search_recipe_cooktime_error(mocker: MockerFixture, recipe_filter: FilterRecipe, recipe_db: RecipeDB):
+    recipe_filter.total_time = timedelta(seconds=0)
+    mocked_return = pandas.core.series.Series(data=[False for _ in range(recipe_db.pd_frame.shape[0])])
+    mocker.patch("tools.recipe_db.RecipeDB.filter_cooktime", return_value=mocked_return)
+
+    with pytest.raises(RecipeNotFound):
+        service_rec.search_recipe(recipe_filter=recipe_filter)
+
+
+def test_search_recipe_keyword_error(mocker: MockerFixture, recipe_filter: FilterRecipe, recipe_db: RecipeDB):
+    recipe_filter.keyword = "So etwas steht nicht in der DB"
+    mocked_return = pandas.core.series.Series(data=[False for _ in range(recipe_db.pd_frame.shape[0])])
+    mocker.patch("tools.recipe_db.RecipeDB.filter_keyword", return_value=mocked_return)
+
+    with pytest.raises(RecipeNotFound):
+        service_rec.search_recipe(recipe_filter=recipe_filter)
