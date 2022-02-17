@@ -1,6 +1,6 @@
 {% extends "shared/layout.html" %} {% block content %} {% include "main_navbar.html" %}
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" onload="get_location()">
     <div class="col-10 limit-width">
         <div class="d-flex">
             <div class="btn btn-outline-dark w-100 flex-grow-1 m-2 py-4 box-shadow prevent-dark-fill d-flex align-items-center justify-content-center flex-column">
@@ -29,8 +29,7 @@
     </div>
 </div>
 
-{% include "signin/account_modal.html" %}
-{% include "restaurant/restaurant_filter_modal.html" %}
+{% include "signin/account_modal.html" %} {% include "restaurant/restaurant_filter_modal.html" %}
 
 <script src="/static/js/index.js"></script>
 <script src="/static/js/restaurant.js"></script>
