@@ -134,10 +134,7 @@ dmypy.json
 # Ignore all Configuration Files
 *.conf
 !example*.conf
-app/tests/test_db.db
-
-# Ignore Logs
-*log*
 
 # Ignore local Database
+app/tests/test_db.db
 app/data/essensfindung.db

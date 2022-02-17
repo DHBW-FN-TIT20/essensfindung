@@ -9,7 +9,7 @@ clean_python:
 	find . -type d -name .pytest_cache -exec rm -r {} \+
 	rm -r -f app/logs
 	rm -f app/essensfindung.db
-	rm -r -f app/data
+	rm -r -f app/data/essensfindung.db
 
 clean_docker:
 	docker rm --force essensfindung
