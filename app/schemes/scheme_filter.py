@@ -98,7 +98,7 @@ class FilterRestDatabase(FilterBase):
         raise ValueError("costs is not between 0 (included) and 4 (included)")
 
 
-class FilterRecipe(FilterBase):
+class FilterRecipe(BaseModel):
     """Extended Model for Recipe-Filter"""
 
     keyword: str
