@@ -36,6 +36,10 @@ class DuplicateEntry(DatabaseException):
     """Exception if you add a duplicate entry"""
 
 
+class RecipeNotFound(NoResultsException):
+    """Exception if no recipe found in the Database"""
+
+
 class NotAuthorizedException(HTTPException):
     """Exception if you are not authorized"""
 
