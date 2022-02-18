@@ -4,12 +4,12 @@ from typing import Union
 import sqlalchemy
 from sqlalchemy.orm import Session
 
-from . import logger
 from db.base import Person
 from schemes import scheme_user
 from schemes.exceptions import DuplicateEntry
 from schemes.exceptions import UserNotFound
 from tools.hashing import Hasher
+from tools.my_logging import logger
 
 
 def create_user(db: Session, person: scheme_user.UserCreate) -> Person:

@@ -32,7 +32,6 @@ WORKDIR /essensfindung/app
 
 
 # Setup local DB if needed
-RUN ["mkdir", "data"]
 VOLUME [ "/essensfindung/app/data" ]
 
 # Start gunicorn server with 2 workers, uvicorn worker type and use the 0.0.0.0 host with port 80

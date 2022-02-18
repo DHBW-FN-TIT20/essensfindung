@@ -40,7 +40,7 @@ async def findrestaurant(
     if cuisine is not None:
         cuisine_list = [scheme_cuisine.PydanticCuisine(name=cuisine) for cuisine in cuisine.split(",")]
     else:
-        cuisine_list = [scheme_cuisine.PydanticCuisine(name="Essen")]
+        cuisine_list = [scheme_cuisine.PydanticCuisine(name="Restaurant")]
     allergies_list = allergies
     if allergies is not None:
         allergies_list = [scheme_allergie.PydanticAllergies(name=allergie) for allergie in allergies.split(",")]

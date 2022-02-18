@@ -1,5 +1,4 @@
 """Connection to the google api"""
-import logging
 from typing import List
 
 import httpx
@@ -8,11 +7,10 @@ from schemes.exceptions import GoogleApiException
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_rest import Restaurant
 from tools.config import settings
+from tools.my_logging import logger
 
 # TODO: Asynchrone Funktionen
 # TODO: Asynchrone API Anfragen
-
-logger = logging.getLogger(__name__)
 
 
 def search_restaurant(res_filter: FilterRest) -> List[Restaurant]:

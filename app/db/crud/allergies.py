@@ -4,9 +4,9 @@ import sqlalchemy
 from sqlalchemy.orm import Session
 
 import schemes
-from . import logger
 from db.base import Allergie
 from schemes.exceptions import DuplicateEntry
+from tools.my_logging import logger
 
 
 def create_allergie(db: Session, allergie: schemes.Allergies) -> Allergie:

@@ -13,7 +13,7 @@
 {% if restaurant.homepage%}
 <div class="row justify-content-center">
     <div class="col-10 m-3 text-center" style="max-width: 480px;">
-        <a href="{{restaurant.homepage}}" class="btn btn-lg btn-dark">Homepage</a>
+        <a href="{{restaurant.homepage}}" class="btn btn-outline-dark box-shadow prevent-dark-fill align-items-center justify-content-center flex-column">zur Restaurant-Homepage</a>
     </div>
 </div>
 {% endif %}
@@ -27,7 +27,7 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-10 text-center m-3" style="max-width: 480px;">
-        <a onclick="reload_page()" class="btn btn-dark btn-lg">Erneut suchen!</a>
+        <a onclick="reload_page()" class="btn btn-outline-dark box-shadow prevent-dark-fill">Erneut suchen!</a>
     </div>
 </div>
 <script src="/static/js/restaurant.js"></script>
