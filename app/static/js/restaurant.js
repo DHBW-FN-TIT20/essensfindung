@@ -4,6 +4,8 @@ $(document).ready(function() {
         dropdownParent: $('#restaurantFilter'),
         width: "250"
     });
+    get_location();
+    update_modal_on_show();
 });
 
 /******** inititialize star-rating-svg *****************/
@@ -83,17 +85,7 @@ function get_cuisine() {
     for (const element of selections) {
         cuisines.push(element.id);
     }
-    // if (cuisines.length > 0) {
     return cuisines;
-    // } else {
-    //     update_cuisine_selected();
-    //     selections = $('#restaurant_filter_cuisine').select2('data');
-    //     for (const element of selections) {
-    //         cuisines.push(element.id);
-    //     }
-    //     return cuisines;
-    // }
-
 }
 
 function get_allergies() {
@@ -102,16 +94,7 @@ function get_allergies() {
     for (const element of selections) {
         allergies.push(element.id);
     }
-    // if (allergies > 0) {
     return allergies;
-    // } else {
-    //     update_allergies_selected();
-    //     selections = $('#restaurant_filter_allergies').select2('data');
-    //     for (const element of selections) {
-    //         allergies.push(element.id);
-    //     }
-    //     return allergies;
-    // }
 }
 
 function update_allergies_selected() {

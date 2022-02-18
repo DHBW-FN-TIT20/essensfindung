@@ -4,10 +4,10 @@ from typing import List
 import sqlalchemy
 from sqlalchemy.orm import Session
 
-from . import logger
 from db.base import Restaurant
 from schemes import scheme_rest
 from schemes.exceptions import DuplicateEntry
+from tools.my_logging import logger
 
 
 def get_restaurant_by_id(db: Session, place_id: str) -> Restaurant:
