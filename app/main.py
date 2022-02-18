@@ -1,9 +1,4 @@
 """Main entry Point for the Application"""
-import logging
-import traceback
-from logging.handlers import RotatingFileHandler
-from pathlib import Path
-
 import fastapi
 import uvicorn
 from fastapi import status
@@ -18,49 +13,23 @@ from schemes import Allergies
 from schemes import Cuisine
 from schemes import exceptions
 from schemes.exceptions import DuplicateEntry
+from tools.my_logging import logger
+from tools.my_logging import setup_logging
 from views import error
 from views import index
+from views import rating
 from views import restaurant
 from views import signin
-from views import rating
 
-app = fastapi.FastAPI()
+
+app = fastapi.FastAPI(title="Essensfindung")
 
 
 def configure():
     """Init Setup for the application"""
-    configure_logger()
+    setup_logging()
     configure_routing()
     configure_database()
-
-
-def configure_logger():
-    """Configure root logger"""
-    # create directory and file if not exist
-    logging_path = Path("./logs/infos.log")
-    logging_path.parent.mkdir(exist_ok=True)
-    logging_path.touch(exist_ok=True)
-
-    # start Configuration
-    logger = logging.getLogger()
-
-    # create handler
-    stream_h = logging.StreamHandler()
-    file_h = logging.FileHandler(logging_path)
-    backup_h = RotatingFileHandler(logging_path, maxBytes=10000, backupCount=5)
-
-    # level and formatter
-    stream_h.setLevel(logging.WARNING)
-    file_h.setLevel(logging.INFO)
-
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
-    stream_h.setFormatter(formatter)
-    file_h.setFormatter(formatter)
-
-    # add handler
-    logger.addHandler(stream_h)
-    logger.addHandler(file_h)
-    logger.addHandler(backup_h)
 
 
 def configure_routing():
@@ -106,7 +75,7 @@ def add_all_cuisine():
 
 
 @app.exception_handler(exceptions.DatabaseException)
-async def database_exception_handler(request: fastapi.Request, exc: Exception):
+async def database_exception_handler(request: fastapi.Request, exc: exceptions.DatabaseException):
     """Exception Handler for all DatabaseExceptions made and unhandeld
 
     Args:
@@ -116,14 +85,12 @@ async def database_exception_handler(request: fastapi.Request, exc: Exception):
     Returns:
         fastapi.responses.RedirectResponse: Redirect to the error page
     """
-    # TODO: Logging the Errors
-    print(str(exc))
-    print(f"Request-URL: {request.url} ")
+    logger.exception("Database Error on %s", request.url)
     return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
 
 
 @app.exception_handler(exceptions.NoResultsException)
-async def search_exception_handler(request: fastapi.Request, exc: Exception):
+async def search_exception_handler(request: fastapi.Request, exc: exceptions.NoResultsException):
     """Exception Handler for all search Exceptions made and unhandeld
 
     Args:
@@ -133,9 +100,7 @@ async def search_exception_handler(request: fastapi.Request, exc: Exception):
     Returns:
         fastapi.responses.RedirectResponse: Redirect to the error page
     """
-    # TODO: Logging the Errors
-    print(str(exc))
-    print(f"Request-URL: {request.url} ")
+    logger.info("%s URL: %s", str(exc), request.url)
     return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}")
 
 
@@ -150,8 +115,7 @@ async def authentication_exception_handler(request: fastapi.Request, exc: except
     Returns:
         fastapi.responses.RedirectResponse: Redirect to the siging page
     """
-    print(str(exc))
-    print(f"Request-URL: {request.url} ")
+    logger.warning("%s on %s", exc.error_msg, request.url)
     url = str(request.url).replace("&", "%26")
     return fastapi.responses.RedirectResponse(url=f"/signin/?url={url}", headers=exc.headers)
 
@@ -167,15 +131,12 @@ async def general_exception_handler(request: fastapi.Request, exc: Exception):
     Returns:
         fastapi.responses.RedirectResponse: Redirect to the error page
     """
-    # TODO: Logging the Errors
-    print(str(exc))
-    traceback.print_exc()
-    print(f"Request-URL: {request.url} ")
+    logger.exception("Internal Server Error on %s", request.url)
     return fastapi.responses.RedirectResponse(url=f"/error?err_msg={str(exc)}", status_code=status.HTTP_302_FOUND)
 
 
 if __name__ == "__main__":
     configure()
-    uvicorn.run(app, port=8000, host="192.168.0.112")
+    uvicorn.run(app, port=8000, host="127.0.0.1")
 else:
     configure()

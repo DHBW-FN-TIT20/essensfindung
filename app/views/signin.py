@@ -19,6 +19,7 @@ from schemes import exceptions
 from schemes.scheme_user import UserCreate
 from tools import security
 from tools.config import settings
+from tools.my_logging import logger
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
@@ -108,6 +109,7 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         create_user(db=db_session, person=user)
         return RedirectResponse("/accresp/?success=True", status_code=status.HTTP_302_FOUND)
     except exceptions.DuplicateEntry:
+        logger.warning("User %s already exist in the Database", email)
         return RedirectResponse(
             "/accresp/?success=False&msg=User mit der email gibt es bereits", status_code=status.HTTP_302_FOUND
         )
@@ -122,7 +124,6 @@ def account_response(request: Request, msg: Optional[str] = "", success: Optiona
     """Return a response page for account creation, either positive or negative"""
     data = {"request": request, "msg": msg, "success": success}
     return templates.TemplateResponse("signin/accresponse.html", data)
-
 
 
 @router.get("/recover/", response_class=HTMLResponse)

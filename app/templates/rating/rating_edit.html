@@ -1,7 +1,8 @@
 {% extends "shared/layout.html" %} {% block content %} {% include "restaurant/restaurant_navbar.html" %}
 <div class="row justify-content-center">
     <div class="col-10" style="max-width: 480px;">
-        <h3>Bewertung ändern</h3>
+        <h2 class="display-1 fs-2">Bewertung ändern</h2>
+        <hr>
     </div>
 </div>
 <div class="row justify-content-center">
@@ -14,16 +15,17 @@
         <form method="post">
             <input id="identifier" name="identifier" type="text" style="display: none;" value="{{ rest_rating.place_id }}">
             <input id="rest_name" name="rest_name" type="text" style="display: none;" value="{{rest_rating.name}}">
-            <label for="restaurant_filter_rating" class="form-label">Bewertung</label>
-            <div id="rating_edit_rating"></div>
+            <label for="restaurant_filter_rating" class="form-label fs-5 d-none">Bewertung:</label>
+            <div id="rating_edit_rating" class="mb-3"></div>
             <input id="rating_edit_rating_target" name="rating_edit_rating_target" style="display:none" value="{{ rest_rating.rating }}">
             <div class="mb-3">
-                <label for="rating_notes" class="form-label">Notizen</label>
+                <label for="rating_notes" class="form-label fs-5">Notizen:</label>
                 <textarea class="form-control" id="rating_notes" name="rating_notes" rows="3">{{rest_rating.comment}}</textarea>
             </div>
             <div class="form-actions text-center">
-                <a href="/rating/delete?place_id={{rest_rating.place_id}}&rest_name={{rest_rating.name}}" class="btn btn-dark mt-3">Löschen</a>
-                <button type="submit" class="btn btn-dark mt-3">Speichern</button>
+                <a href="/rating/delete?place_id={{rest_rating.place_id}}&rest_name={{rest_rating.name}}" class="btn btn-outline-danger mt-3">Löschen</a>
+                <div class="mx-2 d-inline"></div>
+                <button type="submit" class="btn btn-outline-dark mt-3">Speichern</button>
             </div>
         </form>
     </div>

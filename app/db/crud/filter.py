@@ -6,7 +6,6 @@ from typing import Union
 import sqlalchemy
 from sqlalchemy.orm import Session
 
-from . import logger
 from db.base import Allergie
 from db.base import Cuisine
 from db.base import FilterRest
@@ -17,6 +16,7 @@ from schemes import scheme_filter
 from schemes import scheme_user
 from schemes.exceptions import DuplicateEntry
 from schemes.exceptions import UserNotFound
+from tools.my_logging import logger
 
 
 def create_filterRest(
