@@ -136,5 +136,8 @@ dmypy.json
 !example*.conf
 
 # Ignore local Database
+app/data/essensfindung.db
+.VSCodeCounter
 app/tests/test_db.db
+app/data/essensfindung.db
 app/data/essensfindung.db
