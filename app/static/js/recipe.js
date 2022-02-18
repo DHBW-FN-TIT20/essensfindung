@@ -20,7 +20,7 @@ function reload_page() {
 }
 
 function get_keywords() {
-    return ""
+    return document.getElementById('recipe_filter_keywords').value;
 }
 
 function get_length() {
@@ -43,8 +43,4 @@ function update_length_text(val) {
     } else {
         document.getElementById('recipe_filter_length_text').value = "Länge irrelevant";
     }
-}
-
-function strToArray(commaSeperatedString) {
-    return commaSeperatedString.split(',');
 }

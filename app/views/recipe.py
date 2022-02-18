@@ -35,8 +35,18 @@ async def findrecipe(
     )
     recipe = service_rec.search_recipe(recipe_filter=rec_filter)
 
-    # TODO: Rezept suchen/auswählen
+    prep_time_total_seconds = recipe.prepTime.total_seconds()
+    prep_time_hours = prep_time_total_seconds // 3600
+    prep_time_minutes = (prep_time_total_seconds % 3600) // 60
+    prep_time_seconds = prep_time_total_seconds % 60
+    cook_time_total_seconds = recipe.cookTime.total_seconds()
+    cook_time_hours = cook_time_total_seconds // 3600
+    cook_time_minutes = (cook_time_total_seconds % 3600) // 60
+    cook_time_seconds = cook_time_total_seconds % 60
+
+    prep_time = f"{int(prep_time_hours)} Stunde(n), {int(prep_time_minutes)} Minute(n), {int(prep_time_seconds)} Sekunde(n)"
+    cook_time = f"{int(cook_time_hours)} Stunde(n), {int(cook_time_minutes)} Minute(n), {int(cook_time_seconds)} Sekunde(n)"
 
     return templates.TemplateResponse(
-        "recipe/recipe_result.html", {"request": request, "recipe": recipe}
+        "recipe/recipe_result.html", {"request": request, "recipe": recipe, "prepTime": prep_time, "cookTime": cook_time}
     )

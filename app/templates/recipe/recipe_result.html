@@ -6,26 +6,23 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-10" style="max-width: 480px;">
-        <p>{{recipe.ingredients}}</p>
-        <p>{{recipe.url}}</p>
-        <p>{{recipe.cookTime}}</p>
-        <p>{{recipe.prepTime}}</p>
-        <p>{{recipe.image}}</p>
+        <p>Vorbereitungszeit: {{prepTime}}</p>
+        <p>Koch-/Backzeit: {{cookTime}}</p>
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10 m-3 text-center" style="max-width: 480px;">
-        <a href="/main" class="btn btn-lg btn-dark">TODO: zum Rezept</a>
+    <div class="col-10 m-3 text-center" style="max-width: 480px; width: 100%;">
+        <a href="{{recipe.url}}" class="btn btn-outline-dark box-shadow prevent-dark-fill align-items-center justify-content-center flex-column">zum Rezept</a>
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10 m-3 text-center" style="max-width: 480px;">
-        <img id="recipe-image" index="recipe-image" src="/static/img/glaser.JPG"></img>
+    <div class="col-10 m-2 text-center" style="max-width: 480px;">
+        <img id="recipe-image" index="recipe-image" src="{{recipe.image}}" style="width: 100%;" alt="Kein Bild gefunden."></img>
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-10 text-center m-3" style="max-width: 480px;">
-        <a onclick="reload_page()" class="btn btn-dark btn-lg">Erneut suchen!</a>
+        <a onclick="reload_page()" class="btn btn-outline-dark box-shadow prevent-dark-fill">Erneut suchen!</a>
     </div>
 </div>
 <script src="/static/js/recipe.js"></script>

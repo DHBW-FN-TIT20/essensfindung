@@ -25,7 +25,6 @@ $('#restaurantFilter').on('hide.bs.modal', function(e) {
 })
 
 function change_restaurant_url() {
-    update_restaurant_modal_on_show();
     var latitude = get_latitude();
     var longitude = get_longitude();
     var zipcode = get_zipcode();
