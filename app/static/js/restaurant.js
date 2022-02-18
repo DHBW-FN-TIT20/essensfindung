@@ -26,7 +26,7 @@ $('#restaurantFilter').on('hide.bs.modal', function(e) {
     document.getElementById("allergies_selected").innerHTML = get_allergies();
 })
 
-function change_url() {
+function change_restaurant_url() {
     var latitude = get_latitude();
     var longitude = get_longitude();
     var zipcode = get_zipcode();
@@ -116,7 +116,7 @@ function update_allergies_options() {
     }
 }
 
-function update_modal_on_show() {
+function update_restaurant_modal_on_show() {
     update_radius_text(document.getElementById('restaurant_filter_radius').value);
     update_costs_text(document.getElementById('restaurant_filter_costs').value);
     update_cuisine_options();
@@ -134,7 +134,7 @@ function update_cuisine_selected() {
 function update_cuisine_options() {
     var cuisines_options = strToArray(document.getElementById('cuisine_options').innerHTML);
     for (const cuisine of cuisines_options) {
-        if (cuisine != "Essen") {
+        if (cuisine != "Restaurant") {
             if ($('#restaurant_filter_cuisine').find("option[value='" + cuisine + "']").length) {
                 $('#restaurant_filter_cuisine').val(cuisine).trigger('change');
             } else {

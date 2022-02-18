@@ -19,6 +19,7 @@ from views import error
 from views import index
 from views import rating
 from views import restaurant
+from views import recipe
 from views import signin
 
 
@@ -37,6 +38,7 @@ def configure_routing():
     app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(index.router)
     app.include_router(restaurant.router)
+    app.include_router(recipe.router)
     app.include_router(signin.router)
     app.include_router(error.router)
     app.include_router(rating.router)
