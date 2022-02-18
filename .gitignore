@@ -141,3 +141,4 @@ app/tests/test_db.db
 
 # Ignore local Database
 app/data/essensfindung.db
+.VSCodeCounter
