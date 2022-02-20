@@ -1,6 +1,9 @@
 /* sort and filter code */
+
+//contains objects corresponding to each entry on the page
 let entries = []
 
+//generating objects for each page entry
 document.querySelectorAll(".entry").forEach(e => {
     entries.push(
         {
@@ -12,6 +15,7 @@ document.querySelectorAll(".entry").forEach(e => {
     );
 });
 
+//filters entries with a rating
 document.getElementById("filterWithBewertung").addEventListener("click", e => {
     if (e.target.checked) {
         //show entries with a rating
@@ -32,6 +36,7 @@ document.getElementById("filterWithBewertung").addEventListener("click", e => {
     }
 });
 
+//filters entries without a rating
 document.getElementById("filterWithoutBewertung").addEventListener("click", e => {
     if (e.target.checked) {
         //show entries without a rating
@@ -50,8 +55,65 @@ document.getElementById("filterWithoutBewertung").addEventListener("click", e =>
             }
         }
     }
-})
+});
 
+//sorting functions
+//sorts by date descending
+document.getElementById("sortDateDesc").addEventListener("click", e => {
+    console.log("sorting date desc");
+    if (e.target.checked) {
+        //sort by date desc
+
+        //contains the parent element
+        parent = document.querySelector(".entry").parentNode.parentNode.parentNode;
+        //contains a list of entires which are children of the parent element
+        entryList = [];
+        document.querySelectorAll(".entry").forEach(e => {
+            entryList.push(e.parentNode.parentNode);
+        });
+        
+        //bubble sort to rearrange dom
+        let s, n = entries.length;
+        do {
+            s = false;
+            for (i = 1; i < n; i++) {
+                if (entries[i - 1].timestamp < entries[i].timestamp) {
+                    parent.insertBefore(entries[i].parent, entries[i - 1].parent);
+                    x = entries[i];
+                    entries[i] = entries[i - 1];
+                    entries[i - 1] = x;
+                    s = true;
+                }
+            }
+            n = n - 1;
+        } while (s);
+    }
+});
+
+//sorts by date ascending
+document.getElementById("sortDateAsc").addEventListener("click", e => {
+    console.log("sorting date asc");
+    if (e.target.checked) {
+        //contains the parent element
+        parent = document.querySelector(".entry").parentNode.parentNode.parentNode;
+        
+        //bubble sort to rearrange dom
+        let s, n = entries.length;
+        do {
+            s = false;
+            for (i = 1; i < n; i++) {
+                if (entries[i - 1].timestamp > entries[i].timestamp) {
+                    parent.insertBefore(entries[i].parent, entries[i - 1].parent);
+                    x = entries[i];
+                    entries[i] = entries[i - 1];
+                    entries[i - 1] = x;
+                    s = true;
+                }
+            }
+            n = n - 1;
+        } while (s);
+    }
+});
 
 /* filter and sort drawer functionality */
 
