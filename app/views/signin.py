@@ -20,6 +20,7 @@ from schemes.scheme_user import UserCreate
 from tools import security
 from tools.config import settings
 from tools.my_logging import logger
+from tools.security import oauth2_scheme
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
@@ -69,6 +70,13 @@ async def login(request: Request, url: Optional[str] = None, db_session: Session
                 url=f"/signin/?error=Wrong Email or Password&url={url}", status_code=status.HTTP_302_FOUND
             )
     return RedirectResponse(url="/signin/", status_code=status.HTTP_302_FOUND)
+
+
+@router.get("/signout/", response_class=RedirectResponse)
+async def signout(token: str = Depends(oauth2_scheme)):
+    """Logout the user and redirect to the main page"""
+    await security.invalid_access_token(token=token)
+    return RedirectResponse(url="/main", status_code=status.HTTP_302_FOUND)
 
 
 @router.get("/register/", response_class=HTMLResponse)

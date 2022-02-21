@@ -141,3 +141,4 @@ app/data/essensfindung.db
 app/tests/test_db.db
 app/data/essensfindung.db
 app/data/essensfindung.db
+app/data/invalid_token.json
