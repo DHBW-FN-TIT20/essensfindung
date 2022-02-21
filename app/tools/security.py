@@ -1,9 +1,13 @@
+import json
 from datetime import datetime
 from datetime import timedelta
+from pathlib import Path
 from typing import Dict
+from typing import List
 from typing import Optional
 from typing import Union
 
+import jose
 from fastapi import Depends
 from fastapi import Request
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
@@ -20,6 +24,7 @@ from schemes import exceptions
 from schemes.scheme_user import UserLogin
 from tools.config import settings
 from tools.hashing import Hasher
+from tools.my_logging import logger
 
 
 class Token(BaseModel):
@@ -79,7 +84,77 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         return param
 
 
+class InvalidTokens:
+    def __init__(self):
+        self.token_path = Path("./data/invalid_token.json")
+
+    def is_invalid(self, token: str) -> bool:
+        """Return true if the token is deactivated / invalid
+
+        Args:
+            token (str): Token to check
+
+        Returns:
+            bool: True if token is invalid
+        """
+        self.__clean_tokens__()
+        tokens = self.__get_tokens__()
+        if any(t.get(token) for t in tokens):
+            return True
+        return False
+
+    def add_token(self, token: str) -> None:
+        """If you add a token the user is forced to login again. Invalid the current JWS Token
+
+        Args:
+            token (str): Token to deactivade
+        """
+        self.token_path.touch(exist_ok=True)
+        tokens = self.__get_tokens__()
+        tokens.append({token: {"timestamp": datetime.now().timestamp()}})
+
+        with self.token_path.open("w", encoding="utf-8") as file:
+            json.dump(tokens, file)
+
+    def __get_tokens__(self) -> List[Dict]:
+        """Get the tokens in the buffer
+
+        Returns:
+            List[Dict[str]]: List of all Tokens as a dict
+        """
+        tokens = []
+        if not self.token_path.exists():
+            return tokens
+
+        with self.token_path.open("r", encoding="utf-8") as file:
+            try:
+                tokens = json.load(file)
+            except json.decoder.JSONDecodeError:
+                pass
+
+        return tokens
+
+    def __clean_tokens__(self) -> int:
+        """Remove all old Tokens that are safe expired"""
+        old_tokens = self.__get_tokens__()
+        cleaned_tokens = []
+        for token in old_tokens:
+            for key in token.keys():
+                try:
+                    jwt.decode(key, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+                except jose.exceptions.ExpiredSignatureError:
+                    logger.debug("Removed old Token from invalid DB")
+                else:
+                    cleaned_tokens.append(token)
+
+        with self.token_path.open("w", encoding="utf-8") as file:
+            json.dump(cleaned_tokens, file)
+
+        return abs(len(old_tokens) - len(cleaned_tokens))
+
+
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/token")
+invalid_tokens = InvalidTokens()
 
 
 def authenticate_user(db_session: Session, username: str, password: str) -> Union[UserLogin, None]:
@@ -121,6 +196,19 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     return encoded_jwt
 
 
+async def invalid_access_token(token: str = Depends(oauth2_scheme)) -> str:
+    """Add the token to local Database and if someone try to authenticate again with these token it will fail
+
+    Args:
+        token (str, optional): Token to be invalid. Defaults to Depends(oauth2_scheme).
+
+    Returns:
+        str: The removed Token
+    """
+    invalid_tokens.add_token(token=token)
+    return token
+
+
 async def get_current_user(db_session: Session = Depends(get_db), token: str = Depends(oauth2_scheme)) -> UserLogin:
     """Get the current user from a JWT
 
@@ -144,6 +232,6 @@ async def get_current_user(db_session: Session = Depends(get_db), token: str = D
     except JWTError:
         raise credentials_exception from JWTError
     user = get_user_by_mail(db_session, token_data.username)
-    if user is None:
+    if user is None or invalid_tokens.is_invalid(token):
         raise credentials_exception
     return UserLogin.from_orm(user)
