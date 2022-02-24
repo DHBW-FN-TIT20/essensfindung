@@ -6,4 +6,5 @@ API Documents
     :caption: Contents:
 
     tools/tools.rst
+    db/db.rst
 
