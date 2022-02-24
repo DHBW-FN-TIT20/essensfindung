@@ -48,8 +48,10 @@ def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]
     """Specific google api request to search near a location for restaurants
 
     Args:
-        params (dict): See all available params -> https://developers.google.com/maps/documentation/places/web-service/search-nearby#optional-parameters
-        next_page_token (str, optional): For recursion if the result got more than 20 results you have to search with the next_page_token. Defaults to None.
+        params (dict): See all available params
+            -> https://developers.google.com/maps/documentation/places/web-service/search-nearby#optional-parameters
+        next_page_token (str, optional): For recursion if the result got more than 20 results you have to search with
+            the next_page_token. Defaults to None.
 
     Returns:
         List[Restaurant]: List of all found restaurants
