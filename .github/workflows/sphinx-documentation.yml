@@ -32,7 +32,7 @@ jobs:
         ref: gh-pages
         clean: False
     - run: |
-        cp -r docs/build/html/* gh-pages/
+        cp -r docs/build/html/* ./
         cd gh-pages
         touch .nojekyll
         git config --local user.email "action@github.com"
