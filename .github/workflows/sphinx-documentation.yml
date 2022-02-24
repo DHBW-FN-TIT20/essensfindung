@@ -2,8 +2,9 @@ name: "Create docs"
 
 on:
   push:
-    branches:    
-      - master
+  pull_request:
+    branches: 
+      - main
 
 jobs:
   build:
