@@ -28,8 +28,10 @@ jobs:
     # Publish built docs to gh-pages branch.
     # ===============================
     - name: Commit documentation changes
-      run: |
-        git clone https://github.com/DHBW-FN-TIT20/essensfindung.git --branch gh-pages --single-branch gh-pages
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+    - run: |
         cp -r docs/_build/html/* gh-pages/
         cd gh-pages
         touch .nojekyll
