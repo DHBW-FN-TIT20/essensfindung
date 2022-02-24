@@ -28,10 +28,10 @@ jobs:
     # Publish built docs to gh-pages branch.
     # ===============================
     - name: Commit documentation changes
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
         ref: gh-pages
-      run: |
+    - run: |
         cp -r docs/_build/html/* gh-pages/
         cd gh-pages
         touch .nojekyll
