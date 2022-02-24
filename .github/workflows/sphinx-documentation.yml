@@ -18,29 +18,32 @@ jobs:
       with:
         docs-folder: "docs/"
 
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: ./docs/build/html/ # The folder the action should deploy.
+
     # Great extra actions to compose with:
     # Create an artifact of the html output .
-    - uses: actions/upload-artifact@v2
-      with:
-        name: DocumentationHTML
-        path: docs/build/html/
-
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/build/html  
-
-    # # Publish built docs to gh-pages branch.
-    # # ===============================
-    # - uses: actions/checkout@v2
+    # - uses: actions/upload-artifact@v2
     #   with:
-    #     ref: gh-pages
-    #     clean: False
+    #     name: DocumentationHTML
+    #     path: docs/build/html/
+
+
+    # Publish built docs to gh-pages branch.
+    # ===============================
+    # - uses: actions/checkout@v2
     # - uses: actions/download-artifact@v2
     #   with:
     #     name: DocumentationHTML
 
+    # - name: Deploy
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: docs/build/html  
     # - run: |
     #     cp -r docs/build/html/* ./
     #     git config --local user.email "action@github.com"
