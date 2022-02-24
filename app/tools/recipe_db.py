@@ -18,8 +18,6 @@ class RecipeDB:
     """
 
     def __init__(self, json_path: Path = Path("data/recipeitems.json")):
-        print(json_path.absolute())
-        print(json_path.parts)
         data = self.__read_data__(json_path)
         self.pd_frame = self.__convert_rows__(data)
 
