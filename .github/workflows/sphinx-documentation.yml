@@ -31,7 +31,7 @@ jobs:
       with:
         ref: gh-pages
     - run: |
-        cp -r docs/_build/html/* gh-pages/
+        cp -r docs/build/html/* gh-pages/
         cd gh-pages
         touch .nojekyll
         git config --local user.email "action@github.com"
