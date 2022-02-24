@@ -27,7 +27,6 @@ jobs:
 
     # Publish built docs to gh-pages branch.
     # ===============================
-    - name: Commit documentation changes
     - uses: actions/checkout@v2
       with:
         ref: gh-pages
