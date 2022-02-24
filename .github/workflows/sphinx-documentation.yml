@@ -33,8 +33,6 @@ jobs:
         clean: False
     - run: |
         cp -r docs/build/html/* ./
-        cd gh-pages
-        touch .nojekyll
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
