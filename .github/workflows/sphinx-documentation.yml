@@ -3,7 +3,7 @@ name: "Create docs"
 on:
   push:
     branches:
-      - docs/sphinx
+      - main
   pull_request:
     branches: 
       - main
@@ -15,44 +15,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    # Standard drop-in approach that should work for most people.
-    - uses: ammaraskar/sphinx-action@master
+    - name: Create Docs
+      uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: ./docs/
 
     - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: ./docs/build/html/ # The folder the action should deploy
-        clean: True
-        single-commit: True
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-    # Great extra actions to compose with:
-    # Create an artifact of the html output .
-    # - uses: actions/upload-artifact@v2
-    #   with:
-    #     name: DocumentationHTML
-    #     path: docs/build/html/
-
-
-    # Publish built docs to gh-pages branch.
-    # ===============================
-    # - uses: actions/checkout@v2
-    # - uses: actions/download-artifact@v2
-    #   with:
-    #     name: DocumentationHTML
-
-    # - name: Deploy
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: docs/build/html  
-    # - run: |
-    #     cp -r docs/build/html/* ./
-    #     git config --local user.email "action@github.com"
-    #     git config --local user.name "GitHub Action"
-    #     git add .
-    #     git commit -m "Update documentation" -a || true
-    #     git push
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/build/html/
