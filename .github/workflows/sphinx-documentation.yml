@@ -25,6 +25,7 @@ jobs:
         folder: ./docs/build/html/ # The folder the action should deploy
         clean: True
         single-commit: True
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     # Great extra actions to compose with:
     # Create an artifact of the html output .
