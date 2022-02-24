@@ -1,3 +1,4 @@
+"""Connection to the recipes"""
 import json
 from datetime import timedelta
 from pathlib import Path
@@ -7,7 +8,18 @@ import pandas
 
 
 class RecipeDB:
-    def __init__(self, json_path=Path("./data/recipeitems.json")):
+    """Uses Panda to manage the Recipe DB
+
+    Warning:
+        Use the `recipe_db` from this module and not your own instance of this class
+
+    Args:
+        json_path (Path): Path to the recipeitems.json. Defaults to data/recipeitems.json
+    """
+
+    def __init__(self, json_path: Path = Path("data/recipeitems.json")):
+        print(json_path.absolute())
+        print(json_path.parts)
         data = self.__read_data__(json_path)
         self.pd_frame = self.__convert_rows__(data)
 

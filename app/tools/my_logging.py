@@ -1,3 +1,4 @@
+"""Logging for the application"""
 import logging
 from pathlib import Path
 
@@ -5,7 +6,17 @@ import yaml
 
 
 def setup_logging(config_path: Path = Path("./logging.yml")):
-    """Setup the Logger from the Config File - Only call once!"""
+    """Setup the Logger from the Config File
+
+    Warning:
+        Only call once!
+
+    Args:
+        config_path (Path, optional): Path to the Config File. Defaults to Path("./logging.yml").
+
+    Raises:
+        RuntimeWarning: If no Configuration found
+    """
     if not config_path.exists:
         raise RuntimeWarning("No Logging Config Found!")
 
@@ -24,3 +35,7 @@ def setup_logging(config_path: Path = Path("./logging.yml")):
 
 
 logger = logging.getLogger("my_logger")
+"""Use this logger for all logging operations
+
+It use the default configuration with the name `my_logger`
+"""
