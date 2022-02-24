@@ -19,22 +19,32 @@ jobs:
         docs-folder: "docs/"
 
     # Great extra actions to compose with:
-    # Create an artifact of the html output.
+    # Create an artifact of the html output .
     - uses: actions/upload-artifact@v2
       with:
         name: DocumentationHTML
         path: docs/build/html/
 
-    # Publish built docs to gh-pages branch.
-    # ===============================
-    - uses: actions/checkout@v2
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        ref: gh-pages
-        clean: False
-    - run: |
-        cp -r docs/build/html/* ./
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Update documentation" -a || true
-        git push
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/build/html  
+
+    # # Publish built docs to gh-pages branch.
+    # # ===============================
+    # - uses: actions/checkout@v2
+    #   with:
+    #     ref: gh-pages
+    #     clean: False
+    # - uses: actions/download-artifact@v2
+    #   with:
+    #     name: DocumentationHTML
+
+    # - run: |
+    #     cp -r docs/build/html/* ./
+    #     git config --local user.email "action@github.com"
+    #     git config --local user.name "GitHub Action"
+    #     git add .
+    #     git commit -m "Update documentation" -a || true
+    #     git push
