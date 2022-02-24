@@ -2,6 +2,8 @@ name: "Create docs"
 
 on:
   push:
+    branches:
+      - docs/sphinx
   pull_request:
     branches: 
       - main
