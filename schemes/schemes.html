@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schemes &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Views" href="../views/views.html" />
+    <link rel="prev" title="CRUD" href="../db/crud.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Essensfindung
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../exceptions/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../db/db.html">Database</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Schemes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#allergie">Allergie</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pydantic-class">Pydantic Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cuisine">Cuisine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Pydantic Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#filter">Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recipe">Recipe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restaurant">Restaurant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user">User</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../views/views.html">Views</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Essensfindung</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API Documents</a> &raquo;</li>
+      <li>Schemes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/schemes/schemes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="schemes">
+<h1>Schemes<a class="headerlink" href="#schemes" title="Permalink to this headline">¶</a></h1>
+<p>This are classes to use for the communication between all functions</p>
+<div class="section" id="allergie">
+<h2>Allergie<a class="headerlink" href="#allergie" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This is an Enum</p>
+</div>
+<dl class="class">
+<dt id="schemes.Allergies">
+<em class="property">class </em><code class="sig-prename descclassname">schemes.</code><code class="sig-name descname">Allergies</code><a class="reference internal" href="../_modules/schemes.html#Allergies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#schemes.Allergies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter for Allergies</p>
+<dl class="attribute">
+<dt id="schemes.Allergies.LACTOSE">
+<code class="sig-name descname">LACTOSE</code><a class="headerlink" href="#schemes.Allergies.LACTOSE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to Laktoseintoleranz</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Allergies.WHEAT">
+<code class="sig-name descname">WHEAT</code><a class="headerlink" href="#schemes.Allergies.WHEAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to Glutenunvertraeglichkeit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="pydantic-class">
+<h3>Pydantic Class<a class="headerlink" href="#pydantic-class" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Pydantic class for ORM convertion</p>
+</div>
+</div>
+</div>
+<div class="section" id="cuisine">
+<h2>Cuisine<a class="headerlink" href="#cuisine" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="schemes.Cuisine">
+<em class="property">class </em><code class="sig-prename descclassname">schemes.</code><code class="sig-name descname">Cuisine</code><a class="reference internal" href="../_modules/schemes.html#Cuisine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#schemes.Cuisine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only this Cuisine can be searched</p>
+<dl class="attribute">
+<dt id="schemes.Cuisine.ITALIAN">
+<code class="sig-name descname">ITALIAN</code><a class="headerlink" href="#schemes.Cuisine.ITALIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.GERMAN">
+<code class="sig-name descname">GERMAN</code><a class="headerlink" href="#schemes.Cuisine.GERMAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.ASIAN">
+<code class="sig-name descname">ASIAN</code><a class="headerlink" href="#schemes.Cuisine.ASIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.DOENER">
+<code class="sig-name descname">DOENER</code><a class="headerlink" href="#schemes.Cuisine.DOENER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.TURKEY">
+<code class="sig-name descname">TURKEY</code><a class="headerlink" href="#schemes.Cuisine.TURKEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.GREEK">
+<code class="sig-name descname">GREEK</code><a class="headerlink" href="#schemes.Cuisine.GREEK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.KOREAN">
+<code class="sig-name descname">KOREAN</code><a class="headerlink" href="#schemes.Cuisine.KOREAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.THAILAND">
+<code class="sig-name descname">THAILAND</code><a class="headerlink" href="#schemes.Cuisine.THAILAND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.INDIAN">
+<code class="sig-name descname">INDIAN</code><a class="headerlink" href="#schemes.Cuisine.INDIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.COFFE">
+<code class="sig-name descname">COFFE</code><a class="headerlink" href="#schemes.Cuisine.COFFE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.BAKERY">
+<code class="sig-name descname">BAKERY</code><a class="headerlink" href="#schemes.Cuisine.BAKERY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.BUTCHER">
+<code class="sig-name descname">BUTCHER</code><a class="headerlink" href="#schemes.Cuisine.BUTCHER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.VEGAN">
+<code class="sig-name descname">VEGAN</code><a class="headerlink" href="#schemes.Cuisine.VEGAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.VEGETARIAN">
+<code class="sig-name descname">VEGETARIAN</code><a class="headerlink" href="#schemes.Cuisine.VEGETARIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.FASTFOOD">
+<code class="sig-name descname">FASTFOOD</code><a class="headerlink" href="#schemes.Cuisine.FASTFOOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.AMERICAN">
+<code class="sig-name descname">AMERICAN</code><a class="headerlink" href="#schemes.Cuisine.AMERICAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="schemes.Cuisine.RESTAURANT">
+<code class="sig-name descname">RESTAURANT</code><a class="headerlink" href="#schemes.Cuisine.RESTAURANT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="section" id="id1">
+<h3>Pydantic Class<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Pydantic class for ORM convertion</p>
+</div>
+</div>
+</div>
+<div class="section" id="filter">
+<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="recipe">
+<h2>Recipe<a class="headerlink" href="#recipe" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="restaurant">
+<h2>Restaurant<a class="headerlink" href="#restaurant" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="user">
+<h2>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../db/crud.html" class="btn btn-neutral float-left" title="CRUD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../views/views.html" class="btn btn-neutral float-right" title="Views" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
