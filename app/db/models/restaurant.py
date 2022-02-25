@@ -7,7 +7,15 @@ from db.base import Base
 
 
 class Restaurant(Base):
-    """Model for SQLAlchemy for the restaurant Table in the DB"""
+    """
+    Model for SQLAlchemy for the restaurant Table in the DB
+
+    Attributes:
+        place_id (str): Primary Key
+        name (str): Name of the Restaurant
+        bewertungen (db.models.bewertung.Bewertung): Bewertungen of the person
+
+    """
 
     __tablename__ = "restaurant"
 

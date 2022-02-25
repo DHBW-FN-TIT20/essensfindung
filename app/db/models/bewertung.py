@@ -11,7 +11,18 @@ from db.base import Base
 
 
 class Bewertung(Base):
-    """Model for SQLAlchemy for the bewertung Table in the DB"""
+    """
+    Model for SQLAlchemy for the bewertung Table in the DB
+
+    Attributes:
+        person_email (str): Primary Key and ForeignKey of db.models.person.Person email
+        place_id (str): Primary Key and ForeignKey of db.models.restaurant.Restaurant
+        zeitstempel (sqlalchemy.DateTime): Set automatic in DB when updated
+        kommentar (str): Can be None
+        rating (int): Rating if the assessment
+        person (db.models.person.Person)
+        restaurant (db.models.restaurant.Restaurant)
+    """
 
     __tablename__ = "bewertung"
 

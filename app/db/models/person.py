@@ -9,7 +9,17 @@ from db.base import Base
 
 
 class Person(Base):
-    """Model for SQLAlchemy for the person Table in the DB"""
+    """
+    Model for SQLAlchemy for the person Table in the DB
+
+    Attributes:
+        email (str): Primary Key
+        hashed_password (str): Hashed Password of the user
+        last_login (sqlalchemy.DateTime): Autamtic set on update
+        bewertungen (db.models.bewertung.Bewertung): Bewertungen of the Person
+        filterRest (db.models.filter.Filter): Saved Filter of the Person
+
+    """
 
     __tablename__ = "person"
 
