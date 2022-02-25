@@ -1,6 +1,5 @@
 sphinx_rtd_theme
 autodocsumm
-python
 fastapi
 uvicorn
 Jinja2
