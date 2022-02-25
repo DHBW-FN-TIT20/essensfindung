@@ -9,8 +9,17 @@
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10" style="max-width: 480px;">
+    <div class="col-10 limit-width">
         <h5 class="mb-3">Rezept auf: <a href="{{recipe.url}}" id="recipeHref"></a></h5>
+    </div>
+</div>
+<div class="row justify-content-center" id="imageContainer">
+    <div class="col-10 m-2 mb-3 text-center" style="max-width: 480px;">
+        <img id="recipe-image" index="recipe-image" src="{{recipe.image}}" style="width: 100%;" alt="Kein Bild gefunden."></img>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-10" style="max-width: 480px;">
         <div class="d-flex mb-2">
             <div class="d-flex flex-column">
                 <p class="mb-0 me-4">Vorbereitungszeit: </p>
@@ -30,15 +39,11 @@
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10 m-2 text-center" style="max-width: 480px;">
-        <img id="recipe-image" index="recipe-image" src="{{recipe.image}}" style="width: 100%;" alt="Kein Bild gefunden."></img>
-    </div>
-</div>
-<div class="row justify-content-center">
     <div class="col-10 text-center m-3" style="max-width: 480px;">
         <a onclick="reload_page()" class="btn btn-outline-dark box-shadow prevent-dark-fill">Erneut suchen!</a>
     </div>
 </div>
+<script src="/static/js/recipe.js" type="text/javascript"></script>
 <script>
     const prepTime = {
         days: "{{prepTime.days}}",
@@ -54,88 +59,8 @@
     };
     const ingredientString = `{{recipe.ingredients}}`;
     const recipeURL = new URL(`{{recipe.url}}`);
+    const imageURL = `{{recipe.image}}`;
     
-    function fillTimesNumbers() {
-        let prepString = "";
-        prepString += (prepTime.days == 0) ? "" : prepTime.days + ":";
-        prepString += (prepTime.hours == 0) ? "" : prepTime.hours + ":";
-        prepString += (prepTime.minutes.length == 1) ? "0" + prepTime.minutes + ":" : prepTime.minutes + ":";
-        prepString += (prepTime.seconds.length == 1) ? "0" + prepTime.seconds : prepTime.seconds;
-        document.getElementById("prepTime").innerText = prepString;
-
-        let cookString = "";
-        cookString += (cookTime.days == 0) ? "" : cookTime.days + ":";
-        cookString += (cookTime.hours == 0) ? "" : cookTime.hours + ":";
-        cookString += (cookTime.minutes.length == 1) ? "0" + cookTime.minutes + ":" : cookTime.minutes + ":";
-        cookString += (cookTime.seconds.length == 1) ? "0" + cookTime.seconds : cookTime.seconds;
-        document.getElementById("cookTime").innerText = cookString;
-    }
-
-    function fillTimesLabels() {
-        let prepString = "";
-        prepString += (prepTime.days == 0) ? "" : prepTime.days + " tage ";
-        prepString += (prepTime.hours == 0) ? "" : prepTime.hours + " std. ";
-        prepString += (prepTime.minutes == 0) ? "" : prepTime.minutes + " min. ";
-        prepString += (prepTime.seconds == 0) ? "" : prepTime.seconds + " sek. ";
-        document.getElementById("prepTime").innerText = prepString;
-
-        let cookString = "";
-        cookString += (cookTime.days == 0) ? "" : cookTime.days + " tage ";
-        cookString += (cookTime.hours == 0) ? "" : cookTime.hours + " std. ";
-        cookString += (cookTime.minutes == 0) ? "" : cookTime.minutes + " min. ";
-        cookString += (cookTime.seconds == 0) ? "" : cookTime.seconds + " sek. ";
-        document.getElementById("cookTime").innerText = cookString;
-    }
-
-    function parseIngredientString() {
-        ingredientArray = ingredientString.split("\n");
-
-        parent = document.createElement('ul');
-        parent.setAttribute('class', 'list-group-flush ps-1')
-
-        for (i = 0; i < ingredientArray.length; i++) {
-            let li = document.createElement('li');
-            li.setAttribute('class', 'list-group-item')
-            li.innerText = ingredientArray[i];
-            parent.appendChild(li);
-        }
-
-        document.getElementById("ingredientContainer").appendChild(parent);    
-    }
-
-    function addIngredientsDisplayListener() {
-        document.getElementById("toggleIngredients").addEventListener("click", e => {
-            e.preventDefault();
-            let ings = document.getElementById("ingredientContainer");
-            if (ings.classList.contains("d-none")) {
-                e.target.innerText = "Zutaten verbergen";
-                ings.classList.remove("d-none");
-            } else {
-                e.target.innerText = "Zutaten anzeigen";
-                ings.classList.add("d-none");
-            }
-        })
-    }
-
-    function fillRecipeHref() {
-        document.getElementById("recipeHref").innerText = recipeURL.hostname;
-        if (recipeURL.hostname == "tastykitchen.com") {
-            //turn off ingredients due to bad source in JSON
-            document.getElementById("toggleIngredients").classList.add("d-none");
-        }
-    }
-
-    function reload_page() {
-        window.location.reload(true);
-    }
-
-    function initRecipeResult() {
-        fillTimesLabels();
-        fillRecipeHref();
-        parseIngredientString();
-        addIngredientsDisplayListener();
-    }
-
     initRecipeResult();
 </script>
 {% endblock %}
