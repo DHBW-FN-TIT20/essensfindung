@@ -91,7 +91,7 @@
 <span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="n">gapi</span>
 
 
-<div class="viewcode-block" id="get_assessments_from_user"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.get_assessments_from_user">[docs]</a><span class="k">def</span> <span class="nf">get_assessments_from_user</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RestBewertungReturn</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+<div class="viewcode-block" id="get_assessments_from_user"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.get_assessments_from_user">[docs]</a><span class="k">def</span> <span class="nf">get_assessments_from_user</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RestBewertungReturn</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Get Bewertungen from a User to all restaurants</span>
 
 <span class="sd">    Args:</span>
@@ -116,7 +116,7 @@
     <span class="k">return</span> <span class="n">scheme_rests</span></div>
 
 
-<div class="viewcode-block" id="add_assessment"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.add_assessment">[docs]</a><span class="k">def</span> <span class="nf">add_assessment</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">assessment</span><span class="p">:</span> <span class="n">RestBewertungCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestBewertungReturn</span><span class="p">:</span>
+<div class="viewcode-block" id="add_assessment"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.add_assessment">[docs]</a><span class="k">def</span> <span class="nf">add_assessment</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">assessment</span><span class="p">:</span> <span class="n">RestBewertungCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestBewertungReturn</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Add the given assessment to the Database.</span>
 
 <span class="sd">    Args:</span>
@@ -143,7 +143,7 @@
         <span class="k">raise</span> <span class="n">error</span></div>
 
 
-<div class="viewcode-block" id="update_assessment"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.update_assessment">[docs]</a><span class="k">def</span> <span class="nf">update_assessment</span><span class="p">(</span>
+<div class="viewcode-block" id="update_assessment"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.update_assessment">[docs]</a><span class="k">def</span> <span class="nf">update_assessment</span><span class="p">(</span>
     <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">old_assessment</span><span class="p">:</span> <span class="n">RestBewertungCreate</span><span class="p">,</span> <span class="n">new_assessment</span><span class="p">:</span> <span class="n">RestBewertungCreate</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestBewertungReturn</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Update the comment and rating of a existing assessment</span>
@@ -173,7 +173,7 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="delete_assessment"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.delete_assessment">[docs]</a><span class="k">def</span> <span class="nf">delete_assessment</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">,</span> <span class="n">rest</span><span class="p">:</span> <span class="n">RestaurantBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="delete_assessment"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.delete_assessment">[docs]</a><span class="k">def</span> <span class="nf">delete_assessment</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">,</span> <span class="n">rest</span><span class="p">:</span> <span class="n">RestaurantBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Delete one assessment that are mapped between the user and rest</span>
 
 <span class="sd">    Args:</span>
@@ -193,7 +193,7 @@
     <span class="k">return</span> <span class="n">rows</span></div>
 
 
-<div class="viewcode-block" id="get_rest_filter_from_user"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.get_rest_filter_from_user">[docs]</a><span class="k">def</span> <span class="nf">get_rest_filter_from_user</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FilterRestDatabase</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<div class="viewcode-block" id="get_rest_filter_from_user"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.get_rest_filter_from_user">[docs]</a><span class="k">def</span> <span class="nf">get_rest_filter_from_user</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FilterRestDatabase</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Return the saved Filter from the Database if found one</span>
 
 <span class="sd">    Args:</span>
@@ -210,7 +210,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="create_rest_filter"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.create_rest_filter">[docs]</a><span class="k">def</span> <span class="nf">create_rest_filter</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">filter_rest</span><span class="p">:</span> <span class="n">FilterRestDatabase</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterRestDatabase</span><span class="p">:</span>
+<div class="viewcode-block" id="create_rest_filter"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.create_rest_filter">[docs]</a><span class="k">def</span> <span class="nf">create_rest_filter</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">filter_rest</span><span class="p">:</span> <span class="n">FilterRestDatabase</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterRestDatabase</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Add a Filter to an existing person</span>
 
 <span class="sd">    Args:</span>
@@ -232,7 +232,7 @@
         <span class="k">raise</span> <span class="n">error</span></div>
 
 
-<div class="viewcode-block" id="update_rest_filter"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.update_rest_filter">[docs]</a><span class="k">def</span> <span class="nf">update_rest_filter</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">filter_updated</span><span class="p">:</span> <span class="n">FilterRestDatabase</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterRestDatabase</span><span class="p">:</span>
+<div class="viewcode-block" id="update_rest_filter"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.update_rest_filter">[docs]</a><span class="k">def</span> <span class="nf">update_rest_filter</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">filter_updated</span><span class="p">:</span> <span class="n">FilterRestDatabase</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterRestDatabase</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Update a Filter from a User. Need the full information of the filter (not only the new one)</span>
 
 <span class="sd">    Args:</span>
@@ -254,7 +254,7 @@
         <span class="k">raise</span> <span class="n">error</span></div>
 
 
-<div class="viewcode-block" id="search_for_restaurant"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.search_for_restaurant">[docs]</a><span class="k">def</span> <span class="nf">search_for_restaurant</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">,</span> <span class="n">user_f</span><span class="p">:</span> <span class="n">FilterRest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Restaurant</span><span class="p">:</span>
+<div class="viewcode-block" id="search_for_restaurant"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.search_for_restaurant">[docs]</a><span class="k">def</span> <span class="nf">search_for_restaurant</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">,</span> <span class="n">user_f</span><span class="p">:</span> <span class="n">FilterRest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Restaurant</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Do a full search for a Restaurant. This does the google search, weights the result with the user rating</span>
 <span class="sd">    and choose one of the restaurants according to the weights</span>
 
@@ -290,7 +290,7 @@
     <span class="k">return</span> <span class="n">restaurant</span></div>
 
 
-<div class="viewcode-block" id="fill_user_rating"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.fill_user_rating">[docs]</a><span class="k">def</span> <span class="nf">fill_user_rating</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">],</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">]:</span>
+<div class="viewcode-block" id="fill_user_rating"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.fill_user_rating">[docs]</a><span class="k">def</span> <span class="nf">fill_user_rating</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">],</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Search in the connected DB if one restaurant got already rated from the user</span>
 <span class="sd">    and if so add the value to the restaurant</span>
 
@@ -309,7 +309,7 @@
     <span class="k">return</span> <span class="n">rests</span></div>
 
 
-<div class="viewcode-block" id="apply_filter"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.apply_filter">[docs]</a><span class="k">def</span> <span class="nf">apply_filter</span><span class="p">(</span><span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">],</span> <span class="n">user_f</span><span class="p">:</span> <span class="n">FilterRest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">]:</span>
+<div class="viewcode-block" id="apply_filter"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.apply_filter">[docs]</a><span class="k">def</span> <span class="nf">apply_filter</span><span class="p">(</span><span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">],</span> <span class="n">user_f</span><span class="p">:</span> <span class="n">FilterRest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Apply all filter (current only Rating)</span>
 
 <span class="sd">    Args:</span>
@@ -322,7 +322,7 @@
     <span class="k">return</span> <span class="n">filter_rating</span><span class="p">(</span><span class="n">rests</span><span class="p">,</span> <span class="n">user_f</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="filter_rating"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.filter_rating">[docs]</a><span class="k">def</span> <span class="nf">filter_rating</span><span class="p">(</span><span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">],</span> <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">]:</span>
+<div class="viewcode-block" id="filter_rating"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.filter_rating">[docs]</a><span class="k">def</span> <span class="nf">filter_rating</span><span class="p">(</span><span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">],</span> <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Remove all Restaurants from the list under the given rating</span>
 
 <span class="sd">    Args:</span>
@@ -338,7 +338,7 @@
     <span class="k">return</span> <span class="n">rests</span></div>
 
 
-<div class="viewcode-block" id="select_restaurant"><a class="viewcode-back" href="../../services/service_rec.html#services.service_res.select_restaurant">[docs]</a><span class="k">def</span> <span class="nf">select_restaurant</span><span class="p">(</span><span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Restaurant</span><span class="p">:</span>
+<div class="viewcode-block" id="select_restaurant"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.select_restaurant">[docs]</a><span class="k">def</span> <span class="nf">select_restaurant</span><span class="p">(</span><span class="n">rests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Restaurant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Restaurant</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Select one restaurant with specific weight. weight = user_rating * 4 + google_rating * 2.</span>
 <span class="sd">    If None rating found it will be count as 0</span>
 

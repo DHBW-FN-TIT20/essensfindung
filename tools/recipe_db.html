@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recipe_db &mdash; Essensfindung 1.0 documentation</title>
+  <title>Recipe Database &mdash; Essensfindung 1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -48,7 +48,7 @@
 <li class="toctree-l3"><a class="reference internal" href="hashing.html">Hashing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="my_logging.html">Logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="security.html">Config</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Recipe_db</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Recipe Database</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../db/db.html">Database</a></li>
@@ -75,7 +75,7 @@
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../api.html">API Documents</a> &raquo;</li>
           <li><a href="tools.html">Tools</a> &raquo;</li>
-      <li>Recipe_db</li>
+      <li>Recipe Database</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/tools/recipe_db.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,17 +85,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="recipe-db">
-<h1>Recipe_db<a class="headerlink" href="#recipe-db" title="Permalink to this headline"></a></h1>
+  <section id="recipe-database">
+<h1>Recipe Database<a class="headerlink" href="#recipe-database" title="Permalink to this headline"></a></h1>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Use <a class="reference external" href="#recipe_db">recipe_db</a> to interact with the Database if you want</p>
+</div>
 <dl class="py data">
 <dt class="sig sig-object py" id="recipe_db">
 <span class="sig-name descname"><span class="pre">recipe_db</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#tools.recipe_db.RecipeDB" title="tools.recipe_db.RecipeDB"><span class="pre">tools.recipe_db.RecipeDB</span></a></em><a class="headerlink" href="#recipe_db" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This contain a loaded class from <a class="reference external" href="#tools.recipe_db.RecipeDB">RecipeDB</a>
+Use this to reduce loading time</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tools.recipe_db.RecipeDB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tools.recipe_db.</span></span><span class="sig-name descname"><span class="pre">RecipeDB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tools.recipe_db.RecipeDB" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Class to interact with the <code class="file docutils literal notranslate"><span class="pre">data/recipeitems.json</span></code> and filter the data</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tools.recipe_db.RecipeDB.filter_cooktime">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_cooktime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_pd_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tools.recipe_db.RecipeDB.filter_cooktime" title="Permalink to this definition"></a></dt>
+<dd><p>Filter the given DataFrame for the whole cooktime (cookTime+prepTime).
+Only return the recipes with less-equal time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_pd_frame</strong> (<em>pandas.DataFrame</em>) – DataFrame to filter</p></li>
+<li><p><strong>total_time</strong> (<em>datetime.timedelta</em>) – Max cooktime</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of booleans</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tools.recipe_db.RecipeDB.filter_keyword">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_pd_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tools.recipe_db.RecipeDB.filter_keyword" title="Permalink to this definition"></a></dt>
+<dd><p>Filter the given DataFrame if the keyword is one of the columns <cite>name</cite>, <cite>description</cite> or <cite>recipeInstrucions</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_pd_frame</strong> (<em>pandas.DataFrame</em>) – DataFrame to filter</p></li>
+<li><p><strong>keyword</strong> (<em>str</em>) – The keyword to find</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of booleans</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 
