@@ -35,7 +35,23 @@ async def findrestaurant(
     db_session: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    """Requests user settings and search for restaurant.
 
+    Args:
+        request (Request): the http request
+        rating (int): the minimal rating
+        costs (float): the minimal costs
+        radius (int): the radius
+        lat (str): the latitude
+        lng (str): the longitude
+        cuisine (Union[str, None], optional): the selected cuisines. Defaults to None.
+        allergies (Union[str, None], optional): the selected allergies. Defaults to None.
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+        current_user (User, optional): the current user. Defaults to Depends(get_current_user).
+
+    Returns:
+        TemplateResponse: the http response
+    """
     # cuisine:str zum Cuisine-Array machen
     if cuisine is not None:
         cuisine_list = [scheme_cuisine.PydanticCuisine(name=cuisine) for cuisine in cuisine.split(",")]

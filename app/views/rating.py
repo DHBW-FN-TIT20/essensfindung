@@ -25,6 +25,16 @@ def rating(
     db_session: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    """Get all ratings of user
+
+    Args:
+        request (Request): the http request
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+        current_user (User, optional): the current user. Defaults to Depends(get_current_user).
+
+    Returns:
+        TemplateResponse: the http response
+    """
     rest_ratings = service_res.get_assessments_from_user(db_session=db_session, user=current_user)
 
     return templates.TemplateResponse(
@@ -54,6 +64,16 @@ def edit_rating(request: Request, place_id: str, db_session: Session = Depends(g
 
 @router.post("/rating/edit", response_class=RedirectResponse)
 async def edit_rating_post(request: Request, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Save rating of user
+
+    Args:
+        request (Request): the http request
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+        current_user (User, optional): the current user. Defaults to Depends(get_current_user).
+
+    Returns:
+        RedirectResponse: redirect to .../rating/
+    """
     form = await request.form()
     rating = form.get("rating_edit_rating_target")
     notes = form.get("rating_notes")
@@ -73,5 +93,17 @@ async def edit_rating_post(request: Request, db_session: Session = Depends(get_d
 
 @router.get("/rating/delete", response_class=RedirectResponse)
 def delete_rating(request: Request, place_id: str, rest_name: str, db_session: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Delete user rating
+
+    Args:
+        request (Request): the http request
+        place_id (str): the place id
+        rest_name (str): the restaurant name
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+        current_user (User, optional): the current user. Defaults to Depends(get_current_user).
+
+    Returns:
+        RedirectResponse: redirect to /rating/
+    """
     service_res.delete_assessment(db_session=db_session, user=current_user, rest=RestaurantBase(place_id=place_id, name=rest_name))
     return RedirectResponse("/rating/", status_code=status.HTTP_302_FOUND)
