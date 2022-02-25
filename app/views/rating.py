@@ -1,3 +1,4 @@
+"""Router and logic for the rating of the Website"""
 import fastapi
 from fastapi import Depends
 from fastapi import status

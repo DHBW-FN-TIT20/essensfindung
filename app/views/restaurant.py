@@ -1,4 +1,4 @@
-"""Router for the Home of the Website"""
+"""Router and logic for the restaurant of the Website"""
 from typing import Union
 
 import fastapi
