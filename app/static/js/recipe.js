@@ -12,7 +12,9 @@ function change_recipe_url() {
         var length = 0;
     }
     var keywords = get_keywords()
-    document.getElementById("search_recipe").href = "/findrecipe?length=" + length + "&keywords=" + keywords;
+    var new_link = "/findrecipe?length=" + length + "&keywords=" + keywords;
+    document.getElementById("search_recipe").href = new_link;
+    document.getElementById("search_recipe_from_modal").href = new_link;
 }
 
 function reload_page() {
