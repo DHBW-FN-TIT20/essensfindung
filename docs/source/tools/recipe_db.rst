@@ -3,7 +3,7 @@ Recipe_db
 
 .. py:data:: recipe_db
     :type: tools.recipe_db.RecipeDB
-    :canonical: tools.recipe_db.recipe_db
+
 
 .. py:class:: tools.recipe_db.RecipeDB(json_path)
 
