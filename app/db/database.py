@@ -21,6 +21,11 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def get_db() -> Generator:
+    """
+    Get a Session to the Database like a single transaction
+
+    Return:
+        Generator: Session to the Database"""
     try:
         database = SessionLocal()
         yield database
