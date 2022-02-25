@@ -1,16 +1,15 @@
-"""Router for the Home of the Website"""
+"""Router and Logic for the Recipe of the Website"""
 from typing import Union
 
 from datetime import timedelta
 import fastapi
 from fastapi.responses import HTMLResponse
-from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
 from schemes import scheme_filter
-from services import service_rec
 from schemes import scheme_cuisine
+from services import service_rec
 
 
 templates = Jinja2Templates("templates")
@@ -23,6 +22,16 @@ async def findrecipe(
     length: int,
     keywords: Union[str, None] = None,
 ):
+    """Requests user settings and search for recipe.
+
+    Args:
+        request (Request): the http request
+        length (int): the minimal length
+        keywords (Union[str, None], optional): the keywords. Defaults to None.
+
+    Returns:
+        TemplateResponse: the http response
+    """
     if length == 0:
         total_length = timedelta(days=100)
     else:

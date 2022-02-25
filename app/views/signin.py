@@ -1,4 +1,4 @@
-""" Logic for Login and Registration Pages """
+"""Router and Logic for Login and Registration Pages"""
 from datetime import timedelta
 from typing import Optional
 
@@ -30,6 +30,19 @@ router = fastapi.APIRouter()
 async def login_for_access_token(
     response: Response, db_session: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ):
+    """Generate token for user
+
+    Args:
+        response (Response): the http response
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+        form_data (OAuth2PasswordRequestForm, optional): the data of the login form. Defaults to Depends().
+
+    Raises:
+        exceptions.NotAuthorizedException: wrong login exception
+
+    Returns:
+        access_token: access token for user
+    """
     user = security.authenticate_user(db_session, form_data.username, form_data.password)
     if not user:
         raise exceptions.NotAuthorizedException(error_msg="Incorrect username or password")
@@ -45,12 +58,26 @@ def signin(request: Request, error: Optional[str] = ""):
 
     Args:
         request (Request): Requerd for Template
+        error (Optional[str], optional): the error message. Defaults to "".
+
+    Returns:
+        TemplateResponse: the http response
     """
     return templates.TemplateResponse("signin/signin.html", {"request": request, "error": error})
 
 
 @router.post("/signin/", response_class=RedirectResponse)
 async def login(request: Request, url: Optional[str] = None, db_session: Session = Depends(get_db)):
+    """Login Form to login the user and redirect if valid
+
+    Args:
+        request (Request): the http request
+        url (Optional[str], optional): url for redirect. Defaults to None.
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+
+    Returns:
+        RedirectResponse: redirect to /signin/ or /signin/... or /main/
+    """
     if not url:
         url = "/main"
     form = security.LoginForm(request)
@@ -74,17 +101,27 @@ async def login(request: Request, url: Optional[str] = None, db_session: Session
 
 @router.get("/signout/", response_class=RedirectResponse)
 async def signout(token: str = Depends(oauth2_scheme)):
-    """Logout the user and redirect to the main page"""
+    """Logout the user and redirect to the main page
+
+    Args:
+        token (str, optional): the authentification token. Defaults to Depends(oauth2_scheme).
+
+    Returns:
+        RedirectResponse: redirect to /main/
+    """
     await security.invalid_access_token(token=token)
     return RedirectResponse(url="/main", status_code=status.HTTP_302_FOUND)
 
 
 @router.get("/register/", response_class=HTMLResponse)
 def register(request: Request):
-    """Return the rendered template for the login page
+    """Return the rendered template for the register page
 
     Args:
         request (Request): Requerd for Template
+
+    Returns:
+        TemplateResponse: the http response
     """
 
     # read terms of service and privacy policy from text files
@@ -108,6 +145,15 @@ def register(request: Request):
 
 @router.post("/register/", response_class=RedirectResponse)
 async def register_post(request: Request, db_session: Session = Depends(get_db)):
+    """Register Form to register the user and redirect if valid
+
+    Args:
+        request (Request): the http request
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+
+    Returns:
+        RedirectResponse: redirect to /accresp/?success=...
+    """
     form = await request.form()
     email = form.get("emailInput")
     password = form.get("passwordInput")
@@ -129,7 +175,16 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
 
 @router.get("/accresp/", response_class=HTMLResponse)
 def account_response(request: Request, msg: Optional[str] = "", success: Optional[str] = ""):
-    """Return a response page for account creation, either positive or negative"""
+    """Return a response page for account creation, either positive or negative
+
+    Args:
+        request (Request): the http request
+        msg (Optional[str], optional): the error msg. Defaults to "".
+        success (Optional[str], optional): the succes boolean. Defaults to "".
+
+    Returns:
+        TemplateResponse: the http response
+    """
     data = {"request": request, "msg": msg, "success": success}
     return templates.TemplateResponse("signin/accresponse.html", data)
 
@@ -140,6 +195,9 @@ def recover(request: Request):
 
     Args:
         request (Request): Requerd for Template
+
+    Returns:
+        TemplateResponse: the http response
     """
     return templates.TemplateResponse("signin/recover.html", {"request": request})
 
@@ -150,6 +208,9 @@ def pwreset(request: Request):
 
     Args:
         request (Request): Requerd for Template
+
+    Returns:
+        TemplateResponse: the http response
     """
     return templates.TemplateResponse("signin/pwreset.html", {"request": request})
 
@@ -160,5 +221,8 @@ def pwchange(request: Request):
 
     Args:
         request (Request): Requerd for Template
+
+    Returns:
+        TemplateResponse: the http response
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})

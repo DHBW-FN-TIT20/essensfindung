@@ -9,4 +9,5 @@ API Documents
     tools/tools.rst
     db/db.rst
     schemes/schemes.rst
+    views/views.rst
 

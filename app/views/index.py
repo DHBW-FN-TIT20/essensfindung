@@ -25,6 +25,11 @@ def main(request: Request, current_user: UserLogin = Depends(get_current_user), 
 
     Args:
         request (Request): Requerd for Template
+        current_user (UserLogin, optional): the current user logged in. Defaults to Depends(get_current_user).
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+
+    Returns:
+        TemplateResponse: the http response
     """
 
     # request filter of user
@@ -64,7 +69,15 @@ def main(request: Request, current_user: UserLogin = Depends(get_current_user), 
 
 @router.get("/", response_class=HTMLResponse)
 def index(request: Request, db_session: Session = Depends(get_db)):  # <- REMOVE DB WITH MOCKED USER
-    """Return landing page for new users"""
+    """Return landing page for new users
+
+    Args:
+        request (Request): the http request
+        db_session (Session, optional): the db session. Defaults to Depends(get_db).
+
+    Returns:
+        TemplateResponse: the http response
+    """
 
     # TODO: Remove Mocked User ##########
     try:
