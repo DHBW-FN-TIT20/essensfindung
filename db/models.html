@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Models &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>Models &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
@@ -45,12 +47,12 @@
 <li class="toctree-l3"><a class="reference internal" href="base.html">Base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="database.html">Database</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Models</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#allergie">Allergie</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bewertung">Bewertung</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cuisine">Cuisine</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#filter">Filter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#person">Person</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#restaurant">Restaurant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.models.allergie">Allergie</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.models.bewertung">Bewertung</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.models.cuisine">Cuisine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.models.filter">Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.models.person">Person</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.models.restaurant">Restaurant</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="crud.html">CRUD</a></li>
@@ -58,6 +60,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../schemes/schemes.html">Schemes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../views/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/services.html">Services</a></li>
 </ul>
 </li>
 </ul>
@@ -88,33 +91,431 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="models">
-<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
+  <section id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline"></a></h1>
 <p>All the models that are used from <cite>SQL-Alchemy</cite></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Only use this class if you interact with the Database.
 Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </div>
-<div class="section" id="allergie">
-<h2>Allergie<a class="headerlink" href="#allergie" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="bewertung">
-<h2>Bewertung<a class="headerlink" href="#bewertung" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="cuisine">
-<h2>Cuisine<a class="headerlink" href="#cuisine" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="filter">
-<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="person">
-<h2>Person<a class="headerlink" href="#person" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="restaurant">
-<h2>Restaurant<a class="headerlink" href="#restaurant" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+<section id="module-db.models.allergie">
+<span id="allergie"></span><h2>Allergie<a class="headerlink" href="#module-db.models.allergie" title="Permalink to this headline"></a></h2>
+<p>Allergie structure for the DB</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.allergie.Allergie" title="db.models.allergie.Allergie"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Allergie</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the allergie Table in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.allergie.Allergie">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.allergie.</span></span><span class="sig-name descname"><span class="pre">Allergie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/allergie.html#Allergie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.allergie.Allergie" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the allergie Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.allergie.Allergie.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#db.models.allergie.Allergie.name" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.allergie.Allergie.beschreibung">
+<span class="sig-name descname"><span class="pre">beschreibung</span></span><a class="headerlink" href="#db.models.allergie.Allergie.beschreibung" title="Permalink to this definition"></a></dt>
+<dd><p>Optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-db.models.bewertung">
+<span id="bewertung"></span><h2>Bewertung<a class="headerlink" href="#module-db.models.bewertung" title="Permalink to this headline"></a></h2>
+<p>Bewertung structure for the DB</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Bewertung</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the bewertung Table in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.bewertung.</span></span><span class="sig-name descname"><span class="pre">Bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/bewertung.html#Bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.bewertung.Bewertung" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the bewertung Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.person_email">
+<span class="sig-name descname"><span class="pre">person_email</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.person_email" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key and ForeignKey of db.models.person.Person email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.place_id">
+<span class="sig-name descname"><span class="pre">place_id</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.place_id" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key and ForeignKey of db.models.restaurant.Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.zeitstempel">
+<span class="sig-name descname"><span class="pre">zeitstempel</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.zeitstempel" title="Permalink to this definition"></a></dt>
+<dd><p>Set automatic in DB when updated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>sqlalchemy.DateTime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.kommentar">
+<span class="sig-name descname"><span class="pre">kommentar</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.kommentar" title="Permalink to this definition"></a></dt>
+<dd><p>Can be None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.rating" title="Permalink to this definition"></a></dt>
+<dd><p>Rating if the assessment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.person">
+<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.person" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.person.Person" title="db.models.person.Person">db.models.person.Person</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.restaurant">
+<span class="sig-name descname"><span class="pre">restaurant</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.restaurant" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.restaurant.Restaurant" title="db.models.restaurant.Restaurant">db.models.restaurant.Restaurant</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-db.models.cuisine">
+<span id="cuisine"></span><h2>Cuisine<a class="headerlink" href="#module-db.models.cuisine" title="Permalink to this headline"></a></h2>
+<p>Filter structure for the DB</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.cuisine.Cuisine" title="db.models.cuisine.Cuisine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cuisine</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the Cuisine Table in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.cuisine.Cuisine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.cuisine.</span></span><span class="sig-name descname"><span class="pre">Cuisine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/cuisine.html#Cuisine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.cuisine.Cuisine" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the Cuisine Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.cuisine.Cuisine.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#db.models.cuisine.Cuisine.name" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-db.models.filter">
+<span id="filter"></span><h2>Filter<a class="headerlink" href="#module-db.models.filter" title="Permalink to this headline"></a></h2>
+<p>Filter structure for the DB</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.filter.FilterRest" title="db.models.filter.FilterRest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterRest</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the filter Table in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.filter.</span></span><span class="sig-name descname"><span class="pre">FilterRest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/filter.html#FilterRest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.filter.FilterRest" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the filter Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#db.models.filter.FilterRest.email" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key and Foreign Key  of person.email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.zipcode">
+<span class="sig-name descname"><span class="pre">zipcode</span></span><a class="headerlink" href="#db.models.filter.FilterRest.zipcode" title="Permalink to this definition"></a></dt>
+<dd><p>Length of 5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><a class="headerlink" href="#db.models.filter.FilterRest.radius" title="Permalink to this definition"></a></dt>
+<dd><p>Radius of the search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#db.models.filter.FilterRest.rating" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum rating of the google rating</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.costs">
+<span class="sig-name descname"><span class="pre">costs</span></span><a class="headerlink" href="#db.models.filter.FilterRest.costs" title="Permalink to this definition"></a></dt>
+<dd><p>Maximal costs of the google search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.person">
+<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#db.models.filter.FilterRest.person" title="Permalink to this definition"></a></dt>
+<dd><p>Owner of the filter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.person.Person" title="db.models.person.Person">db.models.person.Person</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.allergies">
+<span class="sig-name descname"><span class="pre">allergies</span></span><a class="headerlink" href="#db.models.filter.FilterRest.allergies" title="Permalink to this definition"></a></dt>
+<dd><p>Allergies of the Filter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.allergie.Allergie" title="db.models.allergie.Allergie">db.models.allergie.Allergie</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.filter.FilterRest.cuisines">
+<span class="sig-name descname"><span class="pre">cuisines</span></span><a class="headerlink" href="#db.models.filter.FilterRest.cuisines" title="Permalink to this definition"></a></dt>
+<dd><p>Cuisine of the Filter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.cuisine.Cuisine" title="db.models.cuisine.Cuisine">db.models.cuisine.Cuisine</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-db.models.person">
+<span id="person"></span><h2>Person<a class="headerlink" href="#module-db.models.person" title="Permalink to this headline"></a></h2>
+<p>Person structure for the DB</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.person.Person" title="db.models.person.Person"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Person</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the person Table in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.person.Person">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.person.</span></span><span class="sig-name descname"><span class="pre">Person</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/person.html#Person"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.person.Person" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the person Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.person.Person.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#db.models.person.Person.email" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.person.Person.hashed_password">
+<span class="sig-name descname"><span class="pre">hashed_password</span></span><a class="headerlink" href="#db.models.person.Person.hashed_password" title="Permalink to this definition"></a></dt>
+<dd><p>Hashed Password of the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.person.Person.last_login">
+<span class="sig-name descname"><span class="pre">last_login</span></span><a class="headerlink" href="#db.models.person.Person.last_login" title="Permalink to this definition"></a></dt>
+<dd><p>Autamtic set on update</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>sqlalchemy.DateTime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.person.Person.bewertungen">
+<span class="sig-name descname"><span class="pre">bewertungen</span></span><a class="headerlink" href="#db.models.person.Person.bewertungen" title="Permalink to this definition"></a></dt>
+<dd><p>Bewertungen of the Person</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">db.models.bewertung.Bewertung</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.person.Person.filterRest">
+<span class="sig-name descname"><span class="pre">filterRest</span></span><a class="headerlink" href="#db.models.person.Person.filterRest" title="Permalink to this definition"></a></dt>
+<dd><p>Saved Filter of the Person</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>db.models.filter.Filter</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-db.models.restaurant">
+<span id="restaurant"></span><h2>Restaurant<a class="headerlink" href="#module-db.models.restaurant" title="Permalink to this headline"></a></h2>
+<p>Restaurant structure for the DB</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.restaurant.Restaurant" title="db.models.restaurant.Restaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Restaurant</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the restaurant Table in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.restaurant.Restaurant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.restaurant.</span></span><span class="sig-name descname"><span class="pre">Restaurant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/restaurant.html#Restaurant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.restaurant.Restaurant" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the restaurant Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.restaurant.Restaurant.place_id">
+<span class="sig-name descname"><span class="pre">place_id</span></span><a class="headerlink" href="#db.models.restaurant.Restaurant.place_id" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.restaurant.Restaurant.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#db.models.restaurant.Restaurant.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.restaurant.Restaurant.bewertungen">
+<span class="sig-name descname"><span class="pre">bewertungen</span></span><a class="headerlink" href="#db.models.restaurant.Restaurant.bewertungen" title="Permalink to this definition"></a></dt>
+<dd><p>Bewertungen of the person</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">db.models.bewertung.Bewertung</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>

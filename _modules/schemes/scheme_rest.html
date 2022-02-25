@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>schemes.scheme_rest &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Essensfindung
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Essensfindung</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../schemes.html">schemes</a> &raquo;</li>
+      <li>schemes.scheme_rest</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for schemes.scheme_rest</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Contains all classes for the restaurant search &quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">scheme_user</span>
+
+
+<div class="viewcode-block" id="LocationBase"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.LocationBase">[docs]</a><span class="k">class</span> <span class="nc">LocationBase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    contain only coordinates</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        lat (str): Latitude</span>
+<span class="sd">        lng (str): Longitude</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lat</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">lng</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+<div class="viewcode-block" id="LocationRest"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.LocationRest">[docs]</a><span class="k">class</span> <span class="nc">LocationRest</span><span class="p">(</span><span class="n">LocationBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Store further information about the location of the restaurant</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        adr (str): Address of the Restaurant. Defaults to None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">adr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Geometry"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.Geometry">[docs]</a><span class="k">class</span> <span class="nc">Geometry</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Needed for better automation converting from the google api</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        location (schemes.scheme_rest.LocationRest)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">location</span><span class="p">:</span> <span class="n">LocationRest</span></div>
+
+
+<div class="viewcode-block" id="RestaurantBase"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.RestaurantBase">[docs]</a><span class="k">class</span> <span class="nc">RestaurantBase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scheme that is only needed for the DB</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        place_id (str): ID from Google</span>
+<span class="sd">        name (str): Name of the Restaurant</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">place_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+<div class="viewcode-block" id="RestaurantCreate"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.RestaurantCreate">[docs]</a><span class="k">class</span> <span class="nc">RestaurantCreate</span><span class="p">(</span><span class="n">RestaurantBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scheme that is only needed for the DB</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): Name of the Restaurant</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+        <span class="n">orm_mode</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Restaurant"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.Restaurant">[docs]</a><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">RestaurantBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class that got return to the website</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): Name of the Restaurant</span>
+<span class="sd">        geometry (Geometry): Postion of the Restaurant</span>
+<span class="sd">        maps_url (str): google maps url of the restaurant. Defaults to None.</span>
+<span class="sd">        rating (float): google rating. Defaults. to None</span>
+<span class="sd">        own_rating (float): User rating. Defgaults to None.</span>
+<span class="sd">        phone_number (str): Phonenumber of the restaurant. Defgaults to None.</span>
+<span class="sd">        homepage (str): Url of the homepage. Defgaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="n">Geometry</span>
+    <span class="n">maps_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">rating</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">own_rating</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">homepage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="RestBewertungBase"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.RestBewertungBase">[docs]</a><span class="k">class</span> <span class="nc">RestBewertungBase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    BaseClass for the Bewertung</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): Name of the restaurant</span>
+<span class="sd">        comment (Optional[str]): comment from the user. Defaults to &quot;&quot;.</span>
+<span class="sd">        rating (Optional[float]): Rating of the user. Defaults to 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">comment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">rating</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="RestBewertungCreate"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate">[docs]</a><span class="k">class</span> <span class="nc">RestBewertungCreate</span><span class="p">(</span><span class="n">RestBewertungBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to create a new Bewertung in the DB</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        person (scheme_user.UserBase): Owner of the assessment.</span>
+<span class="sd">        restaurant (RestaurantBase): The restaurant.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">person</span><span class="p">:</span> <span class="n">scheme_user</span><span class="o">.</span><span class="n">UserBase</span>
+    <span class="n">restaurant</span><span class="p">:</span> <span class="n">RestaurantBase</span></div>
+
+
+<div class="viewcode-block" id="RestBewertungReturn"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn">[docs]</a><span class="k">class</span> <span class="nc">RestBewertungReturn</span><span class="p">(</span><span class="n">RestBewertungBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to return to the frontend</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        email (str): Email of the User</span>
+<span class="sd">        place_id (str): PlaceID of the Restaurant</span>
+<span class="sd">        timestamp (datetime.datetime): Last Update of the assessment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">place_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span>
+
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+        <span class="n">orm_mode</span> <span class="o">=</span> <span class="kc">True</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

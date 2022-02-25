@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exceptions &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>Exceptions &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
@@ -44,6 +46,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../db/db.html">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../schemes/schemes.html">Schemes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../views/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/services.html">Services</a></li>
 </ul>
 </li>
 </ul>
@@ -73,9 +76,91 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="exceptions">
-<h1>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h1>
-</div>
+  <section id="module-schemes.exceptions">
+<span id="exceptions"></span><h1>Exceptions<a class="headerlink" href="#module-schemes.exceptions" title="Permalink to this headline"></a></h1>
+<p>Contains all own created Exceptions</p>
+<p><strong>Exceptions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.DatabaseException" title="schemes.exceptions.DatabaseException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatabaseException</span></code></a></p></td>
+<td><p>Exception for all Database Query</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.DuplicateEntry" title="schemes.exceptions.DuplicateEntry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DuplicateEntry</span></code></a></p></td>
+<td><p>Exception if you add a duplicate entry</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.GoogleApiException" title="schemes.exceptions.GoogleApiException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GoogleApiException</span></code></a></p></td>
+<td><p>Exception if some Error from the Google API request are made</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.NoResultsException" title="schemes.exceptions.NoResultsException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoResultsException</span></code></a></p></td>
+<td><p>Exception if the Search got no results</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.NotAuthorizedException" title="schemes.exceptions.NotAuthorizedException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NotAuthorizedException</span></code></a>(error_msg[, ...])</p></td>
+<td><p>Exception if you are not authorized</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.RecipeNotFound" title="schemes.exceptions.RecipeNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeNotFound</span></code></a></p></td>
+<td><p>Exception if no recipe found in the Database</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.RestaurantNotFound" title="schemes.exceptions.RestaurantNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestaurantNotFound</span></code></a>(error_msg, place_id)</p></td>
+<td><p>Exception of a DB Query if the User does not exist</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.UserNotFound" title="schemes.exceptions.UserNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserNotFound</span></code></a>(error_msg, user)</p></td>
+<td><p>Exception of a DB Query if the User does not exist</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.DatabaseException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">DatabaseException</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#DatabaseException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.DatabaseException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception for all Database Query</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.DuplicateEntry">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">DuplicateEntry</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#DuplicateEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.DuplicateEntry" title="Permalink to this definition"></a></dt>
+<dd><p>Exception if you add a duplicate entry</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.GoogleApiException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">GoogleApiException</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#GoogleApiException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.GoogleApiException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception if some Error from the Google API request are made</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.NoResultsException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">NoResultsException</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#NoResultsException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.NoResultsException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception if the Search got no results</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.NotAuthorizedException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotAuthorizedException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">401</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'WWW-Authenticate':</span> <span class="pre">'Bearer'}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/exceptions.html#NotAuthorizedException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.NotAuthorizedException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception if you are not authorized</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.RecipeNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">RecipeNotFound</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#RecipeNotFound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.RecipeNotFound" title="Permalink to this definition"></a></dt>
+<dd><p>Exception if no recipe found in the Database</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.RestaurantNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">RestaurantNotFound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/exceptions.html#RestaurantNotFound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.RestaurantNotFound" title="Permalink to this definition"></a></dt>
+<dd><p>Exception of a DB Query if the User does not exist</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.UserNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">UserNotFound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/exceptions.html#UserNotFound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.UserNotFound" title="Permalink to this definition"></a></dt>
+<dd><p>Exception of a DB Query if the User does not exist</p>
+</dd></dl>
+
+</section>
 
 
            </div>

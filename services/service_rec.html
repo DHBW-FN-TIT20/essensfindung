@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Recipe" href="service_res.html" />
+    <link rel="prev" title="Services" href="services.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Essensfindung
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../exceptions/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../db/db.html">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../schemes/schemes.html">Schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../views/views.html">Views</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="services.html">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Restaurant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_res.html">Recipe</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Essensfindung</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API Documents</a> &raquo;</li>
+          <li><a href="services.html">Services</a> &raquo;</li>
+      <li>Restaurant</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/services/service_rec.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="restaurant">
+<h1>Restaurant<a class="headerlink" href="#restaurant" title="Permalink to this headline"></a></h1>
+<p>Service for all Restaurant interactions</p>
+<span class="target" id="module-services.service_res"></span><p>Main Module for the Restaurant-Search</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.add_assessment" title="services.service_res.add_assessment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_assessment</span></code></a>(db_session, assessment)</p></td>
+<td><p>Add the given assessment to the Database.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.apply_filter" title="services.service_res.apply_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_filter</span></code></a>(rests, user_f)</p></td>
+<td><p>Apply all filter (current only Rating)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.create_rest_filter" title="services.service_res.create_rest_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_rest_filter</span></code></a>(db_session, filter_rest, user)</p></td>
+<td><p>Add a Filter to an existing person</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.delete_assessment" title="services.service_res.delete_assessment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_assessment</span></code></a>(db_session, user, rest)</p></td>
+<td><p>Delete one assessment that are mapped between the user and rest</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.fill_user_rating" title="services.service_res.fill_user_rating"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_user_rating</span></code></a>(db_session, rests, user)</p></td>
+<td><p>Search in the connected DB if one restaurant got already rated from the user and if so add the value to the restaurant</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.filter_rating" title="services.service_res.filter_rating"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_rating</span></code></a>(rests, rating)</p></td>
+<td><p>Remove all Restaurants from the list under the given rating</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.get_assessments_from_user" title="services.service_res.get_assessments_from_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_assessments_from_user</span></code></a>(db_session, user)</p></td>
+<td><p>Get Bewertungen from a User to all restaurants</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.get_rest_filter_from_user" title="services.service_res.get_rest_filter_from_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rest_filter_from_user</span></code></a>(db_session, user)</p></td>
+<td><p>Return the saved Filter from the Database if found one</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.search_for_restaurant" title="services.service_res.search_for_restaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_for_restaurant</span></code></a>(db_session, user, user_f)</p></td>
+<td><p>Do a full search for a Restaurant.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.select_restaurant" title="services.service_res.select_restaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_restaurant</span></code></a>(rests)</p></td>
+<td><p>Select one restaurant with specific weight.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.update_assessment" title="services.service_res.update_assessment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_assessment</span></code></a>(db_session, ...)</p></td>
+<td><p>Update the comment and rating of a existing assessment</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.update_rest_filter" title="services.service_res.update_rest_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_rest_filter</span></code></a>(db_session, ...)</p></td>
+<td><p>Update a Filter from a User.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.add_assessment">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">add_assessment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assessment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn"><span class="pre">schemes.scheme_rest.RestBewertungReturn</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#add_assessment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.add_assessment" title="Permalink to this definition"></a></dt>
+<dd><p>Add the given assessment to the Database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the DB -&gt; See <cite>db: Session = Depends(get_db)</cite></p></li>
+<li><p><strong>assessment</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><em>schemes.scheme_rest.RestBewertungCreate</em></a>) – The assessment need to be unique</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.DatabaseException" title="schemes.exceptions.DatabaseException"><strong>schemes.exceptions.DatabaseException</strong></a> – if the User or Restaurant does not exist or the assessment is duplicated</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The created Restaurant</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn">schemes.scheme_rest.RestBewertungReturn</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.apply_filter">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rests</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRest" title="schemes.scheme_filter.FilterRest"><span class="pre">schemes.scheme_filter.FilterRest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/services/service_res.html#apply_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.apply_filter" title="Permalink to this definition"></a></dt>
+<dd><p>Apply all filter (current only Rating)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rests</strong> (<em>List</em><em>[</em><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><em>schemes.scheme_rest.Restaurant</em></a><em>]</em>) – List of all Restarants to apply the filter</p></li>
+<li><p><strong>filter</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRest" title="schemes.scheme_filter.FilterRest"><em>schemes.scheme_filter.FilterRest</em></a>) – The Filter with all informations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The filtered List of the restaurants</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant">schemes.scheme_rest.Restaurant</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.create_rest_filter">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">create_rest_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_rest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><span class="pre">schemes.scheme_filter.FilterRestDatabase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><span class="pre">schemes.scheme_filter.FilterRestDatabase</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#create_rest_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.create_rest_filter" title="Permalink to this definition"></a></dt>
+<dd><p>Add a Filter to an existing person</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the Database</p></li>
+<li><p><strong>filter_rest</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><em>schemes.scheme_filter.FilterRestDatabase</em></a>) – Filter to add</p></li>
+<li><p><strong>user</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><em>schemes.scheme_user.UserBase</em></a>) – Owner of the Filter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.UserNotFound" title="schemes.exceptions.UserNotFound"><strong>schemes.exceptions.UserNotFound</strong></a> – If the User does not exist</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Added Filter</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase">schemes.scheme_filter.FilterRestDatabase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.delete_assessment">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">delete_assessment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><span class="pre">schemes.scheme_rest.RestaurantBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/services/service_res.html#delete_assessment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.delete_assessment" title="Permalink to this definition"></a></dt>
+<dd><p>Delete one assessment that are mapped between the user and rest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the DB -&gt; See <cite>db: Session = Depends(get_db)</cite></p></li>
+<li><p><strong>user</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><em>schemes.scheme_user.UserBase</em></a>) – The owner of the assessment</p></li>
+<li><p><strong>rest</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><em>schemes.scheme_rest.RestaurantBase</em></a>) – The mapped Restaurant</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.DatabaseException" title="schemes.exceptions.DatabaseException"><strong>schemes.exceptions.DatabaseException</strong></a> – if the User or Restaurant does not exist or the assessment is duplicated</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of affected Rows of the delete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.fill_user_rating">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">fill_user_rating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rests</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/services/service_res.html#fill_user_rating"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.fill_user_rating" title="Permalink to this definition"></a></dt>
+<dd><p>Search in the connected DB if one restaurant got already rated from the user
+and if so add the value to the restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the DB -&gt; See <cite>db: Session = Depends(get_db)</cite></p></li>
+<li><p><strong>google_res</strong> (<em>List</em><em>[</em><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><em>schemes.scheme_rest.Restaurant</em></a><em>]</em>) – Restaurants for lookup</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return of the input List with the user rating if one got found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant">schemes.scheme_rest.Restaurant</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.filter_rating">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">filter_rating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rests</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/services/service_res.html#filter_rating"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.filter_rating" title="Permalink to this definition"></a></dt>
+<dd><p>Remove all Restaurants from the list under the given rating</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rests</strong> (<em>List</em><em>[</em><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><em>schemes.scheme_rest.Restaurant</em></a><em>]</em>) – List of all Restarants to filter</p></li>
+<li><p><strong>rating</strong> (<em>int</em>) – All under this number got removed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Filtered List based ob the rating</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant">schemes.scheme_rest.Restaurant</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.get_assessments_from_user">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">get_assessments_from_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn"><span class="pre">schemes.scheme_rest.RestBewertungReturn</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/services/service_res.html#get_assessments_from_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.get_assessments_from_user" title="Permalink to this definition"></a></dt>
+<dd><p>Get Bewertungen from a User to all restaurants</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the DB -&gt; See <cite>db: Session = Depends(get_db)</cite></p></li>
+<li><p><strong>user_mail</strong> (<em>str</em>) – Mail of the User</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return a List of all User or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[List[<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn">schemes.scheme_rest.RestBewertungReturn</a>], None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.get_rest_filter_from_user">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">get_rest_filter_from_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><span class="pre">schemes.scheme_filter.FilterRestDatabase</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/services/service_res.html#get_rest_filter_from_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.get_rest_filter_from_user" title="Permalink to this definition"></a></dt>
+<dd><p>Return the saved Filter from the Database if found one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the Database</p></li>
+<li><p><strong>user</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><em>schemes.scheme_user.UserBase</em></a>) – Owner of the filter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return the Filter or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRest" title="schemes.scheme_filter.FilterRest">schemes.scheme_filter.FilterRest</a>, None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.search_for_restaurant">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">search_for_restaurant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRest" title="schemes.scheme_filter.FilterRest"><span class="pre">schemes.scheme_filter.FilterRest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#search_for_restaurant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.search_for_restaurant" title="Permalink to this definition"></a></dt>
+<dd><p>Do a full search for a Restaurant. This does the google search, weights the result with the user rating
+and choose one of the restaurants according to the weights</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the DB -&gt; See <cite>db: Session = Depends(get_db)</cite></p></li>
+<li><p><strong>user_f</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRest" title="schemes.scheme_filter.FilterRest"><em>schemes.scheme_filter.FilterRest</em></a>) – Filter that are needed for the search</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.NoResultsException" title="schemes.exceptions.NoResultsException"><strong>schemes.exceptions.NoResultsException</strong></a> – If no Results are found</p></li>
+<li><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.GoogleApiException" title="schemes.exceptions.GoogleApiException"><strong>schemes.exceptions.GoogleApiException</strong></a> – If no communication with the Google API are possible</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The one choosen Restaurant where the user have to go now!</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant">schemes.scheme_rest.Restaurant</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.select_restaurant">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">select_restaurant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rests</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#select_restaurant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.select_restaurant" title="Permalink to this definition"></a></dt>
+<dd><p>Select one restaurant with specific weight. weight = user_rating * 4 + google_rating * 2.
+If None rating found it will be count as 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user_res</strong> (<em>List</em><em>[</em><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><em>schemes.scheme_rest.Restaurant</em></a><em>]</em>) – The Rating of the Restaurants are optional</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The random chooses restaurant</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant">schemes.scheme_rest.Restaurant</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.update_assessment">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">update_assessment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_assessment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_assessment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn"><span class="pre">schemes.scheme_rest.RestBewertungReturn</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#update_assessment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.update_assessment" title="Permalink to this definition"></a></dt>
+<dd><p>Update the comment and rating of a existing assessment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the DB -&gt; See <cite>db: Session = Depends(get_db)</cite></p></li>
+<li><p><strong>old_assessment</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><em>schemes.scheme_rest.RestBewertungCreate</em></a>) – The current assessment</p></li>
+<li><p><strong>new_assessment</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><em>schemes.scheme_rest.RestBewertungCreate</em></a>) – The new assessment with the updated values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.DatabaseException" title="schemes.exceptions.DatabaseException"><strong>schemes.exceptions.DatabaseException</strong></a> – if the User or Restaurant does not exist or the assessment is duplicated</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Restaurant the the new values</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn">schemes.scheme_rest.RestBewertungReturn</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.service_res.update_rest_filter">
+<span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">update_rest_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_updated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><span class="pre">schemes.scheme_filter.FilterRestDatabase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><span class="pre">schemes.scheme_filter.FilterRestDatabase</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#update_rest_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.update_rest_filter" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Filter from a User. Need the full information of the filter (not only the new one)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Session to the Database</p></li>
+<li><p><strong>filter_updated</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><em>schemes.scheme_filter.FilterRestDatabase</em></a>) – The new Filter for the user</p></li>
+<li><p><strong>user</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><em>schemes.scheme_user.UserBase</em></a>) – Owner of the Filter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.UserNotFound" title="schemes.exceptions.UserNotFound"><strong>schemes.exceptions.UserNotFound</strong></a> – If the User is not in the db</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated Filter</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase">schemes.scheme_filter.FilterRestDatabase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="services.html" class="btn btn-neutral float-left" title="Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="service_res.html" class="btn btn-neutral float-right" title="Recipe" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

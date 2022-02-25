@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Usage &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -35,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#google-api-token">Google API Token</a></li>
@@ -79,19 +81,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Essensfindung need a <strong>Google Places API</strong> Token!</p>
 </div>
-<div class="section" id="google-api-token">
-<h2>Google API Token<a class="headerlink" href="#google-api-token" title="Permalink to this headline">¶</a></h2>
+<section id="google-api-token">
+<h2>Google API Token<a class="headerlink" href="#google-api-token" title="Permalink to this headline"></a></h2>
 <p>Create your own <a class="reference external" href="https://cloud.google.com/docs/authentication/api-keys">API Key</a> in this key you have to enable the <a class="reference external" href="https://console.cloud.google.com/apis/library/places-backend.googleapis.com">Google Maps Places API</a>
 If you already have a Google Project you can activate the API <a class="reference external" href="https://console.cloud.google.com/apis/library/places-backend.googleapis.com">here</a></p>
-</div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
 <p>You can install the dependencies with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
@@ -101,16 +103,16 @@ If you already have a Google Project you can activate the API <a class="referenc
 <p>You can also use <a class="reference external" href="https://python-poetry.org">Poetry</a>
 Just use the <code class="file docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and the <code class="file docutils literal notranslate"><span class="pre">poetry.lock</span></code></p>
 </div>
-</div>
-<div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you dont set the DB Settings the app will use a SQL-Lite DB!
 Dont use this in Production!</p>
 </div>
-<div class="section" id="env">
-<h3>.env<a class="headerlink" href="#env" title="Permalink to this headline">¶</a></h3>
+<section id="env">
+<h3>.env<a class="headerlink" href="#env" title="Permalink to this headline"></a></h3>
 <p>In the <code class="file docutils literal notranslate"><span class="pre">.env</span></code> - File you write all the configurations needed.</p>
 <dl>
 <dt>Required</dt><dd><table class="docutils align-default">
@@ -153,12 +155,12 @@ Dont use this in Production!</p>
 </table>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="start-the-app">
-<h2>Start the APP<a class="headerlink" href="#start-the-app" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="console">
-<h3>Console<a class="headerlink" href="#console" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="start-the-app">
+<h2>Start the APP<a class="headerlink" href="#start-the-app" title="Permalink to this headline"></a></h2>
+<section id="console">
+<h3>Console<a class="headerlink" href="#console" title="Permalink to this headline"></a></h3>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>This will start the app at port 8000</p>
@@ -177,13 +179,13 @@ Use at least uvicorn</p>
 </pre></div>
 </div>
 <p>to start it with <strong>gunicorn</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gunicorn</span> <span class="o">-</span><span class="n">w</span> <span class="mi">2</span> <span class="o">-</span><span class="n">k</span> <span class="n">uvicorn</span><span class="o">.</span><span class="n">workers</span><span class="o">.</span><span class="n">UvicornWorker</span> <span class="o">-</span><span class="n">b</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">80</span> <span class="o">--</span><span class="n">preload</span> <span class="n">main</span><span class="p">:</span><span class="n">app</span> <span class="n">main</span><span class="p">:</span><span class="n">app</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gunicorn</span> <span class="o">-</span><span class="n">w</span> <span class="mi">2</span> <span class="o">-</span><span class="n">k</span> <span class="n">uvicorn</span><span class="o">.</span><span class="n">workers</span><span class="o">.</span><span class="n">UvicornWorker</span> <span class="o">-</span><span class="n">b</span> <span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">80</span> <span class="o">--</span><span class="n">preload</span> <span class="n">main</span><span class="p">:</span><span class="n">app</span> <span class="n">main</span><span class="p">:</span><span class="n">app</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h2>
 <p>You also can build a docker container:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DHBW</span><span class="o">-</span><span class="n">FN</span><span class="o">-</span><span class="n">TIT20</span><span class="o">/</span><span class="n">essensfindung</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">essensfindung</span>
@@ -212,12 +214,12 @@ Use at least uvicorn</p>
 <span class="n">essensfindung</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="docker-compose">
-<h2>Docker Compose<a class="headerlink" href="#docker-compose" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="docker-compose">
+<h2>Docker Compose<a class="headerlink" href="#docker-compose" title="Permalink to this headline"></a></h2>
 <p>See the example from <code class="file docutils literal notranslate"><span class="pre">docker-compose.yml</span></code></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

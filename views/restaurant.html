@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>Restaurant &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
@@ -52,6 +54,7 @@
 <li class="toctree-l3"><a class="reference internal" href="signin.html">Signin</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../services/services.html">Services</a></li>
 </ul>
 </li>
 </ul>
@@ -82,9 +85,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="restaurant">
-<h1>Restaurant<a class="headerlink" href="#restaurant" title="Permalink to this headline">¶</a></h1>
-</div>
+  <section id="module-views.restaurant">
+<span id="restaurant"></span><h1>Restaurant<a class="headerlink" href="#module-views.restaurant" title="Permalink to this headline"></a></h1>
+<p>Router and logic for the restaurant of the Website</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.restaurant.findrestaurant" title="views.restaurant.findrestaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findrestaurant</span></code></a>(request, rating, costs, ...)</p></td>
+<td><p>Requests user settings and search for restaurant.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="views.restaurant.findrestaurant">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.restaurant.</span></span><span class="sig-name descname"><span class="pre">findrestaurant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">costs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cuisine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allergies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.User" title="schemes.scheme_user.User"><span class="pre">schemes.scheme_user.User</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/restaurant.html#findrestaurant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.restaurant.findrestaurant" title="Permalink to this definition"></a></dt>
+<dd><p>Requests user settings and search for restaurant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – the http request</p></li>
+<li><p><strong>rating</strong> (<em>int</em>) – the minimal rating</p></li>
+<li><p><strong>costs</strong> (<em>float</em>) – the minimal costs</p></li>
+<li><p><strong>radius</strong> (<em>int</em>) – the radius</p></li>
+<li><p><strong>lat</strong> (<em>str</em>) – the latitude</p></li>
+<li><p><strong>lng</strong> (<em>str</em>) – the longitude</p></li>
+<li><p><strong>cuisine</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – the selected cuisines. Defaults to None.</p></li>
+<li><p><strong>allergies</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – the selected allergies. Defaults to None.</p></li>
+<li><p><strong>db_session</strong> (<em>Session</em><em>, </em><em>optional</em>) – the db session. Defaults to Depends(get_db).</p></li>
+<li><p><strong>current_user</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.User" title="schemes.scheme_user.User"><em>User</em></a><em>, </em><em>optional</em>) – the current user. Defaults to Depends(get_current_user).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 
 
            </div>

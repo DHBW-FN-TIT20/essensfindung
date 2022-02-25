@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>views.signin &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Essensfindung
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Essensfindung</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>views.signin</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for views.signin</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Router and Logic for Login and Registration Pages&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">fastapi</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">Depends</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
+<span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">RedirectResponse</span>
+<span class="kn">from</span> <span class="nn">fastapi.security</span> <span class="kn">import</span> <span class="n">OAuth2PasswordRequestForm</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Session</span>
+<span class="kn">from</span> <span class="nn">starlette.requests</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">starlette.templating</span> <span class="kn">import</span> <span class="n">Jinja2Templates</span>
+
+<span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">create_user</span>
+<span class="kn">from</span> <span class="nn">db.database</span> <span class="kn">import</span> <span class="n">get_db</span>
+<span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">schemes.scheme_user</span> <span class="kn">import</span> <span class="n">UserCreate</span>
+<span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="n">security</span>
+<span class="kn">from</span> <span class="nn">tools.config</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">tools.my_logging</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">tools.security</span> <span class="kn">import</span> <span class="n">oauth2_scheme</span>
+
+<span class="n">templates</span> <span class="o">=</span> <span class="n">Jinja2Templates</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">)</span>
+<span class="n">router</span> <span class="o">=</span> <span class="n">fastapi</span><span class="o">.</span><span class="n">APIRouter</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="login_for_access_token"><a class="viewcode-back" href="../../views/signin.html#views.signin.login_for_access_token">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/token&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">security</span><span class="o">.</span><span class="n">Token</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">login_for_access_token</span><span class="p">(</span>
+    <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">,</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span> <span class="n">form_data</span><span class="p">:</span> <span class="n">OAuth2PasswordRequestForm</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">()</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate token for user</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        response (Response): the http response</span>
+<span class="sd">        db_session (Session, optional): the db session. Defaults to Depends(get_db).</span>
+<span class="sd">        form_data (OAuth2PasswordRequestForm, optional): the data of the login form. Defaults to Depends().</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        exceptions.NotAuthorizedException: wrong login exception</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        access_token: access token for user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">security</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">form_data</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">form_data</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">NotAuthorizedException</span><span class="p">(</span><span class="n">error_msg</span><span class="o">=</span><span class="s2">&quot;Incorrect username or password&quot;</span><span class="p">)</span>
+    <span class="n">access_token_expires</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="p">)</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">security</span><span class="o">.</span><span class="n">create_access_token</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sub&quot;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">},</span> <span class="n">expires_delta</span><span class="o">=</span><span class="n">access_token_expires</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">set_cookie</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;access_token&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">httponly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">,</span> <span class="s2">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;bearer&quot;</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="signin"><a class="viewcode-back" href="../../views/signin.html#views.signin.signin">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/signin/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">signin</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the rendered template for the login page</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): Requerd for Template</span>
+<span class="sd">        error (Optional[str], optional): the error message. Defaults to &quot;&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateResponse: the http response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/signin.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">error</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="login"><a class="viewcode-back" href="../../views/signin.html#views.signin.login">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/signin/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">RedirectResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;Login Form to login the user and redirect if valid</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): the http request</span>
+<span class="sd">        url (Optional[str], optional): url for redirect. Defaults to None.</span>
+<span class="sd">        db_session (Session, optional): the db session. Defaults to Depends(get_db).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RedirectResponse: redirect to /signin/ or /signin/... or /main/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/main&quot;</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">security</span><span class="o">.</span><span class="n">LoginForm</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">form</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+    <span class="k">if</span> <span class="k">await</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">form</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Login Successful :)&quot;</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;%26&quot;</span><span class="p">,</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">login_for_access_token</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">form_data</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">db_session</span><span class="o">=</span><span class="n">db_session</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">response</span>
+        <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">NotAuthorizedException</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;%26&quot;</span><span class="p">)</span>
+            <span class="n">form</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;Incorrect Email or Password&quot;</span>
+            <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span>
+                <span class="n">url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;/signin/?error=Wrong Email or Password&amp;url=</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;/signin/&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="signout"><a class="viewcode-back" href="../../views/signin.html#views.signin.signout">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/signout/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">RedirectResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">signout</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">oauth2_scheme</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;Logout the user and redirect to the main page</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        token (str, optional): the authentification token. Defaults to Depends(oauth2_scheme).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RedirectResponse: redirect to /main/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">await</span> <span class="n">security</span><span class="o">.</span><span class="n">invalid_access_token</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;/main&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="register"><a class="viewcode-back" href="../../views/signin.html#views.signin.register">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/register/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the rendered template for the register page</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): Requerd for Template</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateResponse: the http response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># read terms of service and privacy policy from text files</span>
+    <span class="n">tosstring</span> <span class="o">=</span> <span class="s2">&quot;Terms of Service is Missing&quot;</span>
+    <span class="n">privstring</span> <span class="o">=</span> <span class="s2">&quot;Privacy Policy is Missing&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;static/text/privacy.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">privfile</span><span class="p">:</span>
+            <span class="n">privstring</span> <span class="o">=</span> <span class="n">privfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;static/text/tos.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tosfile</span><span class="p">:</span>
+            <span class="n">tosstring</span> <span class="o">=</span> <span class="n">tosfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="n">legal</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tos&quot;</span><span class="p">:</span> <span class="n">tosstring</span><span class="p">,</span> <span class="s2">&quot;privacy&quot;</span><span class="p">:</span> <span class="n">privstring</span><span class="p">}</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;legal&quot;</span><span class="p">:</span> <span class="n">legal</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/register.html&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="register_post"><a class="viewcode-back" href="../../views/signin.html#views.signin.register_post">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/register/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">RedirectResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">register_post</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;Register Form to register the user and redirect if valid</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): the http request</span>
+<span class="sd">        db_session (Session, optional): the db session. Defaults to Depends(get_db).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RedirectResponse: redirect to /accresp/?success=...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">()</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;emailInput&quot;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;passwordInput&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">UserCreate</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">create_user</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span> <span class="n">person</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="s2">&quot;/accresp/?success=True&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">DuplicateEntry</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> already exist in the Database&quot;</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span>
+            <span class="s2">&quot;/accresp/?success=False&amp;msg=User mit der email gibt es bereits&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">DatabaseException</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span>
+            <span class="s2">&quot;/accresp/?success=False&amp;msg=Probleme mit der Datenbank&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="account_response"><a class="viewcode-back" href="../../views/signin.html#views.signin.account_response">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/accresp/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">account_response</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a response page for account creation, either positive or negative</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): the http request</span>
+<span class="sd">        msg (Optional[str], optional): the error msg. Defaults to &quot;&quot;.</span>
+<span class="sd">        success (Optional[str], optional): the succes boolean. Defaults to &quot;&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateResponse: the http response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">success</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/accresponse.html&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="recover"><a class="viewcode-back" href="../../views/signin.html#views.signin.recover">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/recover/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">recover</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the rendered template for the login page</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): Requerd for Template</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateResponse: the http response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/recover.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="pwreset"><a class="viewcode-back" href="../../views/signin.html#views.signin.pwreset">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/pwreset/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pwreset</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the rendered template for the login page</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): Requerd for Template</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateResponse: the http response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/pwreset.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="pwchange"><a class="viewcode-back" href="../../views/signin.html#views.signin.pwchange">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/pwchange/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pwchange</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the rendered template for the login page</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): Requerd for Template</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateResponse: the http response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/pwchange.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

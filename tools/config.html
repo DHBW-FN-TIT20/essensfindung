@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Config &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>Config &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
@@ -52,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../db/db.html">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../schemes/schemes.html">Schemes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../views/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/services.html">Services</a></li>
 </ul>
 </li>
 </ul>
@@ -82,10 +85,140 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="config">
-<h1>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h1>
+  <section id="config">
+<h1>Config<a class="headerlink" href="#config" title="Permalink to this headline"></a></h1>
 <p>All settings are saved in this module</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="tools.config.settings">
+<span class="sig-prename descclassname"><span class="pre">tools.config.</span></span><span class="sig-name descname"><span class="pre">settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;tools.config.Setting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#tools.config.settings" title="Permalink to this definition"></a></dt>
+<dd><p>Import this to gain the initial settings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tools.config.Setting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tools.config.</span></span><span class="sig-name descname"><span class="pre">Setting</span></span><a class="reference internal" href="../_modules/tools/config.html#Setting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tools.config.Setting" title="Permalink to this definition"></a></dt>
+<dd><p>Contains all Settings - Loads from the os env</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not create your own instance! Import settings instead from this module!</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not modifie SQL_LITE by yourself</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.GOOGLE_API_KEY">
+<span class="sig-name descname"><span class="pre">GOOGLE_API_KEY</span></span><a class="headerlink" href="#tools.config.Setting.GOOGLE_API_KEY" title="Permalink to this definition"></a></dt>
+<dd><p>Google API Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.SECRET_KEY">
+<span class="sig-name descname"><span class="pre">SECRET_KEY</span></span><a class="headerlink" href="#tools.config.Setting.SECRET_KEY" title="Permalink to this definition"></a></dt>
+<dd><p>Key that is used for the JWT hashing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.ALGORITHM">
+<span class="sig-name descname"><span class="pre">ALGORITHM</span></span><a class="headerlink" href="#tools.config.Setting.ALGORITHM" title="Permalink to this definition"></a></dt>
+<dd><p>Used hash algorit. Defaults to HS256</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.ACCESS_TOKEN_EXPIRE_MINUTES">
+<span class="sig-name descname"><span class="pre">ACCESS_TOKEN_EXPIRE_MINUTES</span></span><a class="headerlink" href="#tools.config.Setting.ACCESS_TOKEN_EXPIRE_MINUTES" title="Permalink to this definition"></a></dt>
+<dd><p>How long JWT - Token is valid in Minutes. Defaults to 30</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.SQL_LITE">
+<span class="sig-name descname"><span class="pre">SQL_LITE</span></span><a class="headerlink" href="#tools.config.Setting.SQL_LITE" title="Permalink to this definition"></a></dt>
+<dd><p>Automatic set to True if POSTGRES_SERVER is set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.POSTGRES_USER">
+<span class="sig-name descname"><span class="pre">POSTGRES_USER</span></span><a class="headerlink" href="#tools.config.Setting.POSTGRES_USER" title="Permalink to this definition"></a></dt>
+<dd><p>User for the DB</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.POSTGRES_PASSWORD">
+<span class="sig-name descname"><span class="pre">POSTGRES_PASSWORD</span></span><a class="headerlink" href="#tools.config.Setting.POSTGRES_PASSWORD" title="Permalink to this definition"></a></dt>
+<dd><p>Password for the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.POSTGRES_SERVER">
+<span class="sig-name descname"><span class="pre">POSTGRES_SERVER</span></span><a class="headerlink" href="#tools.config.Setting.POSTGRES_SERVER" title="Permalink to this definition"></a></dt>
+<dd><p>FQDN or IP of the DB Server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.POSTGRES_DATABASE">
+<span class="sig-name descname"><span class="pre">POSTGRES_DATABASE</span></span><a class="headerlink" href="#tools.config.Setting.POSTGRES_DATABASE" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the Database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tools.config.Setting.POSTGRES_PORT">
+<span class="sig-name descname"><span class="pre">POSTGRES_PORT</span></span><a class="headerlink" href="#tools.config.Setting.POSTGRES_PORT" title="Permalink to this definition"></a></dt>
+<dd><p>Port of the Server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 
 
            </div>

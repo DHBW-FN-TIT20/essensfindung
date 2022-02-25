@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>db.crud.bewertung &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Essensfindung
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Documents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Essensfindung</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>db.crud.bewertung</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for db.crud.bewertung</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;All DB functions for the Bewertung table&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">sqlalchemy</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="kn">from</span> <span class="nn">db.base</span> <span class="kn">import</span> <span class="n">Bewertung</span>
+<span class="kn">from</span> <span class="nn">db.base</span> <span class="kn">import</span> <span class="n">Person</span>
+<span class="kn">from</span> <span class="nn">db.base</span> <span class="kn">import</span> <span class="n">Restaurant</span>
+<span class="kn">from</span> <span class="nn">db.crud.restaurant</span> <span class="kn">import</span> <span class="n">get_restaurant_by_id</span>
+<span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">get_user_by_mail</span>
+<span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">scheme_rest</span>
+<span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">scheme_user</span>
+<span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">DatabaseException</span>
+<span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">DuplicateEntry</span>
+<span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">RestaurantNotFound</span>
+<span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">UserNotFound</span>
+<span class="kn">from</span> <span class="nn">tools.my_logging</span> <span class="kn">import</span> <span class="n">logger</span>
+
+
+<div class="viewcode-block" id="get_bewertung_from_user_to_rest"><a class="viewcode-back" href="../../../db/crud.html#db.crud.bewertung.get_bewertung_from_user_to_rest">[docs]</a><span class="k">def</span> <span class="nf">get_bewertung_from_user_to_rest</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">scheme_user</span><span class="o">.</span><span class="n">UserBase</span><span class="p">,</span> <span class="n">rest</span><span class="p">:</span> <span class="n">scheme_rest</span><span class="o">.</span><span class="n">RestaurantBase</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bewertung</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return a specific bewertung from a user to only one restaurant</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db (Session): Session to the DB</span>
+<span class="sd">        user (scheme_user.UserBase): Specifie the User</span>
+<span class="sd">        rest (scheme_rest.RestaurantBase): Specifie the restauranat</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Bewertung: Return one bewertung that match the restaurant - user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Bewertung</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Person</span><span class="p">,</span> <span class="n">Person</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">Bewertung</span><span class="o">.</span><span class="n">person_email</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Restaurant</span><span class="p">,</span> <span class="n">Restaurant</span><span class="o">.</span><span class="n">place_id</span> <span class="o">==</span> <span class="n">Bewertung</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Person</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Restaurant</span><span class="o">.</span><span class="n">place_id</span> <span class="o">==</span> <span class="n">rest</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_all_user_bewertungen"><a class="viewcode-back" href="../../../db/crud.html#db.crud.bewertung.get_all_user_bewertungen">[docs]</a><span class="k">def</span> <span class="nf">get_all_user_bewertungen</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">scheme_user</span><span class="o">.</span><span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Bewertung</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return all bewertugen from one User</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db (Session): Session to the DB</span>
+<span class="sd">        user (scheme_user.UserBase): The user to select</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[Bewertung] OR None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">Person</span> <span class="o">=</span> <span class="n">get_user_by_mail</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">bewertungen</span></div>
+
+
+<div class="viewcode-block" id="create_bewertung"><a class="viewcode-back" href="../../../db/crud.html#db.crud.bewertung.create_bewertung">[docs]</a><span class="k">def</span> <span class="nf">create_bewertung</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">assessment</span><span class="p">:</span> <span class="n">scheme_rest</span><span class="o">.</span><span class="n">RestBewertungCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bewertung</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Create / Add a Bewertung to the DB. Timestamp and ID will set automatic.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db (Session): Session to the DB</span>
+<span class="sd">        assessment (scheme_rest.RestBewertungCreate): Bewertung to add. This include the Person and Restaurant for the mapping of the Bewertung</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        UserNotFound: If the user does not exist</span>
+<span class="sd">        RestaurantNotFound: If the restaurant does not exist</span>
+<span class="sd">        DuplicateEntry: Duplicate Primary Key</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Bewertung: Return if success</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">get_user_by_mail</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">assessment</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UserNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User </span><span class="si">{</span><span class="n">assessment</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2"> does not exist&quot;</span><span class="p">,</span> <span class="n">assessment</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">get_restaurant_by_id</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">assessment</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RestaurantNotFound</span><span class="p">(</span><span class="s2">&quot;Restaurant does not exist&quot;</span><span class="p">,</span> <span class="n">assessment</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span>
+
+    <span class="n">db_assessment</span> <span class="o">=</span> <span class="n">Bewertung</span><span class="p">(</span>
+        <span class="n">person_email</span><span class="o">=</span><span class="n">assessment</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+        <span class="n">place_id</span><span class="o">=</span><span class="n">assessment</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">place_id</span><span class="p">,</span>
+        <span class="n">kommentar</span><span class="o">=</span><span class="n">assessment</span><span class="o">.</span><span class="n">comment</span><span class="p">,</span>
+        <span class="n">rating</span><span class="o">=</span><span class="n">assessment</span><span class="o">.</span><span class="n">rating</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_assessment</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_assessment</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Added assessment to db... place_id:</span><span class="si">%s</span><span class="se">\t</span><span class="s2">email:</span><span class="si">%s</span><span class="se">\t</span><span class="s2">rating:</span><span class="si">%s</span><span class="se">\t</span><span class="s2">comment:</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">db_assessment</span><span class="o">.</span><span class="n">place_id</span><span class="p">,</span>
+            <span class="n">db_assessment</span><span class="o">.</span><span class="n">person_email</span><span class="p">,</span>
+            <span class="n">db_assessment</span><span class="o">.</span><span class="n">rating</span><span class="p">,</span>
+            <span class="n">db_assessment</span><span class="o">.</span><span class="n">kommentar</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">db_assessment</span>
+    <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">DuplicateEntry</span><span class="p">(</span><span class="s2">&quot;Assessment already exist&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
+
+
+<div class="viewcode-block" id="update_bewertung"><a class="viewcode-back" href="../../../db/crud.html#db.crud.bewertung.update_bewertung">[docs]</a><span class="k">def</span> <span class="nf">update_bewertung</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">old_bewertung</span><span class="p">:</span> <span class="n">scheme_rest</span><span class="o">.</span><span class="n">RestBewertungCreate</span><span class="p">,</span> <span class="n">new_bewertung</span><span class="p">:</span> <span class="n">scheme_rest</span><span class="o">.</span><span class="n">RestBewertungCreate</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bewertung</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Update the comment and rating of a bewertung</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db (Session): Session to the DB</span>
+<span class="sd">        old_bewertung (scheme_rest.RestBewertungCreate): The old Bewertung</span>
+<span class="sd">        new_bewertung (scheme_rest.RestBewertungCreate): The updated Bewertung</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Bewertung: New Bewertung from `get_bewertung_from_user_to_rest`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Bewertung</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Bewertung</span><span class="o">.</span><span class="n">person_email</span> <span class="o">==</span> <span class="n">old_bewertung</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Bewertung</span><span class="o">.</span><span class="n">place_id</span> <span class="o">==</span> <span class="n">old_bewertung</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">Bewertung</span><span class="o">.</span><span class="n">kommentar</span><span class="p">:</span> <span class="n">new_bewertung</span><span class="o">.</span><span class="n">comment</span><span class="p">,</span> <span class="n">Bewertung</span><span class="o">.</span><span class="n">rating</span><span class="p">:</span> <span class="n">new_bewertung</span><span class="o">.</span><span class="n">rating</span><span class="p">})</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">DatabaseException</span><span class="p">(</span><span class="s2">&quot;Can not update assessment. Does the User and the Restaurant exist?&quot;</span><span class="p">)</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Updated bewertung </span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">old_bewertung</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">old_bewertung</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_bewertung_from_user_to_rest</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">new_bewertung</span><span class="o">.</span><span class="n">person</span><span class="p">,</span> <span class="n">new_bewertung</span><span class="o">.</span><span class="n">restaurant</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete_bewertung"><a class="viewcode-back" href="../../../db/crud.html#db.crud.bewertung.delete_bewertung">[docs]</a><span class="k">def</span> <span class="nf">delete_bewertung</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">scheme_user</span><span class="o">.</span><span class="n">UserBase</span><span class="p">,</span> <span class="n">rest</span><span class="p">:</span> <span class="n">scheme_rest</span><span class="o">.</span><span class="n">RestaurantBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Delete one Bewertung</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db (Session): Session to the db</span>
+<span class="sd">        user (scheme_user.User): The owner of the Bewertung</span>
+<span class="sd">        rest (scheme_rest.RestaurantBase): The corrosponding Restaurant</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Number of effected rows</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Bewertung</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Bewertung</span><span class="o">.</span><span class="n">person_email</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">Bewertung</span><span class="o">.</span><span class="n">place_id</span> <span class="o">==</span> <span class="n">rest</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Deleted bewertung </span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">rest</span><span class="o">.</span><span class="n">place_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rows</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Schemes &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>Schemes &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
@@ -51,13 +53,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#id1">Pydantic Class</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#filter">Filter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#recipe">Recipe</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restaurant">Restaurant</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#user">User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-schemes.scheme_filter">Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-schemes.scheme_recipe">Recipe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-schemes.scheme_rest">Restaurant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-schemes.scheme_user">User</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../views/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/services.html">Services</a></li>
 </ul>
 </li>
 </ul>
@@ -87,22 +90,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="schemes">
-<h1>Schemes<a class="headerlink" href="#schemes" title="Permalink to this headline">¶</a></h1>
+  <section id="schemes">
+<h1>Schemes<a class="headerlink" href="#schemes" title="Permalink to this headline"></a></h1>
 <p>This are classes to use for the communication between all functions</p>
-<div class="section" id="allergie">
-<h2>Allergie<a class="headerlink" href="#allergie" title="Permalink to this headline">¶</a></h2>
+<section id="allergie">
+<h2>Allergie<a class="headerlink" href="#allergie" title="Permalink to this headline"></a></h2>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>This is an Enum</p>
 </div>
-<dl class="class">
-<dt id="schemes.Allergies">
-<em class="property">class </em><code class="sig-prename descclassname">schemes.</code><code class="sig-name descname">Allergies</code><a class="reference internal" href="../_modules/schemes.html#Allergies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#schemes.Allergies" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.Allergies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.</span></span><span class="sig-name descname"><span class="pre">Allergies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes.html#Allergies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.Allergies" title="Permalink to this definition"></a></dt>
 <dd><p>Filter for Allergies</p>
-<dl class="attribute">
-<dt id="schemes.Allergies.LACTOSE">
-<code class="sig-name descname">LACTOSE</code><a class="headerlink" href="#schemes.Allergies.LACTOSE" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Allergies.LACTOSE">
+<span class="sig-name descname"><span class="pre">LACTOSE</span></span><a class="headerlink" href="#schemes.Allergies.LACTOSE" title="Permalink to this definition"></a></dt>
 <dd><p>Defaults to Laktoseintoleranz</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -111,9 +114,9 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Allergies.WHEAT">
-<code class="sig-name descname">WHEAT</code><a class="headerlink" href="#schemes.Allergies.WHEAT" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Allergies.WHEAT">
+<span class="sig-name descname"><span class="pre">WHEAT</span></span><a class="headerlink" href="#schemes.Allergies.WHEAT" title="Permalink to this definition"></a></dt>
 <dd><p>Defaults to Glutenunvertraeglichkeit</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -124,128 +127,1054 @@
 
 </dd></dl>
 
-<div class="section" id="pydantic-class">
-<h3>Pydantic Class<a class="headerlink" href="#pydantic-class" title="Permalink to this headline">¶</a></h3>
+<section id="pydantic-class">
+<h3>Pydantic Class<a class="headerlink" href="#pydantic-class" title="Permalink to this headline"></a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Pydantic class for ORM convertion</p>
 </div>
-</div>
-</div>
-<div class="section" id="cuisine">
-<h2>Cuisine<a class="headerlink" href="#cuisine" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="schemes.Cuisine">
-<em class="property">class </em><code class="sig-prename descclassname">schemes.</code><code class="sig-name descname">Cuisine</code><a class="reference internal" href="../_modules/schemes.html#Cuisine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#schemes.Cuisine" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-schemes.scheme_allergie"></span><p>Class for the Allergies</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_allergie.PydanticAllergies" title="schemes.scheme_allergie.PydanticAllergies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PydanticAllergies</span></code></a>(*, name)</p></td>
+<td><p>Needed class for revonvert orm models</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_allergie.PydanticAllergies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_allergie.</span></span><span class="sig-name descname"><span class="pre">PydanticAllergies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_allergie.html#PydanticAllergies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_allergie.PydanticAllergies" title="Permalink to this definition"></a></dt>
+<dd><p>Needed class for revonvert orm models</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_allergie.PydanticAllergies.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_allergie.PydanticAllergies.name" title="Permalink to this definition"></a></dt>
+<dd><p>Only Schemes in the schemes.Allergies Enum are valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_allergie.PydanticAllergies.allergie_values" title="schemes.scheme_allergie.PydanticAllergies.allergie_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allergie_values</span></code></a>(value)</p></td>
+<td><p>classmethod(function) -&gt; method</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="schemes.scheme_allergie.PydanticAllergies.allergie_values">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allergie_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_allergie.html#PydanticAllergies.allergie_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_allergie.PydanticAllergies.allergie_values" title="Permalink to this definition"></a></dt>
+<dd><p>classmethod(function) -&gt; method</p>
+<p>Convert a function to be a class method.</p>
+<p>A class method receives the class as implicit first argument,
+just like an instance method receives the instance.
+To declare a class method, use this idiom:</p>
+<blockquote>
+<div><dl>
+<dt>class C:</dt><dd><p>&#64;classmethod
+def f(cls, arg1, arg2, …):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>It can be called either on the class (e.g. C.f()) or on an instance
+(e.g. C().f()).  The instance is ignored except for its class.
+If a class method is called for a derived class, the derived class
+object is passed as the implied first argument.</p>
+<p>Class methods are different than C++ or Java static methods.
+If you want those, see the staticmethod builtin.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="cuisine">
+<h2>Cuisine<a class="headerlink" href="#cuisine" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.Cuisine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.</span></span><span class="sig-name descname"><span class="pre">Cuisine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes.html#Cuisine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.Cuisine" title="Permalink to this definition"></a></dt>
 <dd><p>Only this Cuisine can be searched</p>
-<dl class="attribute">
-<dt id="schemes.Cuisine.ITALIAN">
-<code class="sig-name descname">ITALIAN</code><a class="headerlink" href="#schemes.Cuisine.ITALIAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.ITALIAN">
+<span class="sig-name descname"><span class="pre">ITALIAN</span></span><a class="headerlink" href="#schemes.Cuisine.ITALIAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.GERMAN">
-<code class="sig-name descname">GERMAN</code><a class="headerlink" href="#schemes.Cuisine.GERMAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.GERMAN">
+<span class="sig-name descname"><span class="pre">GERMAN</span></span><a class="headerlink" href="#schemes.Cuisine.GERMAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.ASIAN">
-<code class="sig-name descname">ASIAN</code><a class="headerlink" href="#schemes.Cuisine.ASIAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.ASIAN">
+<span class="sig-name descname"><span class="pre">ASIAN</span></span><a class="headerlink" href="#schemes.Cuisine.ASIAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.DOENER">
-<code class="sig-name descname">DOENER</code><a class="headerlink" href="#schemes.Cuisine.DOENER" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.DOENER">
+<span class="sig-name descname"><span class="pre">DOENER</span></span><a class="headerlink" href="#schemes.Cuisine.DOENER" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.TURKEY">
-<code class="sig-name descname">TURKEY</code><a class="headerlink" href="#schemes.Cuisine.TURKEY" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.TURKEY">
+<span class="sig-name descname"><span class="pre">TURKEY</span></span><a class="headerlink" href="#schemes.Cuisine.TURKEY" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.GREEK">
-<code class="sig-name descname">GREEK</code><a class="headerlink" href="#schemes.Cuisine.GREEK" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.GREEK">
+<span class="sig-name descname"><span class="pre">GREEK</span></span><a class="headerlink" href="#schemes.Cuisine.GREEK" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.KOREAN">
-<code class="sig-name descname">KOREAN</code><a class="headerlink" href="#schemes.Cuisine.KOREAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.KOREAN">
+<span class="sig-name descname"><span class="pre">KOREAN</span></span><a class="headerlink" href="#schemes.Cuisine.KOREAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.THAILAND">
-<code class="sig-name descname">THAILAND</code><a class="headerlink" href="#schemes.Cuisine.THAILAND" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.THAILAND">
+<span class="sig-name descname"><span class="pre">THAILAND</span></span><a class="headerlink" href="#schemes.Cuisine.THAILAND" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.INDIAN">
-<code class="sig-name descname">INDIAN</code><a class="headerlink" href="#schemes.Cuisine.INDIAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.INDIAN">
+<span class="sig-name descname"><span class="pre">INDIAN</span></span><a class="headerlink" href="#schemes.Cuisine.INDIAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.COFFE">
-<code class="sig-name descname">COFFE</code><a class="headerlink" href="#schemes.Cuisine.COFFE" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.COFFE">
+<span class="sig-name descname"><span class="pre">COFFE</span></span><a class="headerlink" href="#schemes.Cuisine.COFFE" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.BAKERY">
-<code class="sig-name descname">BAKERY</code><a class="headerlink" href="#schemes.Cuisine.BAKERY" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.BAKERY">
+<span class="sig-name descname"><span class="pre">BAKERY</span></span><a class="headerlink" href="#schemes.Cuisine.BAKERY" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.BUTCHER">
-<code class="sig-name descname">BUTCHER</code><a class="headerlink" href="#schemes.Cuisine.BUTCHER" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.BUTCHER">
+<span class="sig-name descname"><span class="pre">BUTCHER</span></span><a class="headerlink" href="#schemes.Cuisine.BUTCHER" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.VEGAN">
-<code class="sig-name descname">VEGAN</code><a class="headerlink" href="#schemes.Cuisine.VEGAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.VEGAN">
+<span class="sig-name descname"><span class="pre">VEGAN</span></span><a class="headerlink" href="#schemes.Cuisine.VEGAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.VEGETARIAN">
-<code class="sig-name descname">VEGETARIAN</code><a class="headerlink" href="#schemes.Cuisine.VEGETARIAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.VEGETARIAN">
+<span class="sig-name descname"><span class="pre">VEGETARIAN</span></span><a class="headerlink" href="#schemes.Cuisine.VEGETARIAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.FASTFOOD">
-<code class="sig-name descname">FASTFOOD</code><a class="headerlink" href="#schemes.Cuisine.FASTFOOD" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.FASTFOOD">
+<span class="sig-name descname"><span class="pre">FASTFOOD</span></span><a class="headerlink" href="#schemes.Cuisine.FASTFOOD" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.AMERICAN">
-<code class="sig-name descname">AMERICAN</code><a class="headerlink" href="#schemes.Cuisine.AMERICAN" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.AMERICAN">
+<span class="sig-name descname"><span class="pre">AMERICAN</span></span><a class="headerlink" href="#schemes.Cuisine.AMERICAN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="schemes.Cuisine.RESTAURANT">
-<code class="sig-name descname">RESTAURANT</code><a class="headerlink" href="#schemes.Cuisine.RESTAURANT" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.Cuisine.RESTAURANT">
+<span class="sig-name descname"><span class="pre">RESTAURANT</span></span><a class="headerlink" href="#schemes.Cuisine.RESTAURANT" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<div class="section" id="id1">
-<h3>Pydantic Class<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<section id="id1">
+<h3>Pydantic Class<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Pydantic class for ORM convertion</p>
 </div>
-</div>
-</div>
-<div class="section" id="filter">
-<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="recipe">
-<h2>Recipe<a class="headerlink" href="#recipe" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="restaurant">
-<h2>Restaurant<a class="headerlink" href="#restaurant" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="user">
-<h2>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+<span class="target" id="module-schemes.scheme_cuisine"></span><p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_cuisine.PydanticCuisine" title="schemes.scheme_cuisine.PydanticCuisine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PydanticCuisine</span></code></a>(*, name)</p></td>
+<td><p>Needed class for revonvert orm models</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_cuisine.PydanticCuisine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_cuisine.</span></span><span class="sig-name descname"><span class="pre">PydanticCuisine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_cuisine.html#PydanticCuisine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_cuisine.PydanticCuisine" title="Permalink to this definition"></a></dt>
+<dd><p>Needed class for revonvert orm models</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_cuisine.PydanticCuisine.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_cuisine.PydanticCuisine.name" title="Permalink to this definition"></a></dt>
+<dd><p>Only schemes.Cuisine Enum valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_cuisine.PydanticCuisine.allergie_values" title="schemes.scheme_cuisine.PydanticCuisine.allergie_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allergie_values</span></code></a>(value)</p></td>
+<td><p>classmethod(function) -&gt; method</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="schemes.scheme_cuisine.PydanticCuisine.allergie_values">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allergie_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_cuisine.html#PydanticCuisine.allergie_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_cuisine.PydanticCuisine.allergie_values" title="Permalink to this definition"></a></dt>
+<dd><p>classmethod(function) -&gt; method</p>
+<p>Convert a function to be a class method.</p>
+<p>A class method receives the class as implicit first argument,
+just like an instance method receives the instance.
+To declare a class method, use this idiom:</p>
+<blockquote>
+<div><dl>
+<dt>class C:</dt><dd><p>&#64;classmethod
+def f(cls, arg1, arg2, …):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>It can be called either on the class (e.g. C.f()) or on an instance
+(e.g. C().f()).  The instance is ignored except for its class.
+If a class method is called for a derived class, the derived class
+object is passed as the implied first argument.</p>
+<p>Class methods are different than C++ or Java static methods.
+If you want those, see the staticmethod builtin.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="module-schemes.scheme_filter">
+<span id="filter"></span><h2>Filter<a class="headerlink" href="#module-schemes.scheme_filter" title="Permalink to this headline"></a></h2>
+<p>Contains all Filter for the searches</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterBase" title="schemes.scheme_filter.FilterBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterBase</span></code></a>(*, cuisines, rating[, allergies])</p></td>
+<td><p>Base Filter for recepes and restaurant</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterRecipe" title="schemes.scheme_filter.FilterRecipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterRecipe</span></code></a>(*, keyword, total_time)</p></td>
+<td><p>Extended Model for Recipe-Filter</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterRest" title="schemes.scheme_filter.FilterRest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterRest</span></code></a>(*, cuisines, rating[, allergies])</p></td>
+<td><p>Use this scheme to Search for a Restaurant in the Backend</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterRestDatabase" title="schemes.scheme_filter.FilterRestDatabase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterRestDatabase</span></code></a>(*, cuisines, rating[, ...])</p></td>
+<td><p>Use this scheme if you internact with the Filter that are saved in the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_filter.</span></span><span class="sig-name descname"><span class="pre">FilterBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cuisines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#schemes.scheme_cuisine.PydanticCuisine" title="schemes.scheme_cuisine.PydanticCuisine"><span class="pre">schemes.scheme_cuisine.PydanticCuisine</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allergies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#schemes.scheme_allergie.PydanticAllergies" title="schemes.scheme_allergie.PydanticAllergies"><span class="pre">schemes.scheme_allergie.PydanticAllergies</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterBase" title="Permalink to this definition"></a></dt>
+<dd><p>Base Filter for recepes and restaurant</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterBase.cuisines">
+<span class="sig-name descname"><span class="pre">cuisines</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterBase.cuisines" title="Permalink to this definition"></a></dt>
+<dd><p>All cuisines to search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#schemes.scheme_cuisine.PydanticCuisine" title="schemes.scheme_cuisine.PydanticCuisine">scheme_cuisine.PydanticCuisine</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterBase.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterBase.rating" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum rating</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterBase.allergies">
+<span class="sig-name descname"><span class="pre">allergies</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterBase.allergies" title="Permalink to this definition"></a></dt>
+<dd><p>All allergies to take care of</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[List[<a class="reference internal" href="#schemes.scheme_allergie.PydanticAllergies" title="schemes.scheme_allergie.PydanticAllergies">scheme_allergie.PydanticAllergies</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterBase.rating_range" title="schemes.scheme_filter.FilterBase.rating_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rating_range</span></code></a>(value)</p></td>
+<td><p>Check if rating &gt;= 1 and &lt;= 5</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterBase.rating_range">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rating_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterBase.rating_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterBase.rating_range" title="Permalink to this definition"></a></dt>
+<dd><p>Check if rating &gt;= 1 and &lt;= 5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Value of rating</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If wrong values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRecipe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_filter.</span></span><span class="sig-name descname"><span class="pre">FilterRecipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterRecipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterRecipe" title="Permalink to this definition"></a></dt>
+<dd><p>Extended Model for Recipe-Filter</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRecipe.keyword">
+<span class="sig-name descname"><span class="pre">keyword</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRecipe.keyword" title="Permalink to this definition"></a></dt>
+<dd><p>Keyword to search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRecipe.total_time">
+<span class="sig-name descname"><span class="pre">total_time</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRecipe.total_time" title="Permalink to this definition"></a></dt>
+<dd><p>Max cook time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime.timedelta</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_filter.</span></span><span class="sig-name descname"><span class="pre">FilterRest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cuisines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#schemes.scheme_cuisine.PydanticCuisine" title="schemes.scheme_cuisine.PydanticCuisine"><span class="pre">schemes.scheme_cuisine.PydanticCuisine</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allergies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#schemes.scheme_allergie.PydanticAllergies" title="schemes.scheme_allergie.PydanticAllergies"><span class="pre">schemes.scheme_allergie.PydanticAllergies</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">costs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_rest.LocationBase" title="schemes.scheme_rest.LocationBase"><span class="pre">schemes.scheme_rest.LocationBase</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterRest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterRest" title="Permalink to this definition"></a></dt>
+<dd><p>Use this scheme to Search for a Restaurant in the Backend</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRest.costs">
+<span class="sig-name descname"><span class="pre">costs</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRest.costs" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum pricing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRest.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRest.radius" title="Permalink to this definition"></a></dt>
+<dd><p>Radius of the search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRest.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRest.location" title="Permalink to this definition"></a></dt>
+<dd><p>Position for the search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_rest.LocationBase" title="schemes.scheme_rest.LocationBase">schemes.scheme_rest.LocationBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterRest.costs_range" title="schemes.scheme_filter.FilterRest.costs_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">costs_range</span></code></a>(value)</p></td>
+<td><p>Check if costs &gt;= 0 and &lt;= 4</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRest.costs_range">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">costs_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterRest.costs_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterRest.costs_range" title="Permalink to this definition"></a></dt>
+<dd><p>Check if costs &gt;= 0 and &lt;= 4</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Value of costs</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If wrong values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRestDatabase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_filter.</span></span><span class="sig-name descname"><span class="pre">FilterRestDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cuisines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#schemes.scheme_cuisine.PydanticCuisine" title="schemes.scheme_cuisine.PydanticCuisine"><span class="pre">schemes.scheme_cuisine.PydanticCuisine</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allergies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#schemes.scheme_allergie.PydanticAllergies" title="schemes.scheme_allergie.PydanticAllergies"><span class="pre">schemes.scheme_allergie.PydanticAllergies</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">costs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zipcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterRestDatabase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterRestDatabase" title="Permalink to this definition"></a></dt>
+<dd><p>Use this scheme if you internact with the Filter that are saved in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRestDatabase.costs">
+<span class="sig-name descname"><span class="pre">costs</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRestDatabase.costs" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum pricing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRestDatabase.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRestDatabase.radius" title="Permalink to this definition"></a></dt>
+<dd><p>Radius of the search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRestDatabase.zipcode">
+<span class="sig-name descname"><span class="pre">zipcode</span></span><a class="headerlink" href="#schemes.scheme_filter.FilterRestDatabase.zipcode" title="Permalink to this definition"></a></dt>
+<dd><p>To save the zipcode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterRestDatabase.costs_range" title="schemes.scheme_filter.FilterRestDatabase.costs_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">costs_range</span></code></a>(value)</p></td>
+<td><p>Check if costs &gt;= 0 and &lt;= 4</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_filter.FilterRestDatabase.plz_length" title="schemes.scheme_filter.FilterRestDatabase.plz_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plz_length</span></code></a>(value)</p></td>
+<td><p>Check if the zipcode got the length 5</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRestDatabase.costs_range">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">costs_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterRestDatabase.costs_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterRestDatabase.costs_range" title="Permalink to this definition"></a></dt>
+<dd><p>Check if costs &gt;= 0 and &lt;= 4</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Value of costs</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If wrong values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="schemes.scheme_filter.FilterRestDatabase.plz_length">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plz_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_filter.html#FilterRestDatabase.plz_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_filter.FilterRestDatabase.plz_length" title="Permalink to this definition"></a></dt>
+<dd><p>Check if the zipcode got the length 5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Value of zipcode</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If wrong value</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-schemes.scheme_recipe">
+<span id="recipe"></span><h2>Recipe<a class="headerlink" href="#module-schemes.scheme_recipe" title="Permalink to this headline"></a></h2>
+<p>Contains the Class for Recipe</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_recipe.Recipe" title="schemes.scheme_recipe.Recipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Recipe</span></code></a>(*, id, name, ingredients, url[, ...])</p></td>
+<td><p>Class that you get from the backend to handle the recipe</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">Recipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ingredients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#Recipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.Recipe" title="Permalink to this definition"></a></dt>
+<dd><p>Class that you get from the backend to handle the recipe</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.id" title="Permalink to this definition"></a></dt>
+<dd><p>id of the recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.ingredients">
+<span class="sig-name descname"><span class="pre">ingredients</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.ingredients" title="Permalink to this definition"></a></dt>
+<dd><p>ingredients of the recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.url" title="Permalink to this definition"></a></dt>
+<dd><p>url to the original page of the recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.image">
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.image" title="Permalink to this definition"></a></dt>
+<dd><p>url to an image if db contain one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.cookTime">
+<span class="sig-name descname"><span class="pre">cookTime</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.cookTime" title="Permalink to this definition"></a></dt>
+<dd><p>cooktime of the recipe if specified</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[timedelta]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.prepTime">
+<span class="sig-name descname"><span class="pre">prepTime</span></span><a class="headerlink" href="#schemes.scheme_recipe.Recipe.prepTime" title="Permalink to this definition"></a></dt>
+<dd><p>preperation time of the recipe if specified</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[timedelta]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-schemes.scheme_rest">
+<span id="restaurant"></span><h2>Restaurant<a class="headerlink" href="#module-schemes.scheme_rest" title="Permalink to this headline"></a></h2>
+<p>Contains all classes for the restaurant search</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_rest.Geometry" title="schemes.scheme_rest.Geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Geometry</span></code></a>(*, location)</p></td>
+<td><p>Needed for better automation converting from the google api</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_rest.LocationBase" title="schemes.scheme_rest.LocationBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocationBase</span></code></a>(*, lat, lng)</p></td>
+<td><p>contain only coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_rest.LocationRest" title="schemes.scheme_rest.LocationRest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocationRest</span></code></a>(*, lat, lng[, adr])</p></td>
+<td><p>Store further information about the location of the restaurant</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_rest.RestBewertungBase" title="schemes.scheme_rest.RestBewertungBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestBewertungBase</span></code></a>(*, name[, comment, rating])</p></td>
+<td><p>BaseClass for the Bewertung</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestBewertungCreate</span></code></a>(*, name[, comment, rating])</p></td>
+<td><p>Class to create a new Bewertung in the DB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_rest.RestBewertungReturn" title="schemes.scheme_rest.RestBewertungReturn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestBewertungReturn</span></code></a>(*, name[, comment, rating])</p></td>
+<td><p>Class to return to the frontend</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Restaurant</span></code></a>(*, place_id, name, geometry[, ...])</p></td>
+<td><p>Class that got return to the website</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestaurantBase</span></code></a>(*, place_id, name)</p></td>
+<td><p>Scheme that is only needed for the DB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_rest.RestaurantCreate" title="schemes.scheme_rest.RestaurantCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestaurantCreate</span></code></a>(*, place_id, name)</p></td>
+<td><p>Scheme that is only needed for the DB</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Geometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">Geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_rest.LocationRest" title="schemes.scheme_rest.LocationRest"><span class="pre">schemes.scheme_rest.LocationRest</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#Geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.Geometry" title="Permalink to this definition"></a></dt>
+<dd><p>Needed for better automation converting from the google api</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Geometry.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#schemes.scheme_rest.Geometry.location" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_rest.LocationRest" title="schemes.scheme_rest.LocationRest">schemes.scheme_rest.LocationRest</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.LocationBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">LocationBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#LocationBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.LocationBase" title="Permalink to this definition"></a></dt>
+<dd><p>contain only coordinates</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.LocationBase.lat">
+<span class="sig-name descname"><span class="pre">lat</span></span><a class="headerlink" href="#schemes.scheme_rest.LocationBase.lat" title="Permalink to this definition"></a></dt>
+<dd><p>Latitude</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.LocationBase.lng">
+<span class="sig-name descname"><span class="pre">lng</span></span><a class="headerlink" href="#schemes.scheme_rest.LocationBase.lng" title="Permalink to this definition"></a></dt>
+<dd><p>Longitude</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.LocationRest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">LocationRest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#LocationRest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.LocationRest" title="Permalink to this definition"></a></dt>
+<dd><p>Store further information about the location of the restaurant</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.LocationRest.adr">
+<span class="sig-name descname"><span class="pre">adr</span></span><a class="headerlink" href="#schemes.scheme_rest.LocationRest.adr" title="Permalink to this definition"></a></dt>
+<dd><p>Address of the Restaurant. Defaults to None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">RestBewertungBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#RestBewertungBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.RestBewertungBase" title="Permalink to this definition"></a></dt>
+<dd><p>BaseClass for the Bewertung</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungBase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungBase.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungBase.comment">
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungBase.comment" title="Permalink to this definition"></a></dt>
+<dd><p>comment from the user. Defaults to “”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungBase.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungBase.rating" title="Permalink to this definition"></a></dt>
+<dd><p>Rating of the user. Defaults to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">RestBewertungCreate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">restaurant</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><span class="pre">schemes.scheme_rest.RestaurantBase</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#RestBewertungCreate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.RestBewertungCreate" title="Permalink to this definition"></a></dt>
+<dd><p>Class to create a new Bewertung in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungCreate.person">
+<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungCreate.person" title="Permalink to this definition"></a></dt>
+<dd><p>Owner of the assessment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase">scheme_user.UserBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungCreate.restaurant">
+<span class="sig-name descname"><span class="pre">restaurant</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungCreate.restaurant" title="Permalink to this definition"></a></dt>
+<dd><p>The restaurant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase">RestaurantBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungReturn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">RestBewertungReturn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.datetime</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#RestBewertungReturn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.RestBewertungReturn" title="Permalink to this definition"></a></dt>
+<dd><p>Class to return to the frontend</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungReturn.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungReturn.email" title="Permalink to this definition"></a></dt>
+<dd><p>Email of the User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungReturn.place_id">
+<span class="sig-name descname"><span class="pre">place_id</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungReturn.place_id" title="Permalink to this definition"></a></dt>
+<dd><p>PlaceID of the Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestBewertungReturn.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#schemes.scheme_rest.RestBewertungReturn.timestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Last Update of the assessment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">Restaurant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_rest.Geometry" title="schemes.scheme_rest.Geometry"><span class="pre">schemes.scheme_rest.Geometry</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">maps_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">own_rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phone_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homepage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#Restaurant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.Restaurant" title="Permalink to this definition"></a></dt>
+<dd><p>Class that got return to the website</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.geometry">
+<span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.geometry" title="Permalink to this definition"></a></dt>
+<dd><p>Postion of the Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_rest.Geometry" title="schemes.scheme_rest.Geometry">Geometry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.maps_url">
+<span class="sig-name descname"><span class="pre">maps_url</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.maps_url" title="Permalink to this definition"></a></dt>
+<dd><p>google maps url of the restaurant. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.rating" title="Permalink to this definition"></a></dt>
+<dd><p>google rating. Defaults. to None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.own_rating">
+<span class="sig-name descname"><span class="pre">own_rating</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.own_rating" title="Permalink to this definition"></a></dt>
+<dd><p>User rating. Defgaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.phone_number">
+<span class="sig-name descname"><span class="pre">phone_number</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.phone_number" title="Permalink to this definition"></a></dt>
+<dd><p>Phonenumber of the restaurant. Defgaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.Restaurant.homepage">
+<span class="sig-name descname"><span class="pre">homepage</span></span><a class="headerlink" href="#schemes.scheme_rest.Restaurant.homepage" title="Permalink to this definition"></a></dt>
+<dd><p>Url of the homepage. Defgaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestaurantBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">RestaurantBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#RestaurantBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.RestaurantBase" title="Permalink to this definition"></a></dt>
+<dd><p>Scheme that is only needed for the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestaurantBase.place_id">
+<span class="sig-name descname"><span class="pre">place_id</span></span><a class="headerlink" href="#schemes.scheme_rest.RestaurantBase.place_id" title="Permalink to this definition"></a></dt>
+<dd><p>ID from Google</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestaurantBase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_rest.RestaurantBase.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestaurantCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_rest.</span></span><span class="sig-name descname"><span class="pre">RestaurantCreate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_rest.html#RestaurantCreate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_rest.RestaurantCreate" title="Permalink to this definition"></a></dt>
+<dd><p>Scheme that is only needed for the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_rest.RestaurantCreate.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_rest.RestaurantCreate.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the Restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-schemes.scheme_user">
+<span id="user"></span><h2>User<a class="headerlink" href="#module-schemes.scheme_user" title="Permalink to this headline"></a></h2>
+<p>Contains all classes for the user</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_user.User" title="schemes.scheme_user.User"><code class="xref py py-obj docutils literal notranslate"><span class="pre">User</span></code></a>(*, email, last_login)</p></td>
+<td><p>User with mail an last_login</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserBase</span></code></a>(*, email)</p></td>
+<td><p>Base Class for all User</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_user.UserCreate" title="schemes.scheme_user.UserCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserCreate</span></code></a>(*, email, password)</p></td>
+<td><p>Class to create an User.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_user.UserLogin" title="schemes.scheme_user.UserLogin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserLogin</span></code></a>(*, email, hashed_password[, ...])</p></td>
+<td><p>User if he try to login</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_user.User">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_user.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_login</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.datetime</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_user.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_user.User" title="Permalink to this definition"></a></dt>
+<dd><p>User with mail an last_login</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_user.User.last_login">
+<span class="sig-name descname"><span class="pre">last_login</span></span><a class="headerlink" href="#schemes.scheme_user.User.last_login" title="Permalink to this definition"></a></dt>
+<dd><p>Timestamp of last login</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_user.</span></span><span class="sig-name descname"><span class="pre">UserBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_user.html#UserBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_user.UserBase" title="Permalink to this definition"></a></dt>
+<dd><p>Base Class for all User</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserBase.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#schemes.scheme_user.UserBase.email" title="Permalink to this definition"></a></dt>
+<dd><p>Email of the User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_user.</span></span><span class="sig-name descname"><span class="pre">UserCreate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_user.html#UserCreate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_user.UserCreate" title="Permalink to this definition"></a></dt>
+<dd><p>Class to create an User.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserCreate.password">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#schemes.scheme_user.UserCreate.password" title="Permalink to this definition"></a></dt>
+<dd><p>Plaintext password</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserLogin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_user.</span></span><span class="sig-name descname"><span class="pre">UserLogin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashed_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_login</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_user.html#UserLogin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_user.UserLogin" title="Permalink to this definition"></a></dt>
+<dd><p>User if he try to login</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserLogin.hashed_password">
+<span class="sig-name descname"><span class="pre">hashed_password</span></span><a class="headerlink" href="#schemes.scheme_user.UserLogin.hashed_password" title="Permalink to this definition"></a></dt>
+<dd><p>Hashed user password</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_user.UserLogin.last_login">
+<span class="sig-name descname"><span class="pre">last_login</span></span><a class="headerlink" href="#schemes.scheme_user.UserLogin.last_login" title="Permalink to this definition"></a></dt>
+<dd><p>Defaults to None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[datetime.datetime]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>

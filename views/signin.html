@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Signin &mdash; Essensfindung 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>Signin &mdash; Essensfindung 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Services" href="../services/services.html" />
     <link rel="prev" title="Restaurant" href="restaurant.html" /> 
 </head>
 
@@ -34,7 +37,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documents</a><ul class="current">
@@ -51,6 +54,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Signin</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../services/services.html">Services</a></li>
 </ul>
 </li>
 </ul>
@@ -81,15 +85,247 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="signin">
-<h1>Signin<a class="headerlink" href="#signin" title="Permalink to this headline">¶</a></h1>
-</div>
+  <section id="module-views.signin">
+<span id="signin"></span><h1>Signin<a class="headerlink" href="#module-views.signin" title="Permalink to this headline"></a></h1>
+<p>Router and Logic for Login and Registration Pages</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.account_response" title="views.signin.account_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account_response</span></code></a>(request[, msg, success])</p></td>
+<td><p>Return a response page for account creation, either positive or negative</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.login" title="views.signin.login"><code class="xref py py-obj docutils literal notranslate"><span class="pre">login</span></code></a>(request[, url, db_session])</p></td>
+<td><p>Login Form to login the user and redirect if valid</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.login_for_access_token" title="views.signin.login_for_access_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">login_for_access_token</span></code></a>(response[, ...])</p></td>
+<td><p>Generate token for user</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.pwchange" title="views.signin.pwchange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwchange</span></code></a>(request)</p></td>
+<td><p>Return the rendered template for the login page</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.pwreset" title="views.signin.pwreset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwreset</span></code></a>(request)</p></td>
+<td><p>Return the rendered template for the login page</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.recover" title="views.signin.recover"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recover</span></code></a>(request)</p></td>
+<td><p>Return the rendered template for the login page</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.register" title="views.signin.register"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register</span></code></a>(request)</p></td>
+<td><p>Return the rendered template for the register page</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.register_post" title="views.signin.register_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_post</span></code></a>(request[, db_session])</p></td>
+<td><p>Register Form to register the user and redirect if valid</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.signin" title="views.signin.signin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signin</span></code></a>(request[, error])</p></td>
+<td><p>Return the rendered template for the login page</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.signout" title="views.signin.signout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signout</span></code></a>([token])</p></td>
+<td><p>Logout the user and redirect to the main page</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.account_response">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">account_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#account_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.account_response" title="Permalink to this definition"></a></dt>
+<dd><p>Return a response page for account creation, either positive or negative</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – the http request</p></li>
+<li><p><strong>msg</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – the error msg. Defaults to “”.</p></li>
+<li><p><strong>success</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – the succes boolean. Defaults to “”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.login">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.login" title="Permalink to this definition"></a></dt>
+<dd><p>Login Form to login the user and redirect if valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – the http request</p></li>
+<li><p><strong>url</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – url for redirect. Defaults to None.</p></li>
+<li><p><strong>db_session</strong> (<em>Session</em><em>, </em><em>optional</em>) – the db session. Defaults to Depends(get_db).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>redirect to /signin/ or /signin/… or /main/</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>RedirectResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.login_for_access_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">login_for_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.responses.Response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">fastapi.security.oauth2.OAuth2PasswordRequestForm</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(NoneType)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#login_for_access_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.login_for_access_token" title="Permalink to this definition"></a></dt>
+<dd><p>Generate token for user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>Response</em>) – the http response</p></li>
+<li><p><strong>db_session</strong> (<em>Session</em><em>, </em><em>optional</em>) – the db session. Defaults to Depends(get_db).</p></li>
+<li><p><strong>form_data</strong> (<em>OAuth2PasswordRequestForm</em><em>, </em><em>optional</em>) – the data of the login form. Defaults to Depends().</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.NotAuthorizedException" title="schemes.exceptions.NotAuthorizedException"><strong>exceptions.NotAuthorizedException</strong></a> – wrong login exception</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>access token for user</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>access_token</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.pwchange">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">pwchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#pwchange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.pwchange" title="Permalink to this definition"></a></dt>
+<dd><p>Return the rendered template for the login page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>Request</em>) – Requerd for Template</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.pwreset">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">pwreset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#pwreset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.pwreset" title="Permalink to this definition"></a></dt>
+<dd><p>Return the rendered template for the login page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>Request</em>) – Requerd for Template</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.recover">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">recover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#recover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.recover" title="Permalink to this definition"></a></dt>
+<dd><p>Return the rendered template for the login page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>Request</em>) – Requerd for Template</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.register">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.register" title="Permalink to this definition"></a></dt>
+<dd><p>Return the rendered template for the register page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>Request</em>) – Requerd for Template</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.register_post">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">register_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#register_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.register_post" title="Permalink to this definition"></a></dt>
+<dd><p>Register Form to register the user and redirect if valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – the http request</p></li>
+<li><p><strong>db_session</strong> (<em>Session</em><em>, </em><em>optional</em>) – the db session. Defaults to Depends(get_db).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>redirect to /accresp/?success=…</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>RedirectResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.signin">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">signin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#signin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.signin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the rendered template for the login page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – Requerd for Template</p></li>
+<li><p><strong>error</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – the error message. Defaults to “”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the http response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.signout">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">signout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(OAuth2PasswordBearerWithCookie)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/views/signin.html#signout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.signout" title="Permalink to this definition"></a></dt>
+<dd><p>Logout the user and redirect to the main page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>str</em><em>, </em><em>optional</em>) – the authentification token. Defaults to Depends(oauth2_scheme).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>redirect to /main/</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>RedirectResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="restaurant.html" class="btn btn-neutral float-left" title="Restaurant" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../services/services.html" class="btn btn-neutral float-right" title="Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
