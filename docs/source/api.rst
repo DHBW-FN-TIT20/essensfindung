@@ -7,4 +7,5 @@ API Documents
 
     tools/tools.rst
     db/db.rst
+    views/views.rst
 
