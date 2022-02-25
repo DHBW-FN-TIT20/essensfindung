@@ -1,13 +1,20 @@
-Recipe_db
-=========
+Recipe Database
+===============
+
+.. hint:: Use `recipe_db <#recipe_db>`_ to interact with the Database if you want
 
 .. py:data:: recipe_db
     :type: tools.recipe_db.RecipeDB
 
+    This contain a loaded class from `RecipeDB <#tools.recipe_db.RecipeDB>`_ 
+    Use this to reduce loading time
+
 
 .. py:class:: tools.recipe_db.RecipeDB(json_path)
 
-    .. py:staticmethod::filter_cooktime(user_pd_frame: pandas.DataFrame, total_time: timedelta)
+    Class to interact with the :file:`data/recipeitems.json` and filter the data
+
+    .. py:staticmethod:: filter_cooktime(user_pd_frame: pandas.DataFrame, total_time: timedelta)
 
         Filter the given DataFrame for the whole cooktime (cookTime+prepTime).
         Only return the recipes with less-equal time
@@ -19,7 +26,7 @@ Recipe_db
         :return: DataFrame of booleans
         :rtype: pandas.DataFrame
 
-    .. py:staticmethod::filter_keyword(user_pd_frame: pandas.DataFrame, keyword: str)
+    .. py:staticmethod:: filter_keyword(user_pd_frame: pandas.DataFrame, keyword: str)
     
         Filter the given DataFrame if the keyword is one of the columns `name`, `description` or `recipeInstrucions`
 
