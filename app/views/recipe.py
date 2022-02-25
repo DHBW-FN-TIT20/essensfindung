@@ -37,10 +37,10 @@ async def findrecipe(
     else:
         total_length = timedelta(seconds=length)
     rec_filter = scheme_filter.FilterRecipe(
-        cuisines = [scheme_cuisine.PydanticCuisine(name="Restaurant")],
-        rating = 1,
-        keyword = keywords,
-        total_time = total_length,
+        cuisines=[scheme_cuisine.PydanticCuisine(name="Restaurant")],
+        rating=1,
+        keyword=keywords,
+        total_time=total_length,
     )
     recipe = service_rec.search_recipe(recipe_filter=rec_filter)
 
@@ -57,9 +57,20 @@ async def findrecipe(
     cook_time_minutes = int((cook_time_total_seconds % 3600) // 60)
     cook_time_seconds = int(cook_time_total_seconds % 60)
 
-    prep_time = {"days": prep_time_days, "hours": prep_time_hours, "minutes": prep_time_minutes, "seconds": prep_time_seconds}
-    cook_time = {"days": cook_time_days, "hours": cook_time_hours, "minutes": cook_time_minutes, "seconds": cook_time_seconds}
+    prep_time = {
+        "days": prep_time_days,
+        "hours": prep_time_hours,
+        "minutes": prep_time_minutes,
+        "seconds": prep_time_seconds,
+    }
+    cook_time = {
+        "days": cook_time_days,
+        "hours": cook_time_hours,
+        "minutes": cook_time_minutes,
+        "seconds": cook_time_seconds,
+    }
 
     return templates.TemplateResponse(
-        "recipe/recipe_result.html", {"request": request, "recipe": recipe, "prepTime": prep_time, "cookTime": cook_time}
+        "recipe/recipe_result.html",
+        {"request": request, "recipe": recipe, "prepTime": prep_time, "cookTime": cook_time},
     )
