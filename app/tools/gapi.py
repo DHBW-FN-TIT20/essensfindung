@@ -17,12 +17,12 @@ def search_restaurant(res_filter: FilterRest) -> List[Restaurant]:
     """Search all restaurants for a specific cuisin in a specific location
 
     Args:
-        res_filter (FilterRest): Filter for the API
+        res_filter (schemes.scheme_filter.FilterRest): Filter for the API
     Raises:
         GoogleApiException: If something with the httpx went wrong
 
     Returns:
-        List[Restaurant]: List of all Restaurants from the google api
+        List[schemes.scheme_rest.Restaurant]: List of all Restaurants from the google api
     """
     restaurants = []
     for cuisine in res_filter.cuisines:
@@ -54,7 +54,7 @@ def nearby_search(params: dict, next_page_token: str = None) -> List[Restaurant]
             the next_page_token. Defaults to None.
 
     Returns:
-        List[Restaurant]: List of all found restaurants
+        List[schemes.scheme_rest.Restaurant]: List of all found restaurants
     """
     url: str = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params["pagetoken"] = next_page_token
@@ -79,10 +79,10 @@ def place_details(restaurant: Restaurant) -> Restaurant:
     """To get additionals informations of a specifict place (restaurant) you have to do a specific api request
 
     Args:
-        restaurant (Restaurant): The Restaurant with the palce_id
+        restaurant (schemes.scheme_rest.Restaurant): The Restaurant with the palce_id
 
     Returns:
-        Restaurant: The restaurant with all informations filled out if google got some
+        schemes.scheme_restRestaurant: The restaurant with all informations filled out if google got some
     """
     url: str = "https://maps.googleapis.com/maps/api/place/details/json"
     extended_restaurant: Restaurant = None

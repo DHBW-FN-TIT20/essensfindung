@@ -6,7 +6,13 @@ from db.base import Base
 
 
 class Allergie(Base):
-    """Model for SQLAlchemy for the allergie Table in the DB"""
+    """
+    Model for SQLAlchemy for the allergie Table in the DB
+
+    Attributes:
+        name (str): Primary Key
+        beschreibung (str): Optional
+    """
 
     __tablename__ = "allergie"
 

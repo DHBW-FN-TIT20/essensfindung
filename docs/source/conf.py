@@ -15,14 +15,17 @@ sys.path.insert(0, os.path.abspath("../../app"))
 sys.path.insert(0, os.path.abspath("../../app/tools"))
 sys.path.insert(0, os.path.abspath("../../app/schemes"))
 sys.path.insert(0, os.path.abspath("../../app/db"))
-sys.path.insert(0, os.path.abspath("../../app/views") )
+sys.path.insert(0, os.path.abspath("../../app/db/crud"))
+sys.path.insert(0, os.path.abspath("../../app/db/models"))
+sys.path.insert(0, os.path.abspath("../../app/schemes"))
+sys.path.insert(0, os.path.abspath("../../app/views"))
 
 
 # -- Project information -----------------------------------------------------
 
 project = "Essensfindung"
-copyright = "2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Albert"
-author = "Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Albert"
+copyright = "2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub"
+author = "Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub"
 
 # The full version, including alpha/beta/rc tags
 release = "1.0"
@@ -33,7 +36,15 @@ release = "1.0"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode", "sphinx.ext.napoleon", "sphinx.ext.autosummary"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.autosummary",
+    "autodocsumm",
+]
+
+autodoc_default_options = {"autosummary": True}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]

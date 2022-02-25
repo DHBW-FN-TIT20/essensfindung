@@ -6,7 +6,12 @@ from db.base import Base
 
 
 class Cuisine(Base):
-    """Model for SQLAlchemy for the Cuisine Table in the DB"""
+    """
+    Model for SQLAlchemy for the Cuisine Table in the DB
+
+    Attributes:
+        name (str): Primary Key
+    """
 
     __tablename__ = "cuisine"
 

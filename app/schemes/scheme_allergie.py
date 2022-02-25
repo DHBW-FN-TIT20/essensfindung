@@ -1,12 +1,17 @@
+"""Class for the Allergies"""
 from pydantic import BaseModel
-from pydantic import constr
 from pydantic import validator
 
 from schemes import Allergies
 
 
 class PydanticAllergies(BaseModel):
-    """Needed class for revonvert orm models"""
+    """
+    Needed class for revonvert orm models
+
+    Attributes:
+        name (str): Only Schemes in the schemes.Allergies Enum are valid
+    """
 
     name: str
 
