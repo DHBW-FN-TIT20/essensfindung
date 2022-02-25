@@ -1,23 +1,43 @@
 {% extends "shared/layout.html" %} {% block content %} {% include "recipe/recipe_navbar.html" %}
 <div class="row justify-content-center">
-    <div class="col-10  mb-2" style="max-width: 480px;">
+    <div class="col-10 limit-width">
+        <h2 class="display-1 fs-4 mb-1">Rezept</h2>
+        <hr class="mt-1">
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-10 mb-2" style="max-width: 480px;">
         <h1>{{recipe.name}}</h1>
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10" style="max-width: 480px;">
-        <p>Vorbereitungszeit: {{prepTime}}</p>
-        <p>Koch-/Backzeit: {{cookTime}}</p>
+    <div class="col-10 limit-width">
+        <h5 class="mb-3">Rezept auf: <a href="{{recipe.url}}" id="recipeHref"></a></h5>
     </div>
 </div>
-<div class="row justify-content-center">
-    <div class="col-10 m-3 text-center" style="max-width: 480px; width: 100%;">
-        <a href="{{recipe.url}}" class="btn btn-outline-dark box-shadow prevent-dark-fill align-items-center justify-content-center flex-column">zum Rezept</a>
-    </div>
-</div>
-<div class="row justify-content-center">
-    <div class="col-10 m-2 text-center" style="max-width: 480px;">
+<div class="row justify-content-center" id="imageContainer">
+    <div class="col-10 m-2 mb-3 text-center" style="max-width: 480px;">
         <img id="recipe-image" index="recipe-image" src="{{recipe.image}}" style="width: 100%;" alt="Kein Bild gefunden."></img>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-10" style="max-width: 480px;">
+        <div class="d-flex mb-2">
+            <div class="d-flex flex-column">
+                <p class="mb-0 me-4">Vorbereitungszeit: </p>
+                <p class="mb-0 me-4">Koch-/Backzeit: </p>
+            </div>
+            <div class="d-flex flex-column">
+                <p id="prepTime" class="mb-0"></p>
+                <p id="cookTime" class="mb-0"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-10 limit-width">
+        <a class="text-decoration-underline text-primary mb-2" id="toggleIngredients">Zutaten anzeigen</a>
+        <div class="col-10 mx-3 d-none" id="ingredientContainer"></div>
     </div>
 </div>
 <div class="row justify-content-center">
@@ -25,5 +45,24 @@
         <a onclick="reload_page()" class="btn btn-outline-dark box-shadow prevent-dark-fill">Erneut suchen!</a>
     </div>
 </div>
-<script src="/static/js/recipe.js"></script>
+<script src="/static/js/recipe.js" type="text/javascript"></script>
+<script>
+    const prepTime = {
+        days: "{{prepTime.days}}",
+        hours: "{{prepTime.hours}}",
+        minutes: "{{prepTime.minutes}}",
+        seconds: "{{prepTime.seconds}}",
+    };
+    const cookTime = {
+        days: "{{cookTime.days}}",
+        hours: "{{cookTime.hours}}",
+        minutes: "{{cookTime.minutes}}",
+        seconds: "{{cookTime.seconds}}",
+    };
+    const ingredientString = `{{recipe.ingredients}}`;
+    const recipeURL = new URL(`{{recipe.url}}`);
+    const imageURL = `{{recipe.image}}`;
+    
+    initRecipeResult();
+</script>
 {% endblock %}

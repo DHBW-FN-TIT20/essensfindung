@@ -1,8 +1,8 @@
 {% extends "shared/layout.html" %} {% block content %} {% include "restaurant/restaurant_navbar.html" %}
 <div class="row justify-content-center">
     <div class="col-10" style="max-width: 480px;">
-        <h2 class="display-1 fs-2">Bewertung ändern</h2>
-        <hr>
+        <h2 class="display-1 fs-4 mb-1">Bewertung ändern</h2>
+        <hr class="mt-0">
     </div>
 </div>
 <div class="row justify-content-center">
@@ -15,9 +15,13 @@
         <form method="post">
             <input id="identifier" name="identifier" type="text" style="display: none;" value="{{ rest_rating.place_id }}">
             <input id="rest_name" name="rest_name" type="text" style="display: none;" value="{{rest_rating.name}}">
+            <input type="text" id="timestamp" class="d-none" value="{{rest_rating.timestamp}}">
             <label for="restaurant_filter_rating" class="form-label fs-5 d-none">Bewertung:</label>
-            <div id="rating_edit_rating" class="mb-3"></div>
+            <div id="rating_edit_rating" class="mb-1"></div>
             <input id="rating_edit_rating_target" name="rating_edit_rating_target" style="display:none" value="{{ rest_rating.rating }}">
+            <div class="mb-3">
+                <span id="date_container"></span> 
+            </div>
             <div class="mb-3">
                 <label for="rating_notes" class="form-label fs-5">Notizen:</label>
                 <textarea class="form-control" id="rating_notes" name="rating_notes" rows="3">{{rest_rating.comment}}</textarea>
@@ -42,5 +46,9 @@
             return document.getElementById('rating_edit_rating_target').value;
         }
     });
+
+    //insert date
+    let date = new Date(document.getElementById("timestamp").value);
+    document.getElementById("date_container").innerText = "Gesucht am: " + date.toLocaleString();
 </script>
 {% endblock %}
