@@ -30,5 +30,9 @@
         <a onclick="reload_page()" class="btn btn-outline-dark box-shadow prevent-dark-fill">Erneut suchen!</a>
     </div>
 </div>
-<script src="/static/js/restaurant.js"></script>
+<script>
+    function reload_page() {
+        window.location.reload(true);
+    }
+</script>
 {% endblock %}
