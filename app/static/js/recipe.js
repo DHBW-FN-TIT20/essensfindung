@@ -146,6 +146,9 @@ function addImageLoadListener() {
             document.getElementById("imageContainer").classList.add("d-none")
         } 
     });
+    if (imageURL === "http://images.media-allrecipes.com/images/44555.gif") {
+        document.getElementById("imageContainer").classList.add("d-none")
+    }
 }
 
 function initRecipeResult() {
