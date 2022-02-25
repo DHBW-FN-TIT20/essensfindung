@@ -3,7 +3,28 @@ from enum import Enum
 
 
 class Cuisine(Enum):
-    """Only this Cuisine can be searched"""
+    """
+    Only this Cuisine can be searched
+
+    Attributes:
+        ITALIAN
+        GERMAN
+        ASIAN
+        DOENER
+        TURKEY
+        GREEK
+        KOREAN
+        THAILAND
+        INDIAN
+        COFFE
+        BAKERY
+        BUTCHER
+        VEGAN
+        VEGETARIAN
+        FASTFOOD
+        AMERICAN
+        RESTAURANT
+    """
 
     ITALIAN = "Italienisch"
     GERMAN = "Deutsch"
@@ -25,7 +46,14 @@ class Cuisine(Enum):
 
 
 class Allergies(Enum):
-    """Filter for Allergies"""
+    """
+    Filter for Allergies
+
+    Attributes:
+        LACTOSE (str): Defaults to Laktoseintoleranz
+        WHEAT (str): Defaults to Glutenunvertraeglichkeit
+
+    """
 
     # TODO: More...
     LACTOSE = "Laktoseintoleranz"

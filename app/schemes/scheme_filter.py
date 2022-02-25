@@ -12,7 +12,14 @@ from schemes import scheme_cuisine
 
 
 class FilterBase(BaseModel):
-    """Base Filter for recepes and restaurant"""
+    """
+    Base Filter for recepes and restaurant
+
+    Attributes:
+        cuisines (List[scheme_cuisine.PydanticCuisine]): All cuisines to search
+        rating (int): Minimum rating
+        allergies (Optional[List[scheme_allergie.PydanticAllergies]]): All allergies to take care of
+    """
 
     cuisines: List[scheme_cuisine.PydanticCuisine]
     rating: int
@@ -35,7 +42,14 @@ class FilterBase(BaseModel):
 
 
 class FilterRest(FilterBase):
-    """Use this scheme to Search for a Restaurant in the Backend"""
+    """
+    Use this scheme to Search for a Restaurant in the Backend
+
+    Attributes:
+        costs (int): Maximum pricing
+        radius (int): Radius of the search
+        location (schemes.scheme_rest.LocationBase): Position for the search
+    """
 
     costs: int
     radius: int
@@ -58,7 +72,15 @@ class FilterRest(FilterBase):
 
 
 class FilterRestDatabase(FilterBase):
-    """Use this scheme if you internact with the Filter that are saved in the DB"""
+    """
+    Use this scheme if you internact with the Filter that are saved in the DB
+
+    Attributes:
+        costs (int): Maximum pricing
+        radius (int): Radius of the search
+        zipcode (str): To save the zipcode
+
+    """
 
     costs: int
     radius: int
@@ -99,7 +121,13 @@ class FilterRestDatabase(FilterBase):
 
 
 class FilterRecipe(BaseModel):
-    """Extended Model for Recipe-Filter"""
+    """
+    Extended Model for Recipe-Filter
+
+    Attributes:
+        keyword (str): Keyword to search
+        total_time (datetime.timedelta): Max cook time
+    """
 
     keyword: str
     total_time: timedelta

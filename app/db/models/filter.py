@@ -25,7 +25,20 @@ association_table_filter_cuisine = Table(
 
 
 class FilterRest(Base):
-    """Model for SQLAlchemy for the filter Table in the DB"""
+    """
+    Model for SQLAlchemy for the filter Table in the DB
+
+    Attributes:
+        email (str): Primary Key and Foreign Key  of person.email
+        zipcode (str): Length of 5
+        radius (int): Radius of the search
+        rating (int): Minimum rating of the google rating
+        costs (int): Maximal costs of the google search
+
+        person (db.models.person.Person): Owner of the filter
+        allergies (db.models.allergie.Allergie): Allergies of the Filter
+        cuisines (db.models.cuisine.Cuisine): Cuisine of the Filter
+    """
 
     __tablename__ = "filterRest"
 

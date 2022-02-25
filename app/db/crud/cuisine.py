@@ -1,3 +1,4 @@
+"""All DB functions for the Cuisine table"""
 from typing import List
 
 import sqlalchemy
