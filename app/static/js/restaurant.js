@@ -5,7 +5,7 @@ $(document).ready(function() {
         width: "250"
     });
     get_location();
-    update_modal_on_show();
+    update_restaurant_modal_on_show();
 });
 
 /******** inititialize star-rating-svg *****************/
@@ -36,14 +36,22 @@ function change_restaurant_url() {
     var rating = get_rating();
     var radius = get_radius();
     if (cuisine.length > 0 && allergies.length > 0) {
-        document.getElementById("search_restaurant").href = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
     } else if (cuisine.length > 0) {
-        document.getElementById("search_restaurant").href = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
     } else if (allergies.length > 0) {
-        document.getElementById("search_restaurant").href = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
     } else {
-        document.getElementById("search_restaurant").href = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
     }
+    document.getElementById("search_restaurant").href = new_link;
+    document.getElementById("search_restaurant_from_modal").href = new_link;
+}
+
+function search_from_modal() {
+    document.getElementById("cuisine_selected").innerHTML = get_cuisine();
+    document.getElementById("allergies_selected").innerHTML = get_allergies();
+    change_restaurant_url();
 }
 
 function reload_page() {
