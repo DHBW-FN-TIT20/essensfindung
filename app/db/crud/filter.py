@@ -1,4 +1,4 @@
-"""All DB functions for the User table"""
+"""All DB functions for the Filter table"""
 from typing import Iterable
 from typing import List
 from typing import Union

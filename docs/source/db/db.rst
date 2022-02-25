@@ -10,3 +10,4 @@ Full connetion to the PostreSQL or SQL-Lite Database
     base.rst
     database.rst
     models.rst
+    crud.rst

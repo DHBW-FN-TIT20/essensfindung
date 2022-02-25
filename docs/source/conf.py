@@ -15,14 +15,15 @@ sys.path.insert(0, os.path.abspath("../../app"))
 sys.path.insert(0, os.path.abspath("../../app/tools"))
 sys.path.insert(0, os.path.abspath("../../app/schemes"))
 sys.path.insert(0, os.path.abspath("../../app/db"))
+sys.path.insert(0, os.path.abspath("../../app/db/crud"))
 sys.path.insert(0, os.path.abspath("../../app/db/models"))
 
 
 # -- Project information -----------------------------------------------------
 
 project = "Essensfindung"
-copyright = "2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Albert"
-author = "Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Albert"
+copyright = "2022, Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub"
+author = "Florian Glaser, Florian Herkommer, Baldur Siegel, David Felder, Jonas Straub"
 
 # The full version, including alpha/beta/rc tags
 release = "1.0"
