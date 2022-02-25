@@ -10,4 +10,5 @@ API Documents
     db/db.rst
     schemes/schemes.rst
     views/views.rst
+    services/services.rst
 

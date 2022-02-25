@@ -11,10 +11,10 @@ def search_recipe(recipe_filter: FilterRecipe) -> Recipe:
     """Search for a recipe with the given filter
 
     Args:
-        recipe_filter (FilterRecipe): Filter the Recipes
+        recipe_filter (schemes.scheme_filter.FilterRecipe): Filter the Recipes
 
     Returns:
-        Recipe: The one choosen Recipe
+        schemes.scheme_recipe.Recipe: The one choosen Recipe
     """
     random_recipe: pandas.DataFrame = __apply_filter(recipe_db.pd_frame, recipe_filter).sample()
 

@@ -28,11 +28,11 @@ def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List
     """Get Bewertungen from a User to all restaurants
 
     Args:
-        db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
         user_mail (str): Mail of the User
 
     Returns:
-        Union[List[RestBewertungReturn], None]: Return a List of all User or None
+        Union[List[schemes.scheme_rest.RestBewertungReturn], None]: Return a List of all User or None
     """
     db_rests = crud_bewertung.get_all_user_bewertungen(db_session, user)
     scheme_rests = [
@@ -53,14 +53,14 @@ def add_assessment(db_session: Session, assessment: RestBewertungCreate) -> Rest
     """Add the given assessment to the Database.
 
     Args:
-        db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
-        assessment (RestBewertungCreate): The assessment need to be unique
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        assessment (schemes.scheme_rest.RestBewertungCreate): The assessment need to be unique
 
     Raises:
-        `DatabaseException`: if the User or Restaurant does not exist or the assessment is duplicated
+        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated
 
     Returns:
-        [RestBewertungReturn]: The created Restaurant
+        [schemes.scheme_rest.RestBewertungReturn]: The created Restaurant
     """
     try:
         created_assessment = crud_bewertung.create_bewertung(db_session, assessment)
@@ -82,15 +82,15 @@ def update_assessment(
     """Update the comment and rating of a existing assessment
 
     Args:
-        db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
-        old_assessment (RestBewertungCreate): The current assessment
-        new_assessment (RestBewertungCreate): The new assessment with the updated values
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        old_assessment (schemes.scheme_rest.RestBewertungCreate): The current assessment
+        new_assessment (schemes.scheme_rest.RestBewertungCreate): The new assessment with the updated values
 
     Raises:
-        `DatabaseException`: if the User or Restaurant does not exist or the assessment is duplicated
+        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated
 
     Returns:
-        RestBewertungReturn: Restaurant the the new values
+        schemes.scheme_rest.RestBewertungReturn: Restaurant the the new values
     """
     try:
         updated_assessment = crud_bewertung.update_bewertung(db_session, old_assessment, new_assessment)
@@ -110,12 +110,12 @@ def delete_assessment(db_session: Session, user: UserBase, rest: RestaurantBase)
     """Delete one assessment that are mapped between the user and rest
 
     Args:
-        db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
-        user (UserBase): The owner of the assessment
-        rest (RestaurantBase): The mapped Restaurant
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        user (schemes.scheme_user.UserBase): The owner of the assessment
+        rest (schemes.scheme_rest.RestaurantBase): The mapped Restaurant
 
     Raises:
-        `DatabaseException`: if the User or Restaurant does not exist or the assessment is duplicated
+        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated
 
     Returns:
         int: The number of affected Rows of the delete
@@ -130,11 +130,11 @@ def get_rest_filter_from_user(db_session: Session, user: UserBase) -> Union[Filt
     """Return the saved Filter from the Database if found one
 
     Args:
-        db_session (Session): Session to the Database
-        user (UserBase): Owner of the filter
+        db_session (sqlalchemy.orm.Session): Session to the Database
+        user (schemes.scheme_user.UserBase): Owner of the filter
 
     Returns:
-        Union[FilterRest, None]: Return the Filter or None
+        Union[schemes.scheme_filter.FilterRest, None]: Return the Filter or None
     """
     db_filter_rest = crud_filter.get_filter_from_user(db_session, user)
     if db_filter_rest:
@@ -147,15 +147,15 @@ def create_rest_filter(db_session: Session, filter_rest: FilterRestDatabase, use
     """Add a Filter to an existing person
 
     Args:
-        db_session (Session): Session to the Database
-        filter_rest (FilterRestDatabase): Filter to add
-        user (UserBase): Owner of the Filter
+        db_session (sqlalchemy.orm.Session): Session to the Database
+        filter_rest (schemes.scheme_filter.FilterRestDatabase): Filter to add
+        user (schemes.scheme_user.UserBase): Owner of the Filter
 
     Raises:
-        UserNotFound: If the User does not exist
+        schemes.exceptions.UserNotFound: If the User does not exist
 
     Returns:
-        FilterRestDatabase: Added Filter
+        schemes.scheme_filter.FilterRestDatabase: Added Filter
     """
     try:
         db_filter_rest = crud_filter.create_filterRest(db_session, filter_rest, user)
@@ -169,15 +169,15 @@ def update_rest_filter(db_session: Session, filter_updated: FilterRestDatabase, 
     """Update a Filter from a User. Need the full information of the filter (not only the new one)
 
     Args:
-        db_session (Session): Session to the Database
-        filter_updated (FilterRestDatabase): The new Filter for the user
-        user (UserBase): Owner of the Filter
+        db_session (sqlalchemy.orm.Session): Session to the Database
+        filter_updated (schemes.scheme_filter.FilterRestDatabase): The new Filter for the user
+        user (schemes.scheme_user.UserBase): Owner of the Filter
 
     Raises:
-        UserNotFound: If the User is not in the db
+        schemes.exceptions.UserNotFound: If the User is not in the db
 
     Returns:
-        FilterRestDatabase: The updated Filter
+        schemes.scheme_filter.FilterRestDatabase: The updated Filter
     """
     try:
         db_filter_rest = crud_filter.update_filterRest(db_session, filter_updated, user)
@@ -192,15 +192,15 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
     and choose one of the restaurants according to the weights
 
     Args:
-        db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
-        user_f (FilterRest): Filter that are needed for the search
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        user_f (schemes.scheme_filter.FilterRest): Filter that are needed for the search
 
     Raises:
-        NoResultsException: If no Results are found
-        GoogleApiException: If no communication with the Google API are possible
+        schemes.exceptions.NoResultsException: If no Results are found
+        schemes.exceptions.GoogleApiException: If no communication with the Google API are possible
 
     Returns:
-        Restaurant: The one choosen Restaurant where the user have to go now!
+        schemes.scheme_rest.Restaurant: The one choosen Restaurant where the user have to go now!
     """
     google_rests: List[Restaurant] = gapi.search_restaurant(user_f)
     filterd_rests: List[Restaurant] = apply_filter(google_rests, user_f)
@@ -228,11 +228,11 @@ def fill_user_rating(db_session: Session, rests: List[Restaurant], user: UserBas
     and if so add the value to the restaurant
 
     Args:
-        db_session (Session): Session to the DB -> See `db: Session = Depends(get_db)`
-        google_res (List[Restaurant]): Restaurants for lookup
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        google_res (List[schemes.scheme_rest.Restaurant]): Restaurants for lookup
 
     Returns:
-        List[Restaurant]: Return of the input List with the user rating if one got found
+        List[schemes.scheme_rest.Restaurant]: Return of the input List with the user rating if one got found
     """
     for rest in rests:
         assessment = crud_bewertung.get_bewertung_from_user_to_rest(db_session, user, rest)
@@ -246,11 +246,11 @@ def apply_filter(rests: List[Restaurant], user_f: FilterRest) -> List[Restaurant
     """Apply all filter (current only Rating)
 
     Args:
-        rests (List[Restaurant]): List of all Restarants to apply the filter
-        filter (FilterRest): The Filter with all informations
+        rests (List[schemes.scheme_rest.Restaurant]): List of all Restarants to apply the filter
+        filter (schemes.scheme_filter.FilterRest): The Filter with all informations
 
     Returns:
-        List[Restaurant]: The filtered List of the restaurants
+        List[schemes.scheme_rest.Restaurant]: The filtered List of the restaurants
     """
     return filter_rating(rests, user_f.rating)
 
@@ -259,11 +259,11 @@ def filter_rating(rests: List[Restaurant], rating: int) -> List[Restaurant]:
     """Remove all Restaurants from the list under the given rating
 
     Args:
-        rests (List[Restaurant]): List of all Restarants to filter
+        rests (List[schemes.scheme_rest.Restaurant]): List of all Restarants to filter
         rating (int): All under this number got removed
 
     Returns:
-        List[Restaurant]: Filtered List based ob the rating
+        List[schemes.scheme_rest.Restaurant]: Filtered List based ob the rating
     """
     for res in rests:
         if res.rating < rating:
@@ -276,10 +276,10 @@ def select_restaurant(rests: List[Restaurant]) -> Restaurant:
     If None rating found it will be count as 0
 
     Args:
-        user_res (List[Restaurant]): The Rating of the Restaurants are optional
+        user_res (List[schemes.scheme_rest.Restaurant]): The Rating of the Restaurants are optional
 
     Returns:
-        Restaurant: The random chooses restaurant
+        schemes.scheme_rest.Restaurant: The random chooses restaurant
     """
     weights: List[int] = []
     for res in rests:
