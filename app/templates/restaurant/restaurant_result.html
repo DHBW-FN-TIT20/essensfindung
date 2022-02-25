@@ -1,36 +1,62 @@
 {% extends "shared/layout.html" %} {% block content %} {% include "restaurant/restaurant_navbar.html" %}
 <div class="row justify-content-center">
-    <div class="col-10  mb-2" style="max-width: 480px;">
-        <h1>{{restaurant.name}}</h1>
+    <div class="col-10 limit-width">
+        <h2 class="display-1 fs-2 mb-1">Restaurant</h2>
+        <hr class="mt-0">
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10" style="max-width: 480px;">
-        <p>Google-Bewertung: {{restaurant.rating}}/5</p>
-        <p>Eigene Bewertung: {{restaurant.own_rating}}</p>
+    <div class="col-10 limit-width">
+        <h1 class="mb-0">{{restaurant.name}}</h1>
     </div>
 </div>
 {% if restaurant.homepage%}
 <div class="row justify-content-center">
-    <div class="col-10 m-3 text-center" style="max-width: 480px;">
-        <a href="{{restaurant.homepage}}" class="btn btn-outline-dark box-shadow prevent-dark-fill align-items-center justify-content-center flex-column">zur Restaurant-Homepage</a>
+    <div class="col-10 mb-3 d-flex" style="max-width: 480px;">
+        <h5 class=""><a href="{{restaurant.homepage}}" id="restaurantHref"></a></h5>
     </div>
 </div>
 {% endif %}
 <div class="row justify-content-center">
-    <div class="col-10" style="max-width: 480px;">
-        <!--Google map-->
-        <div id="map-container-google-1" class="z-depth-1-half map-container border border-dark" style="height: 100%">
-            <iframe id="map-google-1" index="map-google" src="{{restaurant.maps_url}}&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <div class="col-10 limit-width">
+        <div class="d-flex mb-4">
+            <div class="d-flex flex-column">
+                <p class="mb-0 me-4">Google-Bewertung: </p>
+                {% if not restaurant.own_rating == 0 %}
+                    <p class="mb-0 me-4">Eigene Bewertung: </p>
+                {% endif %}
+            </div>
+            <div class="d-flex flex-column">
+                <p id="prepTime" class="mb-0">{{restaurant.rating}}/5</p>
+                {% if not restaurant.own_rating == 0 %}
+                    <p id="cookTime" class="mb-0">{{restaurant.own_rating}}/5</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-10 text-center m-3" style="max-width: 480px;">
+    <div class="col-10 limit-width">
+        <!--Google map-->
+        <div class="d-flex justify-content-center">
+            <div style="width: 94%">
+                <div id="map-container-google-1" class="z-depth-1-half map-container border border-1 rounded"> 
+                    <iframe id="map-google-1" index="map-google" src="{{restaurant.maps_url}}&output=embed" class="rounded" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-10 text-center my-4 mx-3 limit-width">
         <a onclick="reload_page()" class="btn btn-outline-dark box-shadow prevent-dark-fill">Erneut suchen!</a>
     </div>
 </div>
 <script>
+    const homepage = new URL(`{{restaurant.homepage}}`);
+
+    document.getElementById("restaurantHref").innerText = homepage.hostname;
+
     function reload_page() {
         window.location.reload(true);
     }
