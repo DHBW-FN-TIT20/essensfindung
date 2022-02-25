@@ -5,7 +5,12 @@ from schemes import Cuisine
 
 
 class PydanticCuisine(BaseModel):
-    """Needed class for revonvert orm models"""
+    """
+    Needed class for revonvert orm models
+
+    Attributes:
+        name (str): Only schemes.Cuisine Enum valid
+    """
 
     name: str
 

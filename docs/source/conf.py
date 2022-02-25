@@ -17,6 +17,7 @@ sys.path.insert(0, os.path.abspath("../../app/schemes"))
 sys.path.insert(0, os.path.abspath("../../app/db"))
 sys.path.insert(0, os.path.abspath("../../app/db/crud"))
 sys.path.insert(0, os.path.abspath("../../app/db/models"))
+sys.path.insert(0, os.path.abspath("../../app/schemes"))
 
 
 # -- Project information -----------------------------------------------------
