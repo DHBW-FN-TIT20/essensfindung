@@ -18,15 +18,7 @@ def search_recipe(recipe_filter: FilterRecipe) -> Recipe:
     """
     random_recipe: pandas.DataFrame = __apply_filter(recipe_db.pd_frame, recipe_filter).sample()
 
-    return Recipe(
-        id=random_recipe["_id.$oid"].array[0],
-        name=random_recipe["name"].array[0],
-        ingredients=random_recipe["ingredients"].array[0],
-        url=random_recipe["url"].array[0],
-        image=random_recipe["image"].array[0],
-        cookTime=random_recipe["cookTime"].array[0],
-        prepTime=random_recipe["prepTime"].array[0],
-    )
+    return Recipe(        id=random_recipe["_id.$oid"].array[0],        name=random_recipe["name"].array[0],        ingredients=random_recipe["ingredients"].array[0],        url=random_recipe["url"].array[0],        image=random_recipe["image"].array[0],        cookTime=random_recipe["cookTime"].array[0],        prepTime=random_recipe["prepTime"].array[0]    )
 
 
 def __apply_filter(recipes: pandas.DataFrame, recipe_filter: FilterRecipe) -> pandas.DataFrame:
