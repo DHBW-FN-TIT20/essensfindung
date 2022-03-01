@@ -1,17 +1,29 @@
 /************ Initialize Multiselects ***************** */
 $(document).ready(function() {
-    $('.restaurant_filter_multiselects').select2({
-        dropdownParent: $('#restaurantFilter'),
-        width: "250"
-    });
     get_location();
     update_restaurant_modal_on_show();
 });
 
+/************ checkbox selection code ***************** */
+function updateCuisineCheckboxes() {
+    if (document.getElementById("allCuisineCheckbox").checked) {
+        document.getElementById("cuisineCheckboxesContainer").classList.add("d-none"); 
+    } else {
+        document.getElementById("cuisineCheckboxesContainer").classList.remove("d-none"); 
+    }
+}
+function updateAllergyCheckboxes() {
+    if (document.getElementById("allAllergyCheckbox").checked) {
+        document.getElementById("allergyCheckboxesContainer").classList.add("d-none"); 
+    } else {
+        document.getElementById("allergyCheckboxesContainer").classList.remove("d-none"); 
+    }
+}
+
 /******** inititialize star-rating-svg *****************/
 $("#restaurant_filter_rating").raty({
-    starOff: 'https://cdn.jsdelivr.net/npm/raty-js@3.1.1/lib/images/star-off.png',
-    starOn: 'https://cdn.jsdelivr.net/npm/raty-js@3.1.1/lib/images/star-on.png',
+    starOff: '/static/img/icons8-star-32.png',
+    starOn: '/static/img/icons8-star-32-filled.png',
     click: function(score, evt) {
         document.getElementById('restaurant_filter_rating_target').innerHTML = score;
     },
@@ -49,8 +61,6 @@ function change_restaurant_url() {
 }
 
 function search_from_modal() {
-    document.getElementById("cuisine_selected").innerHTML = get_cuisine();
-    document.getElementById("allergies_selected").innerHTML = get_allergies();
     change_restaurant_url();
 }
 
@@ -88,38 +98,45 @@ function get_radius() {
 }
 
 function get_cuisine() {
-    var selections = $('#restaurant_filter_cuisine').select2('data');
-    var cuisines = [];
-    for (const element of selections) {
-        cuisines.push(element.id);
+    let cuisines = [];
+    if (!document.getElementById("allCuisineCheckbox").checked) {
+        document.querySelectorAll("#cuisineCheckboxesContainer div.form-check input[type=checkbox]").forEach(e => {
+            if (e.checked) {
+                cuisines.push(e.nextSibling.nextSibling.innerText);         
+            }
+        });
     }
     return cuisines;
 }
 
 function get_allergies() {
-    var selections = $('#restaurant_filter_allergies').select2('data');
-    var allergies = [];
-    for (const element of selections) {
-        allergies.push(element.id);
+    let allergies = [];
+    if (!document.getElementById("allAllergyCheckbox").checked) {
+        document.querySelectorAll("#allergyCheckboxesContainer div.form-check input[type=checkbox]").forEach(e => {
+            if (e.checked) {
+                allergies.push(e.nextSibling.nextSibling.innerText);         
+            }
+        });
     }
     return allergies;
 }
 
 function update_allergies_selected() {
-    var allergies_str = document.getElementById('allergies_selected').innerHTML;
-    $('#restaurant_filter_allergies').val(strToArray(allergies_str));
-    $('#restaurant_filter_allergies').trigger('change');
-    // $('#restaurant_filter_allergies').on('change', function);
-}
-
-function update_allergies_options() {
-    var allergie_options = strToArray(document.getElementById('allergies_options').innerHTML);
-    for (const allergie of allergie_options) {
-        if ($('#restaurant_filter_allergies').find("option[value='" + allergie + "']").length) {
-            $('#restaurant_filter_allergies').val(allergie).trigger('change');
-        } else {
-            var new_option = new Option(allergie, allergie, false, false);
-            $('#restaurant_filter_allergies').append(new_option).trigger('change');
+    let allergies_arr = document.getElementById('allergies_selected').innerHTML.split(",");
+    if (allergies_arr.length > 0) {
+        if (!(allergies_arr.length == 1 && allergies_arr[0] == "")) {
+            /*
+            for (i = 0; i < allergies_arr.length; i++) {
+                let checkbox = document.getElementsByName("allergyCheckbox" + allergies_arr[i])
+                if (checkbox.length > 0) {
+                    if (!checkbox[0].checked) {
+                        checkbox[0].checked = true;
+                    }
+                }
+            }
+            */
+            document.getElementById("allAllergyCheckbox").checked = false;
+            updateAllergyCheckboxes();
         }
     }
 }
@@ -127,28 +144,26 @@ function update_allergies_options() {
 function update_restaurant_modal_on_show() {
     update_radius_text(document.getElementById('restaurant_filter_radius').value);
     update_costs_text(document.getElementById('restaurant_filter_costs').value);
-    update_cuisine_options();
-    update_allergies_options();
     update_cuisine_selected();
     update_allergies_selected();
 }
 
 function update_cuisine_selected() {
-    var cuisine_str = document.getElementById('cuisine_selected').innerHTML;
-    $('#restaurant_filter_cuisine').val(strToArray(cuisine_str));
-    $('#restaurant_filter_cuisine').trigger('change');
-}
-
-function update_cuisine_options() {
-    var cuisines_options = strToArray(document.getElementById('cuisine_options').innerHTML);
-    for (const cuisine of cuisines_options) {
-        if (cuisine != "Restaurant") {
-            if ($('#restaurant_filter_cuisine').find("option[value='" + cuisine + "']").length) {
-                $('#restaurant_filter_cuisine').val(cuisine).trigger('change');
-            } else {
-                var new_option = new Option(cuisine, cuisine, false, false);
-                $('#restaurant_filter_cuisine').append(new_option).trigger('change');
+    let cuisine_arr = document.getElementById('cuisine_selected').innerText.split(",");
+    if (cuisine_arr.length > 0) {
+        if (!(cuisine_arr.length == 1 && (cuisine_arr[0] == "" || cuisine_arr[0] == "Restaurant"))) {
+            /*
+            for (i = 0; i < cuisine_arr.length; i++) {
+                let checkbox = document.getElementsByName("cuisineCheckbox" + cuisine_arr[i])
+                if (checkbox.length > 0) {
+                    if (!checkbox[0].checked) {
+                        checkbox[0].checked = true;
+                    }
+                }
             }
+            */
+            document.getElementById("allCuisineCheckbox").checked = false;
+            updateCuisineCheckboxes();
         }
     }
 }
