@@ -1,9 +1,13 @@
 function get_location() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(show_position);
+      navigator.geolocation.getCurrentPosition(show_position, location_error);
     } else { 
       alert("Geolocation is not supported by this browser.");
     }
+}
+
+function location_error() {
+    document.location.href = "/error?err_msg=Location needs to be activated to use our services";
 }
 
 function show_position(position){

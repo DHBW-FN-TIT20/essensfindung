@@ -151,7 +151,7 @@ function update_restaurant_modal_on_show() {
 function update_cuisine_selected() {
     let cuisine_arr = document.getElementById('cuisine_selected').innerText.split(",");
     if (cuisine_arr.length > 0) {
-        if (!(cuisine_arr.length == 1 && cuisine_arr[0] == "")) {
+        if (!(cuisine_arr.length == 1 && (cuisine_arr[0] == "" || cuisine_arr[0] == "Restaurant"))) {
             /*
             for (i = 0; i < cuisine_arr.length; i++) {
                 let checkbox = document.getElementsByName("cuisineCheckbox" + cuisine_arr[i])
