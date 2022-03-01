@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade modal-sm modal-lg center" id="recipeFilter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade modal-lg center" id="recipeFilter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,13 +7,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="p-2">
-                    <p>Die Filter werden automatisch gespeichert.</p>
-                </div>
 
                 <!-- length range -->
                 <div class="p-2">
-                    <label for="recipe_filter_length" class="form-label">Länge</label>
+                    <label for="recipe_filter_length" class="form-label fs-5 mb-0">Länge</label>
+                    <hr class="mt-0 mb-3">
                     <!-- value="recp_filter.length" -->
                     <input type="range" class="form-range" id="recipe_filter_length" name="recipe_filter_length" min="0" max="4" value="" oninput="update_length_text(this.value)"></input>
                     <input class="form-label text-center" id="recipe_filter_length_text" value="" readonly></input>
@@ -21,11 +19,17 @@
 
                 <!-- keywords -->
                 <div class="p-2">
-                    <label for="recipe_filter_keywords" class="form-label">Suche nach Stichwort</label><br>
+                    <label for="recipe_filter_keywords" class="form-label fs-5 mb-0">Suche nach Stichwort</label><br>
+                    <hr class="mt-0 mb-3">
                     <input class="form-label text-center" id="recipe_filter_keywords" placeholder="z.B. cake, soup, ..." value=""></input>
                 </div>
 
             </div>
+            
+            <div class="p-2 mt-4 text-center">
+                <p class="fst-italic">Die Filter werden automatisch gespeichert.</p>
+            </div>
+
             <div class="modal-footer">
                 <a id="search_recipe_from_modal" type="button" class="btn btn-primary" onclick="change_recipe_url()">Suchen</a>
             </div>
