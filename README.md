@@ -1,5 +1,6 @@
 # Essensfindung
-Student project for DHBW-Friedrichshafen to search for restaurant or recipe suggestions.
+Student project for DHBW-Friedrichshafen to search for restaurant or recipe suggestions.<br>
+Go to ReadTheDocs: https://dhbw-fn-tit20.github.io/essensfindung/
 
 # Usage
 If you want to run it make sure you habe a GoogleAPI KEY<br>
