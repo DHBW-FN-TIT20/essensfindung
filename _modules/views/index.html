@@ -126,9 +126,13 @@
             <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span>
             <span class="s2">&quot;rest_filter&quot;</span><span class="p">:</span> <span class="n">rest_filter_db</span><span class="p">,</span>
             <span class="s2">&quot;cuisines_selected&quot;</span><span class="p">:</span> <span class="n">cuisines_selected</span><span class="p">,</span>
+            <span class="s2">&quot;cuisines_selected_arr&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">cuisine</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">cuisine</span> <span class="ow">in</span> <span class="n">rest_filter_db</span><span class="o">.</span><span class="n">cuisines</span><span class="p">],</span>
             <span class="s2">&quot;cuisines_options&quot;</span><span class="p">:</span> <span class="n">cuisines_options</span><span class="p">,</span>
+            <span class="s2">&quot;cuisines_options_arr&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">cuisine</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">cuisine</span> <span class="ow">in</span> <span class="n">Cuisine</span><span class="p">],</span>
             <span class="s2">&quot;allergies_selected&quot;</span><span class="p">:</span> <span class="n">allergies_selected</span><span class="p">,</span>
+            <span class="s2">&quot;allergies_selected_arr&quot;</span><span class="p">:</span> <span class="n">allergies_selected</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span>
             <span class="s2">&quot;allergies_options&quot;</span><span class="p">:</span> <span class="n">allergies_options</span><span class="p">,</span>
+            <span class="s2">&quot;allergies_options_arr&quot;</span><span class="p">:</span> <span class="n">allergies_options</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span>
             <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">)</span></div>
