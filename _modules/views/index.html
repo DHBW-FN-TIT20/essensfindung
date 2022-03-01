@@ -115,7 +115,7 @@
     <span class="c1"># cuisine_options from Enum to comma seperated str</span>
     <span class="n">cuisines_options</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">cuisine</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">cuisine</span> <span class="ow">in</span> <span class="n">Cuisine</span><span class="p">])</span>
 
-    <span class="n">allergies_selected</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">allergies_selected</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">if</span> <span class="n">rest_filter_db</span><span class="o">.</span><span class="n">allergies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">allergies_selected</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">allergie</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">allergie</span> <span class="ow">in</span> <span class="n">rest_filter_db</span><span class="o">.</span><span class="n">allergies</span><span class="p">])</span>
 
