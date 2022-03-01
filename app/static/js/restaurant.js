@@ -124,27 +124,34 @@ function get_allergies() {
 function update_allergies_selected() {
     let allergies_arr = document.getElementById('allergies_selected').innerHTML.split(",");
     if (allergies_arr.length > 0) {
-        for (i = 0; i < allergies_arr.length; i++) {
-            let checkbox = document.getElementsByName("allergyCheckbox" + allergies_arr[i])
-            if (checkbox.length > 0) {
-                if (!checkbox[0].checked) {
-                    checkbox[0].checked = true;
+        if (!(allergies_arr.length == 1 && allergies_arr[0] == "")) {
+            /*
+            for (i = 0; i < allergies_arr.length; i++) {
+                let checkbox = document.getElementsByName("allergyCheckbox" + allergies_arr[i])
+                if (checkbox.length > 0) {
+                    if (!checkbox[0].checked) {
+                        checkbox[0].checked = true;
+                    }
                 }
             }
+            */
+            document.getElementById("allAllergyCheckbox").checked = false;
+            updateAllergyCheckboxes();
         }
-        document.getElementById("allAllergyCheckbox").checked = false;
-        updateAllergyCheckboxes();
     }
 }
 
 function update_restaurant_modal_on_show() {
     update_radius_text(document.getElementById('restaurant_filter_radius').value);
     update_costs_text(document.getElementById('restaurant_filter_costs').value);
+    update_cuisine_selected();
+    update_allergies_selected();
 }
 
 function update_cuisine_selected() {
     let cuisine_arr = document.getElementById('cuisine_selected').innerText.split(",");
     if (cuisine_arr.length > 0) {
+        /*
         for (i = 0; i < cuisine_arr.length; i++) {
             let checkbox = document.getElementsByName("cuisineCheckbox" + cuisine_arr[i])
             if (checkbox.length > 0) {
@@ -153,6 +160,7 @@ function update_cuisine_selected() {
                 }
             }
         }
+        */
         document.getElementById("allCuisineCheckbox").checked = false;
         updateCuisineCheckboxes();
     }

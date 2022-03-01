@@ -7,58 +7,52 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="p-2">
-                    <p class="fst-italic">Die Filter werden automatisch gespeichert.</p>
-                </div>
 
                 <!-- PLZ input -->
-                <div class="p-2">
+                <div class="p-2 mb-3">
+                    <p class="form-label fs-5 mb-0">Postleitzahl</p>
+                    <hr class="mt-0 mb-3">
                     <input type="text" class="form-control" id="restaurant_filter_zipcode" aria-describedby="zipcode" placeholder="Bitte Postleitzahl eingeben" value="{{rest_filter.zipcode}}">
                 </div>
 
                 <!-- rating input -->
-                <div class="p-2">
-                    <label for="restaurant_filter_rating" class="form-label">Rating (minimal)</label>
+                <div class="p-2 mb-3">
+                    <label for="restaurant_filter_rating" class="form-label fs-5 mb-0">Rating (minimal)</label>
+                    <hr class="mt-0 mb-3">
                     <div id="restaurant_filter_rating"></div>
                     <span id="restaurant_filter_rating_target" style="display:none"></span>
                     <span id="restaurant_filter_rating_selected" style="display:none">{{ rest_filter.rating }}</span>
                 </div>
 
                 <!-- radius range -->
-                <div class="p-2">
-                    <label for="restaurant_filter_radius" class="form-label">Radius (maximal)</label>
+                <div class="p-2 mb-3">
+                    <label for="restaurant_filter_radius" class="form-label fs-5 mb-0">Radius (maximal)</label>
+                    <hr class="mt-0 mb-3">
                     <input type="range" class="form-range" id="restaurant_filter_radius" name="restaurant_filter_radius" min="0" max="50" value="{{rest_filter.radius // 1000}}" oninput="update_radius_text(this.value)">
                     <input class="form-label text-center" id="restaurant_filter_radius_text" value="" readonly></input>
                 </div>
 
 
                 <!-- costs range -->
-                <div class="p-2">
-                    <label for="restaurant_filter_costs" class="form-label">Preisstufe (maximal)</label>
+                <div class="p-2 mb-3">
+                    <label for="restaurant_filter_costs" class="form-label fs-5 mb-0">Preisstufe (maximal)</label>
+                    <hr class="mt-0 mb-3">
                     <input type="range" class="form-range" id="restaurant_filter_costs" name="restaurant_filter_costs" min="0" max="4" value="{{rest_filter.costs}}" oninput="update_costs_text(this.value)"></input>
                     <input class="form-label text-center" id="restaurant_filter_costs_text" value="" readonly></input>
                 </div>
 
 
                 <!-- cuisine select -->
-                <div class="p-2">
-                    <label for="restaurant_filter_cuisine" class="form label">Cuisine</label><br>
+                <div class="p-2 mb-3">
+                    <p class="form-label fs-5 mb-0">Cuisine</p>
+                    <hr class="mt-0 mb-3">
                     <span id="cuisine_selected" style="display:none">{{cuisines_selected}}</span>
 
                     <div class="form-check mb-2">
-                        {% if cuisines_selected_arr|length > 0 %}
-                            <input type="checkbox" name="allCuisineCheckbox" id="allCuisineCheckbox" onclick="updateCuisineCheckboxes()" class="form-check-input big-check" autocomplete="off" checked>
-                            <label for="allCuisineCheckbox" class="form-check-label">Alle</label>
-                        {% else %}
-                            <input type="checkbox" name="allCuisineCheckbox" id="allCuisineCheckbox" onclick="updateCuisineCheckboxes()" class="form-check-input big-check" autocomplete="off">
-                            <label for="allCuisineCheckbox" class="form-check-label">Alle</label>
-                        {% endif %}
+                        <input type="checkbox" name="allCuisineCheckbox" id="allCuisineCheckbox" onclick="updateCuisineCheckboxes()" class="form-check-input big-check" autocomplete="off" checked>
+                        <label for="allCuisineCheckbox" class="form-check-label">Alle</label>
                     </div>
-                    {% if cuisines_selected_arr|length > 0 %}
-                        <div class="grid-23-col" id="cuisineCheckboxesContainer">
-                    {% else %}
-                        <div class="grid-23-col d-none" id="cuisineCheckboxesContainer">
-                    {% endif %}
+                    <div class="grid-23-col d-none" id="cuisineCheckboxesContainer">
                         {% for Cuisine in cuisines_options_arr %}
                             {% if not loop.last %}
                                 {% if Cuisine in cuisines_selected_arr %}
@@ -79,24 +73,16 @@
 
 
                 <!-- allergies select -->
-                <div class="p-2">
-                    <label for="restaurant_filter_allergies" class="form-label">Allergien</label><br>
+                <div class="p-2 mb-3">
+                    <p class="form-label fs-5 mb-0">Allergien</p>
+                    <hr class="mt-0 mb-3">
                     <span id="allergies_selected" style="display:none">{{allergies_selected}}</span>
 
                     <div class="form-check mb-2">
-                        {% if allergies_selected_arr|length > 0 %}
-                            <input type="checkbox" name="allAllergyCheckbox" id="allAllergyCheckbox" onclick="updateAllergyCheckboxes()" class="form-check-input big-check" autocomplete="off" checked>
-                            <label for="allAllergyCheckbox" class="form-check-label">Keine</label>
-                        {% else %}
-                            <input type="checkbox" name="allAllergyCheckbox" id="allAllergyCheckbox" onclick="updateAllergyCheckboxes()" class="form-check-input big-check" autocomplete="off">
-                            <label for="allAllergyCheckbox" class="form-check-label">Keine</label>
-                        {% endif %}
+                        <input type="checkbox" name="allAllergyCheckbox" id="allAllergyCheckbox" onclick="updateAllergyCheckboxes()" class="form-check-input big-check" autocomplete="off" checked>
+                        <label for="allAllergyCheckbox" class="form-check-label">Keine</label>
                     </div>
-                    {% if allergies_selected_arr|length > 0 %}
-                        <div class="" id="allergyCheckboxesContainer">
-                    {% else %}
-                        <div class="d-none" id="allergyCheckboxesContainer">
-                    {% endif %}
+                    <div class="d-none" id="allergyCheckboxesContainer">
                         {% for Allergy in allergies_options_arr %}
                             {% if Allergy in allergies_selected_arr %}
                                 <div class="form-check mb-1">
@@ -116,6 +102,11 @@
                 <span id="restaurant_filter_latitude" style="display:none"></span>
                 <span id="restaurant_filter_longitude" style="display:none"></span>
             </div>
+            
+            <div class="p-2 mt-4 text-center">
+                <p class="fst-italic mb-0">Die Filter werden automatisch gespeichert.</p>
+            </div>
+
             <div class="modal-footer">
                 <a id="search_restaurant_from_modal" type="button" class="btn btn-primary" onclick="search_from_modal()">Suchen</a>
             </div>
