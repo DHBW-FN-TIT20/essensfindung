@@ -48,7 +48,7 @@ def main(request: Request, current_user: UserLogin = Depends(get_current_user), 
     # cuisine_options from Enum to comma seperated str
     cuisines_options: str = ",".join([cuisine.value for cuisine in Cuisine])
 
-    allergies_selected = None
+    allergies_selected = ""
     if rest_filter_db.allergies is not None:
         allergies_selected: str = ",".join([allergie.name for allergie in rest_filter_db.allergies])
 

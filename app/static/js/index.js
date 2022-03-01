@@ -7,7 +7,7 @@ function get_location() {
 }
 
 function location_error() {
-    document.location.href = "/error?err_msg=Location needs to be activated to use our services";
+    console.log("Error grabbing location data");
 }
 
 function show_position(position){
