@@ -1,9 +1,13 @@
 function get_location() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(show_position);
+      navigator.geolocation.getCurrentPosition(show_position, location_error);
     } else { 
       alert("Geolocation is not supported by this browser.");
     }
+}
+
+function location_error() {
+    console.log("Error grabbing location data");
 }
 
 function show_position(position){

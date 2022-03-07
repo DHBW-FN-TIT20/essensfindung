@@ -3,7 +3,9 @@ from typing import Union
 
 import fastapi
 from fastapi import Depends
+from fastapi import status
 from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
@@ -50,8 +52,15 @@ async def findrestaurant(
         current_user (User, optional): the current user. Defaults to Depends(get_current_user).
 
     Returns:
+        RedirectResponse: redirect to /error...
         TemplateResponse: the http response
     """
+
+    if lat == "" or lng == "":
+        return RedirectResponse(
+            url="/error?err_msg=Location is required to search for restaurants", status_code=status.HTTP_302_FOUND
+        )
+    
     # cuisine:str zum Cuisine-Array machen
     if cuisine is not None:
         cuisine_list = [scheme_cuisine.PydanticCuisine(name=cuisine) for cuisine in cuisine.split(",")]
