@@ -620,14 +620,26 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_recipe.Recipe" title="schemes.scheme_recipe.Recipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Recipe</span></code></a>(*, id, name, ingredients, url[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_recipe.Recipe" title="schemes.scheme_recipe.Recipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Recipe</span></code></a>(*, name, ingredients, url[, image, ...])</p></td>
 <td><p>Class that you get from the backend to handle the recipe</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_recipe.RecipeBase" title="schemes.scheme_recipe.RecipeBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeBase</span></code></a>(*, id)</p></td>
+<td><p>Base class for the Recipes</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_recipe.RecipeBewertungBase" title="schemes.scheme_recipe.RecipeBewertungBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeBewertungBase</span></code></a>(*, name[, comment, rating])</p></td>
+<td><p>BaseClass for the Bewertung</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.scheme_recipe.RecipeBewertungCreate" title="schemes.scheme_recipe.RecipeBewertungCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeBewertungCreate</span></code></a>(*, name[, comment, rating])</p></td>
+<td><p>Class to create a new Bewertung in the DB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.scheme_recipe.RecipeBewertungReturn" title="schemes.scheme_recipe.RecipeBewertungReturn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeBewertungReturn</span></code></a>(*, name[, comment, rating])</p></td>
+<td><p>Class to return to the frontend</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">Recipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ingredients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#Recipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.Recipe" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">Recipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ingredients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#Recipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.Recipe" title="Permalink to this definition"></a></dt>
 <dd><p>Class that you get from the backend to handle the recipe</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="schemes.scheme_recipe.Recipe.id">
@@ -702,6 +714,129 @@
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Optional[timedelta]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">RecipeBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#RecipeBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.RecipeBase" title="Permalink to this definition"></a></dt>
+<dd><p>Base class for the Recipes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBase.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBase.id" title="Permalink to this definition"></a></dt>
+<dd><p>id of the recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">RecipeBewertungBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#RecipeBewertungBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungBase" title="Permalink to this definition"></a></dt>
+<dd><p>BaseClass for the Bewertung</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungBase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungBase.name" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the restaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungBase.comment">
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungBase.comment" title="Permalink to this definition"></a></dt>
+<dd><p>comment from the user. Defaults to “”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungBase.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungBase.rating" title="Permalink to this definition"></a></dt>
+<dd><p>Rating of the user. Defaults to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Optional[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">RecipeBewertungCreate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#schemes.scheme_recipe.RecipeBase" title="schemes.scheme_recipe.RecipeBase"><span class="pre">schemes.scheme_recipe.RecipeBase</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#RecipeBewertungCreate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungCreate" title="Permalink to this definition"></a></dt>
+<dd><p>Class to create a new Bewertung in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungCreate.person">
+<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungCreate.person" title="Permalink to this definition"></a></dt>
+<dd><p>Owner of the assessment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase">scheme_user.UserBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungCreate.recipe">
+<span class="sig-name descname"><span class="pre">recipe</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungCreate.recipe" title="Permalink to this definition"></a></dt>
+<dd><p>The recipe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#schemes.scheme_recipe.RecipeBase" title="schemes.scheme_recipe.RecipeBase">scheme_recipe.RecipeBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungReturn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.scheme_recipe.</span></span><span class="sig-name descname"><span class="pre">RecipeBewertungReturn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.datetime</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/schemes/scheme_recipe.html#RecipeBewertungReturn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungReturn" title="Permalink to this definition"></a></dt>
+<dd><p>Class to return to the frontend</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungReturn.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungReturn.email" title="Permalink to this definition"></a></dt>
+<dd><p>Email of the User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungReturn.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungReturn.id" title="Permalink to this definition"></a></dt>
+<dd><p>PlaceID of the recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="schemes.scheme_recipe.RecipeBewertungReturn.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#schemes.scheme_recipe.RecipeBewertungReturn.timestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Last Update of the assessment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime.datetime</p>
 </dd>
 </dl>
 </dd></dl>

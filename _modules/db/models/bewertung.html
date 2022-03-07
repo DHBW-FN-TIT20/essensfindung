@@ -77,13 +77,13 @@
 <span class="kn">from</span> <span class="nn">db.base</span> <span class="kn">import</span> <span class="n">Base</span>
 
 
-<div class="viewcode-block" id="Bewertung"><a class="viewcode-back" href="../../../db/models.html#db.models.bewertung.Bewertung">[docs]</a><span class="k">class</span> <span class="nc">Bewertung</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="BewertungRestaurant"><a class="viewcode-back" href="../../../db/models.html#db.models.bewertung.BewertungRestaurant">[docs]</a><span class="k">class</span> <span class="nc">BewertungRestaurant</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Model for SQLAlchemy for the bewertung Table in the DB</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        person_email (str): Primary Key and ForeignKey of db.models.person.Person email</span>
-<span class="sd">        place_id (str): Primary Key and ForeignKey of db.models.restaurant.Restaurant</span>
+<span class="sd">        place_id (str): Primary Key and ForeignKey of db.models.restaurant.BewertungRestaurant</span>
 <span class="sd">        zeitstempel (sqlalchemy.DateTime): Set automatic in DB when updated</span>
 <span class="sd">        kommentar (str): Can be None</span>
 <span class="sd">        rating (int): Rating if the assessment</span>
@@ -91,7 +91,7 @@
 <span class="sd">        restaurant (db.models.restaurant.Restaurant)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;bewertung&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;bewertungRestaurant&quot;</span>
 
     <span class="n">person_email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;person.email&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">place_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;restaurant.place_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -99,8 +99,35 @@
     <span class="n">kommentar</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">rating</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">person</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Person&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;bewertungen&quot;</span><span class="p">)</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Person&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;bewertungenRest&quot;</span><span class="p">)</span>
     <span class="n">restaurant</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Restaurant&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;bewertungen&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BewertungRecipe"><a class="viewcode-back" href="../../../db/models.html#db.models.bewertung.BewertungRecipe">[docs]</a><span class="k">class</span> <span class="nc">BewertungRecipe</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model for SQLAlchemy for the bewertung Table in the DB</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        person_email (str): Primary Key and ForeignKey of db.models.person.Person email</span>
+<span class="sd">        rezept_id (str): Primary Key and ForeignKey of db.models.restaurant.BewertungRecipe</span>
+<span class="sd">        rezept_name (str): Can not be None</span>
+<span class="sd">        zeitstempel (sqlalchemy.DateTime): Set automatic in DB when updated</span>
+<span class="sd">        kommentar (str): Can be None</span>
+<span class="sd">        rating (int): Rating if the assessment</span>
+<span class="sd">        person (db.models.person.Person)</span>
+<span class="sd">        restaurant (db.models.restaurant.Restaurant)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;bewertungRezept&quot;</span>
+
+    <span class="n">person_email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;person.email&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">rezept_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;restaurant.place_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">rezept_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">zeitstempel</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">server_onupdate</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">server_default</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">kommentar</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">rating</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">person</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Person&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;bewertungenRezept&quot;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

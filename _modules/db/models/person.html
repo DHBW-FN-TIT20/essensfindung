@@ -83,7 +83,7 @@
 <span class="sd">        email (str): Primary Key</span>
 <span class="sd">        hashed_password (str): Hashed Password of the user</span>
 <span class="sd">        last_login (sqlalchemy.DateTime): Autamtic set on update</span>
-<span class="sd">        bewertungen (db.models.bewertung.Bewertung): Bewertungen of the Person</span>
+<span class="sd">        bewertungen (db.models.bewertung.BewertungRestaurant): Bewertungen of the Person</span>
 <span class="sd">        filterRest (db.models.filter.Filter): Saved Filter of the Person</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -94,7 +94,8 @@
     <span class="n">hashed_password</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">last_login</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">server_default</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">bewertungen</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Bewertung&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="n">passive_deletes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">bewertungenRest</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;BewertungRestaurant&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="n">passive_deletes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">bewertungenRezept</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;BewertungRecipe&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="n">passive_deletes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">filterRest</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;FilterRest&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">passive_deletes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 </pre></div>
 

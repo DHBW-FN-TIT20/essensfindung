@@ -80,7 +80,7 @@
 <span class="sd">    Attributes:</span>
 <span class="sd">        place_id (str): Primary Key</span>
 <span class="sd">        name (str): Name of the Restaurant</span>
-<span class="sd">        bewertungen (db.models.bewertung.Bewertung): Bewertungen of the person</span>
+<span class="sd">        bewertungen (db.models.bewertung.BewertungRestaurant): Bewertungen of the person</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -89,7 +89,7 @@
     <span class="n">place_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">bewertungen</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Bewertung&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="n">passive_deletes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="n">bewertungen</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;BewertungRestaurant&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="n">passive_deletes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

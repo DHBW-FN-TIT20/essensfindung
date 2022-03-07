@@ -73,9 +73,9 @@
 <span class="kn">import</span> <span class="nn">httpx</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Session</span>
 
-<span class="kn">from</span> <span class="nn">db.crud</span> <span class="kn">import</span> <span class="n">bewertung</span> <span class="k">as</span> <span class="n">crud_bewertung</span>
 <span class="kn">from</span> <span class="nn">db.crud</span> <span class="kn">import</span> <span class="nb">filter</span> <span class="k">as</span> <span class="n">crud_filter</span>
 <span class="kn">from</span> <span class="nn">db.crud</span> <span class="kn">import</span> <span class="n">restaurant</span> <span class="k">as</span> <span class="n">crud_restaurant</span>
+<span class="kn">from</span> <span class="nn">db.crud</span> <span class="kn">import</span> <span class="n">restBewertung</span> <span class="k">as</span> <span class="n">crud_restBewertung</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">DatabaseException</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">DuplicateEntry</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">GoogleApiException</span>
@@ -121,9 +121,9 @@
 <span class="sd">        user_mail (str): Mail of the User</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Union[List[schemes.scheme_rest.RestBewertungReturn], None]: Return a List of all User or None</span>
+<span class="sd">        Union[List[schemes.scheme_rest.RestBewertungReturn], None]: Return a List of all Restaurants or None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">db_rests</span> <span class="o">=</span> <span class="n">crud_bewertung</span><span class="o">.</span><span class="n">get_all_user_bewertungen</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+    <span class="n">db_rests</span> <span class="o">=</span> <span class="n">crud_restBewertung</span><span class="o">.</span><span class="n">get_all_user_bewertungen</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
     <span class="n">scheme_rests</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">RestBewertungReturn</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">db_rest</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -152,7 +152,7 @@
 <span class="sd">        [schemes.scheme_rest.RestBewertungReturn]: The created Restaurant</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">created_assessment</span> <span class="o">=</span> <span class="n">crud_bewertung</span><span class="o">.</span><span class="n">create_bewertung</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">assessment</span><span class="p">)</span>
+        <span class="n">created_assessment</span> <span class="o">=</span> <span class="n">crud_restBewertung</span><span class="o">.</span><span class="n">create_bewertung</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">assessment</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">RestBewertungReturn</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">created_assessment</span><span class="o">.</span><span class="n">restaurant</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="n">email</span><span class="o">=</span><span class="n">created_assessment</span><span class="o">.</span><span class="n">person_email</span><span class="p">,</span>
@@ -176,13 +176,13 @@
 <span class="sd">        new_assessment (schemes.scheme_rest.RestBewertungCreate): The new assessment with the updated values</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated</span>
+<span class="sd">        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        schemes.scheme_rest.RestBewertungReturn: Restaurant the the new values</span>
+<span class="sd">        schemes.scheme_rest.RestBewertungReturn: Restaurant with the new values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">updated_assessment</span> <span class="o">=</span> <span class="n">crud_bewertung</span><span class="o">.</span><span class="n">update_bewertung</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">old_assessment</span><span class="p">,</span> <span class="n">new_assessment</span><span class="p">)</span>
+        <span class="n">updated_assessment</span> <span class="o">=</span> <span class="n">crud_restBewertung</span><span class="o">.</span><span class="n">update_bewertung</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">old_assessment</span><span class="p">,</span> <span class="n">new_assessment</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">DatabaseException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">error</span>
     <span class="k">return</span> <span class="n">RestBewertungReturn</span><span class="p">(</span>
@@ -204,12 +204,12 @@
 <span class="sd">        rest (schemes.scheme_rest.RestaurantBase): The mapped Restaurant</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated</span>
+<span class="sd">        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        int: The number of affected Rows of the delete</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="n">crud_bewertung</span><span class="o">.</span><span class="n">delete_bewertung</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">crud_restBewertung</span><span class="o">.</span><span class="n">delete_bewertung</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DatabaseException</span><span class="p">(</span><span class="s2">&quot;Can not delete assessment. Does the user and restaurant excist?&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rows</span></div>
@@ -307,7 +307,7 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">crud_restaurant</span><span class="o">.</span><span class="n">get_restaurant_by_id</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">restaurant</span><span class="o">.</span><span class="n">place_id</span><span class="p">):</span>
         <span class="n">crud_restaurant</span><span class="o">.</span><span class="n">create_restaurant</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">restaurant</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">crud_bewertung</span><span class="o">.</span><span class="n">get_bewertung_from_user_to_rest</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">restaurant</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">crud_restBewertung</span><span class="o">.</span><span class="n">get_bewertung_from_user_to_rest</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">restaurant</span><span class="p">):</span>
         <span class="n">add_assessment</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">RestBewertungCreate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">restaurant</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">person</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">restaurant</span><span class="o">=</span><span class="n">restaurant</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">restaurant</span></div>
 
@@ -324,7 +324,7 @@
 <span class="sd">        List[schemes.scheme_rest.Restaurant]: Return of the input List with the user rating if one got found</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">rest</span> <span class="ow">in</span> <span class="n">rests</span><span class="p">:</span>
-        <span class="n">assessment</span> <span class="o">=</span> <span class="n">crud_bewertung</span><span class="o">.</span><span class="n">get_bewertung_from_user_to_rest</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
+        <span class="n">assessment</span> <span class="o">=</span> <span class="n">crud_restBewertung</span><span class="o">.</span><span class="n">get_bewertung_from_user_to_rest</span><span class="p">(</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">assessment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">rest</span><span class="o">.</span><span class="n">own_rating</span> <span class="o">=</span> <span class="n">assessment</span><span class="o">.</span><span class="n">rating</span>
 

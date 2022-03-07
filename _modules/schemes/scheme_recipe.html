@@ -67,10 +67,23 @@
              
   <h1>Source code for schemes.scheme_recipe</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Contains the Class for Recipe&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">scheme_user</span>
+
+
+<div class="viewcode-block" id="RecipeBase"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_recipe.RecipeBase">[docs]</a><span class="k">class</span> <span class="nc">RecipeBase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for the Recipes</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id (str): id of the recipe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span></div>
 
 
 <div class="viewcode-block" id="Recipe"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_recipe.Recipe">[docs]</a><span class="k">class</span> <span class="nc">Recipe</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -87,13 +100,58 @@
 <span class="sd">        prepTime (Optional[timedelta]): preperation time of the recipe if specified</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">ingredients</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">cookTime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span>
     <span class="n">prepTime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="RecipeBewertungBase"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungBase">[docs]</a><span class="k">class</span> <span class="nc">RecipeBewertungBase</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    BaseClass for the Bewertung</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): Name of the restaurant</span>
+<span class="sd">        comment (Optional[str]): comment from the user. Defaults to &quot;&quot;.</span>
+<span class="sd">        rating (Optional[float]): Rating of the user. Defaults to 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">comment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">rating</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="RecipeBewertungCreate"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungCreate">[docs]</a><span class="k">class</span> <span class="nc">RecipeBewertungCreate</span><span class="p">(</span><span class="n">RecipeBewertungBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to create a new Bewertung in the DB</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        person (scheme_user.UserBase): Owner of the assessment.</span>
+<span class="sd">        recipe (scheme_recipe.RecipeBase): The recipe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">person</span><span class="p">:</span> <span class="n">scheme_user</span><span class="o">.</span><span class="n">UserBase</span>
+    <span class="n">recipe</span><span class="p">:</span> <span class="n">RecipeBase</span></div>
+
+
+<div class="viewcode-block" id="RecipeBewertungReturn"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungReturn">[docs]</a><span class="k">class</span> <span class="nc">RecipeBewertungReturn</span><span class="p">(</span><span class="n">RecipeBewertungBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to return to the frontend</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        email (str): Email of the User</span>
+<span class="sd">        id (str): PlaceID of the recipe</span>
+<span class="sd">        timestamp (datetime.datetime): Last Update of the assessment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span>
+
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+        <span class="n">orm_mode</span> <span class="o">=</span> <span class="kc">True</span></div>
 </pre></div>
 
            </div>

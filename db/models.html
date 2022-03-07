@@ -153,18 +153,21 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Bewertung</span></code></a>(**kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.models.bewertung.BewertungRecipe" title="db.models.bewertung.BewertungRecipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BewertungRecipe</span></code></a>(**kwargs)</p></td>
+<td><p>Model for SQLAlchemy for the bewertung Table in the DB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BewertungRestaurant</span></code></a>(**kwargs)</p></td>
 <td><p>Model for SQLAlchemy for the bewertung Table in the DB</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.bewertung.</span></span><span class="sig-name descname"><span class="pre">Bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/bewertung.html#Bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.bewertung.Bewertung" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.bewertung.</span></span><span class="sig-name descname"><span class="pre">BewertungRecipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/bewertung.html#BewertungRecipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.bewertung.BewertungRecipe" title="Permalink to this definition"></a></dt>
 <dd><p>Model for SQLAlchemy for the bewertung Table in the DB</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.person_email">
-<span class="sig-name descname"><span class="pre">person_email</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.person_email" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.person_email">
+<span class="sig-name descname"><span class="pre">person_email</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.person_email" title="Permalink to this definition"></a></dt>
 <dd><p>Primary Key and ForeignKey of db.models.person.Person email</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -174,9 +177,9 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.place_id">
-<span class="sig-name descname"><span class="pre">place_id</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.place_id" title="Permalink to this definition"></a></dt>
-<dd><p>Primary Key and ForeignKey of db.models.restaurant.Restaurant</p>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.rezept_id">
+<span class="sig-name descname"><span class="pre">rezept_id</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.rezept_id" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key and ForeignKey of db.models.restaurant.BewertungRecipe</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
@@ -185,8 +188,19 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.zeitstempel">
-<span class="sig-name descname"><span class="pre">zeitstempel</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.zeitstempel" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.rezept_name">
+<span class="sig-name descname"><span class="pre">rezept_name</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.rezept_name" title="Permalink to this definition"></a></dt>
+<dd><p>Can not be None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.zeitstempel">
+<span class="sig-name descname"><span class="pre">zeitstempel</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.zeitstempel" title="Permalink to this definition"></a></dt>
 <dd><p>Set automatic in DB when updated</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -196,8 +210,8 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.kommentar">
-<span class="sig-name descname"><span class="pre">kommentar</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.kommentar" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.kommentar">
+<span class="sig-name descname"><span class="pre">kommentar</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.kommentar" title="Permalink to this definition"></a></dt>
 <dd><p>Can be None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -207,8 +221,8 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.rating">
-<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.rating" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.rating" title="Permalink to this definition"></a></dt>
 <dd><p>Rating if the assessment</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -218,8 +232,8 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.person">
-<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.person" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.person">
+<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.person" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#db.models.person.Person" title="db.models.person.Person">db.models.person.Person</a></p>
@@ -228,8 +242,89 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="db.models.bewertung.Bewertung.restaurant">
-<span class="sig-name descname"><span class="pre">restaurant</span></span><a class="headerlink" href="#db.models.bewertung.Bewertung.restaurant" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRecipe.restaurant">
+<span class="sig-name descname"><span class="pre">restaurant</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRecipe.restaurant" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.restaurant.Restaurant" title="db.models.restaurant.Restaurant">db.models.restaurant.Restaurant</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.models.bewertung.</span></span><span class="sig-name descname"><span class="pre">BewertungRestaurant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/db/models/bewertung.html#BewertungRestaurant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant" title="Permalink to this definition"></a></dt>
+<dd><p>Model for SQLAlchemy for the bewertung Table in the DB</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.person_email">
+<span class="sig-name descname"><span class="pre">person_email</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.person_email" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key and ForeignKey of db.models.person.Person email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.place_id">
+<span class="sig-name descname"><span class="pre">place_id</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.place_id" title="Permalink to this definition"></a></dt>
+<dd><p>Primary Key and ForeignKey of db.models.restaurant.BewertungRestaurant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.zeitstempel">
+<span class="sig-name descname"><span class="pre">zeitstempel</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.zeitstempel" title="Permalink to this definition"></a></dt>
+<dd><p>Set automatic in DB when updated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>sqlalchemy.DateTime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.kommentar">
+<span class="sig-name descname"><span class="pre">kommentar</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.kommentar" title="Permalink to this definition"></a></dt>
+<dd><p>Can be None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.rating" title="Permalink to this definition"></a></dt>
+<dd><p>Rating if the assessment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.person">
+<span class="sig-name descname"><span class="pre">person</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.person" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.person.Person" title="db.models.person.Person">db.models.person.Person</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="db.models.bewertung.BewertungRestaurant.restaurant">
+<span class="sig-name descname"><span class="pre">restaurant</span></span><a class="headerlink" href="#db.models.bewertung.BewertungRestaurant.restaurant" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#db.models.restaurant.Restaurant" title="db.models.restaurant.Restaurant">db.models.restaurant.Restaurant</a></p>
@@ -441,7 +536,7 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 <dd><p>Bewertungen of the Person</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">db.models.bewertung.Bewertung</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant">db.models.bewertung.BewertungRestaurant</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -507,7 +602,7 @@ Convert it to <cite>schemes</cite> if you use it otherwise!</p>
 <dd><p>Bewertungen of the person</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">db.models.bewertung.Bewertung</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant">db.models.bewertung.BewertungRestaurant</a></p>
 </dd>
 </dl>
 </dd></dl>

@@ -49,7 +49,7 @@
 <li class="toctree-l3"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">CRUD</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#module-db.crud.allergies">Allergies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-db.crud.bewertung">Bewertung</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-db.crud.restBewertung">Bewertung</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-db.crud.cuisine">Cuisine</a></li>
 </ul>
 </li>
@@ -150,8 +150,8 @@
 </dd></dl>
 
 </section>
-<section id="module-db.crud.bewertung">
-<span id="bewertung"></span><h2>Bewertung<a class="headerlink" href="#module-db.crud.bewertung" title="Permalink to this headline"></a></h2>
+<section id="module-db.crud.restBewertung">
+<span id="bewertung"></span><h2>Bewertung<a class="headerlink" href="#module-db.crud.restBewertung" title="Permalink to this headline"></a></h2>
 <p>All DB functions for the Bewertung table</p>
 <p><strong>Functions:</strong></p>
 <table class="longtable docutils align-default">
@@ -160,26 +160,26 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#db.crud.bewertung.create_bewertung" title="db.crud.bewertung.create_bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_bewertung</span></code></a>(db, assessment)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.crud.restBewertung.create_bewertung" title="db.crud.restBewertung.create_bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_bewertung</span></code></a>(db, assessment)</p></td>
 <td><p>Create / Add a Bewertung to the DB.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#db.crud.bewertung.delete_bewertung" title="db.crud.bewertung.delete_bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_bewertung</span></code></a>(db, user, rest)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#db.crud.restBewertung.delete_bewertung" title="db.crud.restBewertung.delete_bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_bewertung</span></code></a>(db, user, rest)</p></td>
 <td><p>Delete one Bewertung</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#db.crud.bewertung.get_all_user_bewertungen" title="db.crud.bewertung.get_all_user_bewertungen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_user_bewertungen</span></code></a>(db, user)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.crud.restBewertung.get_all_user_bewertungen" title="db.crud.restBewertung.get_all_user_bewertungen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_user_bewertungen</span></code></a>(db, user)</p></td>
 <td><p>Return all bewertugen from one User</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#db.crud.bewertung.get_bewertung_from_user_to_rest" title="db.crud.bewertung.get_bewertung_from_user_to_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bewertung_from_user_to_rest</span></code></a>(db, user, rest)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#db.crud.restBewertung.get_bewertung_from_user_to_rest" title="db.crud.restBewertung.get_bewertung_from_user_to_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bewertung_from_user_to_rest</span></code></a>(db, user, rest)</p></td>
 <td><p>Return a specific bewertung from a user to only one restaurant</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#db.crud.bewertung.update_bewertung" title="db.crud.bewertung.update_bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_bewertung</span></code></a>(db, old_bewertung, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#db.crud.restBewertung.update_bewertung" title="db.crud.restBewertung.update_bewertung"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_bewertung</span></code></a>(db, old_bewertung, ...)</p></td>
 <td><p>Update the comment and rating of a bewertung</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
-<dt class="sig sig-object py" id="db.crud.bewertung.create_bewertung">
-<span class="sig-prename descclassname"><span class="pre">db.crud.bewertung.</span></span><span class="sig-name descname"><span class="pre">create_bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assessment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung"><span class="pre">db.models.bewertung.Bewertung</span></a></span></span><a class="reference internal" href="../_modules/db/crud/bewertung.html#create_bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.bewertung.create_bewertung" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.crud.restBewertung.create_bewertung">
+<span class="sig-prename descclassname"><span class="pre">db.crud.restBewertung.</span></span><span class="sig-name descname"><span class="pre">create_bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assessment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant"><span class="pre">db.models.bewertung.BewertungRestaurant</span></a></span></span><a class="reference internal" href="../_modules/db/crud/restBewertung.html#create_bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.restBewertung.create_bewertung" title="Permalink to this definition"></a></dt>
 <dd><p>Create / Add a Bewertung to the DB. Timestamp and ID will set automatic.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -199,14 +199,14 @@
 <dd class="field-odd"><p>Return if success</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">Bewertung</a></p>
+<dd class="field-even"><p><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant">BewertungRestaurant</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="db.crud.bewertung.delete_bewertung">
-<span class="sig-prename descclassname"><span class="pre">db.crud.bewertung.</span></span><span class="sig-name descname"><span class="pre">delete_bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><span class="pre">schemes.scheme_rest.RestaurantBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/db/crud/bewertung.html#delete_bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.bewertung.delete_bewertung" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.crud.restBewertung.delete_bewertung">
+<span class="sig-prename descclassname"><span class="pre">db.crud.restBewertung.</span></span><span class="sig-name descname"><span class="pre">delete_bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><span class="pre">schemes.scheme_rest.RestaurantBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/db/crud/restBewertung.html#delete_bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.restBewertung.delete_bewertung" title="Permalink to this definition"></a></dt>
 <dd><p>Delete one Bewertung</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,8 +226,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="db.crud.bewertung.get_all_user_bewertungen">
-<span class="sig-prename descclassname"><span class="pre">db.crud.bewertung.</span></span><span class="sig-name descname"><span class="pre">get_all_user_bewertungen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung"><span class="pre">db.models.bewertung.Bewertung</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/db/crud/bewertung.html#get_all_user_bewertungen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.bewertung.get_all_user_bewertungen" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.crud.restBewertung.get_all_user_bewertungen">
+<span class="sig-prename descclassname"><span class="pre">db.crud.restBewertung.</span></span><span class="sig-name descname"><span class="pre">get_all_user_bewertungen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant"><span class="pre">db.models.bewertung.BewertungRestaurant</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/db/crud/restBewertung.html#get_all_user_bewertungen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.restBewertung.get_all_user_bewertungen" title="Permalink to this definition"></a></dt>
 <dd><p>Return all bewertugen from one User</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -237,14 +237,14 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>List[Bewertung] OR None</p>
+<dd class="field-even"><p>List[BewertungRestaurant] OR None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="db.crud.bewertung.get_bewertung_from_user_to_rest">
-<span class="sig-prename descclassname"><span class="pre">db.crud.bewertung.</span></span><span class="sig-name descname"><span class="pre">get_bewertung_from_user_to_rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><span class="pre">schemes.scheme_rest.RestaurantBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung"><span class="pre">db.models.bewertung.Bewertung</span></a></span></span><a class="reference internal" href="../_modules/db/crud/bewertung.html#get_bewertung_from_user_to_rest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.bewertung.get_bewertung_from_user_to_rest" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.crud.restBewertung.get_bewertung_from_user_to_rest">
+<span class="sig-prename descclassname"><span class="pre">db.crud.restBewertung.</span></span><span class="sig-name descname"><span class="pre">get_bewertung_from_user_to_rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserBase" title="schemes.scheme_user.UserBase"><span class="pre">schemes.scheme_user.UserBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestaurantBase" title="schemes.scheme_rest.RestaurantBase"><span class="pre">schemes.scheme_rest.RestaurantBase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant"><span class="pre">db.models.bewertung.BewertungRestaurant</span></a></span></span><a class="reference internal" href="../_modules/db/crud/restBewertung.html#get_bewertung_from_user_to_rest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.restBewertung.get_bewertung_from_user_to_rest" title="Permalink to this definition"></a></dt>
 <dd><p>Return a specific bewertung from a user to only one restaurant</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -258,14 +258,14 @@
 <dd class="field-even"><p>Return one bewertung that match the restaurant - user</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">Bewertung</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant">BewertungRestaurant</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="db.crud.bewertung.update_bewertung">
-<span class="sig-prename descclassname"><span class="pre">db.crud.bewertung.</span></span><span class="sig-name descname"><span class="pre">update_bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_bewertung</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_bewertung</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung"><span class="pre">db.models.bewertung.Bewertung</span></a></span></span><a class="reference internal" href="../_modules/db/crud/bewertung.html#update_bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.bewertung.update_bewertung" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="db.crud.restBewertung.update_bewertung">
+<span class="sig-prename descclassname"><span class="pre">db.crud.restBewertung.</span></span><span class="sig-name descname"><span class="pre">update_bewertung</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_bewertung</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_bewertung</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate" title="schemes.scheme_rest.RestBewertungCreate"><span class="pre">schemes.scheme_rest.RestBewertungCreate</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant"><span class="pre">db.models.bewertung.BewertungRestaurant</span></a></span></span><a class="reference internal" href="../_modules/db/crud/restBewertung.html#update_bewertung"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.crud.restBewertung.update_bewertung" title="Permalink to this definition"></a></dt>
 <dd><p>Update the comment and rating of a bewertung</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,7 +279,7 @@
 <dd class="field-even"><p>New Bewertung from <cite>get_bewertung_from_user_to_rest</cite></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="models.html#db.models.bewertung.Bewertung" title="db.models.bewertung.Bewertung">Bewertung</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="models.html#db.models.bewertung.BewertungRestaurant" title="db.models.bewertung.BewertungRestaurant">BewertungRestaurant</a></p>
 </dd>
 </dl>
 </dd></dl>

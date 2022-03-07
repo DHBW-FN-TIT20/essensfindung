@@ -136,16 +136,18 @@
 </li>
       <li><a href="db/models.html#db.models.allergie.Allergie.beschreibung">beschreibung (db.models.allergie.Allergie attribute)</a>
 </li>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung">Bewertung (class in db.models.bewertung)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="db/models.html#db.models.person.Person.bewertungen">bewertungen (db.models.person.Person attribute)</a>
 
       <ul>
         <li><a href="db/models.html#db.models.restaurant.Restaurant.bewertungen">(db.models.restaurant.Restaurant attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe">BewertungRecipe (class in db.models.bewertung)</a>
+</li>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant">BewertungRestaurant (class in db.models.bewertung)</a>
+</li>
       <li><a href="schemes/schemes.html#schemes.Cuisine.BUTCHER">BUTCHER (schemes.Cuisine attribute)</a>
 </li>
   </ul></td>
@@ -156,8 +158,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="schemes/schemes.html#schemes.Cuisine.COFFE">COFFE (schemes.Cuisine attribute)</a>
 </li>
-      <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungBase.comment">comment (schemes.scheme_rest.RestBewertungBase attribute)</a>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungBase.comment">comment (schemes.scheme_recipe.RecipeBewertungBase attribute)</a>
+
+      <ul>
+        <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungBase.comment">(schemes.scheme_rest.RestBewertungBase attribute)</a>
 </li>
+      </ul></li>
       <li><a href="schemes/schemes.html#schemes.scheme_recipe.Recipe.cookTime">cookTime (schemes.scheme_recipe.Recipe attribute)</a>
 </li>
       <li><a href="db/models.html#db.models.filter.FilterRest.costs">costs (db.models.filter.FilterRest attribute)</a>
@@ -180,7 +186,7 @@
 </li>
       <li><a href="db/crud.html#db.crud.allergies.create_allergie">create_allergie() (in module db.crud.allergies)</a>
 </li>
-      <li><a href="db/crud.html#db.crud.bewertung.create_bewertung">create_bewertung() (in module db.crud.bewertung)</a>
+      <li><a href="db/crud.html#db.crud.restBewertung.create_bewertung">create_bewertung() (in module db.crud.restBewertung)</a>
 </li>
       <li><a href="services/service_res.html#services.service_res.create_rest_filter">create_rest_filter() (in module services.service_res)</a>
 </li>
@@ -221,17 +227,17 @@
 </li>
       </ul></li>
       <li>
-    db.crud.bewertung
-
-      <ul>
-        <li><a href="db/crud.html#module-db.crud.bewertung">module</a>
-</li>
-      </ul></li>
-      <li>
     db.crud.cuisine
 
       <ul>
         <li><a href="db/crud.html#module-db.crud.cuisine">module</a>
+</li>
+      </ul></li>
+      <li>
+    db.crud.restBewertung
+
+      <ul>
+        <li><a href="db/crud.html#module-db.crud.restBewertung">module</a>
 </li>
       </ul></li>
       <li>
@@ -287,7 +293,7 @@
       </ul></li>
       <li><a href="services/service_res.html#services.service_res.delete_assessment">delete_assessment() (in module services.service_res)</a>
 </li>
-      <li><a href="db/crud.html#db.crud.bewertung.delete_bewertung">delete_bewertung() (in module db.crud.bewertung)</a>
+      <li><a href="db/crud.html#db.crud.restBewertung.delete_bewertung">delete_bewertung() (in module db.crud.restBewertung)</a>
 </li>
       <li><a href="views/rating.html#views.rating.delete_rating">delete_rating() (in module views.rating)</a>
 </li>
@@ -309,6 +315,8 @@
 
       <ul>
         <li><a href="db/models.html#db.models.person.Person.email">(db.models.person.Person attribute)</a>
+</li>
+        <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungReturn.email">(schemes.scheme_recipe.RecipeBewertungReturn attribute)</a>
 </li>
         <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn.email">(schemes.scheme_rest.RestBewertungReturn attribute)</a>
 </li>
@@ -371,11 +379,11 @@
 </li>
       <li><a href="db/crud.html#db.crud.allergies.get_all_allergies">get_all_allergies() (in module db.crud.allergies)</a>
 </li>
-      <li><a href="db/crud.html#db.crud.bewertung.get_all_user_bewertungen">get_all_user_bewertungen() (in module db.crud.bewertung)</a>
+      <li><a href="db/crud.html#db.crud.restBewertung.get_all_user_bewertungen">get_all_user_bewertungen() (in module db.crud.restBewertung)</a>
 </li>
       <li><a href="services/service_res.html#services.service_res.get_assessments_from_user">get_assessments_from_user() (in module services.service_res)</a>
 </li>
-      <li><a href="db/crud.html#db.crud.bewertung.get_bewertung_from_user_to_rest">get_bewertung_from_user_to_rest() (in module db.crud.bewertung)</a>
+      <li><a href="db/crud.html#db.crud.restBewertung.get_bewertung_from_user_to_rest">get_bewertung_from_user_to_rest() (in module db.crud.restBewertung)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -420,13 +428,19 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="schemes/schemes.html#schemes.scheme_recipe.Recipe.id">id (schemes.scheme_recipe.Recipe attribute)</a>
+
+      <ul>
+        <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBase.id">(schemes.scheme_recipe.RecipeBase attribute)</a>
 </li>
+        <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungReturn.id">(schemes.scheme_recipe.RecipeBewertungReturn attribute)</a>
+</li>
+      </ul></li>
       <li><a href="schemes/schemes.html#schemes.scheme_recipe.Recipe.image">image (schemes.scheme_recipe.Recipe attribute)</a>
-</li>
-      <li><a href="views/index.html#views.index.index">index() (in module views.index)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="views/index.html#views.index.index">index() (in module views.index)</a>
+</li>
       <li><a href="schemes/schemes.html#schemes.Cuisine.INDIAN">INDIAN (schemes.Cuisine attribute)</a>
 </li>
       <li><a href="schemes/schemes.html#schemes.scheme_recipe.Recipe.ingredients">ingredients (schemes.scheme_recipe.Recipe attribute)</a>
@@ -443,10 +457,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="schemes/schemes.html#schemes.scheme_filter.FilterRecipe.keyword">keyword (schemes.scheme_filter.FilterRecipe attribute)</a>
 </li>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.kommentar">kommentar (db.models.bewertung.BewertungRecipe attribute)</a>
+
+      <ul>
+        <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.kommentar">(db.models.bewertung.BewertungRestaurant attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.kommentar">kommentar (db.models.bewertung.Bewertung attribute)</a>
-</li>
       <li><a href="schemes/schemes.html#schemes.Cuisine.KOREAN">KOREAN (schemes.Cuisine attribute)</a>
 </li>
   </ul></td>
@@ -505,9 +523,9 @@
 </li>
         <li><a href="db/crud.html#module-db.crud.allergies">db.crud.allergies</a>
 </li>
-        <li><a href="db/crud.html#module-db.crud.bewertung">db.crud.bewertung</a>
-</li>
         <li><a href="db/crud.html#module-db.crud.cuisine">db.crud.cuisine</a>
+</li>
+        <li><a href="db/crud.html#module-db.crud.restBewertung">db.crud.restBewertung</a>
 </li>
         <li><a href="db/database.html#module-db.database">db.database</a>
 </li>
@@ -575,6 +593,8 @@
 </li>
         <li><a href="schemes/schemes.html#schemes.scheme_recipe.Recipe.name">(schemes.scheme_recipe.Recipe attribute)</a>
 </li>
+        <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungBase.name">(schemes.scheme_recipe.RecipeBewertungBase attribute)</a>
+</li>
         <li><a href="schemes/schemes.html#schemes.scheme_rest.Restaurant.name">(schemes.scheme_rest.Restaurant attribute)</a>
 </li>
         <li><a href="schemes/schemes.html#schemes.scheme_rest.RestaurantBase.name">(schemes.scheme_rest.RestaurantBase attribute)</a>
@@ -612,21 +632,29 @@
 </li>
       <li><a href="db/models.html#db.models.person.Person">Person (class in db.models.person)</a>
 </li>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.person">person (db.models.bewertung.Bewertung attribute)</a>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.person">person (db.models.bewertung.BewertungRecipe attribute)</a>
 
       <ul>
+        <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.person">(db.models.bewertung.BewertungRestaurant attribute)</a>
+</li>
         <li><a href="db/models.html#db.models.filter.FilterRest.person">(db.models.filter.FilterRest attribute)</a>
+</li>
+        <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungCreate.person">(schemes.scheme_recipe.RecipeBewertungCreate attribute)</a>
 </li>
         <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate.person">(schemes.scheme_rest.RestBewertungCreate attribute)</a>
 </li>
       </ul></li>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.person_email">person_email (db.models.bewertung.Bewertung attribute)</a>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.person_email">person_email (db.models.bewertung.BewertungRecipe attribute)</a>
+
+      <ul>
+        <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.person_email">(db.models.bewertung.BewertungRestaurant attribute)</a>
 </li>
+      </ul></li>
       <li><a href="schemes/schemes.html#schemes.scheme_rest.Restaurant.phone_number">phone_number (schemes.scheme_rest.Restaurant attribute)</a>
 </li>
       <li><a href="tools/gapi.html#tools.gapi.place_details">place_details() (in module tools.gapi)</a>
 </li>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.place_id">place_id (db.models.bewertung.Bewertung attribute)</a>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.place_id">place_id (db.models.bewertung.BewertungRestaurant attribute)</a>
 
       <ul>
         <li><a href="db/models.html#db.models.restaurant.Restaurant.place_id">(db.models.restaurant.Restaurant attribute)</a>
@@ -674,12 +702,16 @@
         <li><a href="schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase.radius">(schemes.scheme_filter.FilterRestDatabase attribute)</a>
 </li>
       </ul></li>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.rating">rating (db.models.bewertung.Bewertung attribute)</a>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.rating">rating (db.models.bewertung.BewertungRecipe attribute)</a>
 
       <ul>
+        <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.rating">(db.models.bewertung.BewertungRestaurant attribute)</a>
+</li>
         <li><a href="db/models.html#db.models.filter.FilterRest.rating">(db.models.filter.FilterRest attribute)</a>
 </li>
         <li><a href="schemes/schemes.html#schemes.scheme_filter.FilterBase.rating">(schemes.scheme_filter.FilterBase attribute)</a>
+</li>
+        <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungBase.rating">(schemes.scheme_recipe.RecipeBewertungBase attribute)</a>
 </li>
         <li><a href="schemes/schemes.html#schemes.scheme_rest.Restaurant.rating">(schemes.scheme_rest.Restaurant attribute)</a>
 </li>
@@ -692,12 +724,22 @@
 </li>
       <li><a href="schemes/schemes.html#schemes.scheme_recipe.Recipe">Recipe (class in schemes.scheme_recipe)</a>
 </li>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungCreate.recipe">recipe (schemes.scheme_recipe.RecipeBewertungCreate attribute)</a>
+</li>
       <li><a href="tools/recipe_db.html#recipe_db">recipe_db (built-in variable)</a>
 </li>
-      <li><a href="exceptions/exceptions.html#schemes.exceptions.RecipeNotFound">RecipeNotFound</a>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBase">RecipeBase (class in schemes.scheme_recipe)</a>
+</li>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungBase">RecipeBewertungBase (class in schemes.scheme_recipe)</a>
+</li>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungCreate">RecipeBewertungCreate (class in schemes.scheme_recipe)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungReturn">RecipeBewertungReturn (class in schemes.scheme_recipe)</a>
+</li>
+      <li><a href="exceptions/exceptions.html#schemes.exceptions.RecipeNotFound">RecipeNotFound</a>
+</li>
       <li><a href="views/signin.html#views.signin.recover">recover() (in module views.signin)</a>
 </li>
       <li><a href="views/signin.html#views.signin.register">register() (in module views.signin)</a>
@@ -710,8 +752,12 @@
         <li><a href="schemes/schemes.html#schemes.scheme_rest.Restaurant">(class in schemes.scheme_rest)</a>
 </li>
       </ul></li>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.restaurant">restaurant (db.models.bewertung.Bewertung attribute)</a>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.restaurant">restaurant (db.models.bewertung.BewertungRecipe attribute)</a>
+
+      <ul>
+        <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.restaurant">(db.models.bewertung.BewertungRestaurant attribute)</a>
 </li>
+      </ul></li>
       <li><a href="schemes/schemes.html#schemes.Cuisine.RESTAURANT">RESTAURANT (schemes.Cuisine attribute)</a>
 </li>
       <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate.restaurant">restaurant (schemes.scheme_rest.RestBewertungCreate attribute)</a>
@@ -727,6 +773,10 @@
       <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungCreate">RestBewertungCreate (class in schemes.scheme_rest)</a>
 </li>
       <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn">RestBewertungReturn (class in schemes.scheme_rest)</a>
+</li>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.rezept_id">rezept_id (db.models.bewertung.BewertungRecipe attribute)</a>
+</li>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.rezept_name">rezept_name (db.models.bewertung.BewertungRecipe attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -822,8 +872,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="schemes/schemes.html#schemes.Cuisine.THAILAND">THAILAND (schemes.Cuisine attribute)</a>
 </li>
-      <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn.timestamp">timestamp (schemes.scheme_rest.RestBewertungReturn attribute)</a>
+      <li><a href="schemes/schemes.html#schemes.scheme_recipe.RecipeBewertungReturn.timestamp">timestamp (schemes.scheme_recipe.RecipeBewertungReturn attribute)</a>
+
+      <ul>
+        <li><a href="schemes/schemes.html#schemes.scheme_rest.RestBewertungReturn.timestamp">(schemes.scheme_rest.RestBewertungReturn attribute)</a>
 </li>
+      </ul></li>
       <li>
     tools.gapi
 
@@ -861,7 +915,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/service_res.html#services.service_res.update_assessment">update_assessment() (in module services.service_res)</a>
 </li>
-      <li><a href="db/crud.html#db.crud.bewertung.update_bewertung">update_bewertung() (in module db.crud.bewertung)</a>
+      <li><a href="db/crud.html#db.crud.restBewertung.update_bewertung">update_bewertung() (in module db.crud.restBewertung)</a>
 </li>
       <li><a href="services/service_res.html#services.service_res.update_rest_filter">update_rest_filter() (in module services.service_res)</a>
 </li>
@@ -942,8 +996,12 @@
 <h2 id="Z">Z</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="db/models.html#db.models.bewertung.Bewertung.zeitstempel">zeitstempel (db.models.bewertung.Bewertung attribute)</a>
+      <li><a href="db/models.html#db.models.bewertung.BewertungRecipe.zeitstempel">zeitstempel (db.models.bewertung.BewertungRecipe attribute)</a>
+
+      <ul>
+        <li><a href="db/models.html#db.models.bewertung.BewertungRestaurant.zeitstempel">(db.models.bewertung.BewertungRestaurant attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="db/models.html#db.models.filter.FilterRest.zipcode">zipcode (db.models.filter.FilterRest attribute)</a>
