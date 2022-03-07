@@ -48,13 +48,13 @@ function change_restaurant_url() {
     var rating = get_rating();
     var radius = get_radius();
     if (cuisine.length > 0 && allergies.length > 0) {
-        var new_link = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
     } else if (cuisine.length > 0) {
-        var new_link = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
     } else if (allergies.length > 0) {
-        var new_link = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
     } else {
-        var new_link = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude;
+        var new_link = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
     }
     document.getElementById("search_restaurant").href = new_link;
     document.getElementById("search_restaurant_from_modal").href = new_link;

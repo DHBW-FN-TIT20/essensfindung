@@ -3,9 +3,7 @@ from typing import Union
 
 import fastapi
 from fastapi import Depends
-from fastapi import status
 from fastapi.responses import HTMLResponse
-from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
@@ -32,6 +30,7 @@ async def findrestaurant(
     radius: int,
     lat: str,
     lng: str,
+    zipcode: str,
     cuisine: Union[str, None] = None,
     allergies: Union[str, None] = None,
     db_session: Session = Depends(get_db),
@@ -46,6 +45,7 @@ async def findrestaurant(
         radius (int): the radius
         lat (str): the latitude
         lng (str): the longitude
+        zipcode(str): zipcode for the search
         cuisine (Union[str, None], optional): the selected cuisines. Defaults to None.
         allergies (Union[str, None], optional): the selected allergies. Defaults to None.
         db_session (Session, optional): the db session. Defaults to Depends(get_db).
@@ -57,10 +57,10 @@ async def findrestaurant(
     """
 
     if lat == "" or lng == "":
-        return RedirectResponse(
-            url="/error?err_msg=Location is required to search for restaurants", status_code=status.HTTP_302_FOUND
-        )
-    
+        location = service_res.get_coordinates_from_zipcode(zipcode)
+    else:
+        location = scheme_rest.LocationBase(lat=lat, lng=lng)
+
     # cuisine:str zum Cuisine-Array machen
     if cuisine is not None:
         cuisine_list = [scheme_cuisine.PydanticCuisine(name=cuisine) for cuisine in cuisine.split(",")]
@@ -75,7 +75,7 @@ async def findrestaurant(
         rating=rating,
         costs=costs,
         radius=radius * 1000,
-        location=scheme_rest.LocationBase(lat=lat, lng=lng),
+        location=location,
     )
     rest_filter_db = scheme_filter.FilterRestDatabase(
         cuisines=rest_filter.cuisines,
@@ -83,7 +83,7 @@ async def findrestaurant(
         rating=rest_filter.rating,
         costs=rest_filter.costs,
         radius=rest_filter.radius,
-        zipcode="88045",
+        zipcode=zipcode,
     )
     service_res.update_rest_filter(db_session=db_session, filter_updated=rest_filter_db, user=current_user)
     restaurant = service_res.search_for_restaurant(db_session=db_session, user=current_user, user_f=rest_filter)

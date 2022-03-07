@@ -1,3 +1,4 @@
+"""Class for the Cuisine"""
 from pydantic import BaseModel
 from pydantic import validator
 
@@ -14,10 +15,16 @@ class PydanticCuisine(BaseModel):
 
     name: str
 
-    @classmethod
     @validator("name")
-    def allergie_values(cls, value: str):
-        """Check if the cuisine is in schemes.Cuisine Enum"""
+    @classmethod
+    def cuisine_values(cls, value: str):
+        """
+        Check if the cuisine is in schemes.cuisines Enum
+
+        Args:
+            cls (any): Class of the method
+            value (str): the name that got passed
+        """
         for cuisine in Cuisine:
             if cuisine.value == value:
                 return value
