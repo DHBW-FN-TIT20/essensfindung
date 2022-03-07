@@ -95,17 +95,44 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tools.gapi.nearby_search" title="tools.gapi.nearby_search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearby_search</span></code></a>(params[, next_page_token])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tools.gapi.geocode" title="tools.gapi.geocode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geocode</span></code></a>(address)</p></td>
+<td><p>This does geocoding (get information based on Streed addres / zipcode / plus code).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tools.gapi.nearby_search" title="tools.gapi.nearby_search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearby_search</span></code></a>(params[, next_page_token])</p></td>
 <td><p>Specific google api request to search near a location for restaurants</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tools.gapi.place_details" title="tools.gapi.place_details"><code class="xref py py-obj docutils literal notranslate"><span class="pre">place_details</span></code></a>(restaurant)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tools.gapi.place_details" title="tools.gapi.place_details"><code class="xref py py-obj docutils literal notranslate"><span class="pre">place_details</span></code></a>(restaurant)</p></td>
 <td><p>To get additionals informations of a specifict place (restaurant) you have to do a specific api request</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tools.gapi.search_restaurant" title="tools.gapi.search_restaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_restaurant</span></code></a>(res_filter)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tools.gapi.search_restaurant" title="tools.gapi.search_restaurant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_restaurant</span></code></a>(res_filter)</p></td>
 <td><p>Search all restaurants for a specific cuisin in a specific location</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py function">
+<dt class="sig sig-object py" id="tools.gapi.geocode">
+<span class="sig-prename descclassname"><span class="pre">tools.gapi.</span></span><span class="sig-name descname"><span class="pre">geocode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/tools/gapi.html#geocode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tools.gapi.geocode" title="Permalink to this definition"></a></dt>
+<dd><p>This does geocoding (get information based on Streed addres / zipcode / plus code).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – The street address or plus code that you want to geocode. Specify addresses in accordance with
+the format used by the national postal service of the country concerned.
+Additional address elements such as business names and unit, suite or floor numbers should be avoided.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.GoogleApiException" title="schemes.exceptions.GoogleApiException"><strong>schemes.exceptions.GoogleApiException</strong></a> – Raises if no result found for the query</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Refer to the See Also</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[dict]</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://developers.google.com/maps/documentation/geocoding/requests-geocoding">https://developers.google.com/maps/documentation/geocoding/requests-geocoding</a></p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="tools.gapi.nearby_search">
 <span class="sig-prename descclassname"><span class="pre">tools.gapi.</span></span><span class="sig-name descname"><span class="pre">nearby_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_page_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.Restaurant" title="schemes.scheme_rest.Restaurant"><span class="pre">schemes.scheme_rest.Restaurant</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/tools/gapi.html#nearby_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tools.gapi.nearby_search" title="Permalink to this definition"></a></dt>

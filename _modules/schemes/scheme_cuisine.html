@@ -66,7 +66,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for schemes.scheme_cuisine</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span></span><span class="sd">&quot;&quot;&quot;Class for the Cuisine&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">validator</span>
 
 <span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">Cuisine</span>
@@ -82,10 +83,16 @@
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 
-<div class="viewcode-block" id="PydanticCuisine.allergie_values"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_cuisine.PydanticCuisine.allergie_values">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">allergie_values</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if the cuisine is in schemes.Cuisine Enum&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PydanticCuisine.cuisine_values"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_cuisine.PydanticCuisine.cuisine_values">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">cuisine_values</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the cuisine is in schemes.cuisines Enum</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cls (any): Class of the method</span>
+<span class="sd">            value (str): the name that got passed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">cuisine</span> <span class="ow">in</span> <span class="n">Cuisine</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">cuisine</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">value</span>

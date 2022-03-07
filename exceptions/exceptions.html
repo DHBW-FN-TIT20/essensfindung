@@ -98,16 +98,19 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.NoResultsException" title="schemes.exceptions.NoResultsException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoResultsException</span></code></a></p></td>
 <td><p>Exception if the Search got no results</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.NotAuthorizedException" title="schemes.exceptions.NotAuthorizedException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NotAuthorizedException</span></code></a>(error_msg[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.NoneExcistingZipCodeException" title="schemes.exceptions.NoneExcistingZipCodeException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoneExcistingZipCodeException</span></code></a></p></td>
+<td><p>Exception if no result found with these zip code</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.NotAuthorizedException" title="schemes.exceptions.NotAuthorizedException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NotAuthorizedException</span></code></a>(error_msg[, ...])</p></td>
 <td><p>Exception if you are not authorized</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.RecipeNotFound" title="schemes.exceptions.RecipeNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeNotFound</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.RecipeNotFound" title="schemes.exceptions.RecipeNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RecipeNotFound</span></code></a></p></td>
 <td><p>Exception if no recipe found in the Database</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.RestaurantNotFound" title="schemes.exceptions.RestaurantNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestaurantNotFound</span></code></a>(error_msg, place_id)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.RestaurantNotFound" title="schemes.exceptions.RestaurantNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestaurantNotFound</span></code></a>(error_msg, place_id)</p></td>
 <td><p>Exception of a DB Query if the User does not exist</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#schemes.exceptions.UserNotFound" title="schemes.exceptions.UserNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserNotFound</span></code></a>(error_msg, user)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#schemes.exceptions.UserNotFound" title="schemes.exceptions.UserNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserNotFound</span></code></a>(error_msg, user)</p></td>
 <td><p>Exception of a DB Query if the User does not exist</p></td>
 </tr>
 </tbody>
@@ -134,6 +137,12 @@
 <dt class="sig sig-object py" id="schemes.exceptions.NoResultsException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">NoResultsException</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#NoResultsException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.NoResultsException" title="Permalink to this definition"></a></dt>
 <dd><p>Exception if the Search got no results</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="schemes.exceptions.NoneExcistingZipCodeException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">schemes.exceptions.</span></span><span class="sig-name descname"><span class="pre">NoneExcistingZipCodeException</span></span><a class="reference internal" href="../_modules/schemes/exceptions.html#NoneExcistingZipCodeException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#schemes.exceptions.NoneExcistingZipCodeException" title="Permalink to this definition"></a></dt>
+<dd><p>Exception if no result found with these zip code</p>
 </dd></dl>
 
 <dl class="py exception">

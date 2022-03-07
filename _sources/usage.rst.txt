@@ -6,7 +6,8 @@ Usage
 Google API Token
 ----------------
 
-Create your own `API Key <https://cloud.google.com/docs/authentication/api-keys>`_ in this key you have to enable the `Google Maps Places API <https://console.cloud.google.com/apis/library/places-backend.googleapis.com>`_ 
+Create your own `API Key <https://cloud.google.com/docs/authentication/api-keys>`_ in this key you have to enable
+the `Google Maps Places API <https://console.cloud.google.com/apis/library/places-backend.googleapis.com>`_ and `Geocoding <https://console.cloud.google.com/marketplace/product/google/geocoding-backend.googleapis.com>`_ 
 If you already have a Google Project you can activate the API `here <https://console.cloud.google.com/apis/library/places-backend.googleapis.com>`_ 
 
 Installation
