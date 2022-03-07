@@ -16,7 +16,7 @@ class Person(Base):
         email (str): Primary Key
         hashed_password (str): Hashed Password of the user
         last_login (sqlalchemy.DateTime): Autamtic set on update
-        bewertungen (db.models.bewertung.Bewertung): Bewertungen of the Person
+        bewertungen (db.models.bewertung.BewertungRestaurant): Bewertungen of the Person
         filterRest (db.models.filter.Filter): Saved Filter of the Person
 
     """
@@ -27,5 +27,6 @@ class Person(Base):
     hashed_password = Column(String, nullable=False)
     last_login = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
-    bewertungen = relationship("Bewertung", back_populates="person", passive_deletes=True)
+    bewertungenRest = relationship("BewertungRestaurant", back_populates="person", passive_deletes=True)
+    bewertungenRezept = relationship("BewertungRecipe", back_populates="person", passive_deletes=True)
     filterRest = relationship("FilterRest", back_populates="person", uselist=False, passive_deletes=True)

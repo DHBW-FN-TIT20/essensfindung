@@ -13,7 +13,7 @@ class Restaurant(Base):
     Attributes:
         place_id (str): Primary Key
         name (str): Name of the Restaurant
-        bewertungen (db.models.bewertung.Bewertung): Bewertungen of the person
+        bewertungen (db.models.bewertung.BewertungRestaurant): Bewertungen of the person
 
     """
 
@@ -22,4 +22,4 @@ class Restaurant(Base):
     place_id = Column(String, primary_key=True)
     name = Column(String, nullable=False, autoincrement=False)
 
-    bewertungen = relationship("Bewertung", back_populates="restaurant", passive_deletes=True)
+    bewertungen = relationship("BewertungRestaurant", back_populates="restaurant", passive_deletes=True)

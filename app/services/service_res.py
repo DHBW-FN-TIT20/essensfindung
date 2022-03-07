@@ -6,9 +6,9 @@ from typing import Union
 import httpx
 from sqlalchemy.orm import Session
 
-from db.crud import bewertung as crud_bewertung
 from db.crud import filter as crud_filter
 from db.crud import restaurant as crud_restaurant
+from db.crud import restBewertung as crud_restBewertung
 from schemes.exceptions import DatabaseException
 from schemes.exceptions import DuplicateEntry
 from schemes.exceptions import GoogleApiException
@@ -54,9 +54,9 @@ def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List
         user_mail (str): Mail of the User
 
     Returns:
-        Union[List[schemes.scheme_rest.RestBewertungReturn], None]: Return a List of all User or None
+        Union[List[schemes.scheme_rest.RestBewertungReturn], None]: Return a List of all Restaurants or None
     """
-    db_rests = crud_bewertung.get_all_user_bewertungen(db_session, user)
+    db_rests = crud_restBewertung.get_all_user_bewertungen(db_session, user)
     scheme_rests = [
         RestBewertungReturn(
             name=db_rest.restaurant.name,
@@ -85,7 +85,7 @@ def add_assessment(db_session: Session, assessment: RestBewertungCreate) -> Rest
         [schemes.scheme_rest.RestBewertungReturn]: The created Restaurant
     """
     try:
-        created_assessment = crud_bewertung.create_bewertung(db_session, assessment)
+        created_assessment = crud_restBewertung.create_bewertung(db_session, assessment)
         return RestBewertungReturn(
             name=created_assessment.restaurant.name,
             email=created_assessment.person_email,
@@ -109,13 +109,13 @@ def update_assessment(
         new_assessment (schemes.scheme_rest.RestBewertungCreate): The new assessment with the updated values
 
     Raises:
-        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated
+        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist
 
     Returns:
-        schemes.scheme_rest.RestBewertungReturn: Restaurant the the new values
+        schemes.scheme_rest.RestBewertungReturn: Restaurant with the new values
     """
     try:
-        updated_assessment = crud_bewertung.update_bewertung(db_session, old_assessment, new_assessment)
+        updated_assessment = crud_restBewertung.update_bewertung(db_session, old_assessment, new_assessment)
     except DatabaseException as error:
         raise error
     return RestBewertungReturn(
@@ -137,12 +137,12 @@ def delete_assessment(db_session: Session, user: UserBase, rest: RestaurantBase)
         rest (schemes.scheme_rest.RestaurantBase): The mapped Restaurant
 
     Raises:
-        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist or the assessment is duplicated
+        schemes.exceptions.DatabaseException: if the User or Restaurant does not exist
 
     Returns:
         int: The number of affected Rows of the delete
     """
-    rows = crud_bewertung.delete_bewertung(db_session, user, rest)
+    rows = crud_restBewertung.delete_bewertung(db_session, user, rest)
     if rows == 0:
         raise DatabaseException("Can not delete assessment. Does the user and restaurant excist?")
     return rows
@@ -240,7 +240,7 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
 
     if not crud_restaurant.get_restaurant_by_id(db_session, restaurant.place_id):
         crud_restaurant.create_restaurant(db_session, restaurant)
-    if not crud_bewertung.get_bewertung_from_user_to_rest(db_session, user, restaurant):
+    if not crud_restBewertung.get_bewertung_from_user_to_rest(db_session, user, restaurant):
         add_assessment(db_session, RestBewertungCreate(name=restaurant.name, person=user, restaurant=restaurant))
     return restaurant
 
@@ -257,7 +257,7 @@ def fill_user_rating(db_session: Session, rests: List[Restaurant], user: UserBas
         List[schemes.scheme_rest.Restaurant]: Return of the input List with the user rating if one got found
     """
     for rest in rests:
-        assessment = crud_bewertung.get_bewertung_from_user_to_rest(db_session, user, rest)
+        assessment = crud_restBewertung.get_bewertung_from_user_to_rest(db_session, user, rest)
         if assessment is not None:
             rest.own_rating = assessment.rating
 
