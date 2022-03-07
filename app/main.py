@@ -18,8 +18,8 @@ from tools.my_logging import setup_logging
 from views import error
 from views import index
 from views import rating
-from views import restaurant
 from views import recipe
+from views import restaurant
 from views import signin
 
 

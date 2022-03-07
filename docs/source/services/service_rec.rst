@@ -1,7 +1,7 @@
-Restaurant
-==========
+Recipe
+======
 
-Service for all Restaurant interactions
+Service for all Recipe interactions
 
 .. py:method:: services.service_rec.search_recipe(recipe_filter: FilterRecipe) -> Recipe
 

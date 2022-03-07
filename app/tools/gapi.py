@@ -103,3 +103,39 @@ def place_details(restaurant: Restaurant) -> Restaurant:
     extended_restaurant = restaurant
 
     return extended_restaurant
+
+
+def geocode(address: str) -> List[dict]:
+    """This does geocoding (get information based on Streed addres / zipcode / plus code).
+
+    Args:
+        address (str): The street address or plus code that you want to geocode. Specify addresses in accordance with
+            the format used by the national postal service of the country concerned.
+            Additional address elements such as business names and unit, suite or floor numbers should be avoided.
+
+    Raises:
+        schemes.exceptions.GoogleApiException: Raises if no result found for the query
+
+    Returns:
+        List[dict]: Refer to the See Also
+
+    References:
+        https://developers.google.com/maps/documentation/geocoding/requests-geocoding
+
+    """
+    url: str = "https://maps.googleapis.com/maps/api/geocode/json"
+    address = address.replace(" ", "%20")
+    params = {"key": settings.GOOGLE_API_KEY, "address": address}
+
+    response = httpx.get(url, params=params)
+    logger.debug("Response status: %s", response.status_code)
+    logger.debug("Request url: %s", response.url)
+
+    response.raise_for_status()
+
+    resp_obj = response.json().get("results")
+
+    if len(resp_obj) == 0:
+        raise GoogleApiException(f"No geocode result for query {address}")
+
+    return resp_obj

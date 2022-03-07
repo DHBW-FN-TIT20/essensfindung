@@ -117,7 +117,7 @@ class FilterRestDatabase(FilterBase):
         """
         if len(value) == 5:
             return value
-        raise ValueError("costs is not between 0 (included) and 4 (included)")
+        raise ValueError("zipcode got not the length of 5")
 
 
 class FilterRecipe(BaseModel):
