@@ -1,6 +1,5 @@
 import pytest
 from sqlalchemy import create_engine
-from sqlalchemy import exc
 from sqlalchemy.orm import sessionmaker
 
 from db.base import Base

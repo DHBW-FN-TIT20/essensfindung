@@ -1,5 +1,5 @@
-Recipe
-======
+Restaurant
+==========
 
 Service for all Recipe interactions
 

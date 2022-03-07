@@ -12,6 +12,10 @@ class GoogleApiException(NoResultsException):
     """Exception if some Error from the Google API request are made"""
 
 
+class NoneExcistingZipCodeException(GoogleApiException):
+    """Exception if no result found with these zip code"""
+
+
 class DatabaseException(Exception):
     """Exception for all Database Query"""
 

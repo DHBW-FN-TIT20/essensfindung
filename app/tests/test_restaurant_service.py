@@ -14,6 +14,8 @@ from db.crud.cuisine import create_cuisine
 from db.crud.user import create_user
 from schemes import Allergies
 from schemes import Cuisine
+from schemes import scheme_allergie
+from schemes import scheme_cuisine
 from schemes.scheme_allergie import PydanticAllergies
 from schemes.scheme_cuisine import PydanticCuisine
 from schemes.scheme_filter import FilterRest
@@ -145,8 +147,8 @@ def test_search_for_restaurant(
     httpx_mock.add_response(status_code=200, json={"result": random_res.dict()}, url=url)
 
     filter = FilterRest(
-        cuisines=[Cuisine.DOENER],
-        allergies=[Allergies.LACTOSE],
+        cuisines=[scheme_cuisine.PydanticCuisine(name=Cuisine.DOENER.value)],
+        allergies=[scheme_allergie.PydanticAllergies(name=Allergies.LACTOSE.value)],
         rating=3,
         costs=3,
         zipcode="88069",

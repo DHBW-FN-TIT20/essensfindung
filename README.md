@@ -2,9 +2,12 @@
 Student project for DHBW-Friedrichshafen to search for restaurant or recipe suggestions.<br>
 Go to ReadTheDocs: https://dhbw-fn-tit20.github.io/essensfindung/
 
+# Docs
+See [GitHub-Pages](https://dhbw-fn-tit20.github.io/essensfindung/)
+
 # Usage
 If you want to run it make sure you habe a GoogleAPI KEY<br>
-The Application use [place-details](https://developers.google.com/maps/billing-and-pricing/pricing#places-details) and [nearby-search](https://developers.google.com/maps/billing-and-pricing/pricing#nearby-search)<br>
+The Application use [Geocoding](https://developers.google.com/maps/documentation/geocoding/requests-geocoding), [place-details](https://developers.google.com/maps/billing-and-pricing/pricing#places-details) and [nearby-search](https://developers.google.com/maps/billing-and-pricing/pricing#nearby-search)<br>
 **!!! The GoogleAPI Requests are not for free, so pay attention on the pricing !!!**
 ## Direct with Python
 ### Requirements

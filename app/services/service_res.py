@@ -12,16 +12,38 @@ from db.crud import restaurant as crud_restaurant
 from schemes.exceptions import DatabaseException
 from schemes.exceptions import DuplicateEntry
 from schemes.exceptions import GoogleApiException
+from schemes.exceptions import NoneExcistingZipCodeException
 from schemes.exceptions import NoResultsException
 from schemes.exceptions import UserNotFound
 from schemes.scheme_filter import FilterRest
 from schemes.scheme_filter import FilterRestDatabase
+from schemes.scheme_rest import LocationBase
 from schemes.scheme_rest import Restaurant
 from schemes.scheme_rest import RestaurantBase
 from schemes.scheme_rest import RestBewertungCreate
 from schemes.scheme_rest import RestBewertungReturn
 from schemes.scheme_user import UserBase
 from tools import gapi
+
+
+def get_coordinates_from_zipcode(zipcode: str) -> LocationBase:
+    """Convert a zipcode to Coordinates
+
+    Args:
+        zipcode (str): The zipcode to search
+
+    Raises:
+        NoneExcistingZipCodeException: Raises if the zipcode was not found
+
+    Returns:
+        schemes.scheme_rest.LocationBase: Location with the coordinates
+    """
+    try:
+        results = gapi.geocode(zipcode)
+        location = results[0].get("geometry").get("location")
+        return LocationBase(**location)
+    except GoogleApiException as error:
+        raise NoneExcistingZipCodeException(f"Invalid zipcode {zipcode} - no results") from error
 
 
 def get_assessments_from_user(db_session: Session, user: UserBase) -> Union[List[RestBewertungReturn], None]:
