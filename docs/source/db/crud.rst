@@ -13,7 +13,7 @@ Allergies
 Bewertung
 #########
 
-.. automodule:: db.crud.bewertung
+.. automodule:: db.crud.restBewertung
     :members:
 
 Cuisine
