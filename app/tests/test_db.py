@@ -3,12 +3,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from db.base import Base
+from db.crud import recipeBewertung
+from db.crud import restBewertung
 from db.crud.allergies import create_allergie
-from db.crud.bewertung import create_bewertung
-from db.crud.bewertung import delete_bewertung
-from db.crud.bewertung import get_all_user_bewertungen
-from db.crud.bewertung import get_bewertung_from_user_to_rest
-from db.crud.bewertung import update_bewertung
 from db.crud.cuisine import create_cuisine
 from db.crud.filter import create_filterRest
 from db.crud.filter import update_filterRest
@@ -25,6 +22,7 @@ from schemes import Cuisine
 from schemes import scheme_allergie
 from schemes import scheme_cuisine
 from schemes import scheme_filter
+from schemes import scheme_recipe
 from schemes import scheme_rest
 from schemes import scheme_user
 from schemes.exceptions import DuplicateEntry
@@ -137,7 +135,7 @@ def test_user(db_session: SessionTesting):
         create_user(db_session, user_add)
 
 
-def test_bewertung(db_session: SessionTesting):
+def test_restaurant_bewertung(db_session: SessionTesting):
     fake_user = scheme_user.UserBase(email="fake@nope.ok")
     fake_rest = scheme_rest.RestaurantBase(place_id="000000", name="Fake Rest")
     user_add_1 = scheme_user.UserCreate(email="test1@demo.lol", password="password1")
@@ -157,7 +155,7 @@ def test_bewertung(db_session: SessionTesting):
     assessment_add_1_1 = scheme_rest.RestBewertungCreate(
         name="Rest 1 1", comment="This is a comment", rating=1.5, person=user_add_1, restaurant=rest_add_1
     )
-    assessment_ret = create_bewertung(db_session, assessment_add_1_1)
+    assessment_ret = restBewertung.create_bewertung(db_session, assessment_add_1_1)
     assert assessment_ret.kommentar == assessment_add_1_1.comment
     assert assessment_ret.rating == assessment_add_1_1.rating
     assert assessment_ret.zeitstempel is not None
@@ -166,7 +164,7 @@ def test_bewertung(db_session: SessionTesting):
     assessment_add_1_2 = scheme_rest.RestBewertungCreate(
         name="Rest 1 2", comment="This is a comment for rest 2", rating=2.5, person=user_add_1, restaurant=rest_add_2
     )
-    assessment_ret = create_bewertung(db_session, assessment_add_1_2)
+    assessment_ret = restBewertung.create_bewertung(db_session, assessment_add_1_2)
     assert assessment_ret.kommentar == assessment_add_1_2.comment
     assert assessment_ret.rating == assessment_add_1_2.rating
     assert assessment_ret.zeitstempel is not None
@@ -175,20 +173,20 @@ def test_bewertung(db_session: SessionTesting):
     assessment_add_2_2 = scheme_rest.RestBewertungCreate(
         name="Rest 2 2", comment="This is a comment 2", rating=3.5, person=user_add_2, restaurant=rest_add_2
     )
-    assessment_ret = create_bewertung(db_session, assessment_add_2_2)
+    assessment_ret = restBewertung.create_bewertung(db_session, assessment_add_2_2)
     assert assessment_ret.kommentar == assessment_add_2_2.comment
     assert assessment_ret.rating == assessment_add_2_2.rating
     assert assessment_ret.zeitstempel is not None
 
     # Get all assessments
-    assessments_ret = get_all_user_bewertungen(db_session, user_add_1)
+    assessments_ret = restBewertung.get_all_user_bewertungen(db_session, user_add_1)
     assert len(assessments_ret) == 2
 
-    assessments_ret = get_all_user_bewertungen(db_session, user_add_2)
+    assessments_ret = restBewertung.get_all_user_bewertungen(db_session, user_add_2)
     assert len(assessments_ret) == 1
 
     # Get one assessment from one user to one rest
-    assessment_ret = get_bewertung_from_user_to_rest(db_session, user_add_1, rest_add_1)
+    assessment_ret = restBewertung.get_bewertung_from_user_to_rest(db_session, user_add_1, rest_add_1)
     assert assessment_ret.kommentar == assessment_add_1_1.comment
     assert assessment_ret.rating == assessment_add_1_1.rating
     assert assessment_ret.zeitstempel is not None
@@ -197,25 +195,25 @@ def test_bewertung(db_session: SessionTesting):
     updated_1_1 = assessment_add_1_1.copy()
     updated_1_1.comment = "UPDATED"
     updated_1_1.rating = 0
-    assessment_ret = update_bewertung(db_session, assessment_add_1_1, updated_1_1)
+    assessment_ret = restBewertung.update_bewertung(db_session, assessment_add_1_1, updated_1_1)
     assert assessment_ret.kommentar == updated_1_1.comment
     assert assessment_ret.rating == updated_1_1.rating
     assert assessment_ret.person_email == updated_1_1.person.email
     assert assessment_ret.place_id == updated_1_1.restaurant.place_id
 
     # Try to get assessments that does not exist
-    assessment_ret = get_all_user_bewertungen(db_session, fake_user)
+    assessment_ret = restBewertung.get_all_user_bewertungen(db_session, fake_user)
     assert assessment_ret is None
 
-    assessment_ret = get_bewertung_from_user_to_rest(db_session, fake_user, rest_add_1)
+    assessment_ret = restBewertung.get_bewertung_from_user_to_rest(db_session, fake_user, rest_add_1)
     assert assessment_ret is None
 
-    assessment_ret = get_bewertung_from_user_to_rest(db_session, user_add_1, fake_rest)
+    assessment_ret = restBewertung.get_bewertung_from_user_to_rest(db_session, user_add_1, fake_rest)
     assert assessment_ret is None
 
     # Try to add assessments with invalid user and restaurant
     with pytest.raises(UserNotFound):
-        assessment_ret = create_bewertung(
+        assessment_ret = restBewertung.create_bewertung(
             db_session,
             scheme_rest.RestBewertungCreate(
                 name="Troll", comment="none", rating=0, person=fake_user, restaurant=rest_add_1
@@ -223,7 +221,7 @@ def test_bewertung(db_session: SessionTesting):
         )
 
     with pytest.raises(RestaurantNotFound):
-        assessment_ret = create_bewertung(
+        assessment_ret = restBewertung.create_bewertung(
             db_session,
             scheme_rest.RestBewertungCreate(
                 name="Nice",
@@ -235,15 +233,108 @@ def test_bewertung(db_session: SessionTesting):
         )
 
     # Delete Assessments
-    assert 1 == delete_bewertung(db_session, user_add_1, rest_add_1)
-    assert get_bewertung_from_user_to_rest(db_session, user_add_1, rest_add_1) is None
-    assert 0 == delete_bewertung(db_session, user_add_1, rest_add_1)
-    assert 0 == delete_bewertung(db_session, fake_user, rest_add_2)
-    assert 0 == delete_bewertung(db_session, user_add_1, fake_rest)
+    assert 1 == restBewertung.delete_bewertung(db_session, user_add_1, rest_add_1)
+    assert restBewertung.get_bewertung_from_user_to_rest(db_session, user_add_1, rest_add_1) is None
+    assert 0 == restBewertung.delete_bewertung(db_session, user_add_1, rest_add_1)
+    assert 0 == restBewertung.delete_bewertung(db_session, fake_user, rest_add_2)
+    assert 0 == restBewertung.delete_bewertung(db_session, user_add_1, fake_rest)
 
     # Test if only one comment for the same restaurant an user are possible
     with pytest.raises(DuplicateEntry):
-        create_bewertung(db_session, assessment_add_2_2)
+        restBewertung.create_bewertung(db_session, assessment_add_2_2)
+
+
+def test_recipe_bewertung(db_session: SessionTesting):
+    fake_user = scheme_user.UserBase(email="fake@nope.ok")
+    fake_rest = scheme_recipe.RecipeBase(id="884488")
+    user_add_1 = scheme_user.UserCreate(email="test1@demo.lol", password="password1")
+    user_add_2 = scheme_user.UserCreate(email="test2@demo.lol", password="password2")
+    recipe_1 = scheme_recipe.RecipeBase(id="1234")
+    recipe_2 = scheme_recipe.RecipeBase(id="6789")
+
+    # Add user
+    create_user(db_session, user_add_1)
+    create_user(db_session, user_add_2)
+
+    # Add assessment to user1 and recipe1
+    assessment_add_1_1 = scheme_recipe.RecipeBewertungCreate(
+        name="Rest 1 1", comment="This is a comment", rating=1.5, person=user_add_1, recipe=recipe_1
+    )
+    assessment_ret = recipeBewertung.create_bewertung(db_session, assessment_add_1_1)
+    assert assessment_ret.kommentar == assessment_add_1_1.comment
+    assert assessment_ret.rating == assessment_add_1_1.rating
+    assert assessment_ret.zeitstempel is not None
+
+    # Add assessment to user1 and rest2
+    assessment_add_1_2 = scheme_recipe.RecipeBewertungCreate(
+        name="Rest 1 2", comment="This is a comment for rest 2", rating=2.5, person=user_add_1, recipe=recipe_2
+    )
+    assessment_ret = recipeBewertung.create_bewertung(db_session, assessment_add_1_2)
+    assert assessment_ret.kommentar == assessment_add_1_2.comment
+    assert assessment_ret.rating == assessment_add_1_2.rating
+    assert assessment_ret.zeitstempel is not None
+
+    # Add assessment to user2 and rest2
+    assessment_add_2_2 = scheme_recipe.RecipeBewertungCreate(
+        name="Rest 2 2", comment="This is a comment 2", rating=3.5, person=user_add_2, recipe=recipe_2
+    )
+    assessment_ret = recipeBewertung.create_bewertung(db_session, assessment_add_2_2)
+    assert assessment_ret.kommentar == assessment_add_2_2.comment
+    assert assessment_ret.rating == assessment_add_2_2.rating
+    assert assessment_ret.zeitstempel is not None
+
+    # Get all assessments
+    assessments_ret = recipeBewertung.get_all_user_bewertungen(db_session, user_add_1)
+    assert len(assessments_ret) == 2
+
+    assessments_ret = recipeBewertung.get_all_user_bewertungen(db_session, user_add_2)
+    assert len(assessments_ret) == 1
+
+    # Get one assessment from one user to one rest
+    assessment_ret = recipeBewertung.get_bewertung_from_user_to_recipe(db_session, user_add_1, recipe_1)
+    assert assessment_ret.kommentar == assessment_add_1_1.comment
+    assert assessment_ret.rating == assessment_add_1_1.rating
+    assert assessment_ret.zeitstempel is not None
+
+    # Update assessment
+    updated_1_1 = assessment_add_1_1.copy()
+    updated_1_1.comment = "UPDATED"
+    updated_1_1.rating = 0
+    assessment_ret = recipeBewertung.update_assessment(db_session, assessment_add_1_1, updated_1_1)
+    assert assessment_ret.kommentar == updated_1_1.comment
+    assert assessment_ret.rating == updated_1_1.rating
+    assert assessment_ret.person_email == updated_1_1.person.email
+    assert assessment_ret.rezept_id == updated_1_1.recipe.id
+
+    # Try to get assessments that does not exist
+    assessment_ret = recipeBewertung.get_all_user_bewertungen(db_session, fake_user)
+    assert assessment_ret is None
+
+    assessment_ret = recipeBewertung.get_bewertung_from_user_to_recipe(db_session, fake_user, recipe_1)
+    assert assessment_ret is None
+
+    assessment_ret = recipeBewertung.get_bewertung_from_user_to_recipe(db_session, user_add_1, fake_rest)
+    assert assessment_ret is None
+
+    # Try to add assessments with invalid user
+    with pytest.raises(UserNotFound):
+        assessment_ret = recipeBewertung.create_bewertung(
+            db_session,
+            scheme_recipe.RecipeBewertungCreate(
+                name="Rest 1 1", comment="This is a comment", rating=1.5, person=fake_user, recipe=recipe_1
+            ),
+        )
+
+    # Delete Assessments
+    assert 1 == recipeBewertung.delete_bewertung(db_session, user_add_1, recipe_1)
+    assert recipeBewertung.get_bewertung_from_user_to_recipe(db_session, user_add_1, recipe_1) is None
+    assert 0 == recipeBewertung.delete_bewertung(db_session, user_add_1, recipe_1)
+    assert 0 == recipeBewertung.delete_bewertung(db_session, fake_user, recipe_2)
+    assert 0 == recipeBewertung.delete_bewertung(db_session, user_add_1, fake_rest)
+
+    # Test if only one comment for the same restaurant an user are possible
+    with pytest.raises(DuplicateEntry):
+        recipeBewertung.create_bewertung(db_session, assessment_add_2_2)
 
 
 def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):

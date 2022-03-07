@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
-from db.crud.bewertung import get_bewertung_from_user_to_rest
+from db.crud.restBewertung import get_bewertung_from_user_to_rest
 from db.database import get_db
 from schemes.scheme_rest import RestaurantBase
 from schemes.scheme_rest import RestBewertungCreate

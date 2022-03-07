@@ -5,7 +5,7 @@ from typing import Union
 import sqlalchemy
 from sqlalchemy.orm import Session
 
-from db.base import Bewertung
+from db.base import BewertungRestaurant
 from db.base import Person
 from db.base import Restaurant
 from db.crud.restaurant import get_restaurant_by_id
@@ -21,7 +21,7 @@ from tools.my_logging import logger
 
 def get_bewertung_from_user_to_rest(
     db: Session, user: scheme_user.UserBase, rest: scheme_rest.RestaurantBase
-) -> Bewertung:
+) -> BewertungRestaurant:
     """Return a specific bewertung from a user to only one restaurant
 
     Args:
@@ -30,19 +30,19 @@ def get_bewertung_from_user_to_rest(
         rest (scheme_rest.RestaurantBase): Specifie the restauranat
 
     Returns:
-        Bewertung: Return one bewertung that match the restaurant - user
+        BewertungRestaurant: Return one bewertung that match the restaurant - user
     """
     return (
-        db.query(Bewertung)
-        .join(Person, Person.email == Bewertung.person_email)
-        .join(Restaurant, Restaurant.place_id == Bewertung.place_id)
+        db.query(BewertungRestaurant)
+        .join(Person, Person.email == BewertungRestaurant.person_email)
+        .join(Restaurant, Restaurant.place_id == BewertungRestaurant.place_id)
         .filter(Person.email == user.email)
         .filter(Restaurant.place_id == rest.place_id)
         .first()
     )
 
 
-def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> Union[List[Bewertung], None]:
+def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> Union[List[BewertungRestaurant], None]:
     """Return all bewertugen from one User
 
     Args:
@@ -50,16 +50,16 @@ def get_all_user_bewertungen(db: Session, user: scheme_user.UserBase) -> Union[L
         user (scheme_user.UserBase): The user to select
 
     Returns:
-        List[Bewertung] OR None
+        List[BewertungRestaurant] OR None
     """
     user: Person = get_user_by_mail(db, user.email)
     if user is None:
         return None
     else:
-        return user.bewertungen
+        return user.bewertungenRest
 
 
-def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -> Bewertung:
+def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -> BewertungRestaurant:
     """Create / Add a Bewertung to the DB. Timestamp and ID will set automatic.
 
     Args:
@@ -72,14 +72,14 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
         DuplicateEntry: Duplicate Primary Key
 
     Returns:
-        Bewertung: Return if success
+        BewertungRestaurant: Return if success
     """
     if get_user_by_mail(db, assessment.person.email) is None:
         raise UserNotFound(f"User {assessment.person.email} does not exist", assessment.person.email)
     if get_restaurant_by_id(db, assessment.restaurant.place_id) is None:
         raise RestaurantNotFound("Restaurant does not exist", assessment.restaurant.place_id)
 
-    db_assessment = Bewertung(
+    db_assessment = BewertungRestaurant(
         person_email=assessment.person.email,
         place_id=assessment.restaurant.place_id,
         kommentar=assessment.comment,
@@ -103,7 +103,7 @@ def create_bewertung(db: Session, assessment: scheme_rest.RestBewertungCreate) -
 
 def update_bewertung(
     db: Session, old_bewertung: scheme_rest.RestBewertungCreate, new_bewertung: scheme_rest.RestBewertungCreate
-) -> Bewertung:
+) -> BewertungRestaurant:
     """Update the comment and rating of a bewertung
 
     Args:
@@ -112,13 +112,15 @@ def update_bewertung(
         new_bewertung (scheme_rest.RestBewertungCreate): The updated Bewertung
 
     Returns:
-        Bewertung: New Bewertung from `get_bewertung_from_user_to_rest`
+        BewertungRestaurant: New Bewertung from `get_bewertung_from_user_to_rest`
     """
     rows = (
-        db.query(Bewertung)
-        .filter(Bewertung.person_email == old_bewertung.person.email)
-        .filter(Bewertung.place_id == old_bewertung.restaurant.place_id)
-        .update({Bewertung.kommentar: new_bewertung.comment, Bewertung.rating: new_bewertung.rating})
+        db.query(BewertungRestaurant)
+        .filter(BewertungRestaurant.person_email == old_bewertung.person.email)
+        .filter(BewertungRestaurant.place_id == old_bewertung.restaurant.place_id)
+        .update(
+            {BewertungRestaurant.kommentar: new_bewertung.comment, BewertungRestaurant.rating: new_bewertung.rating}
+        )
     )
 
     if rows == 0:
@@ -141,7 +143,9 @@ def delete_bewertung(db: Session, user: scheme_user.UserBase, rest: scheme_rest.
         int: Number of effected rows
     """
     rows = (
-        db.query(Bewertung).filter(Bewertung.person_email == user.email, Bewertung.place_id == rest.place_id).delete()
+        db.query(BewertungRestaurant)
+        .filter(BewertungRestaurant.person_email == user.email, BewertungRestaurant.place_id == rest.place_id)
+        .delete()
     )
     db.commit()
     logger.info("Deleted bewertung %s - %s", user.email, rest.place_id)
