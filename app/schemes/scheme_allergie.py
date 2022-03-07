@@ -17,14 +17,12 @@ class PydanticAllergies(BaseModel):
     name: str
 
     @validator("name")
-    def allergie_values(cls, value: str) -> Any:
+    @classmethod
+    def allergie_values(cls, value: str):
         """Check if the Allergie is in schemes.Allergies Enum
 
         Args:
             value (str): the name that got passed
-
-        Returns:
-            Any: Return a object if value is valid
         """
         for allergie in Allergies:
             if allergie.value == value:

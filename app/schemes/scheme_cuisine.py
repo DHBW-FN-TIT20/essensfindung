@@ -16,6 +16,7 @@ class PydanticCuisine(BaseModel):
     name: str
 
     @validator("name")
+    @classmethod
     def cuisine_values(cls, value: str):
         """
         Check if the cuisine is in schemes.cuisines Enum
@@ -23,9 +24,6 @@ class PydanticCuisine(BaseModel):
         Args:
             cls (any): Class of the method
             value (str): the name that got passed
-
-        Returns:
-            Any: Return a object if value is valid
         """
         for cuisine in Cuisine:
             if cuisine.value == value:
