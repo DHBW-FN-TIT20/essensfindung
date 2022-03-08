@@ -9,17 +9,22 @@ from fastapi import status
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
+from httpcore import request
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
 from db.crud.user import create_user
+from db.crud.user import delete_user
 from db.database import get_db
 from schemes import exceptions
+from schemes.scheme_user import User
 from schemes.scheme_user import UserCreate
+from schemes.scheme_user import UserLogin
 from tools import security
 from tools.config import settings
 from tools.my_logging import logger
+from tools.security import get_current_user
 from tools.security import oauth2_scheme
 
 templates = Jinja2Templates("templates")
@@ -226,3 +231,22 @@ def pwchange(request: Request):
         TemplateResponse: the http response
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})
+
+
+@router.post("/delete/", status_code=200, response_model=User)
+def delete_singined_user(
+    request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)
+) -> User:
+    """Delete the current logged in user
+
+    Args:
+        request (Request): The Request
+        current_user (UserLogin, optional): Current logged in User. Defaults to Depends(get_current_user).
+        db_session (Session, optional): Session to the Database. Defaults to Depends(get_db).
+
+    Returns:
+        RedirectResponse: Redirect to the landingpage
+    """
+    user = User(email=current_user.email, last_login=current_user.last_login)
+    delete_user(db=db_session, user=user)
+    return user
