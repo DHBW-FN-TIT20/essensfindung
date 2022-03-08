@@ -98,31 +98,34 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.account_response" title="views.signin.account_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account_response</span></code></a>(request[, msg, success])</p></td>
 <td><p>Return a response page for account creation, either positive or negative</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.login" title="views.signin.login"><code class="xref py py-obj docutils literal notranslate"><span class="pre">login</span></code></a>(request[, url, db_session])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.delete_singined_user" title="views.signin.delete_singined_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_singined_user</span></code></a>(request[, ...])</p></td>
+<td><p>Delete the current logged in user</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.login" title="views.signin.login"><code class="xref py py-obj docutils literal notranslate"><span class="pre">login</span></code></a>(request[, url, db_session])</p></td>
 <td><p>Login Form to login the user and redirect if valid</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.login_for_access_token" title="views.signin.login_for_access_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">login_for_access_token</span></code></a>(response[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.login_for_access_token" title="views.signin.login_for_access_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">login_for_access_token</span></code></a>(response[, ...])</p></td>
 <td><p>Generate token for user</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.pwchange" title="views.signin.pwchange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwchange</span></code></a>(request)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.pwchange" title="views.signin.pwchange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwchange</span></code></a>(request)</p></td>
 <td><p>Return the rendered template for the login page</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.pwreset" title="views.signin.pwreset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwreset</span></code></a>(request)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.pwreset" title="views.signin.pwreset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwreset</span></code></a>(request)</p></td>
 <td><p>Return the rendered template for the login page</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.recover" title="views.signin.recover"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recover</span></code></a>(request)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.recover" title="views.signin.recover"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recover</span></code></a>(request)</p></td>
 <td><p>Return the rendered template for the login page</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.register" title="views.signin.register"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register</span></code></a>(request)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.register" title="views.signin.register"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register</span></code></a>(request)</p></td>
 <td><p>Return the rendered template for the register page</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.register_post" title="views.signin.register_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_post</span></code></a>(request[, db_session])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.register_post" title="views.signin.register_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_post</span></code></a>(request[, db_session])</p></td>
 <td><p>Register Form to register the user and redirect if valid</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.signin" title="views.signin.signin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signin</span></code></a>(request[, error])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.signin" title="views.signin.signin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signin</span></code></a>(request[, error])</p></td>
 <td><p>Return the rendered template for the login page</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#views.signin.signout" title="views.signin.signout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signout</span></code></a>([token])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#views.signin.signout" title="views.signin.signout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signout</span></code></a>([token])</p></td>
 <td><p>Logout the user and redirect to the main page</p></td>
 </tr>
 </tbody>
@@ -144,6 +147,27 @@
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.signin.delete_singined_user">
+<span class="sig-prename descclassname"><span class="pre">views.signin.</span></span><span class="sig-name descname"><span class="pre">delete_singined_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">starlette.requests.Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserLogin" title="schemes.scheme_user.UserLogin"><span class="pre">schemes.scheme_user.UserLogin</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.User" title="schemes.scheme_user.User"><span class="pre">schemes.scheme_user.User</span></a></span></span><a class="reference internal" href="../_modules/views/signin.html#delete_singined_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#views.signin.delete_singined_user" title="Permalink to this definition"></a></dt>
+<dd><p>Delete the current logged in user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – The Request</p></li>
+<li><p><strong>current_user</strong> (<a class="reference internal" href="../schemes/schemes.html#schemes.scheme_user.UserLogin" title="schemes.scheme_user.UserLogin"><em>UserLogin</em></a><em>, </em><em>optional</em>) – Current logged in User. Defaults to Depends(get_current_user).</p></li>
+<li><p><strong>db_session</strong> (<em>Session</em><em>, </em><em>optional</em>) – Session to the Database. Defaults to Depends(get_db).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Redirect to the landingpage</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>RedirectResponse</p>
 </dd>
 </dl>
 </dd></dl>

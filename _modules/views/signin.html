@@ -81,12 +81,16 @@
 <span class="kn">from</span> <span class="nn">starlette.templating</span> <span class="kn">import</span> <span class="n">Jinja2Templates</span>
 
 <span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">create_user</span>
+<span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">delete_user</span>
 <span class="kn">from</span> <span class="nn">db.database</span> <span class="kn">import</span> <span class="n">get_db</span>
 <span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">schemes.scheme_user</span> <span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">schemes.scheme_user</span> <span class="kn">import</span> <span class="n">UserCreate</span>
+<span class="kn">from</span> <span class="nn">schemes.scheme_user</span> <span class="kn">import</span> <span class="n">UserLogin</span>
 <span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="n">security</span>
 <span class="kn">from</span> <span class="nn">tools.config</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">tools.my_logging</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">tools.security</span> <span class="kn">import</span> <span class="n">get_current_user</span>
 <span class="kn">from</span> <span class="nn">tools.security</span> <span class="kn">import</span> <span class="n">oauth2_scheme</span>
 
 <span class="n">templates</span> <span class="o">=</span> <span class="n">Jinja2Templates</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">)</span>
@@ -293,6 +297,25 @@
 <span class="sd">        TemplateResponse: the http response</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/pwchange.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="delete_singined_user"><a class="viewcode-back" href="../../views/signin.html#views.signin.delete_singined_user">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/delete/&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">User</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">delete_singined_user</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">current_user</span><span class="p">:</span> <span class="n">UserLogin</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">),</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Delete the current logged in user</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The Request</span>
+<span class="sd">        current_user (UserLogin, optional): Current logged in User. Defaults to Depends(get_current_user).</span>
+<span class="sd">        db_session (Session, optional): Session to the Database. Defaults to Depends(get_db).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RedirectResponse: Redirect to the landingpage</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">last_login</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">last_login</span><span class="p">)</span>
+    <span class="n">delete_user</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">user</span></div>
 </pre></div>
 
            </div>
