@@ -165,16 +165,30 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
     try:
         user = UserCreate(email=email, password=password)
         create_user(db=db_session, person=user)
-        return RedirectResponse("/accresp/?success=True", status_code=status.HTTP_302_FOUND)
+        success = True
+        title = "Konto Erfolgreich Erstellt"
+        msg = "Melden Sie sich an und finden sie Essen!"
+        buttontext = "Anmelden"
+        url = "/signin"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DuplicateEntry:
         logger.warning("User %s already exist in the Database", email)
-        return RedirectResponse(
-            "/accresp/?success=False&msg=User mit der email gibt es bereits", status_code=status.HTTP_302_FOUND
-        )
+        success = False
+        title = "Konto Erstellen Fehlgeschlagen"
+        msg = "Fehler: User mit der Email gibt es bereits"
+        buttontext = "Erneut Registrieren"
+        url = "/register"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DatabaseException:
-        return RedirectResponse(
-            "/accresp/?success=False&msg=Probleme mit der Datenbank", status_code=status.HTTP_302_FOUND
-        )
+        success = False
+        title = "Konto Erstellen Fehlgeschlagen"
+        msg = "Fehler: Probleme mit der Datenbank"
+        buttontext = "Erneut Registrieren"
+        url = "/register"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
 
 
 @router.get("/accresp/", response_class=HTMLResponse)
@@ -191,6 +205,31 @@ def account_response(request: Request, msg: Optional[str] = "", success: Optiona
     """
     data = {"request": request, "msg": msg, "success": success}
     return templates.TemplateResponse("signin/accresponse.html", data)
+
+@router.get("/boolresp/", response_class=HTMLResponse)
+def bool_response(request: Request, success: Optional[bool] = False, title: Optional[str] = "Fehler", msg: Optional[str] = "", buttontext: Optional[str] = "Startseite", url: Optional[str] = "/"):
+    """Return a dynamic response page, either positive or negative
+
+    Args:
+        request (Request): the http request
+        success (Optional[bool], optional): the success boolean. Defaults to False.
+        title (Optional[str], optional): the title text displayed over the checkmark. Defaults to "Fehler".
+        msg (Optional[str], optional): the message displayed under the text. Defaults to "".
+        buttontext (Optional[str], optional): text displayed inside the button. Defaults to "Startseite".
+        url (Optional[str], optional): href to which the link button redirects. Defaults to "/".
+
+    Returns:
+        TemplateResponse: the http response
+    """
+    data = {
+        "request": request,
+        "success": success,
+        "title": title,
+        "msg": msg,
+        "buttontext": buttontext,
+        "url": url
+    }
+    return templates.TemplateResponse("bool_response.html", data)
 
 
 @router.get("/recover/", response_class=HTMLResponse)
