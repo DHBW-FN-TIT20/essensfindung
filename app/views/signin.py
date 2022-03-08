@@ -156,7 +156,7 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         db_session (Session, optional): the db session. Defaults to Depends(get_db).
 
     Returns:
-        RedirectResponse: redirect to /accresp/?success=...
+        RedirectResponse: redirect to /boolresp/?success=...
     """
     form = await request.form()
     email = form.get("emailInput")
@@ -189,22 +189,6 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         url = "/register"
         redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
-
-
-@router.get("/accresp/", response_class=HTMLResponse)
-def account_response(request: Request, msg: Optional[str] = "", success: Optional[str] = ""):
-    """Return a response page for account creation, either positive or negative
-
-    Args:
-        request (Request): the http request
-        msg (Optional[str], optional): the error msg. Defaults to "".
-        success (Optional[str], optional): the succes boolean. Defaults to "".
-
-    Returns:
-        TemplateResponse: the http response
-    """
-    data = {"request": request, "msg": msg, "success": success}
-    return templates.TemplateResponse("signin/accresponse.html", data)
 
 @router.get("/boolresp/", response_class=HTMLResponse)
 def bool_response(request: Request, success: Optional[bool] = False, title: Optional[str] = "Fehler", msg: Optional[str] = "", buttontext: Optional[str] = "Startseite", url: Optional[str] = "/"):
