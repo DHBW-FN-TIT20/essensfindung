@@ -45,14 +45,23 @@
     </footer>
 </body>
 <script type="text/javascript">
-    let clickcount = 0;
-    $('#logo').click(function() {
-        clickcount += 1;
-        if (clickcount == 3) {
-            $("#logo").addClass("rotate");
-            clickcount = 0;
+    let logo = document.getElementById('logo');
+    let x, lastClick = 0;
+
+    logo.addEventListener("click", e => {
+        if (!lastClick) {
+            x = setTimeout(redirectToLanding, 200);
+            lastClick = 1;
+        } else {
+            clearTimeout(x);
+            lastClick = 0;
+            logo.classList.add('rotate');
         }
-    });
+    })
+
+    function redirectToLanding() {
+        window.location.href = "/";
+    }
 </script>
 
 </html>
