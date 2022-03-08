@@ -254,11 +254,21 @@ def pwchange(request: Request):
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})
 
+@router.get("/confdelete/", response_class=HTMLResponse)
+def confirm_delete(request: Request, current_user: UserLogin = Depends(get_current_user)):
+    """Return confirmation page for user deletion
+
+    Args:
+        request (Request): The Request
+        current_user (UserLogin, optional): Current logged in User. Defaults to Depends(get_current_user).
+
+    Returns:
+        TemplateResponse: the http response
+    """
+    return templates.TemplateResponse("signin/confirm_delete.html", {"request": request, "username": current_user.email})
 
 @router.post("/delete/", status_code=200, response_model=User)
-def delete_singined_user(
-    request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)
-) -> User:
+def delete_singined_user(request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)):
     """Delete the current logged in user
 
     Args:
@@ -269,6 +279,22 @@ def delete_singined_user(
     Returns:
         RedirectResponse: Redirect to the landingpage
     """
-    user = User(email=current_user.email, last_login=current_user.last_login)
-    delete_user(db=db_session, user=user)
-    return user
+    try:
+        user = User(email=current_user.email, last_login=current_user.last_login)
+        delete_user(db=db_session, user=user)
+        success = True
+        title = "Konto Erfolgreich Gelöscht"
+        msg = "Auf Wiedersehen!"
+        buttontext = "Zur Startseite"
+        url = "/"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
+    
+    except exceptions.DatabaseException:
+        success = False
+        title = "Konto Löschen Fehlgeschlagen"
+        msg = "Fehler: Probleme mit der Datenbank"
+        buttontext = "Zur Startseite"
+        url = "/"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
