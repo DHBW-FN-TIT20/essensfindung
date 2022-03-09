@@ -113,7 +113,7 @@
 <td><p>Get Bewertungen from a User to all restaurants</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#services.service_res.get_coordinates_from_zipcode" title="services.service_res.get_coordinates_from_zipcode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_coordinates_from_zipcode</span></code></a>(zipcode)</p></td>
-<td><p>Convert a zipcode to Coordinates</p></td>
+<td><p>Convert a string containing an address or zipcode into coordinates</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#services.service_res.get_rest_filter_from_user" title="services.service_res.get_rest_filter_from_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rest_filter_from_user</span></code></a>(db_session, user)</p></td>
 <td><p>Return the saved Filter from the Database if found one</p></td>
@@ -287,10 +287,10 @@ and if so add the value to the restaurant</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="services.service_res.get_coordinates_from_zipcode">
 <span class="sig-prename descclassname"><span class="pre">services.service_res.</span></span><span class="sig-name descname"><span class="pre">get_coordinates_from_zipcode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zipcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../schemes/schemes.html#schemes.scheme_rest.LocationBase" title="schemes.scheme_rest.LocationBase"><span class="pre">schemes.scheme_rest.LocationBase</span></a></span></span><a class="reference internal" href="../_modules/services/service_res.html#get_coordinates_from_zipcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#services.service_res.get_coordinates_from_zipcode" title="Permalink to this definition"></a></dt>
-<dd><p>Convert a zipcode to Coordinates</p>
+<dd><p>Convert a string containing an address or zipcode into coordinates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>zipcode</strong> (<em>str</em>) – The zipcode to search</p>
+<dd class="field-odd"><p><strong>zipcode</strong> (<em>str</em>) – The address/zipcode string to search</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="../exceptions/exceptions.html#schemes.exceptions.NoneExcistingZipCodeException" title="schemes.exceptions.NoneExcistingZipCodeException"><strong>NoneExcistingZipCodeException</strong></a> – Raises if the zipcode was not found</p>

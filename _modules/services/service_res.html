@@ -94,10 +94,10 @@
 
 
 <div class="viewcode-block" id="get_coordinates_from_zipcode"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.get_coordinates_from_zipcode">[docs]</a><span class="k">def</span> <span class="nf">get_coordinates_from_zipcode</span><span class="p">(</span><span class="n">zipcode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LocationBase</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Convert a zipcode to Coordinates</span>
+    <span class="sd">&quot;&quot;&quot;Convert a string containing an address or zipcode into coordinates</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        zipcode (str): The zipcode to search</span>
+<span class="sd">        zipcode (str): The address/zipcode string to search</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        NoneExcistingZipCodeException: Raises if the zipcode was not found</span>
