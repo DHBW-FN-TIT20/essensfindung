@@ -1,0 +1,24 @@
+{% extends "shared/layout_singleform.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="text-center mb-3">
+        <h2>Account</h2>
+    </div>
+    <div class="col-10 limit-width">
+        <form method="post" action="/delete/">
+            <div class="mb-3 text-center">
+                <h5 class="mb-0">Angemeldet als:</h5>
+                <h5 class="mt-0 mb-3 fw-bold">{{ username }}</h5>
+                <p>Sind Sie sicher, dass Sie Ihren Account und alle verbundenen Daten l&ouml;schen wollen?</p>
+                <p class="fw-bold fst-italic">Vorsicht: Dieser Vorgang kann nicht r&uuml;ckg&auml;ngig gemacht werden!</p>
+            </div>
+            <div class="form-actions text-center">
+                <button type="submit" class="btn btn-danger mt-3">Account L&ouml;schen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

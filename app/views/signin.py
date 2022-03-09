@@ -156,7 +156,7 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         db_session (Session, optional): the db session. Defaults to Depends(get_db).
 
     Returns:
-        RedirectResponse: redirect to /accresp/?success=...
+        RedirectResponse: redirect to /boolresp/?success=...
     """
     form = await request.form()
     email = form.get("emailInput")
@@ -165,32 +165,55 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
     try:
         user = UserCreate(email=email, password=password)
         create_user(db=db_session, person=user)
-        return RedirectResponse("/accresp/?success=True", status_code=status.HTTP_302_FOUND)
+        success = True
+        title = "Konto Erfolgreich Erstellt"
+        msg = "Melden Sie sich an und finden sie Essen!"
+        buttontext = "Anmelden"
+        url = "/signin"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DuplicateEntry:
         logger.warning("User %s already exist in the Database", email)
-        return RedirectResponse(
-            "/accresp/?success=False&msg=User mit der email gibt es bereits", status_code=status.HTTP_302_FOUND
-        )
+        success = False
+        title = "Konto Erstellen Fehlgeschlagen"
+        msg = "Fehler: User mit der Email gibt es bereits"
+        buttontext = "Erneut Registrieren"
+        url = "/register"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DatabaseException:
-        return RedirectResponse(
-            "/accresp/?success=False&msg=Probleme mit der Datenbank", status_code=status.HTTP_302_FOUND
-        )
+        success = False
+        title = "Konto Erstellen Fehlgeschlagen"
+        msg = "Fehler: Probleme mit der Datenbank"
+        buttontext = "Erneut Registrieren"
+        url = "/register"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
 
-
-@router.get("/accresp/", response_class=HTMLResponse)
-def account_response(request: Request, msg: Optional[str] = "", success: Optional[str] = ""):
-    """Return a response page for account creation, either positive or negative
+@router.get("/boolresp/", response_class=HTMLResponse)
+def bool_response(request: Request, success: Optional[bool] = False, title: Optional[str] = "Fehler", msg: Optional[str] = "", buttontext: Optional[str] = "Startseite", url: Optional[str] = "/"):
+    """Return a dynamic response page, either positive or negative
 
     Args:
         request (Request): the http request
-        msg (Optional[str], optional): the error msg. Defaults to "".
-        success (Optional[str], optional): the succes boolean. Defaults to "".
+        success (Optional[bool], optional): the success boolean. Defaults to False.
+        title (Optional[str], optional): the title text displayed over the checkmark. Defaults to "Fehler".
+        msg (Optional[str], optional): the message displayed under the text. Defaults to "".
+        buttontext (Optional[str], optional): text displayed inside the button. Defaults to "Startseite".
+        url (Optional[str], optional): href to which the link button redirects. Defaults to "/".
 
     Returns:
         TemplateResponse: the http response
     """
-    data = {"request": request, "msg": msg, "success": success}
-    return templates.TemplateResponse("signin/accresponse.html", data)
+    data = {
+        "request": request,
+        "success": success,
+        "title": title,
+        "msg": msg,
+        "buttontext": buttontext,
+        "url": url
+    }
+    return templates.TemplateResponse("bool_response.html", data)
 
 
 @router.get("/recover/", response_class=HTMLResponse)
@@ -231,11 +254,21 @@ def pwchange(request: Request):
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})
 
+@router.get("/confdelete/", response_class=HTMLResponse)
+def confirm_delete(request: Request, current_user: UserLogin = Depends(get_current_user)):
+    """Return confirmation page for user deletion
+
+    Args:
+        request (Request): The Request
+        current_user (UserLogin, optional): Current logged in User. Defaults to Depends(get_current_user).
+
+    Returns:
+        TemplateResponse: the http response
+    """
+    return templates.TemplateResponse("signin/confirm_delete.html", {"request": request, "username": current_user.email})
 
 @router.post("/delete/", status_code=200, response_model=User)
-def delete_singined_user(
-    request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)
-) -> User:
+def delete_singined_user(request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)):
     """Delete the current logged in user
 
     Args:
@@ -246,6 +279,22 @@ def delete_singined_user(
     Returns:
         RedirectResponse: Redirect to the landingpage
     """
-    user = User(email=current_user.email, last_login=current_user.last_login)
-    delete_user(db=db_session, user=user)
-    return user
+    try:
+        user = User(email=current_user.email, last_login=current_user.last_login)
+        delete_user(db=db_session, user=user)
+        success = True
+        title = "Konto Erfolgreich Gelöscht"
+        msg = "Auf Wiedersehen!"
+        buttontext = "Zur Startseite"
+        url = "/"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
+    
+    except exceptions.DatabaseException:
+        success = False
+        title = "Konto Löschen Fehlgeschlagen"
+        msg = "Fehler: Probleme mit der Datenbank"
+        buttontext = "Zur Startseite"
+        url = "/"
+        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
