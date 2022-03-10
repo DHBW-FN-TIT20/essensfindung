@@ -265,7 +265,10 @@ def pwchange(request: Request):
 
 @router.post("/pwchange/", response_class=RedirectResponse)
 async def pwchange_singined_user(
-    request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)
+    request: Request,
+    current_user: UserLogin = Depends(get_current_user),
+    db_session: Session = Depends(get_db),
+    token: str = Depends(oauth2_scheme),
 ) -> RedirectResponse:
     """Update the password from the current logged in user
 
@@ -286,9 +289,17 @@ async def pwchange_singined_user(
         new_user = UserCreate(email=current_user.email, password=form.get("passwordInput"))
         update_user(db=db_session, current_user=current_user, new_user=new_user)
 
-        return RedirectResponse("/signin/", status_code=status.HTTP_302_FOUND)
+        await signout(token)
+        return RedirectResponse(
+            "/boolresp/?success=true&title=Passwort geaendert&msg=Passwort wurde aktuallisiert",
+            status_code=status.HTTP_302_FOUND,
+        )
     else:
-        return RedirectResponse("/error?err_msg=The old password is not correct", status_code=status.HTTP_302_FOUND)
+        await signout(token)
+        return RedirectResponse(
+            "/boolresp/?success=false&title=Passwort aendern fehlgeschlagen&msg=Das aktuelle Passwort war nicht korrekt",
+            status_code=status.HTTP_302_FOUND,
+        )
 
 
 @router.get("/confdelete/", response_class=HTMLResponse)
