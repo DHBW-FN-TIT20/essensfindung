@@ -15,6 +15,7 @@ from starlette.templating import Jinja2Templates
 
 from db.crud.user import create_user
 from db.crud.user import delete_user
+from db.crud.user import update_user
 from db.database import get_db
 from schemes import exceptions
 from schemes.scheme_user import User
@@ -260,6 +261,45 @@ def pwchange(request: Request):
         TemplateResponse: the http response
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})
+
+
+@router.post("/pwchange/", response_class=RedirectResponse)
+async def pwchange_singined_user(
+    request: Request,
+    current_user: UserLogin = Depends(get_current_user),
+    db_session: Session = Depends(get_db),
+    token: str = Depends(oauth2_scheme),
+) -> RedirectResponse:
+    """Update the password from the current logged in user
+
+    Args:
+        request (Request): Request that contain the Form with the Atr `passwordInput`
+        current_user (schemes.scheme_user.UserLogin, optional): Current logged in User.
+            Defaults to Depends(get_current_user).
+        db_session (sqlalchemy.orm.Session, optional): Session to the Database. Defaults to Depends(get_db).
+
+    Returns:
+        RedirectResponse: Redirect to the signing if success
+        RedirectResponse: Redirect to the error if old password is not correct
+    """
+    form = await request.form()
+    if security.authenticate_user(
+        db_session=db_session, username=current_user.email, password=form.get("oldpasswordinput")
+    ):
+        new_user = UserCreate(email=current_user.email, password=form.get("passwordInput"))
+        update_user(db=db_session, current_user=current_user, new_user=new_user)
+
+        await signout(token)
+        return RedirectResponse(
+            "/boolresp/?success=true&title=Passwort geaendert&msg=Passwort wurde aktuallisiert",
+            status_code=status.HTTP_302_FOUND,
+        )
+    else:
+        await signout(token)
+        return RedirectResponse(
+            "/boolresp/?success=false&title=Passwort aendern fehlgeschlagen&msg=Das aktuelle Passwort war nicht korrekt",
+            status_code=status.HTTP_302_FOUND,
+        )
 
 
 @router.get("/confdelete/", response_class=HTMLResponse)
