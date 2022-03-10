@@ -76,11 +76,23 @@ def test_get_rest_filter_from_user(db_session: SessionTesting, add_allergies, mo
     allergies = [db.base.Allergie(name=Allergies.LACTOSE.value), db.base.Allergie(name=Allergies.WHEAT.value)]
     cuisines = [PydanticCuisine(name=Cuisine.GERMAN.value), PydanticCuisine(name=Cuisine.DOENER.value)]
     db_filter = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
+        email="test@nice.de",
+        manuell_location="88069",
+        radius=5000,
+        rating=3,
+        cuisines=cuisines,
+        costs=3,
+        allergies=allergies,
     )
 
     db_filter_copy = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
+        email="test@nice.de",
+        manuell_location="88069",
+        radius=5000,
+        rating=3,
+        cuisines=cuisines,
+        costs=3,
+        allergies=allergies,
     )
 
     mocker.patch("db.crud.filter.get_filter_from_user", return_value=db_filter)
@@ -96,7 +108,13 @@ def test_create_rest_filter(db_session: SessionTesting, add_allergies, add_cuisi
     user = User.from_orm(db_user)
 
     db_filter = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
+        email="test@nice.de",
+        manuell_location="88069",
+        radius=5000,
+        rating=3,
+        cuisines=cuisines,
+        costs=3,
+        allergies=allergies,
     )
 
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
@@ -112,7 +130,13 @@ def test_update_rest_filter(db_session: SessionTesting, add_allergies, add_cuisi
     user = User.from_orm(db_user)
 
     db_filter = db.base.FilterRest(
-        email="test@nice.de", zipcode="88069", radius=5000, rating=3, cuisines=cuisines, costs=3, allergies=allergies
+        email="test@nice.de",
+        manuell_location="88069",
+        radius=5000,
+        rating=3,
+        cuisines=cuisines,
+        costs=3,
+        allergies=allergies,
     )
     scheme_filter_rest = FilterRestDatabase.from_orm(db_filter)
     service_res.create_rest_filter(db_session, scheme_filter_rest, user)
@@ -151,7 +175,7 @@ def test_search_for_restaurant(
         allergies=[scheme_allergie.PydanticAllergies(name=Allergies.LACTOSE.value)],
         rating=3,
         costs=3,
-        zipcode="88069",
+        manuell_location="88069",
         radius=5000,
         location=LocationBase(lat="1111", lng="345"),
     )

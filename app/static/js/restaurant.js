@@ -41,20 +41,20 @@ $('#restaurantFilter').on('hide.bs.modal', function(e) {
 function change_restaurant_url() {
     var latitude = get_latitude();
     var longitude = get_longitude();
-    var zipcode = get_zipcode();
+    var location = get_location();
     var costs = get_costs();
     var cuisine = get_cuisine();
     var allergies = get_allergies();
     var rating = get_rating();
     var radius = get_radius();
     if (cuisine.length > 0 && allergies.length > 0) {
-        var new_link = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
+        var new_link = "/findrestaurant?cuisine=" + cuisine + "&allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&manuell_location=" + location;
     } else if (cuisine.length > 0) {
-        var new_link = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
+        var new_link = "/findrestaurant?cuisine=" + cuisine + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&manuell_location=" + location;
     } else if (allergies.length > 0) {
-        var new_link = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
+        var new_link = "/findrestaurant?allergies=" + allergies + "&rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&manuell_location=" + location;
     } else {
-        var new_link = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&zipcode=" + zipcode;
+        var new_link = "/findrestaurant?rating=" + rating + "&costs=" + costs + "&radius=" + radius + "&lat=" + latitude + "&lng=" + longitude + "&manuell_location=" + location;
     }
     document.getElementById("search_restaurant").href = new_link;
     document.getElementById("search_restaurant_from_modal").href = new_link;
@@ -76,8 +76,8 @@ function get_longitude() {
     return document.getElementById("restaurant_filter_longitude").innerHTML;
 }
 
-function get_zipcode() {
-    return document.getElementById("restaurant_filter_zipcode").value;
+function get_location() {
+    return document.getElementById("restaurant_filter_location").value;
 }
 
 function get_costs() {

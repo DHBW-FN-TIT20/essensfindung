@@ -170,7 +170,9 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         msg = "Melden Sie sich an und finden sie Essen!"
         buttontext = "Anmelden"
         url = "/signin"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DuplicateEntry:
         logger.warning("User %s already exist in the Database", email)
@@ -179,7 +181,9 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         msg = "Fehler: User mit der Email gibt es bereits"
         buttontext = "Erneut Registrieren"
         url = "/register"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DatabaseException:
         success = False
@@ -187,11 +191,21 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         msg = "Fehler: Probleme mit der Datenbank"
         buttontext = "Erneut Registrieren"
         url = "/register"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
 
+
 @router.get("/boolresp/", response_class=HTMLResponse)
-def bool_response(request: Request, success: Optional[bool] = False, title: Optional[str] = "Fehler", msg: Optional[str] = "", buttontext: Optional[str] = "Startseite", url: Optional[str] = "/"):
+def bool_response(
+    request: Request,
+    success: Optional[bool] = False,
+    title: Optional[str] = "Fehler",
+    msg: Optional[str] = "",
+    buttontext: Optional[str] = "Startseite",
+    url: Optional[str] = "/",
+):
     """Return a dynamic response page, either positive or negative
 
     Args:
@@ -205,14 +219,7 @@ def bool_response(request: Request, success: Optional[bool] = False, title: Opti
     Returns:
         TemplateResponse: the http response
     """
-    data = {
-        "request": request,
-        "success": success,
-        "title": title,
-        "msg": msg,
-        "buttontext": buttontext,
-        "url": url
-    }
+    data = {"request": request, "success": success, "title": title, "msg": msg, "buttontext": buttontext, "url": url}
     return templates.TemplateResponse("bool_response.html", data)
 
 
@@ -254,6 +261,7 @@ def pwchange(request: Request):
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})
 
+
 @router.get("/confdelete/", response_class=HTMLResponse)
 def confirm_delete(request: Request, current_user: UserLogin = Depends(get_current_user)):
     """Return confirmation page for user deletion
@@ -265,10 +273,15 @@ def confirm_delete(request: Request, current_user: UserLogin = Depends(get_curre
     Returns:
         TemplateResponse: the http response
     """
-    return templates.TemplateResponse("signin/confirm_delete.html", {"request": request, "username": current_user.email})
+    return templates.TemplateResponse(
+        "signin/confirm_delete.html", {"request": request, "username": current_user.email}
+    )
+
 
 @router.post("/delete/", status_code=200, response_model=User)
-def delete_singined_user(request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)):
+def delete_singined_user(
+    request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)
+):
     """Delete the current logged in user
 
     Args:
@@ -287,14 +300,18 @@ def delete_singined_user(request: Request, current_user: UserLogin = Depends(get
         msg = "Auf Wiedersehen!"
         buttontext = "Zur Startseite"
         url = "/"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
-    
+
     except exceptions.DatabaseException:
         success = False
         title = "Konto Löschen Fehlgeschlagen"
         msg = "Fehler: Probleme mit der Datenbank"
         buttontext = "Zur Startseite"
         url = "/"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
