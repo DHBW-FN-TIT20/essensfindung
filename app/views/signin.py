@@ -15,6 +15,7 @@ from starlette.templating import Jinja2Templates
 
 from db.crud.user import create_user
 from db.crud.user import delete_user
+from db.crud.user import update_user
 from db.database import get_db
 from schemes import exceptions
 from schemes.scheme_user import User
@@ -170,7 +171,9 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         msg = "Melden Sie sich an und finden sie Essen!"
         buttontext = "Anmelden"
         url = "/signin"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DuplicateEntry:
         logger.warning("User %s already exist in the Database", email)
@@ -179,7 +182,9 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         msg = "Fehler: User mit der Email gibt es bereits"
         buttontext = "Erneut Registrieren"
         url = "/register"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
     except exceptions.DatabaseException:
         success = False
@@ -187,11 +192,21 @@ async def register_post(request: Request, db_session: Session = Depends(get_db))
         msg = "Fehler: Probleme mit der Datenbank"
         buttontext = "Erneut Registrieren"
         url = "/register"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
 
+
 @router.get("/boolresp/", response_class=HTMLResponse)
-def bool_response(request: Request, success: Optional[bool] = False, title: Optional[str] = "Fehler", msg: Optional[str] = "", buttontext: Optional[str] = "Startseite", url: Optional[str] = "/"):
+def bool_response(
+    request: Request,
+    success: Optional[bool] = False,
+    title: Optional[str] = "Fehler",
+    msg: Optional[str] = "",
+    buttontext: Optional[str] = "Startseite",
+    url: Optional[str] = "/",
+):
     """Return a dynamic response page, either positive or negative
 
     Args:
@@ -205,14 +220,7 @@ def bool_response(request: Request, success: Optional[bool] = False, title: Opti
     Returns:
         TemplateResponse: the http response
     """
-    data = {
-        "request": request,
-        "success": success,
-        "title": title,
-        "msg": msg,
-        "buttontext": buttontext,
-        "url": url
-    }
+    data = {"request": request, "success": success, "title": title, "msg": msg, "buttontext": buttontext, "url": url}
     return templates.TemplateResponse("bool_response.html", data)
 
 
@@ -254,6 +262,46 @@ def pwchange(request: Request):
     """
     return templates.TemplateResponse("signin/pwchange.html", {"request": request})
 
+
+@router.post("/pwchange/", response_class=RedirectResponse)
+async def pwchange_singined_user(
+    request: Request,
+    current_user: UserLogin = Depends(get_current_user),
+    db_session: Session = Depends(get_db),
+    token: str = Depends(oauth2_scheme),
+) -> RedirectResponse:
+    """Update the password from the current logged in user
+
+    Args:
+        request (Request): Request that contain the Form with the Atr `passwordInput`
+        current_user (schemes.scheme_user.UserLogin, optional): Current logged in User.
+            Defaults to Depends(get_current_user).
+        db_session (sqlalchemy.orm.Session, optional): Session to the Database. Defaults to Depends(get_db).
+
+    Returns:
+        RedirectResponse: Redirect to the signing if success
+        RedirectResponse: Redirect to the error if old password is not correct
+    """
+    form = await request.form()
+    if security.authenticate_user(
+        db_session=db_session, username=current_user.email, password=form.get("oldpasswordinput")
+    ):
+        new_user = UserCreate(email=current_user.email, password=form.get("passwordInput"))
+        update_user(db=db_session, current_user=current_user, new_user=new_user)
+
+        await signout(token)
+        return RedirectResponse(
+            "/boolresp/?success=true&title=Passwort geaendert&msg=Passwort wurde aktuallisiert",
+            status_code=status.HTTP_302_FOUND,
+        )
+    else:
+        await signout(token)
+        return RedirectResponse(
+            "/boolresp/?success=false&title=Passwort aendern fehlgeschlagen&msg=Das aktuelle Passwort war nicht korrekt",
+            status_code=status.HTTP_302_FOUND,
+        )
+
+
 @router.get("/confdelete/", response_class=HTMLResponse)
 def confirm_delete(request: Request, current_user: UserLogin = Depends(get_current_user)):
     """Return confirmation page for user deletion
@@ -265,10 +313,15 @@ def confirm_delete(request: Request, current_user: UserLogin = Depends(get_curre
     Returns:
         TemplateResponse: the http response
     """
-    return templates.TemplateResponse("signin/confirm_delete.html", {"request": request, "username": current_user.email})
+    return templates.TemplateResponse(
+        "signin/confirm_delete.html", {"request": request, "username": current_user.email}
+    )
+
 
 @router.post("/delete/", status_code=200, response_model=User)
-def delete_singined_user(request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)):
+def delete_singined_user(
+    request: Request, current_user: UserLogin = Depends(get_current_user), db_session: Session = Depends(get_db)
+):
     """Delete the current logged in user
 
     Args:
@@ -287,14 +340,18 @@ def delete_singined_user(request: Request, current_user: UserLogin = Depends(get
         msg = "Auf Wiedersehen!"
         buttontext = "Zur Startseite"
         url = "/"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
-    
+
     except exceptions.DatabaseException:
         success = False
         title = "Konto Löschen Fehlgeschlagen"
         msg = "Fehler: Probleme mit der Datenbank"
         buttontext = "Zur Startseite"
         url = "/"
-        redirect_url = f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        redirect_url = (
+            f"/boolresp/?success={ success }&title={ title }&msg={ msg }&buttontext={ buttontext }&url={ url }"
+        )
         return RedirectResponse(redirect_url, status_code=status.HTTP_302_FOUND)
