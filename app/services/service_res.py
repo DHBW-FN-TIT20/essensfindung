@@ -27,10 +27,10 @@ from tools import gapi
 
 
 def get_coordinates_from_zipcode(zipcode: str) -> LocationBase:
-    """Convert a zipcode to Coordinates
+    """Convert a string containing an address or zipcode into coordinates
 
     Args:
-        zipcode (str): The zipcode to search
+        zipcode (str): The address/zipcode string to search
 
     Raises:
         NoneExcistingZipCodeException: Raises if the zipcode was not found

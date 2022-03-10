@@ -1,0 +1,34 @@
+{% extends "shared/layout_singleform.html" %}
+
+{% block content %}
+
+<!--
+    bool success: shows checkmark(true) or x(false)
+    string title: displayed as title over mark
+    string msg: displayed as text under mark
+    string buttontext: displayed inside redirect button
+    string url: href to which the link button redirects
+-->
+
+<div class="row justify-content-center">
+    <div class="text-center mb-3">
+        <h2>{{ title }}</h2>
+    </div>
+    <div class="col-10 limit-width">
+        {% if success %}
+            <img src="/static/img/icons8-checkmark-yes-large.png" alt="" class="mx-auto d-block w-25">
+        {% elif not success %}
+            <img src="/static/img/icons8-macos-close-large.png" alt="" class="mx-auto d-block w-25">
+        {% endif %}
+        <div class="text-center">
+            {% if msg is defined and msg|length > 0 %}
+                <p class="mt-4 mb-0">
+                    {{ msg }}
+                </p>
+            {% endif %}
+            <a href="{{ url }}" class="btn btn-dark mt-3">{{ buttontext }}</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
