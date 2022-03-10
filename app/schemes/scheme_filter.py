@@ -78,13 +78,13 @@ class FilterRestDatabase(FilterBase):
     Attributes:
         costs (int): Maximum pricing
         radius (int): Radius of the search
-        zipcode (str): To save the zipcode
+        manuell_location (str): To save the location
 
     """
 
     costs: int
     radius: int
-    zipcode: str
+    manuell_location: str
 
     class Config:
         orm_mode = True
@@ -103,22 +103,6 @@ class FilterRestDatabase(FilterBase):
         if 0 <= value <= 4:
             return value
         raise ValueError("costs is not between 0 (included) and 4 (included)")
-
-    @validator("zipcode")
-    @classmethod
-    def plz_length(cls, value: str):
-        """Check if the zipcode got the length 5
-
-        Args:
-            value (int): Value of zipcode
-
-        Raises:
-            ValueError: If wrong value
-        """
-        #if len(value) == 5:
-        #    return value
-        #raise ValueError("zipcode got not the length of 5")
-        return value
 
 
 class FilterRecipe(BaseModel):

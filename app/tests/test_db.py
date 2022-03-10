@@ -348,14 +348,14 @@ def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):
         scheme_cuisine.PydanticCuisine(name=Cuisine.DOENER.value),
     ]
     filterRest_person1 = scheme_filter.FilterRestDatabase(
-        cuisines=cuisines, allergies=allergies, rating=3, costs=3, radius=5000, zipcode=88069
+        cuisines=cuisines, allergies=allergies, rating=3, costs=3, radius=5000, manuell_location=88069
     )
 
     # Try with Allergies
     filterRest_return = create_filterRest(db_session, filterRest_person1, person1)
     assert person1.email == filterRest_return.person.email
     assert person1.email == filterRest_return.email
-    assert filterRest_person1.zipcode == filterRest_return.zipcode
+    assert filterRest_person1.manuell_location == filterRest_return.manuell_location
     assert filterRest_person1.radius == filterRest_return.radius
     assert filterRest_person1.rating == filterRest_return.rating
     # assert filterRest_person1.cuisines.value == filterRest_return.cuisine
@@ -383,12 +383,12 @@ def test_filterRest(db_session: SessionTesting, add_allergies, add_cuisines):
         rating=1,
         costs=1,
         radius=1444,
-        zipcode=88069,
+        manuell_location=88069,
     )
     filterRest_return = update_filterRest(db_session, updated_filter=filterRest_update, user=person1)
     assert person1.email == filterRest_return.person.email
     assert person1.email == filterRest_return.email
-    assert filterRest_update.zipcode == filterRest_return.zipcode
+    assert filterRest_update.manuell_location == filterRest_return.manuell_location
     assert filterRest_update.radius == filterRest_return.radius
     assert filterRest_update.rating == filterRest_return.rating
     # assert filterRest_update.cuisines.value == filterRest_return.cuisine

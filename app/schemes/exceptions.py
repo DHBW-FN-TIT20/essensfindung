@@ -12,7 +12,7 @@ class GoogleApiException(NoResultsException):
     """Exception if some Error from the Google API request are made"""
 
 
-class NoneExcistingZipCodeException(GoogleApiException):
+class NoneExcistingLocationException(GoogleApiException):
     """Exception if no result found with these zip code"""
 
 

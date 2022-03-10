@@ -39,7 +39,7 @@ def main(request: Request, current_user: UserLogin = Depends(get_current_user), 
     if rest_filter_db is None:
         cuisine_list = [scheme_cuisine.PydanticCuisine(name=scheme_cuisine.Cuisine.RESTAURANT.value)]
         rest_filter_db = scheme_filter.FilterRestDatabase(
-            cuisines=cuisine_list, allergies=None, rating=4, costs=2, radius=5000, zipcode="Friedrichshafen"
+            cuisines=cuisine_list, allergies=None, rating=4, costs=2, radius=5000, manuell_location="Friedrichshafen"
         )
         service_res.create_rest_filter(db_session=db_session, filter_rest=rest_filter_db, user=current_user)
 
