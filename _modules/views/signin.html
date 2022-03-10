@@ -82,6 +82,7 @@
 
 <span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">create_user</span>
 <span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">delete_user</span>
+<span class="kn">from</span> <span class="nn">db.crud.user</span> <span class="kn">import</span> <span class="n">update_user</span>
 <span class="kn">from</span> <span class="nn">db.database</span> <span class="kn">import</span> <span class="n">get_db</span>
 <span class="kn">from</span> <span class="nn">schemes</span> <span class="kn">import</span> <span class="n">exceptions</span>
 <span class="kn">from</span> <span class="nn">schemes.scheme_user</span> <span class="kn">import</span> <span class="n">User</span>
@@ -237,7 +238,9 @@
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Melden Sie sich an und finden sie Essen!&quot;</span>
         <span class="n">buttontext</span> <span class="o">=</span> <span class="s2">&quot;Anmelden&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/signin&quot;</span>
-        <span class="n">redirect_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">redirect_url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">DuplicateEntry</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> already exist in the Database&quot;</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
@@ -246,7 +249,9 @@
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Fehler: User mit der Email gibt es bereits&quot;</span>
         <span class="n">buttontext</span> <span class="o">=</span> <span class="s2">&quot;Erneut Registrieren&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/register&quot;</span>
-        <span class="n">redirect_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">redirect_url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">DatabaseException</span><span class="p">:</span>
         <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
@@ -254,11 +259,21 @@
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Fehler: Probleme mit der Datenbank&quot;</span>
         <span class="n">buttontext</span> <span class="o">=</span> <span class="s2">&quot;Erneut Registrieren&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/register&quot;</span>
-        <span class="n">redirect_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">redirect_url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span></div>
 
+
 <div class="viewcode-block" id="bool_response"><a class="viewcode-back" href="../../views/signin.html#views.signin.bool_response">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boolresp/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">bool_response</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Fehler&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">buttontext</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Startseite&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">bool_response</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
+    <span class="n">success</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Fehler&quot;</span><span class="p">,</span>
+    <span class="n">msg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">buttontext</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Startseite&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a dynamic response page, either positive or negative</span>
 
 <span class="sd">    Args:</span>
@@ -272,14 +287,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        TemplateResponse: the http response</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span>
-        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">success</span><span class="p">,</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-        <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="n">msg</span><span class="p">,</span>
-        <span class="s2">&quot;buttontext&quot;</span><span class="p">:</span> <span class="n">buttontext</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span>
-    <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">success</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;buttontext&quot;</span><span class="p">:</span> <span class="n">buttontext</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;bool_response.html&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
@@ -321,6 +329,46 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/pwchange.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">})</span></div>
 
+
+<div class="viewcode-block" id="pwchange_singined_user"><a class="viewcode-back" href="../../views/signin.html#views.signin.pwchange_singined_user">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/pwchange/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">RedirectResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">pwchange_singined_user</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
+    <span class="n">current_user</span><span class="p">:</span> <span class="n">UserLogin</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">),</span>
+    <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span>
+    <span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">oauth2_scheme</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RedirectResponse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Update the password from the current logged in user</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): Request that contain the Form with the Atr `passwordInput`</span>
+<span class="sd">        current_user (schemes.scheme_user.UserLogin, optional): Current logged in User.</span>
+<span class="sd">            Defaults to Depends(get_current_user).</span>
+<span class="sd">        db_session (sqlalchemy.orm.Session, optional): Session to the Database. Defaults to Depends(get_db).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RedirectResponse: Redirect to the signing if success</span>
+<span class="sd">        RedirectResponse: Redirect to the error if old password is not correct</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">security</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">(</span>
+        <span class="n">db_session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;oldpasswordinput&quot;</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="n">new_user</span> <span class="o">=</span> <span class="n">UserCreate</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;passwordInput&quot;</span><span class="p">))</span>
+        <span class="n">update_user</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span> <span class="n">current_user</span><span class="o">=</span><span class="n">current_user</span><span class="p">,</span> <span class="n">new_user</span><span class="o">=</span><span class="n">new_user</span><span class="p">)</span>
+
+        <span class="k">await</span> <span class="n">signout</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span>
+            <span class="s2">&quot;/boolresp/?success=true&amp;title=Passwort geaendert&amp;msg=Passwort wurde aktuallisiert&quot;</span><span class="p">,</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">signout</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span>
+            <span class="s2">&quot;/boolresp/?success=false&amp;title=Passwort aendern fehlgeschlagen&amp;msg=Das aktuelle Passwort war nicht korrekt&quot;</span><span class="p">,</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="confirm_delete"><a class="viewcode-back" href="../../views/signin.html#views.signin.confirm_delete">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/confdelete/&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">confirm_delete</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">current_user</span><span class="p">:</span> <span class="n">UserLogin</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Return confirmation page for user deletion</span>
@@ -332,10 +380,15 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        TemplateResponse: the http response</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;signin/confirm_delete.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span><span class="p">})</span></div>
+    <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span>
+        <span class="s2">&quot;signin/confirm_delete.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span><span class="p">}</span>
+    <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="delete_singined_user"><a class="viewcode-back" href="../../views/signin.html#views.signin.delete_singined_user">[docs]</a><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/delete/&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">User</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">delete_singined_user</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">current_user</span><span class="p">:</span> <span class="n">UserLogin</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">),</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+<span class="k">def</span> <span class="nf">delete_singined_user</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">current_user</span><span class="p">:</span> <span class="n">UserLogin</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">),</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Delete the current logged in user</span>
 
 <span class="sd">    Args:</span>
@@ -354,16 +407,20 @@
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Auf Wiedersehen!&quot;</span>
         <span class="n">buttontext</span> <span class="o">=</span> <span class="s2">&quot;Zur Startseite&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
-        <span class="n">redirect_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">redirect_url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span>
-    
+
     <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">DatabaseException</span><span class="p">:</span>
         <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Konto Löschen Fehlgeschlagen&quot;</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Fehler: Probleme mit der Datenbank&quot;</span>
         <span class="n">buttontext</span> <span class="o">=</span> <span class="s2">&quot;Zur Startseite&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
-        <span class="n">redirect_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">redirect_url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/boolresp/?success=</span><span class="si">{</span> <span class="n">success</span> <span class="si">}</span><span class="s2">&amp;title=</span><span class="si">{</span> <span class="n">title</span> <span class="si">}</span><span class="s2">&amp;msg=</span><span class="si">{</span> <span class="n">msg</span> <span class="si">}</span><span class="s2">&amp;buttontext=</span><span class="si">{</span> <span class="n">buttontext</span> <span class="si">}</span><span class="s2">&amp;url=</span><span class="si">{</span> <span class="n">url</span> <span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_302_FOUND</span><span class="p">)</span></div>
 </pre></div>
 
