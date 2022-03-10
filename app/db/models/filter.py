@@ -30,7 +30,7 @@ class FilterRest(Base):
 
     Attributes:
         email (str): Primary Key and Foreign Key  of person.email
-        zipcode (str): Length of 5
+        manuell_location (str): Location for the search
         radius (int): Radius of the search
         rating (int): Minimum rating of the google rating
         costs (int): Maximal costs of the google search
@@ -43,7 +43,7 @@ class FilterRest(Base):
     __tablename__ = "filterRest"
 
     email = Column(String, ForeignKey("person.email"), primary_key=True)
-    zipcode = Column(String(5), nullable=False)
+    manuell_location = Column(String(5), nullable=False)
     radius = Column(Integer, nullable=False)
     rating = Column(Integer, nullable=False)
     costs = Column(Integer, nullable=False)

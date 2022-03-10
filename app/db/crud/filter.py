@@ -43,7 +43,7 @@ def create_filterRest(
 
     db_filter = FilterRest(
         email=db_user.email,
-        zipcode=filter_new.zipcode,
+        manuell_location=filter_new.manuell_location,
         radius=filter_new.radius,
         rating=filter_new.rating,
         costs=filter_new.costs,
@@ -84,7 +84,7 @@ def update_filterRest(
     if not db_person:
         raise UserNotFound(f"User {user.email} not found", user.email)
 
-    db_person.filterRest.zipcode = updated_filter.zipcode
+    db_person.filterRest.manuell_location = updated_filter.manuell_location
     db_person.filterRest.radius = str(updated_filter.radius)
     db_person.filterRest.rating = str(updated_filter.rating)
     db_person.filterRest.costs = updated_filter.costs
