@@ -79,7 +79,7 @@
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">DatabaseException</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">DuplicateEntry</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">GoogleApiException</span>
-<span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">NoneExcistingZipCodeException</span>
+<span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">NoneExcistingLocationException</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">NoResultsException</span>
 <span class="kn">from</span> <span class="nn">schemes.exceptions</span> <span class="kn">import</span> <span class="n">UserNotFound</span>
 <span class="kn">from</span> <span class="nn">schemes.scheme_filter</span> <span class="kn">import</span> <span class="n">FilterRest</span>
@@ -93,24 +93,24 @@
 <span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="n">gapi</span>
 
 
-<div class="viewcode-block" id="get_coordinates_from_zipcode"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.get_coordinates_from_zipcode">[docs]</a><span class="k">def</span> <span class="nf">get_coordinates_from_zipcode</span><span class="p">(</span><span class="n">zipcode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LocationBase</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Convert a string containing an address or zipcode into coordinates</span>
+<div class="viewcode-block" id="get_coordinates_from_location"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.get_coordinates_from_location">[docs]</a><span class="k">def</span> <span class="nf">get_coordinates_from_location</span><span class="p">(</span><span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LocationBase</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a string containing an address into coordinates</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        zipcode (str): The address/zipcode string to search</span>
+<span class="sd">        location (str): The address/zipcode string to search</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        NoneExcistingZipCodeException: Raises if the zipcode was not found</span>
+<span class="sd">        NoneExcistingLocationException: Raises if the location was not found</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        schemes.scheme_rest.LocationBase: Location with the coordinates</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">gapi</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="n">zipcode</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">gapi</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">LocationBase</span><span class="p">(</span><span class="o">**</span><span class="n">location</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">GoogleApiException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoneExcistingZipCodeException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid zipcode </span><span class="si">{</span><span class="n">zipcode</span><span class="si">}</span><span class="s2"> - no results&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
+        <span class="k">raise</span> <span class="n">NoneExcistingLocationException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid location </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2"> - no results&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span></div>
 
 
 <div class="viewcode-block" id="get_assessments_from_user"><a class="viewcode-back" href="../../services/service_res.html#services.service_res.get_assessments_from_user">[docs]</a><span class="k">def</span> <span class="nf">get_assessments_from_user</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RestBewertungReturn</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>

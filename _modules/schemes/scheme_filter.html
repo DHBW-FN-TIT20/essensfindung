@@ -146,13 +146,13 @@
 <span class="sd">    Attributes:</span>
 <span class="sd">        costs (int): Maximum pricing</span>
 <span class="sd">        radius (int): Radius of the search</span>
-<span class="sd">        zipcode (str): To save the zipcode</span>
+<span class="sd">        manuell_location (str): To save the location</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">costs</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">zipcode</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">manuell_location</span><span class="p">:</span> <span class="nb">str</span>
 
     <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
         <span class="n">orm_mode</span> <span class="o">=</span> <span class="kc">True</span>
@@ -170,23 +170,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;costs is not between 0 (included) and 4 (included)&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="FilterRestDatabase.plz_length"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_filter.FilterRestDatabase.plz_length">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;zipcode&quot;</span><span class="p">)</span>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">plz_length</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if the zipcode got the length 5</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            value (int): Value of zipcode</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If wrong value</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1">#if len(value) == 5:</span>
-        <span class="c1">#    return value</span>
-        <span class="c1">#raise ValueError(&quot;zipcode got not the length of 5&quot;)</span>
-        <span class="k">return</span> <span class="n">value</span></div></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;costs is not between 0 (included) and 4 (included)&quot;</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="FilterRecipe"><a class="viewcode-back" href="../../schemes/schemes.html#schemes.scheme_filter.FilterRecipe">[docs]</a><span class="k">class</span> <span class="nc">FilterRecipe</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>

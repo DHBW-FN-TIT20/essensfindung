@@ -97,7 +97,7 @@
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        email (str): Primary Key and Foreign Key  of person.email</span>
-<span class="sd">        zipcode (str): Length of 5</span>
+<span class="sd">        manuell_location (str): Location for the search</span>
 <span class="sd">        radius (int): Radius of the search</span>
 <span class="sd">        rating (int): Minimum rating of the google rating</span>
 <span class="sd">        costs (int): Maximal costs of the google search</span>
@@ -110,7 +110,7 @@
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;filterRest&quot;</span>
 
     <span class="n">email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;person.email&quot;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">zipcode</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">manuell_location</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">radius</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">rating</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">costs</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>

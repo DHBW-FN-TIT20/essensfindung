@@ -97,7 +97,7 @@
     <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">lat</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">lng</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">zipcode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">manuell_location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">cuisine</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allergies</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span>
@@ -112,7 +112,7 @@
 <span class="sd">        radius (int): the radius</span>
 <span class="sd">        lat (str): the latitude</span>
 <span class="sd">        lng (str): the longitude</span>
-<span class="sd">        zipcode(str): zipcode for the search</span>
+<span class="sd">        manuell_location(str): manuell location for the search</span>
 <span class="sd">        cuisine (Union[str, None], optional): the selected cuisines. Defaults to None.</span>
 <span class="sd">        allergies (Union[str, None], optional): the selected allergies. Defaults to None.</span>
 <span class="sd">        db_session (Session, optional): the db session. Defaults to Depends(get_db).</span>
@@ -124,7 +124,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">lat</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">lng</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-        <span class="n">location</span> <span class="o">=</span> <span class="n">service_res</span><span class="o">.</span><span class="n">get_coordinates_from_zipcode</span><span class="p">(</span><span class="n">zipcode</span><span class="p">)</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">service_res</span><span class="o">.</span><span class="n">get_coordinates_from_location</span><span class="p">(</span><span class="n">manuell_location</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">scheme_rest</span><span class="o">.</span><span class="n">LocationBase</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="o">=</span><span class="n">lng</span><span class="p">)</span>
 
@@ -150,7 +150,7 @@
         <span class="n">rating</span><span class="o">=</span><span class="n">rest_filter</span><span class="o">.</span><span class="n">rating</span><span class="p">,</span>
         <span class="n">costs</span><span class="o">=</span><span class="n">rest_filter</span><span class="o">.</span><span class="n">costs</span><span class="p">,</span>
         <span class="n">radius</span><span class="o">=</span><span class="n">rest_filter</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
-        <span class="n">zipcode</span><span class="o">=</span><span class="n">zipcode</span><span class="p">,</span>
+        <span class="n">manuell_location</span><span class="o">=</span><span class="n">manuell_location</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">service_res</span><span class="o">.</span><span class="n">update_rest_filter</span><span class="p">(</span><span class="n">db_session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span> <span class="n">filter_updated</span><span class="o">=</span><span class="n">rest_filter_db</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">)</span>
     <span class="n">restaurant</span> <span class="o">=</span> <span class="n">service_res</span><span class="o">.</span><span class="n">search_for_restaurant</span><span class="p">(</span><span class="n">db_session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">,</span> <span class="n">user_f</span><span class="o">=</span><span class="n">rest_filter</span><span class="p">)</span>
