@@ -115,9 +115,10 @@ class FilterRestDatabase(FilterBase):
         Raises:
             ValueError: If wrong value
         """
-        if len(value) == 5:
-            return value
-        raise ValueError("zipcode got not the length of 5")
+        #if len(value) == 5:
+        #    return value
+        #raise ValueError("zipcode got not the length of 5")
+        return value
 
 
 class FilterRecipe(BaseModel):
