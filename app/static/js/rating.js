@@ -202,6 +202,49 @@ function initSort() {
 function initFilter() {
     //creates event listeners for filter buttons
 
+
+    //filters entries that are a restaurant
+    document.getElementById("filterRestaurant").addEventListener("click", e => {
+        if (e.target.checked) {
+            //show entries with a rating
+            for (i = 0; i < entries.length; i++) {
+                if (entries[i].type == "Restaurant") {
+                    //entry is a restaurant
+                    entries[i].parent.classList.remove("d-none");
+                }
+            }
+        } else {
+            //hide entries with a rating
+            for (i = 0; i < entries.length; i++) {
+                if (entries[i].type == "Restaurant") {
+                    //entry is a restaurant
+                    entries[i].parent.classList.add("d-none");
+                }
+            }
+        }
+    });
+
+    //filters entries that are a recipe
+    document.getElementById("filterRezepte").addEventListener("click", e => {
+        if (e.target.checked) {
+            //show entries with a rating
+            for (i = 0; i < entries.length; i++) {
+                if (entries[i].type == "Recipe") {
+                    //entry is a restaurant
+                    entries[i].parent.classList.remove("d-none");
+                }
+            }
+        } else {
+            //hide entries with a rating
+            for (i = 0; i < entries.length; i++) {
+                if (entries[i].type == "Recipe") {
+                    //entry is a restaurant
+                    entries[i].parent.classList.add("d-none");
+                }
+            }
+        }
+    });
+
     //filters entries with a rating
     document.getElementById("filterWithBewertung").addEventListener("click", e => {
         if (e.target.checked) {
@@ -257,7 +300,8 @@ function init() {
                 name: e.querySelector(".entry-name").innerText,
                 rating: rating,
                 timestamp: parseInt(e.querySelector(".entry-timestamp").innerText),
-                parent: e.parentNode.parentNode
+                parent: e.parentNode.parentNode,
+                type: e.querySelector(".type").innerText
             }
         );
     });

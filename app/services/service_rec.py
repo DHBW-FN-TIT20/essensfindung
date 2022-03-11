@@ -127,7 +127,7 @@ def update_assessment(
         schemes.scheme_recipe.RecipeBewertungReturn: Recipe with the new values
     """
     try:
-        updated_assessment = crud_recipeBewertung.update_bewertung(db_session, old_assessment, new_assessment)
+        updated_assessment = crud_recipeBewertung.update_assessment(db_session, old_assessment, new_assessment)
     except DatabaseException as error:
         raise error
     return RecipeBewertungReturn(

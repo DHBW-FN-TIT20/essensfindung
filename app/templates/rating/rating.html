@@ -9,10 +9,10 @@
     <div class="col-10 mt-2 limit-width text-center">
         <h5 id="filterButton" class="filter-up cursor-pointer user-select-none">Filter&nbsp;<span id="filterSymbol" class="filter-character-up">▲</span></h5>
         <div id="filterButtonsContainer" class="d-none justify-content-evenly my-3"><!-- d-flex -->
-            <div class="d-none flex-column">
+            <div class="d-flex flex-column">
                 <input type="checkbox" name="filterRestaurant" id="filterRestaurant" class="btn-check" autocomplete="off" checked>
                 <label for="filterRestaurant" class="btn btn-outline-dark m-1 box-shadow prevent-dark-hover">Restaurants</label>
-                <input type="checkbox" name="filterRezepte" id="filterRezepte" class="btn-check">
+                <input type="checkbox" name="filterRezepte" id="filterRezepte" class="btn-check" autocomplete="off" checked>
                 <label for="filterRezepte" class="btn btn-outline-dark m-1 box-shadow prevent-dark-hover" autocomplete="off">Rezepte</label>
             </div>
             <div class="d-flex flex-column">
@@ -47,10 +47,10 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-10 mb-2 limit-width">
-        {% for rest_rating in rest_ratings %}
+        {% for rest_rating in res_ratings %}
         <div class="d-flex flex-column">
             <div class="btn-group m-2 box-shadow" role="group">
-                <a type="button" class="btn btn-outline-dark prevent-dark-fill d-flex justify-content-between pe-2 entry" href="/rating/edit?place_id={{rest_rating.place_id}}">
+                <a type="button" class="btn btn-outline-dark prevent-dark-fill d-flex justify-content-between pe-2 entry" href="/rating/edit?id={{rest_rating.place_id}}&type=Restaurant">
                     <span class="text-start entry-name">{{rest_rating.name}}</span>
                     <span class="text-end ps-3 entry-rating">
 
@@ -62,8 +62,32 @@
 
                     </span>
                     <p class="d-none entry-timestamp">{{ rest_rating.timestamp.timestamp() }}</p>
+                    <p class="d-none type">Restaurant</p>
                 </a>
-                <a type="button" class="btn btn-outline-dark prevent-dark-fill flex-grow-0 d-flex align-items-center" href="/rating/edit?place_id={{rest_rating.place_id}}">
+                <a type="button" class="btn btn-outline-dark prevent-dark-fill flex-grow-0 d-flex align-items-center" href="/rating/edit?id={{rest_rating.place_id}}&type=Restaurant">
+                    <span class="border-left border-white">&gt;</span>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% for rec_rating in rec_ratings %}
+        <div class="d-flex flex-column">
+            <div class="btn-group m-2 box-shadow" role="group">
+                <a type="button" class="btn btn-outline-dark prevent-dark-fill d-flex justify-content-between pe-2 entry" href="/rating/edit?id={{rec_rating.id}}&type=Recipe">
+                    <span class="text-start entry-name">{{rec_rating.name}}</span>
+                    <span class="text-end ps-3 entry-rating">
+
+                    {% if rec_rating.rating != 0 %}
+                        {{rec_rating.rating|round|int}}/5
+                    {% else %}
+                        Keine&#32;Bewertung
+                    {% endif %}
+
+                    </span>
+                    <p class="d-none entry-timestamp">{{ rec_rating.timestamp.timestamp() }}</p>
+                    <p class="d-none type">Recipe</p>
+                </a>
+                <a type="button" class="btn btn-outline-dark prevent-dark-fill flex-grow-0 d-flex align-items-center" href="/rating/edit?id={{rec_rating.id}}&type=Recipe">
                     <span class="border-left border-white">&gt;</span>
                 </a>
             </div>

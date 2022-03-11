@@ -7,27 +7,36 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-10" style="max-width: 480px;">
-        <h1>{{rest_rating.name}}</h1>
+        <h1>{{rating.name}}</h1>
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-10" style="max-width: 480px;">
         <form method="post">
-            <input id="identifier" name="identifier" type="text" style="display: none;" value="{{ rest_rating.place_id }}">
-            <input id="rest_name" name="rest_name" type="text" style="display: none;" value="{{rest_rating.name}}">
-            <input type="text" id="timestamp" class="d-none" value="{{rest_rating.timestamp}}">
+            {% if type == "Restaurant" %}
+                <input id="identifier" name="identifier" type="text" style="display: none;" value="{{ rating.place_id }}">
+            {% elif type == "Recipe" %}
+                <input id="identifier" name="identifier" type="text" style="display: none;" value="{{ rating.id }}">
+            {% endif %}
+            <input type="text" name="type" id="type" class="d-none" value="{{ type }}">
+            <input id="rest_name" name="rest_name" type="text" style="display: none;" value="{{rating.name}}">
+            <input type="text" id="timestamp" class="d-none" value="{{rating.timestamp}}">
             <label for="restaurant_filter_rating" class="form-label fs-5 d-none">Bewertung:</label>
             <div id="rating_edit_rating" class="mb-1"></div>
-            <input id="rating_edit_rating_target" name="rating_edit_rating_target" style="display:none" value="{{ rest_rating.rating }}">
+            <input id="rating_edit_rating_target" name="rating_edit_rating_target" style="display:none" value="{{ rating.rating }}">
             <div class="mb-3">
                 <span id="date_container"></span> 
             </div>
             <div class="mb-3">
                 <label for="rating_notes" class="form-label fs-5">Notizen:</label>
-                <textarea class="form-control" id="rating_notes" name="rating_notes" rows="3">{{rest_rating.comment}}</textarea>
+                <textarea class="form-control" id="rating_notes" name="rating_notes" rows="3">{{rating.comment}}</textarea>
             </div>
             <div class="form-actions text-center">
-                <a href="/rating/delete?place_id={{rest_rating.place_id}}&rest_name={{rest_rating.name}}" class="btn btn-outline-danger mt-3">Löschen</a>
+                {% if type == "Restaurant" %}
+                    <a href="/rating/delete?type={{type}}&id={{rating.place_id}}&rest_name={{rating.name}}" class="btn btn-outline-danger mt-3">Löschen</a>
+                {% elif type == "Recipe" %}
+                    <a href="/rating/delete?type={{type}}&id={{rating.id}}" class="btn btn-outline-danger mt-3">Löschen</a>
+                {% endif %}
                 <div class="mx-2 d-inline"></div>
                 <button type="submit" class="btn btn-outline-dark mt-3">Speichern</button>
             </div>
