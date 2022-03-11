@@ -14,6 +14,7 @@ from schemes import scheme_filter
 from schemes.scheme_user import UserLogin
 from services import service_res
 from tools.security import get_current_user
+from tools.legal import read_legal
 
 templates = Jinja2Templates("templates")
 router = fastapi.APIRouter()
@@ -96,3 +97,16 @@ def index(request: Request, db_session: Session = Depends(get_db)):  # <- REMOVE
     ############ END REMOVE ###############
 
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+@router.get("/impressum", response_class=HTMLResponse)
+def impressum(request: Request):
+    """Return legal page
+    
+    Args:
+        request (Request): the http request
+    
+    Returns:
+        TemplateResponse: the http response
+    """
+    return templates.TemplateResponse("impressum.html", {"request": request, "entity": read_legal()})

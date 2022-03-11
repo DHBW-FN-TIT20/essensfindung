@@ -1,0 +1,25 @@
+{% extends "shared/layout_singleform.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-10 limit-width">
+        <h2 class="display-1 fs-4 mb-1">Impressum</h2>
+        <hr class="mt-1">
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-10 limit-width">
+        <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
+        <p class="mb-0">{{entity.full_name}}</p>
+        <p class="mb-0">{{entity.address_1}}</p>
+        <p>{{entity.address_2}}</p>
+
+        <h2>Kontakt</h2>
+        <p class="mb-0">Telefon: {{entity.phone_number}}</p>
+        <p>Email: {{entity.email}}</p>
+    </div>
+</div>
+
+{% endblock %}
