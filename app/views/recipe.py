@@ -4,12 +4,16 @@ from typing import Union
 
 import fastapi
 from fastapi.responses import HTMLResponse
+from sqlalchemy.orm import Session
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
+from db.database import get_db
 from schemes import scheme_cuisine
 from schemes import scheme_filter
+from schemes.scheme_user import User
 from services import service_rec
+from tools.security import get_current_user
 
 
 templates = Jinja2Templates("templates")
@@ -17,7 +21,13 @@ router = fastapi.APIRouter()
 
 
 @router.get("/findrecipe", response_class=HTMLResponse)
-async def findrecipe(request: Request, length: int, keywords: Union[str, None] = None):
+async def findrecipe(
+    request: Request,
+    length: int,
+    keywords: Union[str, None] = None,
+    db_session: Session = fastapi.Depends(get_db),
+    current_user: User = fastapi.Depends(get_current_user),
+):
     """Requests user settings and search for recipe.
 
     Args:
@@ -38,7 +48,7 @@ async def findrecipe(request: Request, length: int, keywords: Union[str, None] =
         keyword=keywords,
         total_time=total_length,
     )
-    recipe = service_rec.search_recipe(recipe_filter=rec_filter)
+    recipe = service_rec.search_recipe(db_session=db_session, user=current_user, recipe_filter=rec_filter)
 
     prep_time_total_seconds = recipe.prepTime.total_seconds()
     prep_time_days = int(prep_time_total_seconds // 86400)
