@@ -215,6 +215,7 @@ def search_for_restaurant(db_session: Session, user: UserBase, user_f: FilterRes
 
     Args:
         db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
+        user (schemes.scheme_user.UserBase): User that contain the mail address
         user_f (schemes.scheme_filter.FilterRest): Filter that are needed for the search
 
     Raises:

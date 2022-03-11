@@ -17,26 +17,34 @@ from tools.recipe_db import recipe_db
 from tools.recipe_db import RecipeDB
 
 
-def search_recipe(recipe_filter: FilterRecipe) -> Recipe:
+def search_recipe(db_session: Session, user: UserBase, recipe_filter: FilterRecipe) -> Recipe:
     """Search for a recipe with the given filter
 
     Args:
+        db_session (sqlalchemy.orm.Session): Session to the DB -> See `db: Session = Depends(get_db)`
         recipe_filter (schemes.scheme_filter.FilterRecipe): Filter the Recipes
 
     Returns:
         schemes.scheme_recipe.Recipe: The one choosen Recipe
     """
-    random_recipe: pandas.DataFrame = __apply_filter(recipe_db.pd_frame, recipe_filter).sample()
-
-    return Recipe(
-        id=random_recipe["_id.$oid"].array[0],
-        name=random_recipe["name"].array[0],
-        ingredients=random_recipe["ingredients"].array[0],
-        url=random_recipe["url"].array[0],
-        image=random_recipe["image"].array[0],
-        cookTime=random_recipe["cookTime"].array[0],
-        prepTime=random_recipe["prepTime"].array[0],
+    pd_random_recipe: pandas.DataFrame = __apply_filter(recipe_db.pd_frame, recipe_filter).sample()
+    random_recipe = Recipe(
+        id=pd_random_recipe["_id.$oid"].array[0],
+        name=pd_random_recipe["name"].array[0],
+        ingredients=pd_random_recipe["ingredients"].array[0],
+        url=pd_random_recipe["url"].array[0],
+        image=pd_random_recipe["image"].array[0],
+        cookTime=pd_random_recipe["cookTime"].array[0],
+        prepTime=pd_random_recipe["prepTime"].array[0],
     )
+
+    if not crud_recipeBewertung.get_bewertung_from_user_to_recipe(db=db_session, user=user, recipe=random_recipe):
+        add_assessment(
+            db_session=db_session,
+            assessment=RecipeBewertungCreate(name=random_recipe.name, person=user, recipe=random_recipe),
+        )
+
+    return random_recipe
 
 
 def __apply_filter(recipes: pandas.DataFrame, recipe_filter: FilterRecipe) -> pandas.DataFrame:

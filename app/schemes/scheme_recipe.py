@@ -18,7 +18,7 @@ class RecipeBase(BaseModel):
     id: str
 
 
-class Recipe(BaseModel):
+class Recipe(RecipeBase):
     """
     Class that you get from the backend to handle the recipe
 
