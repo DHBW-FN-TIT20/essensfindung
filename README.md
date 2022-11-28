@@ -131,3 +131,6 @@ To install the requierd dependencies via pip:
 pip install -r requirements-dev.txt
 ```
 Here you have to manuel manage the requirements.txt files. Use a fixed versions only.
+
+# Recipes
+To get the recipe json visit: https://github.com/jakevdp/open-recipe-data
